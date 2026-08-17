@@ -104,6 +104,7 @@ export function mapDraftToFormValues(
       date: row.achievement_date ?? "",
       description: row.description ?? "",
       document: null,
+      documentPath: row.document_path ?? null,
     })),
     additionalRecognition: {
       awards: profile.awards_recognition ?? "",

@@ -4,12 +4,16 @@ interface FormActionsProps {
   onSaveDraft: () => void;
   isSavingDraft: boolean;
   isSubmitting: boolean;
+  draftLabel?: string;
+  submitLabel?: string;
 }
 
 export function FormActions({
   onSaveDraft,
   isSavingDraft,
   isSubmitting,
+  draftLabel,
+  submitLabel,
 }: FormActionsProps) {
   const busy = isSavingDraft || isSubmitting;
 
@@ -21,10 +25,10 @@ export function FormActions({
         onClick={onSaveDraft}
         disabled={busy}
       >
-        {isSavingDraft ? "Saving draft..." : "Save Draft"}
+        {isSavingDraft ? (draftLabel ?? "Saving draft...") : "Save Draft"}
       </Button>
       <Button type="submit" variant="primary" disabled={busy}>
-        {isSubmitting ? "Creating profile..." : "Create Athlete Profile"}
+        {isSubmitting ? (submitLabel ?? "Creating profile...") : "Create Athlete Profile"}
       </Button>
     </div>
   );

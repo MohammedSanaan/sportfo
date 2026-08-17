@@ -45,7 +45,13 @@ export interface Achievement {
   organization: string;
   date: string;
   description: string;
+  // A freshly picked, not-yet-uploaded file. Cleared back to null once it's
+  // been uploaded and documentPath is set -- never sent to the server or
+  // persisted anywhere itself.
   document: File | null;
+  // The Storage object path for an already-uploaded document, or null/
+  // undefined if none exists yet. Mirrors athlete_achievements.document_path.
+  documentPath?: string | null;
 }
 
 export interface AdditionalRecognition {

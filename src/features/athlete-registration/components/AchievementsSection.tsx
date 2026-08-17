@@ -4,6 +4,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
 import type { Achievement, AthleteRegistrationFormValues } from "@/types/athlete";
+import type { DocumentOperationsByField } from "../document-operations";
 import { AchievementForm } from "./AchievementForm";
 
 function createEmptyAchievement(): Achievement {
@@ -14,10 +15,23 @@ function createEmptyAchievement(): Achievement {
     date: "",
     description: "",
     document: null,
+    documentPath: null,
   };
 }
 
-export function AchievementsSection() {
+interface AchievementsSectionProps {
+  docOpsByField: DocumentOperationsByField;
+  onFileSelected: (fieldId: string, index: number, file: File | null) => void;
+  onViewDocument: (fieldId: string, index: number) => void;
+  onRemoveDocument: (fieldId: string, index: number) => void;
+}
+
+export function AchievementsSection({
+  docOpsByField,
+  onFileSelected,
+  onViewDocument,
+  onRemoveDocument,
+}: AchievementsSectionProps) {
   const { control } = useFormContext<AthleteRegistrationFormValues>();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -42,6 +56,10 @@ export function AchievementsSection() {
               key={field.id}
               index={index}
               onRemove={() => remove(index)}
+              docOp={docOpsByField[field.id]}
+              onFileSelected={(file) => onFileSelected(field.id, index, file)}
+              onViewDocument={() => onViewDocument(field.id, index)}
+              onRemoveDocument={() => onRemoveDocument(field.id, index)}
             />
           ))}
         </div>
