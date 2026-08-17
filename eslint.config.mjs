@@ -15,6 +15,9 @@ const eslintConfig = defineConfig([
     // Supabase CLI-managed local dev runtime artifacts, not app source.
     "supabase/.branches/**",
     "supabase/.temp/**",
+    // Deno runtime code (Supabase Edge Functions) -- linted separately,
+    // not with this project's Node/React ESLint config.
+    "supabase/functions/**",
   ]),
 ]);
 
