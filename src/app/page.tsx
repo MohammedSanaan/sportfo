@@ -11,7 +11,7 @@ export default function Home() {
         connect with coaches, academies, and sponsors.
       </p>
       <Link
-        href="/athlete/register"
+        href="/auth"
         className="mt-8 inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-8 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
       >
         Create Your Athlete Profile

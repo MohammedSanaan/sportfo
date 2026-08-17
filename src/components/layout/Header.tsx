@@ -1,8 +1,14 @@
 import Link from "next/link";
+import { Suspense } from "react";
+import { AuthNav } from "./AuthNav";
 
-const NAV_LINKS = [
-  { href: "/athlete/register", label: "Athlete Registration" },
-];
+function AuthNavFallback() {
+  return (
+    <span aria-hidden className="px-3 py-2 text-sm text-transparent">
+      Login
+    </span>
+  );
+}
 
 export function Header() {
   return (
@@ -19,15 +25,9 @@ export function Header() {
         </Link>
 
         <nav aria-label="Primary" className="flex items-center gap-1">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded-md px-3 py-2 text-sm font-medium text-ink-600 transition-colors hover:bg-surface-muted hover:text-ink-900"
-            >
-              {link.label}
-            </Link>
-          ))}
+          <Suspense fallback={<AuthNavFallback />}>
+            <AuthNav />
+          </Suspense>
         </nav>
       </div>
     </header>
