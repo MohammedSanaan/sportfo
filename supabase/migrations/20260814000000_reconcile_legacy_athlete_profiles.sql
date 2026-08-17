@@ -1,0 +1,21 @@
+-- Reconcile the legacy athlete_profiles table shipped in
+-- 20260812201831_create_athlete_profiles.sql with the current SportFo
+-- architecture.
+--
+-- The legacy table predates the auth.users-owned design: it has no user_id
+-- column (no way to tie a row to an authenticated athlete) and its RLS
+-- policies grant the `anon` role unrestricted select/insert
+-- (`using (true)` / `with check (true)`), so any anonymous caller can read
+-- or write every athlete's registration data. It also predates
+-- athlete_sports / athlete_achievements.
+--
+-- This project has no production athlete data yet (the only remote row is
+-- pre-launch test data with no auth.users linkage to preserve), so the
+-- legacy table is dropped outright. The very next migration
+-- (20260815120000_athlete_registration_tables.sql) recreates
+-- athlete_profiles with the correct owner-scoped schema; the migrations
+-- after it layer on RLS and storage. `create table if not exists` there
+-- would otherwise silently no-op against this table and leave the insecure
+-- anon policies in place.
+
+drop table if exists public.athlete_profiles cascade;
