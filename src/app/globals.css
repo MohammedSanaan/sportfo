@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  /* SportFo brand blue scale */
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dbe6fe;
+  --color-brand-200: #bfd3fe;
+  --color-brand-300: #93b4fd;
+  --color-brand-400: #5a8cfa;
+  --color-brand-500: #2f66f0;
+  --color-brand-600: #1d4fd8;
+  --color-brand-700: #1a3fb0;
+  --color-brand-800: #1a3689;
+  --color-brand-900: #172a5e;
+
+  /* Dark navy ink scale for typography */
+  --color-ink-900: #0b1220;
+  --color-ink-800: #131c2e;
+  --color-ink-700: #1f2937;
+  --color-ink-600: #374151;
+  --color-ink-500: #4b5563;
+  --color-ink-400: #6b7280;
+
+  /* Neutral surfaces */
+  --color-surface: #ffffff;
+  --color-surface-muted: #f7f9fc;
+  --color-border-default: #e2e7f0;
+  --color-border-strong: #cbd5e1;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+}
+
+body {
+  background-color: var(--color-surface-muted);
+  color: var(--color-ink-900);
+  font-family: var(--font-sans);
+}
+
+* {
+  border-color: var(--color-border-default);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-500);
+  outline-offset: 2px;
+}
