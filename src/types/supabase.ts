@@ -196,6 +196,30 @@ export type Database = {
     }
     Functions: {
       owns_athlete_profile: { Args: { profile_id: string }; Returns: boolean }
+      save_athlete_registration: {
+        Args: {
+          p_achievements?: Json
+          p_awards_recognition: string
+          p_city: string
+          p_club_academy: string
+          p_coach_mentor: string
+          p_country: string
+          p_date_of_birth: string
+          p_email: string
+          p_full_name: string
+          p_gender: string
+          p_mobile_number: string
+          p_nationality: string
+          p_position_role: string
+          p_primary_sport: string
+          p_profile_status: string
+          p_scholarship_recipient: boolean
+          p_school_college: string
+          p_skill_level: string
+          p_sport_discipline: string
+        }
+        Returns: Json
+      }
     }
     Enums: {
       [_ in never]: never

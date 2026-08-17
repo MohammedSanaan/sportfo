@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AthleteRegistrationForm } from "@/features/athlete-registration/components/AthleteRegistrationForm";
 import { getAuthUser } from "@/lib/supabase/auth-user";
+import { createClient } from "@/lib/supabase/server";
+import { loadAthleteDraft, mapDraftToFormValues } from "@/lib/athlete/registration-draft";
+import { formatAuthPhone } from "@/lib/phone/format-auth-phone";
 
 export const metadata: Metadata = {
   title: "Create Your Athlete Profile | SportFo",
@@ -18,6 +22,10 @@ export default async function AthleteRegisterPage() {
     redirect("/auth");
   }
 
+  const authPhone = formatAuthPhone(user.phone);
+  const supabase = await createClient();
+  const { draft, error: draftLoadFailed } = await loadAthleteDraft(supabase, user.id);
+
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <div className="mb-8 sm:mb-10">
@@ -30,7 +38,26 @@ export default async function AthleteRegisterPage() {
         </p>
       </div>
 
-      <AthleteRegistrationForm />
+      {draftLoadFailed ? (
+        // Rendering a blank form here would risk Save Draft silently
+        // overwriting a real, already-saved draft with empty fields --
+        // safer to block on a retry than to guess.
+        <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-sm text-red-700">
+          <p className="font-medium">We couldn&apos;t load your saved information.</p>
+          <p className="mt-1">
+            Please{" "}
+            <Link href="/athlete/register" className="font-medium underline">
+              try reloading this page
+            </Link>
+            . If this keeps happening, contact support.
+          </p>
+        </div>
+      ) : (
+        <AthleteRegistrationForm
+          authPhone={authPhone}
+          initialValues={draft ? mapDraftToFormValues(draft, authPhone) : undefined}
+        />
+      )}
     </div>
   );
 }

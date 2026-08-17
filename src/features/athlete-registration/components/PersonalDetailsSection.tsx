@@ -84,7 +84,10 @@ export function PersonalDetailsSection() {
           label="Mobile Number"
           type="tel"
           autoComplete="tel"
-          placeholder="e.g. +974 1234 5678"
+          readOnly
+          aria-readonly
+          helperText="This is the number you verified at login and can't be changed here."
+          className="cursor-not-allowed bg-surface-muted text-ink-500"
           error={errors.personalDetails?.mobileNumber?.message}
           {...register("personalDetails.mobileNumber", mobileNumberRule)}
         />

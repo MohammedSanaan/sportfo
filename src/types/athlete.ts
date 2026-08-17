@@ -35,6 +35,11 @@ export interface SportsInformation {
 }
 
 export interface Achievement {
+  // Present once the achievement has been persisted -- absent for rows the
+  // athlete has added locally but not yet saved. Round-tripped through
+  // Save Draft/Create Profile so repeat saves update existing rows instead
+  // of duplicating them.
+  id?: string;
   title: string;
   type: string;
   organization: string;
