@@ -7,6 +7,7 @@ import "@supabase/functions-js/edge-runtime.d.ts";
 import { withSupabase } from "@supabase/server";
 import { verifySendSmsHook, HookVerificationError } from "./verify-hook.ts";
 import { isValidOtp } from "./message.ts";
+import { normalizeHookPhone } from "./phone.ts";
 import { getSmsProvider, SmsProviderError } from "./sms-provider.ts";
 
 interface HookErrorBody {
@@ -56,13 +57,17 @@ export default {
       throw err;
     }
 
-    const phone = payload?.user?.phone;
+    const rawPhone = payload?.user?.phone;
     const otp = payload?.sms?.otp;
 
-    if (typeof phone !== "string" || phone.length === 0 || !isValidOtp(otp)) {
+    if (typeof rawPhone !== "string" || rawPhone.length === 0 || !isValidOtp(otp)) {
       console.error("send-auth-sms: malformed hook payload (missing phone or otp)");
       return hookError(400, "Malformed hook payload");
     }
+
+    // Supabase's hook payload omits the leading "+" the SMS gateway
+    // requires -- see phone.ts for why this normalization lives here.
+    const phone = normalizeHookPhone(rawPhone);
 
     try {
       const provider = getSmsProvider();
