@@ -64,9 +64,31 @@ Deno.test("getSmsProvider throws on an unknown provider name", () =>
     assertEquals(threw, true);
   }));
 
-Deno.test("getSmsProvider throws when sms-gateway is missing url/secret", () =>
+Deno.test("getSmsProvider throws when SMS_GATEWAY_URL is missing", () =>
   withEnv(
-    { SMS_PROVIDER: "sms-gateway", SMS_GATEWAY_URL: undefined, SMS_GATEWAY_SHARED_SECRET: undefined },
+    {
+      SMS_PROVIDER: "sms-gateway",
+      SMS_GATEWAY_URL: undefined,
+      SMS_GATEWAY_SHARED_SECRET: "test-shared-secret",
+    },
+    () => {
+      let threw = false;
+      try {
+        getSmsProvider();
+      } catch (err) {
+        threw = err instanceof SmsProviderError;
+      }
+      assertEquals(threw, true);
+    },
+  ));
+
+Deno.test("getSmsProvider throws when SMS_GATEWAY_SHARED_SECRET is missing", () =>
+  withEnv(
+    {
+      SMS_PROVIDER: "sms-gateway",
+      SMS_GATEWAY_URL: "https://gateway.example/send-sms",
+      SMS_GATEWAY_SHARED_SECRET: undefined,
+    },
     () => {
       let threw = false;
       try {
@@ -102,12 +124,12 @@ Deno.test("sms-gateway provider sends {to, otp} with Bearer auth and succeeds on
     }
 
     assertEquals(capturedUrl, "https://gateway.example/send-sms");
+    assertEquals(capturedInit?.method, "POST");
     const body = JSON.parse(String(capturedInit?.body));
     assertEquals(body, { to: "+97455512345", otp: "561166" });
-    assertEquals(
-      (capturedInit?.headers as Record<string, string>).Authorization,
-      "Bearer test-shared-secret",
-    );
+    const headers = capturedInit?.headers as Record<string, string>;
+    assertEquals(headers.Authorization, "Bearer test-shared-secret");
+    assertEquals(headers["Content-Type"], "application/json");
   }));
 
 Deno.test("sms-gateway provider treats a 401 as a non-retryable error", () =>
@@ -239,6 +261,25 @@ Deno.test("sms-gateway provider treats 2xx with success!==true as a malformed/re
         () => provider.sendSms({ to: "+97455512345", otp: "561166" }),
         true,
       );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  }));
+
+Deno.test("sms-gateway provider treats a plain network failure as a retryable error (not a timeout)", () =>
+  withEnv(GATEWAY_ENV, async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = (() => {
+      throw new TypeError("Failed to fetch");
+    }) as typeof fetch;
+
+    try {
+      const provider = getSmsProvider();
+      const err = await expectProviderError(
+        () => provider.sendSms({ to: "+97455512345", otp: "561166" }),
+        true,
+      );
+      assertEquals(err.message, "SMS gateway request failed");
     } finally {
       globalThis.fetch = originalFetch;
     }
