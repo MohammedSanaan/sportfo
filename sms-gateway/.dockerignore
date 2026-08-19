@@ -1,0 +1,8 @@
+node_modules
+dist
+dist-test
+.env
+*.tsbuildinfo
+test
+.git
+README.md

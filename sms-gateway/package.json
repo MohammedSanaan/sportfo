@@ -1,0 +1,27 @@
+{
+  "name": "sms-gateway",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Minimal stateless SMS delivery gateway (Supabase Send SMS Hook -> MSG91) for SportFo.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "dev": "node --experimental-strip-types --watch src/server.ts",
+    "start": "node dist/server.js",
+    "test": "tsc -p tsconfig.test.json && node --test dist-test/test/*.test.js",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fastify": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "eslint": "^9.17.0",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.18.1"
+  }
+}
