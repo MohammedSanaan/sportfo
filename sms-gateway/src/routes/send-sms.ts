@@ -39,11 +39,22 @@ export async function registerSendSmsRoute(
       const outcome = await send(options.config, { to, otp });
       const elapsedMs = Date.now() - startedAt;
 
-      // Deliberately never logs `to`/`otp`/the raw MSG91 response -- only
-      // the categorized outcome and timing.
+      // Deliberately never logs `to`/`otp`/the raw MSG91 response body --
+      // only the categorized outcome, timing, and (on failure) the safe
+      // diagnostic fields sendViaMsg91 already sanitized: MSG91's HTTP
+      // status, its response `type` (a fixed "success"/"error" value, not
+      // user data), and whether a request id was present -- never the
+      // request id's actual value.
       request.log.info({
         msg91Outcome: outcome.ok ? "success" : outcome.category,
         elapsedMs,
+        ...(outcome.ok
+          ? {}
+          : {
+              msg91HttpStatus: outcome.msg91HttpStatus,
+              msg91ResponseType: outcome.msg91ResponseType,
+              hasRequestId: outcome.hasRequestId,
+            }),
       });
 
       if (outcome.ok) {

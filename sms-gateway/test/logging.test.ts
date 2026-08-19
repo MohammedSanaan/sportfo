@@ -83,3 +83,38 @@ test("logs never contain the MSG91 auth key or the otp on a provider error", asy
   assert.equal(log.includes(VALID_PHONE), false);
   assert.equal(log.includes(config.msg91AuthKey), false);
 });
+
+test("logs surface safe MSG91 diagnostic fields (status/type/hasRequestId) on unexpected_response, with no sensitive values", async () => {
+  const { stream, lines } = collectingStream();
+  const config = testConfig();
+  const app = await buildApp({
+    config,
+    sendSms: async () => ({
+      ok: false,
+      category: "unexpected_response",
+      msg91HttpStatus: 200,
+      msg91ResponseType: "success",
+      hasRequestId: false,
+    }),
+    loggerStream: stream,
+  });
+
+  await app.inject({
+    method: "POST",
+    url: "/send-sms",
+    headers: { authorization: `Bearer ${config.smsGatewaySharedSecret}` },
+    payload: { to: VALID_PHONE, otp: VALID_OTP },
+  });
+  await app.close();
+
+  const log = lines();
+  // The diagnostic signal the task asked for is actually present in logs...
+  assert.equal(log.includes("unexpected_response"), true);
+  assert.equal(log.includes("msg91HttpStatus"), true);
+  assert.equal(log.includes("hasRequestId"), true);
+  // ...but nothing sensitive rides along with it.
+  assert.equal(log.includes(VALID_OTP), false);
+  assert.equal(log.includes(VALID_PHONE), false);
+  assert.equal(log.includes(config.msg91AuthKey), false);
+  assert.equal(log.includes(config.smsGatewaySharedSecret), false);
+});

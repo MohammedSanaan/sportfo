@@ -49,14 +49,17 @@ test("sendViaMsg91 treats HTTP 200 with type:error as a provider error", async (
   if (!outcome.ok) assert.equal(outcome.category, "provider_error");
 });
 
-test("sendViaMsg91 treats a 4xx HTTP response as a provider error", async () => {
+test("sendViaMsg91 treats a 4xx HTTP response as a provider error and surfaces the status", async () => {
   const config = testConfig();
   const fakeFetch: typeof fetch = async () => new Response("bad request", { status: 400 });
 
   const outcome = await sendViaMsg91(config, { to: VALID_PHONE, otp: VALID_OTP }, fakeFetch);
 
   assert.equal(outcome.ok, false);
-  if (!outcome.ok) assert.equal(outcome.category, "provider_error");
+  if (!outcome.ok) {
+    assert.equal(outcome.category, "provider_error");
+    assert.equal(outcome.msg91HttpStatus, 400);
+  }
 });
 
 test("sendViaMsg91 treats a 5xx HTTP response as a provider error", async () => {
@@ -96,4 +99,71 @@ test("sendViaMsg91 treats a plain network failure as a provider error (not a tim
 
   assert.equal(outcome.ok, false);
   if (!outcome.ok) assert.equal(outcome.category, "provider_error");
+});
+
+test("sendViaMsg91 treats HTTP 200 type:success with NO request id as unexpected_response, not success", async () => {
+  const config = testConfig();
+  const fakeFetch: typeof fetch = async () => jsonResponse(200, { type: "success" });
+
+  const outcome = await sendViaMsg91(config, { to: VALID_PHONE, otp: VALID_OTP }, fakeFetch);
+
+  assert.equal(outcome.ok, false);
+  if (!outcome.ok) {
+    assert.equal(outcome.category, "unexpected_response");
+    assert.equal(outcome.hasRequestId, false);
+    assert.equal(outcome.msg91ResponseType, "success");
+    assert.equal(outcome.msg91HttpStatus, 200);
+  }
+});
+
+test("sendViaMsg91 treats HTTP 200 type:success with an EMPTY request id as unexpected_response", async () => {
+  const config = testConfig();
+  const fakeFetch: typeof fetch = async () => jsonResponse(200, { type: "success", message: "   " });
+
+  const outcome = await sendViaMsg91(config, { to: VALID_PHONE, otp: VALID_OTP }, fakeFetch);
+
+  assert.equal(outcome.ok, false);
+  if (!outcome.ok) assert.equal(outcome.category, "unexpected_response");
+});
+
+test("sendViaMsg91 treats a non-JSON HTTP 200 body as unexpected_response", async () => {
+  const config = testConfig();
+  const fakeFetch: typeof fetch = async () =>
+    new Response("<html>not json</html>", { status: 200 });
+
+  const outcome = await sendViaMsg91(config, { to: VALID_PHONE, otp: VALID_OTP }, fakeFetch);
+
+  assert.equal(outcome.ok, false);
+  if (!outcome.ok) {
+    assert.equal(outcome.category, "unexpected_response");
+    assert.equal(outcome.msg91HttpStatus, 200);
+  }
+});
+
+test("sendViaMsg91 surfaces safe diagnostic fields (status/type/hasRequestId) on a type:error failure, never the raw body", async () => {
+  const config = testConfig();
+  const fakeFetch: typeof fetch = async () =>
+    jsonResponse(200, { type: "error", message: "invalid mobile number" });
+
+  const outcome = await sendViaMsg91(config, { to: VALID_PHONE, otp: VALID_OTP }, fakeFetch);
+
+  assert.equal(outcome.ok, false);
+  if (!outcome.ok) {
+    assert.equal(outcome.msg91HttpStatus, 200);
+    assert.equal(outcome.msg91ResponseType, "error");
+    assert.equal(outcome.hasRequestId, true);
+  }
+});
+
+test("sendViaMsg91's outcome never carries the request id VALUE, only whether one is present", async () => {
+  const config = testConfig();
+  const fakeFetch: typeof fetch = async () =>
+    jsonResponse(200, { type: "success", message: "super-secret-looking-request-id-999" });
+
+  const outcome = await sendViaMsg91(config, { to: VALID_PHONE, otp: VALID_OTP }, fakeFetch);
+
+  assert.equal(outcome.ok, true);
+  // The success variant of Msg91Outcome has no fields beyond `ok` -- there
+  // is no property this test could even read the request id back from.
+  assert.deepEqual(outcome, { ok: true });
 });
