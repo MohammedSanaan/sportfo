@@ -6,7 +6,7 @@
 import "@supabase/functions-js/edge-runtime.d.ts";
 import { withSupabase } from "@supabase/server";
 import { verifySendSmsHook, HookVerificationError } from "./verify-hook.ts";
-import { isValidOtp, buildOtpMessage } from "./message.ts";
+import { isValidOtp } from "./message.ts";
 import { getSmsProvider, SmsProviderError } from "./sms-provider.ts";
 
 interface HookErrorBody {
@@ -66,13 +66,14 @@ export default {
 
     try {
       const provider = getSmsProvider();
-      await provider.sendSms({ to: phone, message: buildOtpMessage(otp) });
+      await provider.sendSms({ to: phone, otp });
     } catch (err) {
       if (err instanceof SmsProviderError) {
-        // `err.detail` (upstream response body / raw cause) is logged for
-        // diagnostics only -- it is never included in the response, and
-        // never contains the OTP since the provider call's inputs are
-        // `to`/`message`, not logged here either.
+        // `err.detail` (the gateway's response body, or a raw network
+        // failure message) is logged for diagnostics only -- never included
+        // in the response. It also never contains the OTP: the gateway's
+        // own responses never echo it back (verified in sms-gateway's own
+        // tests), and `to`/`otp` themselves are never logged here either.
         console.error("send-auth-sms: provider send failed", {
           message: err.message,
           retryable: err.retryable,
