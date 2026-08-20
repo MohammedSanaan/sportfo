@@ -37,7 +37,7 @@ export function Textarea({
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "w-full resize-y rounded-lg border bg-surface px-3.5 py-3 text-sm text-ink-900 placeholder:text-ink-400",
+          "w-full resize-y rounded-xl border bg-surface px-3.5 py-3 text-sm text-ink-900 placeholder:text-ink-400",
           error ? "border-red-400" : "border-border-default",
           "transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100",
           className,

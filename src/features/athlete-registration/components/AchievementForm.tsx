@@ -49,7 +49,7 @@ export function AchievementForm({
             : undefined;
 
   return (
-    <div className="rounded-lg border border-border-default bg-surface-muted p-5">
+    <div className="rounded-xl border border-border-default bg-surface-muted p-5 transition-colors hover:border-brand-200">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-sm font-semibold text-ink-800">
           Achievement {index + 1}
@@ -150,7 +150,7 @@ export function AchievementForm({
           ) : (
             <label
               htmlFor={`${idPrefix}-document`}
-              className="flex cursor-pointer flex-col items-center justify-center gap-1 rounded-lg border border-dashed border-border-strong bg-surface px-4 py-6 text-center transition-colors hover:border-brand-400 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
+              className="flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border border-dashed border-border-strong bg-surface px-4 py-8 text-center transition-colors hover:border-brand-400 hover:bg-brand-50/40 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
               aria-disabled={Boolean(busy)}
             >
               <span className="text-sm font-medium text-brand-700">
