@@ -1,52 +1,54 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { SportsHeroCarousel, type CarouselImage } from "./SportsHeroCarousel";
 
-// Real, licensed sports photography (Pexels free-to-use license) for
-// atmosphere -- an anonymous silhouette, not a specific identifiable
-// person, so nothing here implies a real SportFo athlete or endorsement.
-// A navy wash + a restrained radial brand-blue highlight sit on top for
-// text contrast, per the brief's "dark/blue image overlay" direction --
-// one overlay treatment, not a stack of competing gradients.
+// Generic editorial sports photography for atmosphere -- not photos of
+// real SportFo athletes. All six are free-to-use (Pexels license),
+// deliberately silhouette/backlit shots with no visible team or sponsor
+// branding, chosen for one consistent, cinematic golden-hour mood rather
+// than a mismatched grab-bag of styles.
+const CAROUSEL_IMAGES: CarouselImage[] = [
+  { src: "/images/carousel/athletics.jpg", alt: "Athlete sprinting on a running track at sunset" },
+  { src: "/images/carousel/football.jpg", alt: "Football player heading the ball on a beach at dusk" },
+  { src: "/images/carousel/basketball.jpg", alt: "Basketball player dunking, silhouetted against a sunset sky" },
+  { src: "/images/carousel/cricket.jpg", alt: "Cricketer holding a bat, silhouetted against a sunset skyline" },
+  { src: "/images/carousel/tennis.jpg", alt: "Tennis player at the net during a sunset match" },
+  { src: "/images/carousel/swimming.jpg", alt: "Swimmer diving beneath the water's surface" },
+];
+
 export function Hero() {
   return (
-    <section className="relative isolate overflow-hidden rounded-3xl px-6 py-20 text-center sm:px-10 sm:py-24 lg:py-28">
-      <div aria-hidden className="absolute inset-0">
-        <Image
-          src="/images/hero-track.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-navy-950/72" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(47,102,240,0.35),_transparent_55%)]" />
-      </div>
+    <section className="overflow-hidden rounded-3xl bg-navy-950 px-6 py-14 sm:px-10 sm:py-16 lg:py-20">
+      <div className="mx-auto flex max-w-6xl flex-col items-center gap-10 lg:flex-row lg:items-center lg:gap-14">
+        <div className="flex flex-col items-center gap-6 text-center lg:w-1/2 lg:items-start lg:text-left">
+          <Badge variant="onDark">Built for athletes</Badge>
 
-      <div className="relative mx-auto flex max-w-2xl flex-col items-center gap-6">
-        <Badge variant="onDark">Built for athletes. Designed for opportunity.</Badge>
+          <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Build Your Sporting <span className="text-brand-400">Future.</span>
+          </h1>
 
-        <h1 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-          Build Your Sporting Future.
-        </h1>
+          <p className="max-w-xl text-base text-white/70 sm:text-lg">
+            Create your professional athlete identity, showcase your achievements, and get
+            discovered by the sporting world.
+          </p>
 
-        <p className="max-w-xl text-base text-white/70 sm:text-lg">
-          Create your professional athlete identity. Showcase your achievements. Get discovered.
-        </p>
+          <div className="mt-2 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
+            <Link href="/auth" className="w-full sm:w-auto">
+              <Button size="lg" className="w-full sm:w-auto">
+                Create Athlete Profile
+              </Button>
+            </Link>
+            <Link href="/athletes" className="w-full sm:w-auto">
+              <Button variant="outlineOnDark" size="lg" className="w-full sm:w-auto">
+                Discover Athletes
+              </Button>
+            </Link>
+          </div>
+        </div>
 
-        <div className="mt-2 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
-          <Link href="/auth" className="w-full sm:w-auto">
-            <Button size="lg" className="w-full sm:w-auto">
-              Create Athlete Profile
-            </Button>
-          </Link>
-          <Link href="/athletes" className="w-full sm:w-auto">
-            <Button variant="outlineOnDark" size="lg" className="w-full sm:w-auto">
-              Discover Athletes
-            </Button>
-          </Link>
+        <div className="w-full lg:w-1/2">
+          <SportsHeroCarousel images={CAROUSEL_IMAGES} />
         </div>
       </div>
     </section>
