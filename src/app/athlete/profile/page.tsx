@@ -10,6 +10,7 @@ import { AthletePersonalInfo } from "@/features/athlete-profile/components/Athle
 import { AthleteSportsSection } from "@/features/athlete-profile/components/AthleteSportsSection";
 import { AthleteAchievementsSection } from "@/features/athlete-profile/components/AthleteAchievementsSection";
 import { ProfileActions } from "@/features/athlete-profile/components/ProfileActions";
+import { ProfileVisibilityCard } from "@/features/athlete-profile/components/ProfileVisibilityCard";
 
 export const metadata: Metadata = {
   title: "My Athlete Profile | SportFo",
@@ -69,6 +70,11 @@ export default async function AthleteProfilePage() {
         />
 
         <ProfileActions />
+
+        <ProfileVisibilityCard
+          initialIsPublic={profile.is_public}
+          initialSlug={profile.public_slug}
+        />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <AthletePersonalInfo profile={profile} />
