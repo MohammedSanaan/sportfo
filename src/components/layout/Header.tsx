@@ -51,7 +51,7 @@ export function Header({ authNav }: HeaderProps) {
         "sticky top-0 z-40 border-b transition-[background-color,border-color,box-shadow] duration-300",
         overHero
           ? "border-transparent bg-transparent"
-          : "border-border-default bg-surface/85 shadow-[0_1px_0_rgba(11,18,32,0.04)] backdrop-blur-md",
+          : "border-border-default bg-surface/85 shadow-[0_1px_0_rgba(10,22,40,0.04)] backdrop-blur-md",
       )}
     >
       <div className="mx-auto flex h-16 w-full max-w-[78rem] items-center justify-between gap-4 px-5 sm:px-8">

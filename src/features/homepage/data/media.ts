@@ -17,6 +17,11 @@ export interface Media {
 }
 
 export const MEDIA = {
+  heroAthlete: {
+    src: "/media/hero-athlete.jpg",
+    alt: "A sprinter bursting from starting blocks under dramatic stadium floodlights",
+    focus: "55% 40%",
+  },
   floodlights: {
     src: "/media/floodlights.jpg",
     alt: "A floodlit pitch at night, players small under a single tower of light",

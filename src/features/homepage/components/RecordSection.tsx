@@ -82,7 +82,7 @@ export function RecordSection() {
 
           {/* The record itself */}
           <Reveal delay={120} className="lg:-ml-16 lg:pt-16">
-            <div className="rounded-sm border border-border-default bg-surface shadow-[0_2px_6px_rgba(11,18,32,0.04),0_28px_60px_-32px_rgba(11,18,32,0.3)]">
+            <div className="rounded-sm border border-border-default bg-surface shadow-[0_2px_6px_rgba(10,22,40,0.04),0_28px_60px_-32px_rgba(10,22,40,0.3)]">
               <header className="flex items-start justify-between gap-4 border-b border-border-default p-6">
                 <div>
                   <SpecLabel>SportFo record</SpecLabel>

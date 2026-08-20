@@ -26,7 +26,7 @@ export function Hero() {
     // headline's optical position.
     <section className="relative isolate -mt-16 overflow-hidden bg-navy-975 pt-40 sm:pt-44 lg:pt-52">
       <EditorialImage
-        media="stadiumNight"
+        media="heroAthlete"
         grade="deep"
         priority
         inset

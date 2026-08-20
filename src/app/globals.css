@@ -30,17 +30,20 @@
   /* Extended tonal range for the homepage's premium/editorial sections --
      additive to (never replacing) the tokens above, so auth/registration/
      profile pages are unaffected. Same navy-to-cobalt hue family as the
-     brand and ink scales, so the whole product still reads as one system. */
-  --color-navy-975: #04070f;
-  --color-navy-950: #060a16;
-  --color-navy-900: #0a1226;
-  --color-navy-800: #101c37;
-  --color-navy-700: #17264a;
-  --color-steel-700: #33415c;
-  --color-steel-600: #4a5b7d;
-  --color-steel-500: #6a7c9e;
-  --color-steel-400: #8e9cb8;
-  --color-steel-300: #b9c3d6;
+     brand and ink scales, so the whole product still reads as one system.
+
+     Palette: deep navy → dark royal/cobalt → lighter layered blue.
+     Shifted from near-black to rich dark-blue to feel premium and branded. */
+  --color-navy-975: #0a1628;
+  --color-navy-950: #0d1a30;
+  --color-navy-900: #112240;
+  --color-navy-800: #162d54;
+  --color-navy-700: #1c3868;
+  --color-steel-700: #3a5278;
+  --color-steel-600: #526b91;
+  --color-steel-500: #7389aa;
+  --color-steel-400: #94a7c2;
+  --color-steel-300: #bcc8db;
   --color-silver-200: #e3e8f1;
   --color-silver-100: #eef1f6;
   --color-silver-50: #f5f7fb;
@@ -110,7 +113,7 @@ body {
 .sf-rules-light {
   background-image: linear-gradient(
     to right,
-    rgba(11, 18, 32, 0.05) 1px,
+    rgba(10, 22, 40, 0.05) 1px,
     transparent 1px
   );
   background-size: 8.3333% 100%;

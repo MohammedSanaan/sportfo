@@ -95,7 +95,7 @@ function EcosystemDiagram() {
             cy="250"
             r={r}
             fill="none"
-            stroke="rgba(11,18,32,0.09)"
+            stroke="rgba(10,22,40,0.12)"
             strokeWidth="1"
             strokeDasharray={r === 172 ? undefined : "3 7"}
           />
@@ -108,13 +108,13 @@ function EcosystemDiagram() {
             y1="250"
             x2={node.x}
             y2={node.y}
-            stroke="rgba(29,79,216,0.22)"
+            stroke="rgba(29,79,216,0.28)"
             strokeWidth="1"
           />
         ))}
 
         {/* Centre — the athlete */}
-        <circle cx="250" cy="250" r="58" fill="#0b1220" />
+        <circle cx="250" cy="250" r="58" fill="#0a1628" />
         <circle cx="250" cy="250" r="58" fill="none" stroke="rgba(255,255,255,0.14)" />
         <text
           x="250"
@@ -141,13 +141,13 @@ function EcosystemDiagram() {
               cy={node.y}
               r="40"
               fill="none"
-              stroke="rgba(11,18,32,0.12)"
+              stroke="rgba(10,22,40,0.15)"
             />
             <text
               x={node.x}
               y={node.y - 3}
               textAnchor="middle"
-              className="fill-[#0b1220] text-[11.5px] font-semibold"
+              className="fill-[#0a1628] text-[11.5px] font-semibold"
             >
               {node.label}
             </text>

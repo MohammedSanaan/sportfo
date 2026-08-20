@@ -17,7 +17,7 @@ export function FinalCta() {
           tunnel still reads behind the statement. */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_60%_at_50%_58%,transparent,rgba(4,7,15,0.82)_78%)]"
+        className="absolute inset-0 -z-10 bg-[radial-gradient(70%_60%_at_50%_58%,transparent,rgba(10,22,40,0.82)_78%)]"
       />
       <div
         aria-hidden
