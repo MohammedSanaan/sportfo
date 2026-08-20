@@ -191,6 +191,12 @@ export type Database = {
           title: string
         }[]
       }
+      get_public_athlete_countries: {
+        Args: never
+        Returns: {
+          country: string
+        }[]
+      }
       get_public_athlete_profile: {
         Args: { p_slug: string }
         Returns: {
@@ -229,6 +235,18 @@ export type Database = {
           p_school_college: string
           p_skill_level: string
           p_sport_discipline: string
+        }
+        Returns: Json
+      }
+      search_public_athletes: {
+        Args: {
+          p_city?: string
+          p_country?: string
+          p_page?: number
+          p_page_size?: number
+          p_query?: string
+          p_skill_level?: string
+          p_sport?: string
         }
         Returns: Json
       }

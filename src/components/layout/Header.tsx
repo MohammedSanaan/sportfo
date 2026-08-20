@@ -25,6 +25,12 @@ export function Header() {
         </Link>
 
         <nav aria-label="Primary" className="flex items-center gap-1">
+          <Link
+            href="/athletes"
+            className="rounded-md px-3 py-2 text-sm font-medium text-ink-600 transition-colors hover:bg-surface-muted hover:text-ink-900"
+          >
+            Discover Athletes
+          </Link>
           <Suspense fallback={<AuthNavFallback />}>
             <AuthNav />
           </Suspense>
