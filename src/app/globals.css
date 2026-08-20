@@ -27,8 +27,29 @@
   --color-border-default: #e2e7f0;
   --color-border-strong: #cbd5e1;
 
+  /* Extended tonal range for the homepage's premium/editorial sections --
+     additive to (never replacing) the tokens above, so auth/registration/
+     profile pages are unaffected. Same navy-to-cobalt hue family as the
+     brand and ink scales, so the whole product still reads as one system. */
+  --color-navy-975: #04070f;
+  --color-navy-950: #060a16;
+  --color-navy-900: #0a1226;
+  --color-navy-800: #101c37;
+  --color-navy-700: #17264a;
+  --color-steel-700: #33415c;
+  --color-steel-600: #4a5b7d;
+  --color-steel-500: #6a7c9e;
+  --color-steel-400: #8e9cb8;
+  --color-steel-300: #b9c3d6;
+  --color-silver-200: #e3e8f1;
+  --color-silver-100: #eef1f6;
+  --color-silver-50: #f5f7fb;
+  --color-ice-300: #a9c6ff;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
+  --font-display: var(--font-instrument-serif), ui-serif, Georgia,
+    "Times New Roman", serif;
 }
 
 body {
@@ -44,4 +65,91 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-brand-500);
   outline-offset: 2px;
+}
+
+/* Used by the homepage sports showcase's crossfade (SportsShowcase.tsx). */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Homepage editorial layer                                            */
+/* Photography on this site is always treated, never raw: every image  */
+/* sits under a navy grade plus this grain so wildly different source  */
+/* stock still reads as one commissioned shoot.                        */
+/* ------------------------------------------------------------------ */
+
+.sf-grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* The column measure, exposed.
+   Twelve evenly spaced vertical hairlines — the same grid the sections are
+   set on, made faintly visible. Percentage sizing keeps the columns tied to
+   the layout at every width rather than tiling a fixed pixel cell. */
+.sf-rules {
+  background-image: linear-gradient(
+    to right,
+    rgba(185, 195, 214, 0.08) 1px,
+    transparent 1px
+  );
+  background-size: 8.3333% 100%;
+}
+
+.sf-rules-light {
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 18, 32, 0.05) 1px,
+    transparent 1px
+  );
+  background-size: 8.3333% 100%;
+}
+
+/* The auth nav renders on the server and can't take a tone prop from the
+   client-side Header, so its over-the-hero colours are applied here. Scoped
+   to the header only; the auth and registration pages are untouched. */
+.sf-authnav[data-over-hero="true"] a:not([class*="bg-"]),
+.sf-authnav[data-over-hero="true"] button:not([class*="bg-"]) {
+  color: var(--color-steel-300);
+}
+
+.sf-authnav[data-over-hero="true"] a:not([class*="bg-"]):hover,
+.sf-authnav[data-over-hero="true"] button:not([class*="bg-"]):hover {
+  color: #fff;
+  background-color: rgb(255 255 255 / 0.1);
+}
+
+/* Scroll reveal. Transform/opacity only, and inert under reduced motion. */
+.sf-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--sf-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.sf-reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

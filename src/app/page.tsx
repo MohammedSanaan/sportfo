@@ -1,21 +1,31 @@
-import Link from "next/link";
+import { Hero } from "@/features/homepage/components/Hero";
+import { RecordSection } from "@/features/homepage/components/RecordSection";
+import { SportsShowcase } from "@/features/homepage/components/SportsShowcase";
+import { EcosystemSection } from "@/features/homepage/components/EcosystemSection";
+import { DiscoverySection } from "@/features/homepage/components/DiscoverySection";
+import { OpportunitiesSection } from "@/features/homepage/components/OpportunitiesSection";
+import { VoicesSection } from "@/features/homepage/components/VoicesSection";
+import { EventsSection } from "@/features/homepage/components/EventsSection";
+import { FinalCta } from "@/features/homepage/components/FinalCta";
+import { Footer } from "@/features/homepage/components/Footer";
 
+// Section order is the page's argument, and the rhythm is deliberate:
+// dark photography, light product, dark index, light diagram, dark register,
+// light board, light band, light calendar, dark close. No two adjacent
+// sections share a layout or a background.
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
-      <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-ink-900 sm:text-5xl">
-        Build your professional athlete profile with SportFo
-      </h1>
-      <p className="mt-4 max-w-xl text-base text-ink-500 sm:text-lg">
-        Showcase your sports background, achievements, and experience — and
-        connect with coaches, academies, and sponsors.
-      </p>
-      <Link
-        href="/auth"
-        className="mt-8 inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-8 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
-      >
-        Create Your Athlete Profile
-      </Link>
+    <div className="flex flex-1 flex-col">
+      <Hero />
+      <RecordSection />
+      <SportsShowcase />
+      <EcosystemSection />
+      <DiscoverySection />
+      <OpportunitiesSection />
+      <VoicesSection />
+      <EventsSection />
+      <FinalCta />
+      <Footer />
     </div>
   );
 }

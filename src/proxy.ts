@@ -3,10 +3,12 @@ import { updateSupabaseSession } from "@/lib/supabase/proxy-session";
 
 // Routes that require an authenticated Supabase session. This is an
 // optimistic check only (see the Next.js Proxy/authentication guides) --
-// the real, secure check lives in the route's own Server Component
-// (src/app/athlete/register/page.tsx), which re-verifies the session with
-// Supabase directly rather than trusting Proxy alone.
-const PROTECTED_ROUTES = ["/athlete/register"];
+// the real, secure check lives in each route's own Server Component
+// (src/app/athlete/register/page.tsx, src/app/athlete/me/page.tsx,
+// src/app/athlete/[id]/page.tsx), which re-verifies the session with
+// Supabase directly rather than trusting Proxy alone. "/athlete" as a
+// prefix covers all three.
+const PROTECTED_ROUTES = ["/athlete"];
 
 export async function proxy(request: NextRequest) {
   const { response, user } = await updateSupabaseSession(request);
