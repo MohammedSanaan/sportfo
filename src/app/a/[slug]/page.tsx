@@ -69,6 +69,7 @@ export default async function PublicAthleteProfilePage({
           city={profile.city}
           country={profile.country}
           actions={<ShareProfileButton />}
+          bannerImage="/images/profile-banner-track.jpg"
         />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
