@@ -39,3 +39,15 @@ export const SCHOLARSHIP_OPTIONS: SelectOption[] = [
   { value: "yes", label: "Yes" },
   { value: "no", label: "No" },
 ];
+
+// Read-only display views (the athlete profile page) show the friendly
+// label for a stored option value rather than the raw "semi-professional"
+// -style value -- falls back to the raw value itself for anything not in
+// the list, rather than hiding data the athlete actually entered.
+export function getOptionLabel(
+  options: SelectOption[],
+  value: string | null | undefined,
+): string {
+  if (!value) return "";
+  return options.find((option) => option.value === value)?.label ?? value;
+}

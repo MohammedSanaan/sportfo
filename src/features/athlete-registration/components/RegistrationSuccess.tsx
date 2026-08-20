@@ -9,15 +9,18 @@ export function RegistrationSuccess() {
         <p className="text-base text-ink-700">
           Your athlete profile has been created successfully.
         </p>
-        <p className="text-sm text-ink-500">
-          The full profile page is coming in a future update. For now, you
-          can return to the homepage.
-        </p>
-        <Link href="/">
-          <Button type="button" variant="primary">
-            Back to Home
-          </Button>
-        </Link>
+        <div className="flex w-full flex-col-reverse gap-3 sm:w-auto sm:flex-row">
+          <Link href="/" className="sm:w-auto">
+            <Button type="button" variant="secondary">
+              Back to Home
+            </Button>
+          </Link>
+          <Link href="/athlete/profile" className="sm:w-auto">
+            <Button type="button" variant="primary">
+              View My Profile
+            </Button>
+          </Link>
+        </div>
       </div>
     </SectionCard>
   );
