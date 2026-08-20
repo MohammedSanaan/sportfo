@@ -12,6 +12,10 @@ interface PhoneStepProps {
   onSubmit: () => void;
   isSubmitting: boolean;
   error?: string;
+  fieldHelperText?: string;
+  submitLabel?: string;
+  submitBusyLabel?: string;
+  note?: string;
 }
 
 export function PhoneStep({
@@ -22,6 +26,10 @@ export function PhoneStep({
   onSubmit,
   isSubmitting,
   error,
+  fieldHelperText,
+  submitLabel = "Send verification code",
+  submitBusyLabel = "Sending code...",
+  note,
 }: PhoneStepProps) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -38,10 +46,12 @@ export function PhoneStep({
         onLocalNumberChange={onLocalNumberChange}
         error={error}
         disabled={isSubmitting}
+        helperText={fieldHelperText}
       />
       <Button type="submit" variant="primary" disabled={isSubmitting}>
-        {isSubmitting ? "Sending code..." : "Send verification code"}
+        {isSubmitting ? submitBusyLabel : submitLabel}
       </Button>
+      {note && <p className="text-center text-xs text-ink-400">{note}</p>}
     </form>
   );
 }

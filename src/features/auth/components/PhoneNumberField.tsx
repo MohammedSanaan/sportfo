@@ -9,6 +9,7 @@ interface PhoneNumberFieldProps {
   onLocalNumberChange: (value: string) => void;
   error?: string;
   disabled?: boolean;
+  helperText?: string;
 }
 
 export function PhoneNumberField({
@@ -18,15 +19,14 @@ export function PhoneNumberField({
   onLocalNumberChange,
   error,
   disabled,
+  helperText = "We'll text a 6-digit code to this number.",
 }: PhoneNumberFieldProps) {
   return (
     <FieldShell
       label="Mobile number"
       htmlFor="phone-number"
       error={error}
-      helperText={
-        error ? undefined : "We'll text a 6-digit code to this number."
-      }
+      helperText={error ? undefined : helperText}
     >
       <div className="flex gap-2">
         <select

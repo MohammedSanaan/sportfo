@@ -5,7 +5,7 @@ import { AthleteRegistrationForm } from "@/features/athlete-registration/compone
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
 import { loadAthleteDraft, mapDraftToFormValues } from "@/lib/athlete/registration-draft";
-import { formatAuthPhone } from "@/lib/phone/format-auth-phone";
+import { resolveAthleteMobileNumber } from "@/lib/phone/resolve-athlete-phone";
 
 export const metadata: Metadata = {
   title: "Create Your Athlete Profile | SportFo",
@@ -22,7 +22,7 @@ export default async function AthleteRegisterPage() {
     redirect("/auth");
   }
 
-  const authPhone = formatAuthPhone(user.phone);
+  const authPhone = resolveAthleteMobileNumber(user);
   const supabase = await createClient();
   const { draft, error: draftLoadFailed } = await loadAthleteDraft(supabase, user.id);
 
