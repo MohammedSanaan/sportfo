@@ -27,6 +27,20 @@
   --color-border-default: #e2e7f0;
   --color-border-strong: #cbd5e1;
 
+  /* Deep navy -- dedicated to dark hero/overlay surfaces (hero panels,
+     footer, future ecosystem section), distinct from --color-ink-* (text)
+     and --color-brand-* (interactive blue). Keeps a hero panel reading as
+     "premium dark surface" rather than just a darker shade of the brand
+     button color. */
+  --color-navy-950: #0b1220;
+  --color-navy-900: #101828;
+  --color-navy-800: #0b1f3a;
+  --color-navy-700: #16294a;
+
+  /* Status -- used sparingly (profile-strength/status indicators only). */
+  --color-success-500: #12b76a;
+  --color-success-50: #ecfdf3;
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
 }

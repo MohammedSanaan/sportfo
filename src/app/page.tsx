@@ -1,21 +1,28 @@
-import Link from "next/link";
+import { createClient } from "@/lib/supabase/server";
+import { searchPublicAthletes, parseDiscoveryFilters } from "@/lib/athlete/discovery";
+import { Container } from "@/components/ui/Container";
+import { Hero } from "@/features/landing/components/Hero";
+import { DiscoverAthletesSection } from "@/features/landing/components/DiscoverAthletesSection";
+import { HowItWorksSection } from "@/features/landing/components/HowItWorksSection";
+import { SportingIdentitySection } from "@/features/landing/components/SportingIdentitySection";
+import { FutureEcosystemSection } from "@/features/landing/components/FutureEcosystemSection";
+import { FinalCtaSection } from "@/features/landing/components/FinalCtaSection";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient();
+  // Reuses the same public-safe discovery RPC as /athletes -- no separate
+  // query path, no private data, same security model. Only the first 3
+  // results (of up to 12 the RPC returns) are shown as a preview.
+  const { athletes } = await searchPublicAthletes(supabase, parseDiscoveryFilters({}));
+
   return (
-    <div className="flex flex-1 flex-col items-center justify-center px-4 py-24 text-center sm:px-6">
-      <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-ink-900 sm:text-5xl">
-        Build your professional athlete profile with SportFo
-      </h1>
-      <p className="mt-4 max-w-xl text-base text-ink-500 sm:text-lg">
-        Showcase your sports background, achievements, and experience — and
-        connect with coaches, academies, and sponsors.
-      </p>
-      <Link
-        href="/auth"
-        className="mt-8 inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-8 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
-      >
-        Create Your Athlete Profile
-      </Link>
-    </div>
+    <Container className="flex flex-col gap-20 py-10 sm:gap-24 sm:py-14 lg:gap-28">
+      <Hero />
+      <DiscoverAthletesSection athletes={athletes.slice(0, 3)} />
+      <HowItWorksSection />
+      <SportingIdentitySection />
+      <FutureEcosystemSection />
+      <FinalCtaSection />
+    </Container>
   );
 }
