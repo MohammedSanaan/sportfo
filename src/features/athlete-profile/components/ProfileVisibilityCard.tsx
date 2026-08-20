@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { cn } from "@/lib/cn";
@@ -104,7 +105,7 @@ export function ProfileVisibilityCard({
             <p suppressHydrationWarning className="break-all text-sm text-ink-600">
               {displayUrl}
             </p>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button
                 type="button"
                 variant="secondary"
@@ -113,6 +114,11 @@ export function ProfileVisibilityCard({
               >
                 Copy Profile Link
               </Button>
+              <Link href={profilePath} target="_blank" rel="noopener noreferrer">
+                <Button type="button" variant="ghost">
+                  View Public Profile
+                </Button>
+              </Link>
               {copied && (
                 <span role="status" className="text-xs text-ink-500">
                   Profile link copied

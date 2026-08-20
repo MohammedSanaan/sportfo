@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { getInitials } from "@/lib/format";
 import { getOptionLabel, PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
 import { Badge } from "@/components/ui/Badge";
+import { AthleteAvatar } from "@/components/ui/AthleteAvatar";
 import type { PublicAthleteSearchResult } from "@/lib/athlete/discovery";
 
 interface AthleteCardProps {
@@ -26,12 +26,7 @@ export function AthleteCard({ athlete }: AthleteCardProps) {
       className="group flex flex-col gap-5 rounded-2xl border border-border-default bg-surface p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
     >
       <div className="flex items-center gap-4">
-        <div
-          aria-hidden
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-600 text-lg font-bold text-white"
-        >
-          {getInitials(athlete.full_name)}
-        </div>
+        <AthleteAvatar fullName={athlete.full_name} size="md" />
         <div className="flex flex-col gap-1.5">
           <Badge>SportFo Athlete</Badge>
           <h3 className="text-lg font-semibold leading-tight text-ink-900">

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { loadPublicAthleteProfile } from "@/lib/athlete/public-profile";
 import { getOptionLabel, PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
-import { AthleteProfileHeader } from "@/features/athlete-profile/components/AthleteProfileHeader";
+import { ProfileHero } from "@/components/ui/ProfileHero";
 import { PublicProfileSummary } from "@/features/public-profile/components/PublicProfileSummary";
 import { PublicSportsSection } from "@/features/public-profile/components/PublicSportsSection";
 import { PublicAchievementsSection } from "@/features/public-profile/components/PublicAchievementsSection";
@@ -62,17 +62,14 @@ export default async function PublicAthleteProfilePage({
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
       <div className="flex flex-col gap-6">
-        <AthleteProfileHeader
+        <ProfileHero
           fullName={profile.full_name}
           primarySport={getOptionLabel(PRIMARY_SPORTS, profile.primary_sport)}
           skillLevel={getOptionLabel(SKILL_LEVELS, profile.skill_level)}
           city={profile.city}
           country={profile.country}
+          actions={<ShareProfileButton />}
         />
-
-        <div className="flex justify-end">
-          <ShareProfileButton />
-        </div>
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           <PublicProfileSummary profile={profile} />

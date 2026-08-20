@@ -28,7 +28,7 @@ function buildHref(searchParams: RawDiscoverySearchParams, page: number): string
 }
 
 const pageLinkClassName =
-  "inline-flex h-10 items-center justify-center rounded-lg border px-4 text-sm font-medium transition-colors";
+  "inline-flex h-11 min-w-11 items-center justify-center rounded-lg border px-4 text-sm font-medium transition-colors";
 
 export function DiscoveryPagination({ page, totalPages, searchParams }: DiscoveryPaginationProps) {
   if (totalPages <= 1) return null;

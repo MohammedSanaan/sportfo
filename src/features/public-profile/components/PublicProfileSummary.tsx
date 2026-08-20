@@ -13,7 +13,7 @@ interface PublicProfileSummaryProps {
 // supabase/migrations/20260820100100_athlete_public_profiles_rls.sql).
 export function PublicProfileSummary({ profile }: PublicProfileSummaryProps) {
   return (
-    <SectionCard title="Professional Background">
+    <SectionCard title="Athlete Overview">
       <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
         <DetailField label="Nationality" value={profile.nationality ?? ""} />
         <DetailField label="School / College" value={profile.school_college ?? ""} />
