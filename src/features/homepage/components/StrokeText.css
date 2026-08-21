@@ -1,0 +1,39 @@
+.sportfo-stroke-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sportfo-stroke-text__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.sportfo-stroke-text__eyebrow-line {
+  width: 24px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.65;
+}
+
+/* Sized to its own content (like an inline logo), not stretched to the
+   container's full width -- matches the max-w-[22ch] centered box this
+   replaces. max-width keeps it from overflowing a narrow phone screen. */
+.sportfo-stroke-text__svg {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sportfo-stroke-text__svg text {
+  user-select: none;
+}

@@ -1,5 +1,5 @@
-import { Reveal } from "./Reveal";
-import { Container, Display, SpecLabel } from "./primitives";
+import { Container } from "./primitives";
+import { StrokeText } from "./StrokeText";
 
 /**
  * The seam between the hero and Discovery.
@@ -11,22 +11,17 @@ import { Container, Display, SpecLabel } from "./primitives";
  * BOTH sides at once (dark-to-light entering, light-to-dark leaving), which
  * does more for the seam than nudging one shade of navy against another.
  *
- * One short line, not a second hero. No ParticleText here -- it doesn't
- * exist yet in this codebase (checked: no component, no canvas dependency),
- * and building a canvas particle system from scratch is the kind of "flashy
- * animation section" this brief explicitly asked to avoid. Same italic-
- * accent Display pattern used by every other section on the page.
+ * One short line, not a second hero. The heading is StrokeText (a restrained
+ * outline-draw-then-fill entrance, once, on scroll) rather than the plain
+ * Display/SpecLabel pair used elsewhere -- StrokeText owns its own
+ * scroll-triggered entrance, so it isn't also wrapped in Reveal (would be a
+ * second, redundant entrance animation on the same text).
  */
 export function HeroDiscoveryBreak() {
   return (
     <section className="bg-silver-50 py-14 sm:py-16">
       <Container>
-        <Reveal className="flex flex-col items-center gap-3 text-center">
-          <SpecLabel>SportFo</SpecLabel>
-          <Display size="sm" className="max-w-[22ch]" accent="discovered.">
-            Talent deserves to be
-          </Display>
-        </Reveal>
+        <StrokeText />
       </Container>
     </section>
   );
