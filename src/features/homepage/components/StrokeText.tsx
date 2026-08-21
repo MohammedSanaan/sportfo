@@ -71,12 +71,17 @@ export function StrokeText({
 }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
+  const line1MeasureRef = useRef<SVGTextElement | null>(null);
 
   const strokeRefs = useRef<SVGTextElement[]>([]);
   const fillRefs = useRef<SVGTextElement[]>([]);
   const wipeRef = useRef<SVGRectElement | null>(null);
 
   const [box, setBox] = useState<TextBox | null>(null);
+  // Line 2 ("discovered.") centers under line 1 rather than sharing its
+  // left edge -- needs line 1's own rendered width, not the combined
+  // group's, since line 1 is wider and defines the block's x=0 origin.
+  const [line1Width, setLine1Width] = useState<number | null>(null);
 
   const rawId = useId();
   const wipeId = `sportfo-stroke-wipe-${rawId.replace(/[^a-zA-Z0-9_-]/g, "")}`;
@@ -106,6 +111,16 @@ export function StrokeText({
     const measure = () => {
       if (cancelled) return;
       try {
+        const line1El = line1MeasureRef.current;
+        if (line1El) {
+          const line1Box = line1El.getBBox();
+          if (line1Box.width) {
+            setLine1Width((prev) =>
+              prev !== null && Math.abs(prev - line1Box.width) < 0.5 ? prev : line1Box.width,
+            );
+          }
+        }
+
         const bbox = svg.getBBox();
         if (!bbox || !bbox.width || !bbox.height) return;
         const padding = Math.max(3, strokeWidth * 2);
@@ -270,7 +285,10 @@ export function StrokeText({
         </text>
         <text
           ref={(el) => {
-            if (el) fillRefs.current[0] = el;
+            if (el) {
+              fillRefs.current[0] = el;
+              line1MeasureRef.current = el;
+            }
           }}
           x="0"
           y={fontSize}
@@ -286,8 +304,9 @@ export function StrokeText({
           ref={(el) => {
             if (el) strokeRefs.current[1] = el;
           }}
-          x="0"
+          x={line1Width !== null ? line1Width / 2 : "0"}
           y={fontSize * 2.05}
+          textAnchor={line1Width !== null ? "middle" : "start"}
           fill="none"
           stroke={strokeColor}
           strokeWidth={strokeWidth}
@@ -301,8 +320,9 @@ export function StrokeText({
           ref={(el) => {
             if (el) fillRefs.current[1] = el;
           }}
-          x="0"
+          x={line1Width !== null ? line1Width / 2 : "0"}
           y={fontSize * 2.05}
+          textAnchor={line1Width !== null ? "middle" : "start"}
           fill={fillColor}
           stroke="none"
           style={italicFontStyle}
