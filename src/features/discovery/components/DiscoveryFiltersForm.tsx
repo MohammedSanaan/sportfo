@@ -1,10 +1,14 @@
 import { PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
 import { Button } from "@/components/ui/Button";
 import type { DiscoveryFilters } from "@/lib/athlete/discovery";
+import { translate } from "@/i18n/dictionary";
+import { translateOptions } from "@/lib/i18n-options";
+import type { Locale } from "@/i18n/config";
 
 interface DiscoveryFiltersFormProps {
   filters: DiscoveryFilters;
   countries: string[];
+  locale: Locale;
 }
 
 const controlClassName =
@@ -16,7 +20,10 @@ const controlClassName =
 // friendly, and refresh-safe with zero client-side routing code. Filters
 // stack one-per-row on mobile (never a crushed multi-column row) and only
 // become a horizontal toolbar at sm+.
-export function DiscoveryFiltersForm({ filters, countries }: DiscoveryFiltersFormProps) {
+export function DiscoveryFiltersForm({ filters, countries, locale }: DiscoveryFiltersFormProps) {
+  const t = (key: string) => translate(locale, key);
+  const skillLevelOptions = translateOptions(t, "options.skillLevel", SKILL_LEVELS);
+
   return (
     <form
       method="GET"
@@ -27,8 +34,8 @@ export function DiscoveryFiltersForm({ filters, countries }: DiscoveryFiltersFor
         type="search"
         name="q"
         defaultValue={filters.query ?? ""}
-        placeholder="Search athletes by name..."
-        aria-label="Search athletes by name"
+        placeholder={t("athletes.searchPlaceholder")}
+        aria-label={t("athletes.searchAriaLabel")}
         className="h-14 w-full rounded-xl border border-border-strong bg-surface-muted px-5 text-base text-ink-800 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
       />
 
@@ -36,10 +43,10 @@ export function DiscoveryFiltersForm({ filters, countries }: DiscoveryFiltersFor
         <select
           name="sport"
           defaultValue={filters.sport ?? ""}
-          aria-label="Filter by sport"
+          aria-label={t("athletes.filterBySport")}
           className={`${controlClassName} sm:w-auto`}
         >
-          <option value="">All sports</option>
+          <option value="">{t("athletes.allSports")}</option>
           {PRIMARY_SPORTS.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
@@ -50,10 +57,10 @@ export function DiscoveryFiltersForm({ filters, countries }: DiscoveryFiltersFor
         <select
           name="country"
           defaultValue={filters.country ?? ""}
-          aria-label="Filter by country"
+          aria-label={t("athletes.filterByCountry")}
           className={`${controlClassName} sm:w-auto`}
         >
-          <option value="">All countries</option>
+          <option value="">{t("athletes.allCountries")}</option>
           {countries.map((country) => (
             <option key={country} value={country}>
               {country}
@@ -65,19 +72,19 @@ export function DiscoveryFiltersForm({ filters, countries }: DiscoveryFiltersFor
           type="text"
           name="city"
           defaultValue={filters.city ?? ""}
-          placeholder="City"
-          aria-label="Filter by city"
+          placeholder={t("athletes.cityPlaceholder")}
+          aria-label={t("athletes.cityAriaLabel")}
           className={`${controlClassName} sm:w-36`}
         />
 
         <select
           name="skill"
           defaultValue={filters.skillLevel ?? ""}
-          aria-label="Filter by skill level"
+          aria-label={t("athletes.filterBySkillLevel")}
           className={`${controlClassName} sm:w-auto`}
         >
-          <option value="">All skill levels</option>
-          {SKILL_LEVELS.map((option) => (
+          <option value="">{t("athletes.allSkillLevels")}</option>
+          {skillLevelOptions.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
@@ -85,7 +92,7 @@ export function DiscoveryFiltersForm({ filters, countries }: DiscoveryFiltersFor
         </select>
 
         <Button type="submit" className="sm:ml-auto">
-          Search
+          {t("athletes.searchButton")}
         </Button>
       </div>
     </form>

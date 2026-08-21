@@ -1,6 +1,9 @@
+"use client";
+
 import { cn } from "@/lib/cn";
 import { FieldShell } from "@/components/ui/FieldShell";
 import { COUNTRIES } from "@/lib/phone/countries";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface PhoneNumberFieldProps {
   dialCode: string;
@@ -19,18 +22,21 @@ export function PhoneNumberField({
   onLocalNumberChange,
   error,
   disabled,
-  helperText = "We'll text a 6-digit code to this number.",
+  helperText,
 }: PhoneNumberFieldProps) {
+  const { t } = useTranslation();
+  const resolvedHelperText = helperText ?? t("auth.mobileHelperOtp");
+
   return (
     <FieldShell
-      label="Mobile number"
+      label={t("auth.mobileNumberLabel")}
       htmlFor="phone-number"
       error={error}
-      helperText={error ? undefined : helperText}
+      helperText={error ? undefined : resolvedHelperText}
     >
       <div className="flex gap-2">
         <select
-          aria-label="Country code"
+          aria-label={t("auth.countryCodeLabel")}
           value={dialCode}
           disabled={disabled}
           onChange={(e) => onDialCodeChange(e.target.value)}
@@ -52,7 +58,7 @@ export function PhoneNumberField({
           type="tel"
           inputMode="tel"
           autoComplete="tel-national"
-          placeholder="Mobile number"
+          placeholder={t("auth.phonePlaceholder")}
           value={localNumber}
           disabled={disabled}
           aria-invalid={error ? true : undefined}

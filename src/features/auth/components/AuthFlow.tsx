@@ -11,6 +11,7 @@ import { DEFAULT_COUNTRY } from "@/lib/phone/countries";
 import { isValidE164, maskPhoneNumber, toE164 } from "@/lib/phone/e164";
 import { PhoneStep } from "./PhoneStep";
 import { OtpStep } from "./OtpStep";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 const RESEND_COOLDOWN_SECONDS = 30;
 
@@ -18,6 +19,7 @@ type Step = "phone" | "otp";
 
 export function AuthFlow() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [supabase] = useState(() => createClient());
   const [authMode] = useState(() => getAuthMode());
 
@@ -65,7 +67,7 @@ export function AuthFlow() {
   async function continueDemo() {
     const e164Phone = toE164(dialCode, localNumber);
     if (!isValidE164(e164Phone)) {
-      setPhoneError("Enter a valid mobile number.");
+      setPhoneError(t("auth.errorInvalidPhone"));
       return;
     }
 
@@ -104,7 +106,7 @@ export function AuthFlow() {
   async function sendCode() {
     const e164Phone = toE164(dialCode, localNumber);
     if (!isValidE164(e164Phone)) {
-      setPhoneError("Enter a valid mobile number.");
+      setPhoneError(t("auth.errorInvalidPhone"));
       return;
     }
 
@@ -145,7 +147,7 @@ export function AuthFlow() {
 
   async function verifyCode() {
     if (otp.length !== 6) {
-      setOtpError("Enter the 6-digit code.");
+      setOtpError(t("auth.errorInvalidOtp"));
       return;
     }
 
@@ -163,9 +165,7 @@ export function AuthFlow() {
       console.error("verifyOtp failed:", error);
       setIsVerifying(false);
       setOtpError(
-        error
-          ? friendlyAuthErrorMessage(error)
-          : "That code isn't right. Double-check it and try again.",
+        error ? friendlyAuthErrorMessage(error) : t("auth.errorOtpWrong"),
       );
       return;
     }
@@ -178,7 +178,7 @@ export function AuthFlow() {
     if (userCheckError || !userCheck.user) {
       console.error("post-verify session check failed:", userCheckError);
       setIsVerifying(false);
-      setOtpError("We couldn't confirm your session. Please try again.");
+      setOtpError(t("auth.errorSessionCheckFailed"));
       return;
     }
 
@@ -219,10 +219,10 @@ export function AuthFlow() {
         onSubmit={continueDemo}
         isSubmitting={isSendingCode}
         error={phoneError}
-        fieldHelperText="We'll use this number for your athlete profile."
-        submitLabel="Continue"
-        submitBusyLabel="Continuing..."
-        note="Phone verification will be enabled before public launch."
+        fieldHelperText={t("auth.mobileHelperDemo")}
+        submitLabel={t("auth.continueLabel")}
+        submitBusyLabel={t("auth.continuing")}
+        note={t("auth.demoNote")}
       />
     );
   }

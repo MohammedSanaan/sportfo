@@ -65,6 +65,32 @@ body {
   font-family: var(--font-sans);
 }
 
+/* Indic-script font routing. Inter (--font-sans) and Lexend (--font-stitch,
+   the homepage's own display face) have no Devanagari/Kannada/Tamil/Telugu/
+   Malayalam glyphs -- these rules swap in a dedicated Noto Sans family
+   whenever <html lang> (set from the persisted locale, see
+   src/i18n/server.ts) is one of the five Indic locales. Matched via
+   :lang() rather than a per-locale className so it applies everywhere at
+   once with no class threaded through every component, and left
+   deliberately unlayered so it wins over Tailwind's own (layered)
+   font-family utilities regardless of specificity. English keeps the
+   existing SportFo typography untouched. */
+:lang(hi) {
+  font-family: var(--font-noto-devanagari), var(--font-sans);
+}
+:lang(kn) {
+  font-family: var(--font-noto-kannada), var(--font-sans);
+}
+:lang(ta) {
+  font-family: var(--font-noto-tamil), var(--font-sans);
+}
+:lang(te) {
+  font-family: var(--font-noto-telugu), var(--font-sans);
+}
+:lang(ml) {
+  font-family: var(--font-noto-malayalam), var(--font-sans);
+}
+
 /* Wrapped in Tailwind's own `base` layer -- left unlayered, this rule (a
    bare `*` selector) wins over EVERY `border-{color}` utility in the
    codebase regardless of specificity, because CSS Cascade Layers give any

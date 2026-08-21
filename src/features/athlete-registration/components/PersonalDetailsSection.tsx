@@ -14,8 +14,11 @@ import {
 } from "@/lib/athlete-validation";
 import { getAuthMode } from "@/lib/auth-mode";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
+import { useTranslation } from "@/i18n/LocaleProvider";
+import { translateOptions } from "@/lib/i18n-options";
 
 export function PersonalDetailsSection() {
+  const { t } = useTranslation();
   const {
     register,
     control,
@@ -23,26 +26,23 @@ export function PersonalDetailsSection() {
   } = useFormContext<AthleteRegistrationFormValues>();
 
   const mobileHelperText =
-    getAuthMode() === "demo"
-      ? "This is the number you entered when joining. Phone verification will be enabled before public launch."
-      : "This is the number you verified at login and can't be changed here.";
+    getAuthMode() === "demo" ? t("register.personal.mobileHelperDemo") : t("register.personal.mobileHelperOtp");
+
+  const genderOptions = translateOptions(t, "options.gender", GENDER_OPTIONS);
 
   return (
-    <SectionCard
-      title="Personal Details"
-      description="Tell us who you are and how to reach you."
-    >
+    <SectionCard title={t("register.personal.title")} description={t("register.personal.description")}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
         <Input
           id="fullName"
-          label="Full Name"
+          label={t("register.personal.fullName")}
           autoComplete="name"
           error={errors.personalDetails?.fullName?.message}
           {...register("personalDetails.fullName", requiredTextRule("Full name"))}
         />
         <Input
           id="dateOfBirth"
-          label="Date of Birth"
+          label={t("register.personal.dateOfBirth")}
           type="date"
           max={today()}
           error={errors.personalDetails?.dateOfBirth?.message}
@@ -54,9 +54,9 @@ export function PersonalDetailsSection() {
           rules={{ required: "Select your gender." }}
           render={({ field, fieldState }) => (
             <RadioGroup
-              label="Gender"
+              label={t("register.personal.gender")}
               name={field.name}
-              options={GENDER_OPTIONS}
+              options={genderOptions}
               value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}
@@ -67,27 +67,27 @@ export function PersonalDetailsSection() {
         />
         <Input
           id="nationality"
-          label="Nationality"
+          label={t("register.personal.nationality")}
           error={errors.personalDetails?.nationality?.message}
           {...register("personalDetails.nationality", requiredTextRule("Nationality"))}
         />
         <Input
           id="country"
-          label="Country"
+          label={t("register.personal.country")}
           autoComplete="country-name"
           error={errors.personalDetails?.country?.message}
           {...register("personalDetails.country", requiredTextRule("Country"))}
         />
         <Input
           id="city"
-          label="City"
+          label={t("register.personal.city")}
           autoComplete="address-level2"
           error={errors.personalDetails?.city?.message}
           {...register("personalDetails.city", requiredTextRule("City"))}
         />
         <Input
           id="mobileNumber"
-          label="Mobile Number"
+          label={t("register.personal.mobileNumber")}
           type="tel"
           autoComplete="tel"
           readOnly
@@ -99,7 +99,7 @@ export function PersonalDetailsSection() {
         />
         <Input
           id="email"
-          label="Email Address"
+          label={t("register.personal.email")}
           type="email"
           autoComplete="email"
           error={errors.personalDetails?.email?.message}
@@ -107,19 +107,19 @@ export function PersonalDetailsSection() {
         />
         <Input
           id="school"
-          label="School / College"
+          label={t("register.personal.school")}
           optional
           {...register("personalDetails.school")}
         />
         <Input
           id="club"
-          label="Club / Academy"
+          label={t("register.personal.club")}
           optional
           {...register("personalDetails.club")}
         />
         <Input
           id="coachName"
-          label="Coach / Mentor Name"
+          label={t("register.personal.coachName")}
           optional
           {...register("personalDetails.coachName")}
         />

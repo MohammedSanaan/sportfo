@@ -14,6 +14,7 @@ import { AthleteAchievementsSection } from "@/features/athlete-profile/component
 import { ProfileActions } from "@/features/athlete-profile/components/ProfileActions";
 import { ProfileVisibilityCard } from "@/features/athlete-profile/components/ProfileVisibilityCard";
 import { ProfileStrengthCard } from "@/features/athlete-profile/components/ProfileStrengthCard";
+import { getServerTranslations } from "@/i18n/server";
 
 export const metadata: Metadata = {
   title: "My Athlete Profile | SportFo",
@@ -35,18 +36,19 @@ export default async function AthleteProfilePage() {
   // enforced by "Athletes can view own profile" etc., never by a
   // client-supplied id, and never a service-role client.
   const { draft, error: loadFailed } = await loadAthleteDraft(supabase, user.id);
+  const { locale, t } = await getServerTranslations();
 
   if (loadFailed) {
     return (
       <div className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <div className="rounded-xl border border-red-200 bg-red-50 p-6 text-sm text-red-700">
-          <p className="font-medium">We couldn&apos;t load your profile.</p>
+          <p className="font-medium">{t("profile.loadFailed")}</p>
           <p className="mt-1">
-            Please{" "}
+            {t("common.pleasePrefix")}{" "}
             <Link href="/athlete/profile" className="font-medium underline">
-              try reloading this page
+              {t("profile.reload")}
             </Link>
-            . If this keeps happening, contact support.
+            . {t("profile.contactSupport")}
           </p>
         </div>
       </div>
@@ -69,7 +71,7 @@ export default async function AthleteProfilePage() {
       <div className="relative mx-auto w-full max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
         <div className="flex flex-col gap-6">
           <h1 className="text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-            My SportFo Profile
+            {t("profile.pageTitle")}
           </h1>
 
           <ProfileHero
@@ -79,10 +81,11 @@ export default async function AthleteProfilePage() {
             skillLevel={getOptionLabel(SKILL_LEVELS, sport?.skill_level)}
             city={profile.city}
             country={profile.country}
-            actions={<ProfileActions />}
+            actions={<ProfileActions locale={locale} />}
+            locale={locale}
           />
 
-          <ProfileStrengthCard strength={strength} />
+          <ProfileStrengthCard strength={strength} locale={locale} />
 
           <ProfileVisibilityCard
             initialIsPublic={profile.is_public}
@@ -90,11 +93,11 @@ export default async function AthleteProfilePage() {
           />
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            <AthletePersonalInfo profile={profile} />
-            <AthleteSportsSection sport={sport} />
+            <AthletePersonalInfo profile={profile} locale={locale} />
+            <AthleteSportsSection sport={sport} locale={locale} />
           </div>
 
-          <AthleteAchievementsSection achievements={achievements} />
+          <AthleteAchievementsSection achievements={achievements} locale={locale} />
         </div>
       </div>
     </div>

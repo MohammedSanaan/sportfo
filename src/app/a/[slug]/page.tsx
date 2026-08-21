@@ -8,6 +8,7 @@ import { PublicProfileSummary } from "@/features/public-profile/components/Publi
 import { PublicSportsSection } from "@/features/public-profile/components/PublicSportsSection";
 import { PublicAchievementsSection } from "@/features/public-profile/components/PublicAchievementsSection";
 import { ShareProfileButton } from "@/features/public-profile/components/ShareProfileButton";
+import { getServerLocale } from "@/i18n/server";
 
 interface PublicAthleteProfilePageProps {
   params: Promise<{ slug: string }>;
@@ -58,6 +59,7 @@ export default async function PublicAthleteProfilePage({
   }
 
   const { profile, achievements } = data;
+  const locale = await getServerLocale();
 
   return (
     <div className="mx-auto w-full max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
@@ -70,14 +72,15 @@ export default async function PublicAthleteProfilePage({
           country={profile.country}
           actions={<ShareProfileButton />}
           bannerImage="/images/profile-banner-track.jpg"
+          locale={locale}
         />
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <PublicProfileSummary profile={profile} />
-          <PublicSportsSection profile={profile} />
+          <PublicProfileSummary profile={profile} locale={locale} />
+          <PublicSportsSection profile={profile} locale={locale} />
         </div>
 
-        <PublicAchievementsSection achievements={achievements} />
+        <PublicAchievementsSection achievements={achievements} locale={locale} />
       </div>
     </div>
   );

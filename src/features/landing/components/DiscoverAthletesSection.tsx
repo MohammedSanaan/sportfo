@@ -24,7 +24,7 @@ export function DiscoverAthletesSection({ athletes }: DiscoverAthletesSectionPro
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {athletes.map((athlete) => (
-          <AthleteCard key={athlete.public_slug} athlete={athlete} />
+          <AthleteCard key={athlete.public_slug} athlete={athlete} locale="en" />
         ))}
       </div>
 

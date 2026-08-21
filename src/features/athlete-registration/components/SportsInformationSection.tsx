@@ -7,23 +7,25 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import { Select } from "@/components/ui/Select";
 import { PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
+import { useTranslation } from "@/i18n/LocaleProvider";
+import { translateOptions } from "@/lib/i18n-options";
 
 export function SportsInformationSection() {
+  const { t } = useTranslation();
   const {
     register,
     control,
     formState: { errors },
   } = useFormContext<AthleteRegistrationFormValues>();
 
+  const skillLevelOptions = translateOptions(t, "options.skillLevel", SKILL_LEVELS);
+
   return (
-    <SectionCard
-      title="Sports Information"
-      description="Share your primary sport and current skill level."
-    >
+    <SectionCard title={t("register.sports.title")} description={t("register.sports.description")}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
         <Select
           id="primarySport"
-          label="Primary Sport"
+          label={t("register.sports.primarySport")}
           options={PRIMARY_SPORTS}
           error={errors.sportsInformation?.primarySport?.message}
           {...register("sportsInformation.primarySport", {
@@ -32,16 +34,16 @@ export function SportsInformationSection() {
         />
         <Input
           id="discipline"
-          label="Sport Discipline / Sub-category"
+          label={t("register.sports.discipline")}
           optional
-          placeholder="e.g. Freestyle, Sprint, Striker"
+          placeholder={t("register.sports.disciplinePlaceholder")}
           {...register("sportsInformation.discipline")}
         />
         <Input
           id="position"
-          label="Position / Role"
+          label={t("register.sports.position")}
           optional
-          placeholder="e.g. Forward, Goalkeeper, All-rounder"
+          placeholder={t("register.sports.positionPlaceholder")}
           {...register("sportsInformation.position")}
         />
         <Controller
@@ -50,9 +52,9 @@ export function SportsInformationSection() {
           rules={{ required: "Select your skill level." }}
           render={({ field, fieldState }) => (
             <RadioGroup
-              label="Skill Level"
+              label={t("register.sports.skillLevel")}
               name={field.name}
-              options={SKILL_LEVELS}
+              options={skillLevelOptions}
               value={field.value}
               onChange={field.onChange}
               onBlur={field.onBlur}

@@ -6,6 +6,7 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import type { Achievement, AthleteRegistrationFormValues } from "@/types/athlete";
 import type { DocumentOperationsByField } from "../document-operations";
 import { AchievementForm } from "./AchievementForm";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 function createEmptyAchievement(): Achievement {
   return {
@@ -32,6 +33,7 @@ export function AchievementsSection({
   onViewDocument,
   onRemoveDocument,
 }: AchievementsSectionProps) {
+  const { t } = useTranslation();
   const { control } = useFormContext<AthleteRegistrationFormValues>();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -39,13 +41,10 @@ export function AchievementsSection({
   });
 
   return (
-    <SectionCard
-      title="Achievements & Certificates"
-      description="Add medals, awards, and certifications that showcase your journey."
-    >
+    <SectionCard title={t("register.achievements.title")} description={t("register.achievements.description")}>
       {fields.length === 0 && (
         <p className="rounded-lg border border-dashed border-border-strong px-4 py-6 text-center text-sm text-ink-400">
-          No achievements added yet.
+          {t("register.achievements.empty")}
         </p>
       )}
 
@@ -70,7 +69,7 @@ export function AchievementsSection({
         onClick={() => append(createEmptyAchievement())}
         className="self-start"
       >
-        + Add Achievement
+        {t("register.achievements.addAchievement")}
       </Button>
     </SectionCard>
   );

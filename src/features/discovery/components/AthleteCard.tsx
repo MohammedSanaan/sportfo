@@ -3,15 +3,19 @@ import { getOptionLabel, PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-opti
 import { Badge } from "@/components/ui/Badge";
 import { AthleteAvatar } from "@/components/ui/AthleteAvatar";
 import type { PublicAthleteSearchResult } from "@/lib/athlete/discovery";
+import { translate } from "@/i18n/dictionary";
+import type { Locale } from "@/i18n/config";
 
 interface AthleteCardProps {
   athlete: PublicAthleteSearchResult;
+  locale: Locale;
 }
 
 // The whole card is a single <Link> -- no nested buttons/links inside --
 // so it stays a single focusable, single accessible-name control ("View
 // Profile" is just its visual CTA text, not a second interactive element).
-export function AthleteCard({ athlete }: AthleteCardProps) {
+export function AthleteCard({ athlete, locale }: AthleteCardProps) {
+  const t = (key: string) => translate(locale, key);
   const location = [athlete.city, athlete.country].filter(Boolean).join(", ");
   const sportLine = [
     getOptionLabel(PRIMARY_SPORTS, athlete.primary_sport),
@@ -28,9 +32,9 @@ export function AthleteCard({ athlete }: AthleteCardProps) {
       <div className="flex items-center gap-4">
         <AthleteAvatar fullName={athlete.full_name} size="md" />
         <div className="flex flex-col gap-1.5">
-          <Badge>SportFo Athlete</Badge>
+          <Badge>{t("athletes.sportfoAthleteBadge")}</Badge>
           <h3 className="text-lg font-semibold leading-tight text-ink-900">
-            {athlete.full_name || "Athlete"}
+            {athlete.full_name || t("athletes.athleteFallback")}
           </h3>
         </div>
       </div>
@@ -43,10 +47,13 @@ export function AthleteCard({ athlete }: AthleteCardProps) {
 
       <div className="mt-auto flex items-center justify-between border-t border-border-default pt-4">
         <span className="text-xs font-medium text-ink-500">
-          {athlete.achievement_count} {athlete.achievement_count === 1 ? "achievement" : "achievements"}
+          {athlete.achievement_count}{" "}
+          {athlete.achievement_count === 1
+            ? t("athletes.achievementSingular")
+            : t("athletes.achievementPlural")}
         </span>
         <span className="text-sm font-semibold text-brand-700 transition-transform group-hover:translate-x-0.5">
-          View Profile →
+          {t("athletes.viewProfile")} →
         </span>
       </div>
     </Link>

@@ -3,8 +3,10 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import { translate } from "@/i18n/dictionary";
+import type { Locale } from "@/i18n/config";
 
-export function LogoutButton() {
+export function LogoutButton({ locale }: { locale: Locale }) {
   const router = useRouter();
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
@@ -23,7 +25,7 @@ export function LogoutButton() {
       disabled={isLoggingOut}
       className="rounded-md px-3 py-2 text-sm font-medium text-ink-600 transition-colors hover:bg-surface-muted hover:text-ink-900 disabled:cursor-not-allowed disabled:opacity-50"
     >
-      {isLoggingOut ? "Logging out..." : "Logout"}
+      {isLoggingOut ? translate(locale, "nav.loggingOut") : translate(locale, "nav.logout")}
     </button>
   );
 }

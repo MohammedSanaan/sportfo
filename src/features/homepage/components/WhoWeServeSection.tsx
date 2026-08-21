@@ -1,79 +1,56 @@
 import { EcosystemRoleCard } from "./EcosystemRoleCard";
+import type { TFunc } from "@/i18n/dictionary";
 
 // Images are licensed local stock already in public/images/** (see Hero.tsx
 // in features/landing for the source/license note) -- reused across cards
 // since we don't have a distinct photo per role, same as the Stitch source
 // itself reused a similarly generic photo style across its 8 cards.
-const ROLES = [
-  {
-    title: "Athletes",
-    description: "Players across all sports, including para athletes.",
-    ctaLabel: "Register Now",
-    href: "/auth",
-    image: { src: "/images/carousel/athletics.jpg", alt: "" },
-  },
-  {
-    title: "Academies & Coaches",
-    description: "Training clubs and coaches.",
-    ctaLabel: "JOIN NOW",
-    image: { src: "/images/carousel/basketball.jpg", alt: "" },
-  },
-  {
-    title: "Performance Experts",
-    description: "Physios, nutritionists, and trainers.",
-    ctaLabel: "JOIN NOW",
-    image: { src: "/images/carousel/tennis.jpg", alt: "" },
-  },
-  {
-    title: "Media & Creators",
-    description: "Photographers and content creators.",
-    ctaLabel: "JOIN NOW",
-    image: { src: "/images/carousel/swimming.jpg", alt: "" },
-  },
-  {
-    title: "Sports Management & Legal",
-    description: "Managers, agents or legal advisors.",
-    ctaLabel: "JOIN NOW",
-    image: { src: "/images/carousel/cricket.jpg", alt: "" },
-  },
-  {
-    title: "Event & Operations Staff",
-    description: "Managers, agents or legal advisors.",
-    ctaLabel: "JOIN NOW",
-    image: { src: "/images/carousel/football.jpg", alt: "" },
-  },
-  {
-    title: "Event & Operations Staff",
-    description: "Referees and event coordinators.",
-    ctaLabel: "JOIN NOW",
-    image: { src: "/images/profile-banner-track.jpg", alt: "" },
-  },
-  {
-    title: "Sponsors & CSR",
-    description: "Brands and corporate sponsors.",
-    ctaLabel: "JOIN NOW",
-    image: { src: "/images/carousel/athletics.jpg", alt: "" },
-  },
+const ROLE_IMAGES = [
+  "/images/carousel/athletics.jpg",
+  "/images/carousel/basketball.jpg",
+  "/images/carousel/tennis.jpg",
+  "/images/carousel/swimming.jpg",
+  "/images/carousel/cricket.jpg",
+  "/images/carousel/football.jpg",
+  "/images/profile-banner-track.jpg",
+  "/images/carousel/athletics.jpg",
 ] as const;
 
-export function WhoWeServeSection() {
+const ROLE_KEYS = [
+  "athletes",
+  "academies",
+  "experts",
+  "media",
+  "management",
+  "operations1",
+  "operations2",
+  "sponsors",
+] as const;
+
+export function WhoWeServeSection({ t }: { t: TFunc }) {
+  const roles = ROLE_KEYS.map((key, i) => ({
+    title: t(`home.whoWeServe.${key}.title`),
+    description: t(`home.whoWeServe.${key}.description`),
+    ctaLabel: t(`home.whoWeServe.${key}.cta`),
+    href: key === "athletes" ? "/auth" : undefined,
+    image: { src: ROLE_IMAGES[i], alt: "" },
+  }));
+
   return (
     <section className="bg-stitch-gray px-4 py-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 text-center">
           <div className="mb-2 flex items-center justify-center gap-4">
             <div className="h-px w-16 bg-gray-300 md:w-32" />
-            <h2 className="text-3xl font-bold text-stitch-navy">Who We Serve</h2>
+            <h2 className="text-3xl font-bold text-stitch-navy">{t("home.whoWeServe.heading")}</h2>
             <div className="h-px w-16 bg-gray-300 md:w-32" />
           </div>
-          <p className="font-medium text-stitch-blue">
-            One platform, many roles – one connected sports economy.
-          </p>
+          <p className="font-medium text-stitch-blue">{t("home.whoWeServe.subheading")}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {ROLES.map((role, i) => (
-            <EcosystemRoleCard key={`${role.title}-${i}`} {...role} />
+          {roles.map((role, i) => (
+            <EcosystemRoleCard key={`${ROLE_KEYS[i]}-${i}`} {...role} />
           ))}
         </div>
       </div>

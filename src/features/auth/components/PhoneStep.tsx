@@ -3,6 +3,7 @@
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { PhoneNumberField } from "./PhoneNumberField";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface PhoneStepProps {
   dialCode: string;
@@ -27,10 +28,14 @@ export function PhoneStep({
   isSubmitting,
   error,
   fieldHelperText,
-  submitLabel = "Send verification code",
-  submitBusyLabel = "Sending code...",
+  submitLabel,
+  submitBusyLabel,
   note,
 }: PhoneStepProps) {
+  const { t } = useTranslation();
+  const resolvedSubmitLabel = submitLabel ?? t("auth.sendCode");
+  const resolvedSubmitBusyLabel = submitBusyLabel ?? t("auth.sendingCode");
+
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (isSubmitting) return;
@@ -49,7 +54,7 @@ export function PhoneStep({
         helperText={fieldHelperText}
       />
       <Button type="submit" variant="primary" disabled={isSubmitting}>
-        {isSubmitting ? submitBusyLabel : submitLabel}
+        {isSubmitting ? resolvedSubmitBusyLabel : resolvedSubmitLabel}
       </Button>
       {note && <p className="text-center text-xs text-ink-400">{note}</p>}
     </form>

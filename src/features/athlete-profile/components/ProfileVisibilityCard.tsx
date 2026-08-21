@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { cn } from "@/lib/cn";
 import { setProfileVisibility } from "@/features/athlete-profile/actions";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface ProfileVisibilityCardProps {
   initialIsPublic: boolean;
@@ -31,6 +32,7 @@ export function ProfileVisibilityCard({
   initialIsPublic,
   initialSlug,
 }: ProfileVisibilityCardProps) {
+  const { t } = useTranslation();
   const [isPublic, setIsPublic] = useState(initialIsPublic);
   const [slug, setSlug] = useState(initialSlug);
   const [error, setError] = useState<string | null>(null);
@@ -68,8 +70,8 @@ export function ProfileVisibilityCard({
 
   return (
     <SectionCard
-      title="Profile Visibility"
-      description="Control whether your athlete profile can be viewed by anyone with the link."
+      title={t("profile.visibility.title")}
+      description={t("profile.visibility.description")}
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-3">
@@ -77,7 +79,7 @@ export function ProfileVisibilityCard({
             type="button"
             role="switch"
             aria-checked={isPublic}
-            aria-label="Toggle profile visibility"
+            aria-label={t("profile.visibility.toggleAriaLabel")}
             disabled={isPending}
             onClick={() => handleToggle(!isPublic)}
             className={cn(
@@ -96,7 +98,7 @@ export function ProfileVisibilityCard({
             />
           </button>
           <span className="text-sm font-medium text-ink-800">
-            {isPublic ? "Public" : "Private"}
+            {isPublic ? t("profile.visibility.public") : t("profile.visibility.private")}
           </span>
         </div>
 
@@ -112,24 +114,22 @@ export function ProfileVisibilityCard({
                 onClick={handleCopy}
                 disabled={!profileUrl}
               >
-                Copy Profile Link
+                {t("profile.visibility.copyLink")}
               </Button>
               <Link href={profilePath} target="_blank" rel="noopener noreferrer">
                 <Button type="button" variant="ghost">
-                  View Public Profile
+                  {t("profile.visibility.viewPublic")}
                 </Button>
               </Link>
               {copied && (
                 <span role="status" className="text-xs text-ink-500">
-                  Profile link copied
+                  {t("profile.visibility.linkCopied")}
                 </span>
               )}
             </div>
           </div>
         ) : (
-          <p className="text-sm text-ink-400">
-            Your profile is private. Make it public to get a shareable link.
-          </p>
+          <p className="text-sm text-ink-400">{t("profile.visibility.privateNote")}</p>
         )}
       </div>
 

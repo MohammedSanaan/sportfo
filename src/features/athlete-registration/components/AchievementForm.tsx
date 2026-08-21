@@ -12,6 +12,8 @@ import {
 import { displayFilenameFromPath } from "@/lib/storage/achievement-documents";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
 import type { DocumentOperationState } from "../document-operations";
+import { useTranslation } from "@/i18n/LocaleProvider";
+import { translateOptions } from "@/lib/i18n-options";
 
 interface AchievementFormProps {
   index: number;
@@ -30,6 +32,7 @@ export function AchievementForm({
   onViewDocument,
   onRemoveDocument,
 }: AchievementFormProps) {
+  const { t } = useTranslation();
   const { register, control } = useFormContext<AthleteRegistrationFormValues>();
 
   const documentPath = useWatch({ control, name: `achievements.${index}.documentPath` });
@@ -39,57 +42,59 @@ export function AchievementForm({
   const busy = docOp?.kind;
   const busyLabel =
     busy === "uploading"
-      ? "Uploading document..."
+      ? t("register.achievements.uploading")
       : busy === "replacing"
-        ? "Replacing document..."
+        ? t("register.achievements.replacing")
         : busy === "removing"
-          ? "Removing document..."
+          ? t("register.achievements.removing")
           : busy === "viewing"
-            ? "Opening document..."
+            ? t("register.achievements.opening")
             : undefined;
+
+  const achievementTypeOptions = translateOptions(t, "options.achievementType", ACHIEVEMENT_TYPES);
 
   return (
     <div className="rounded-xl border border-border-default bg-surface-muted p-5 transition-colors hover:border-brand-200">
       <div className="mb-4 flex items-center justify-between">
         <h3 className="text-sm font-semibold text-ink-800">
-          Achievement {index + 1}
+          {t("register.achievements.achievementN", { n: index + 1 })}
         </h3>
         <button
           type="button"
           onClick={onRemove}
           className="rounded-md px-2 py-1 text-xs font-medium text-ink-500 transition-colors hover:bg-surface hover:text-red-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-100"
         >
-          Remove
+          {t("register.achievements.remove")}
         </button>
       </div>
 
       <div className="grid grid-cols-1 gap-x-6 gap-y-5 sm:grid-cols-2">
         <Input
           id={`${idPrefix}-title`}
-          label="Achievement Title"
+          label={t("register.achievements.achievementTitle")}
           {...register(`achievements.${index}.title`)}
         />
         <Select
           id={`${idPrefix}-type`}
-          label="Achievement Type"
-          options={ACHIEVEMENT_TYPES}
+          label={t("register.achievements.achievementType")}
+          options={achievementTypeOptions}
           {...register(`achievements.${index}.type`)}
         />
         <Input
           id={`${idPrefix}-organization`}
-          label="Issuing Organization"
+          label={t("register.achievements.organization")}
           {...register(`achievements.${index}.organization`)}
         />
         <Input
           id={`${idPrefix}-date`}
-          label="Achievement Date"
+          label={t("register.achievements.achievementDate")}
           type="date"
           {...register(`achievements.${index}.date`)}
         />
         <div className="sm:col-span-2">
           <Textarea
             id={`${idPrefix}-description`}
-            label="Description"
+            label={t("register.achievements.description2")}
             optional
             rows={3}
             {...register(`achievements.${index}.description`)}
@@ -98,7 +103,7 @@ export function AchievementForm({
 
         <div className="sm:col-span-2">
           <span className="mb-1.5 block text-sm font-medium text-ink-800">
-            Supporting Document
+            {t("register.achievements.supportingDocument")}
           </span>
 
           {documentPath ? (
@@ -111,14 +116,14 @@ export function AchievementForm({
                   disabled={Boolean(busy)}
                   className="text-brand-700 hover:text-brand-800 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  View
+                  {t("register.achievements.view")}
                 </button>
                 <label
                   htmlFor={`${idPrefix}-document`}
                   className="cursor-pointer text-brand-700 hover:text-brand-800 aria-disabled:cursor-not-allowed aria-disabled:opacity-50"
                   aria-disabled={Boolean(busy)}
                 >
-                  Replace
+                  {t("register.achievements.replace")}
                 </label>
                 <button
                   type="button"
@@ -126,7 +131,7 @@ export function AchievementForm({
                   disabled={Boolean(busy)}
                   className="text-ink-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  Remove
+                  {t("register.achievements.removeDoc")}
                 </button>
               </div>
             </div>
@@ -135,7 +140,7 @@ export function AchievementForm({
               <span className="truncate">
                 {pendingFile.name}{" "}
                 <span className="text-xs text-ink-400">
-                  · will upload when you save
+                  · {t("register.achievements.willUpload")}
                 </span>
               </span>
               <button
@@ -144,7 +149,7 @@ export function AchievementForm({
                 disabled={Boolean(busy)}
                 className="ml-3 shrink-0 text-xs font-medium text-ink-500 hover:text-red-600 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                Remove file
+                {t("register.achievements.removeFile")}
               </button>
             </div>
           ) : (
@@ -154,10 +159,10 @@ export function AchievementForm({
               aria-disabled={Boolean(busy)}
             >
               <span className="text-sm font-medium text-brand-700">
-                Choose a file to attach
+                {t("register.achievements.chooseFile")}
               </span>
               <span className="text-xs text-ink-400">
-                PDF, JPG or PNG · Up to {MAX_DOCUMENT_SIZE_LABEL}
+                {t("register.achievements.fileHint", { maxSize: MAX_DOCUMENT_SIZE_LABEL })}
               </span>
             </label>
           )}

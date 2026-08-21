@@ -25,6 +25,7 @@ import { FormActions } from "./FormActions";
 import { PersonalDetailsSection } from "./PersonalDetailsSection";
 import { RegistrationSuccess } from "./RegistrationSuccess";
 import { SportsInformationSection } from "./SportsInformationSection";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface AthleteRegistrationFormProps {
   authPhone: string;
@@ -37,6 +38,7 @@ export function AthleteRegistrationForm({
   authPhone,
   initialValues,
 }: AthleteRegistrationFormProps) {
+  const { t } = useTranslation();
   const [supabase] = useState(() => createClient());
 
   const methods = useForm<AthleteRegistrationFormValues>({
@@ -101,7 +103,7 @@ export function AthleteRegistrationForm({
       file,
     });
     if (!uploadResult.ok || !uploadResult.path) {
-      setDocOp(fieldId, { error: uploadResult.error ?? "Failed to upload document." });
+      setDocOp(fieldId, { error: uploadResult.error ?? t("register.uploadFailed") });
       return false;
     }
 
@@ -189,9 +191,7 @@ export function AthleteRegistrationForm({
 
     const pathResult = await setAchievementDocumentPath(achievement.id, null);
     if (!pathResult.ok) {
-      setDocOp(fieldId, {
-        error: "Document removed, but we couldn't update our records. Please refresh and try again.",
-      });
+      setDocOp(fieldId, { error: t("register.documentRemovedButSyncFailed") });
       return;
     }
 
@@ -262,7 +262,7 @@ export function AthleteRegistrationForm({
 
     let uploadFailures = 0;
     if (pending.length > 0) {
-      setPhaseLabel("Uploading documents...");
+      setPhaseLabel(t("register.actions.uploadingDocuments"));
       const outcomes = await Promise.all(
         pending.map(({ originalIndex, achievement }) =>
           uploadAndPersist({
@@ -296,9 +296,12 @@ export function AthleteRegistrationForm({
       uploadFailures > 0
         ? {
             kind: "warning",
-            message: `Draft saved, but ${uploadFailures} document${uploadFailures > 1 ? "s" : ""} failed to upload. Select the file again or save once more to retry.`,
+            message: t("register.banners.draftSavedWithFailures", {
+              n: uploadFailures,
+              plural: uploadFailures > 1 ? "s" : "",
+            }),
           }
-        : { kind: "success", message: "Draft saved." },
+        : { kind: "success", message: t("register.banners.draftSaved") },
     );
   }
 
@@ -317,7 +320,10 @@ export function AthleteRegistrationForm({
       // retry rather than hiding that behind a success screen.
       setBanner({
         kind: "warning",
-        message: `Your profile was created, but ${uploadFailures} document${uploadFailures > 1 ? "s" : ""} failed to upload. Select the file again or submit once more to retry.`,
+        message: t("register.banners.createdWithFailures", {
+          n: uploadFailures,
+          plural: uploadFailures > 1 ? "s" : "",
+        }),
       });
       return;
     }
@@ -371,8 +377,8 @@ export function AthleteRegistrationForm({
             onSaveDraft={handleSaveDraft}
             isSavingDraft={isSavingDraft}
             isSubmitting={isSubmitting}
-            draftLabel={draftPhaseLabel ?? "Saving draft..."}
-            submitLabel={submitPhaseLabel ?? "Creating profile..."}
+            draftLabel={draftPhaseLabel ?? t("register.actions.savingDraft")}
+            submitLabel={submitPhaseLabel ?? t("register.actions.creatingProfile")}
           />
         </div>
       </form>

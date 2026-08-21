@@ -12,6 +12,7 @@ import { AthleteCard } from "@/features/discovery/components/AthleteCard";
 import { DiscoveryFiltersForm } from "@/features/discovery/components/DiscoveryFiltersForm";
 import { DiscoveryPagination } from "@/features/discovery/components/DiscoveryPagination";
 import { DiscoveryStatus } from "@/features/discovery/components/DiscoveryStatus";
+import { getServerTranslations } from "@/i18n/server";
 
 // Static, deliberately simple metadata -- no per-query/per-filter dynamic
 // SEO for this milestone (see task scope). Not in src/proxy.ts's
@@ -33,50 +34,49 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
   );
 
   const supabase = await createClient();
-  const [result, countries] = await Promise.all([
+  const [result, countries, { locale, t }] = await Promise.all([
     searchPublicAthletes(supabase, filters),
     loadPublicAthleteCountries(supabase),
+    getServerTranslations(),
   ]);
 
   return (
     <Container className="flex flex-col gap-8 py-10 sm:py-14">
       <div className="flex flex-col gap-2 text-center sm:text-left">
         <h1 className="text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-          Discover Athletes
+          {t("athletes.pageTitle")}
         </h1>
-        <p className="text-base text-ink-500 sm:text-lg">
-          Find talent by sport, location and experience.
-        </p>
+        <p className="text-base text-ink-500 sm:text-lg">{t("athletes.pageDescription")}</p>
       </div>
 
-      <DiscoveryFiltersForm filters={filters} countries={countries} />
+      <DiscoveryFiltersForm filters={filters} countries={countries} locale={locale} />
 
       {result.error ? (
-        <DiscoveryStatus variant="error" />
+        <DiscoveryStatus variant="error" locale={locale} />
       ) : result.totalCount === 0 ? (
-        <DiscoveryStatus variant={hasActiveFilters ? "no-matches" : "no-athletes"} />
+        <DiscoveryStatus variant={hasActiveFilters ? "no-matches" : "no-athletes"} locale={locale} />
       ) : result.athletes.length === 0 ? (
-        <DiscoveryStatus variant="out-of-range" />
+        <DiscoveryStatus variant="out-of-range" locale={locale} />
       ) : (
         <>
           <div className="flex items-center justify-between">
             <p className="text-sm text-ink-500">
               <span className="font-semibold text-ink-800">{result.totalCount}</span>{" "}
-              {result.totalCount === 1 ? "athlete" : "athletes"} found
+              {result.totalCount === 1 ? t("athletes.athleteFound") : t("athletes.athletesFound")}
             </p>
             {hasActiveFilters && (
               <Link
                 href="/athletes"
                 className="text-sm font-medium text-brand-700 hover:underline"
               >
-                Clear filters
+                {t("athletes.clearFilters")}
               </Link>
             )}
           </div>
 
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {result.athletes.map((athlete) => (
-              <AthleteCard key={athlete.public_slug} athlete={athlete} />
+              <AthleteCard key={athlete.public_slug} athlete={athlete} locale={locale} />
             ))}
           </div>
 
@@ -84,6 +84,7 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
             page={result.page}
             totalPages={result.totalPages}
             searchParams={rawParams}
+            locale={locale}
           />
         </>
       )}

@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 import Image from "next/image";
 import { AthleteAvatar } from "./AthleteAvatar";
 import { Badge } from "./Badge";
+import { translate } from "@/i18n/dictionary";
+import type { Locale } from "@/i18n/config";
 
 interface ProfileHeroProps {
   fullName: string | null;
@@ -21,6 +23,7 @@ interface ProfileHeroProps {
   // this is a picture of the athlete themselves, just atmosphere, the
   // same treatment already established for the landing hero and /auth.
   bannerImage?: string;
+  locale: Locale;
 }
 
 function LocationPinIcon() {
@@ -52,7 +55,9 @@ export function ProfileHero({
   actions,
   headingLevel = "h1",
   bannerImage,
+  locale,
 }: ProfileHeroProps) {
+  const t = (key: string) => translate(locale, key);
   const location = [city, country].filter(Boolean).join(", ");
   const sportLine = [primarySport, skillLevel].filter(Boolean).join(" • ");
   const NameHeading = headingLevel;
@@ -86,9 +91,9 @@ export function ProfileHero({
               }
             />
             <div className="flex flex-col items-center gap-1.5 pb-1 text-center sm:items-start sm:text-left">
-              <Badge>SportFo Athlete</Badge>
+              <Badge>{t("athletes.sportfoAthleteBadge")}</Badge>
               <NameHeading className="text-2xl font-bold tracking-tight text-ink-900 sm:text-3xl">
-                {fullName || "Athlete"}
+                {fullName || t("athletes.athleteFallback")}
               </NameHeading>
               {sportLine && <p className="text-base font-medium text-ink-600">{sportLine}</p>}
               {location && (

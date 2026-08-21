@@ -1,14 +1,4 @@
-const CHECKLIST_COLUMNS = [
-  ["Safe & Certified Coaches", "Progress Tracking Event"],
-  ["Progress Tracking Reports", "Progress Enhancement Focus"],
-  ["Skill Development Focus", "Community Events & Fun"],
-] as const;
-
-const FEATURE_STRIP = [
-  { value: "7/7", label: "Coach Screening", icon: "check" },
-  { value: "1:1", label: "Parent Support", icon: "people" },
-  { value: "100%", label: "Progress Visibility", icon: "monitor" },
-] as const;
+import type { TFunc } from "@/i18n/dictionary";
 
 function CheckIcon() {
   return (
@@ -18,7 +8,7 @@ function CheckIcon() {
   );
 }
 
-function StripIcon({ icon }: { icon: (typeof FEATURE_STRIP)[number]["icon"] }) {
+function StripIcon({ icon }: { icon: "check" | "people" | "monitor" }) {
   if (icon === "check") {
     return (
       <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -55,18 +45,30 @@ function StripIcon({ icon }: { icon: (typeof FEATURE_STRIP)[number]["icon"] }) {
   );
 }
 
-export function ParentsSection() {
+export function ParentsSection({ t }: { t: TFunc }) {
+  const checklistColumns: string[][] = [
+    [t("home.parents.checklist1"), t("home.parents.checklist2")],
+    [t("home.parents.checklist3"), t("home.parents.checklist4")],
+    [t("home.parents.checklist5"), t("home.parents.checklist6")],
+  ];
+
+  const featureStrip: { value: string; label: string; icon: "check" | "people" | "monitor" }[] = [
+    { value: "7/7", label: t("home.parents.coachScreening"), icon: "check" },
+    { value: "1:1", label: t("home.parents.parentSupport"), icon: "people" },
+    { value: "100%", label: t("home.parents.progressVisibility"), icon: "monitor" },
+  ];
+
   return (
     <section className="bg-stitch-gray py-10">
       <div className="mx-auto max-w-4xl px-4 text-center">
         <div className="mb-8 flex items-center justify-center gap-4">
           <div className="h-px w-16 bg-gray-300 md:w-32" />
-          <h2 className="text-2xl font-bold text-stitch-navy">For Parents</h2>
+          <h2 className="text-2xl font-bold text-stitch-navy">{t("home.parents.heading")}</h2>
           <div className="h-px w-16 bg-gray-300 md:w-32" />
         </div>
 
         <div className="mx-auto mb-10 grid max-w-3xl grid-cols-1 gap-x-4 gap-y-4 text-left md:grid-cols-3">
-          {CHECKLIST_COLUMNS.map((column, i) => (
+          {checklistColumns.map((column, i) => (
             <ul key={i} className="space-y-2">
               {column.map((item) => (
                 <li key={item} className="flex items-center gap-2 font-medium text-stitch-navy">
@@ -81,7 +83,7 @@ export function ParentsSection() {
 
       <div className="border-y border-gray-300 bg-gray-200 py-6">
         <div className="mx-auto flex max-w-4xl flex-wrap items-center justify-center divide-x divide-gray-400 px-4 text-stitch-navy">
-          {FEATURE_STRIP.map((item) => (
+          {featureStrip.map((item) => (
             <div key={item.label} className="flex items-center gap-3 px-6 py-2">
               <span className="rounded-full bg-stitch-navy p-2 text-white">
                 <StripIcon icon={item.icon} />

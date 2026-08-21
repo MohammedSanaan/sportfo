@@ -1,41 +1,35 @@
 import Image from "next/image";
+import type { TFunc } from "@/i18n/dictionary";
 
-const STORIES = [
-  {
-    title: "From Gully Cricket to State Trials",
-    image: { src: "/images/carousel/football.jpg", alt: "" },
-    rating: true,
-  },
-  {
-    title: "Two Setbacks, No Comeback",
-    image: { src: "/images/carousel/tennis.jpg", alt: "" },
-    rating: true,
-  },
-  {
-    title:
-      "“My daughter was too shy, join a team, Six months later, she's leading warm-ups.”",
-    image: { src: "/images/profile-banner-track.jpg", alt: "" },
-    rating: false,
-  },
+const STORY_IMAGES = [
+  "/images/carousel/football.jpg",
+  "/images/carousel/tennis.jpg",
+  "/images/profile-banner-track.jpg",
 ] as const;
 
-export function AthleteStoriesSection() {
+export function AthleteStoriesSection({ t }: { t: TFunc }) {
+  const stories = [
+    { title: t("home.stories.story1Title"), rating: true },
+    { title: t("home.stories.story2Title"), rating: true },
+    { title: t("home.stories.story3Quote"), rating: false },
+  ];
+
   return (
     <section className="bg-stitch-gray py-12">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="mb-8 text-center text-2xl font-bold text-stitch-navy">
-          Inspiring Athlete Stories
+          {t("home.stories.heading")}
         </h2>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {STORIES.map((story) => (
+          {stories.map((story, i) => (
             <div
               key={story.title}
               className="relative h-64 overflow-hidden rounded-lg shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)]"
             >
               <Image
-                src={story.image.src}
-                alt={story.image.alt}
+                src={STORY_IMAGES[i]}
+                alt=""
                 fill
                 sizes="(min-width: 768px) 33vw, 100vw"
                 className="object-cover"

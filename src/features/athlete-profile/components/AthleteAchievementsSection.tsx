@@ -2,22 +2,28 @@ import { SectionCard } from "@/components/ui/SectionCard";
 import { AchievementCard } from "@/components/ui/AchievementCard";
 import type { AthleteAchievementRow } from "@/types/database";
 import { ViewCertificateButton } from "./ViewCertificateButton";
+import { translate } from "@/i18n/dictionary";
+import type { Locale } from "@/i18n/config";
 
 interface AthleteAchievementsSectionProps {
   achievements: AthleteAchievementRow[];
+  locale: Locale;
 }
 
 export function AthleteAchievementsSection({
   achievements,
+  locale,
 }: AthleteAchievementsSectionProps) {
+  const t = (key: string) => translate(locale, key);
+
   return (
     <SectionCard
-      title="Achievements & Certificates"
-      description="Medals, awards, and certifications this athlete has earned."
+      title={t("profile.achievements.title")}
+      description={t("profile.achievements.description")}
     >
       {achievements.length === 0 ? (
         <p className="rounded-lg border border-dashed border-border-strong px-4 py-6 text-center text-sm text-ink-400">
-          No achievements added yet.
+          {t("profile.achievements.empty")}
         </p>
       ) : (
         <div className="flex flex-col gap-4">
@@ -29,11 +35,12 @@ export function AthleteAchievementsSection({
               issuingOrganization={achievement.issuing_organization}
               achievementDate={achievement.achievement_date}
               description={achievement.description}
+              locale={locale}
               documentAction={
                 achievement.document_path ? (
                   <ViewCertificateButton achievementId={achievement.id} />
                 ) : (
-                  <span className="text-xs text-ink-400">No document attached</span>
+                  <span className="text-xs text-ink-400">{t("profile.achievements.noDocument")}</span>
                 )
               }
             />

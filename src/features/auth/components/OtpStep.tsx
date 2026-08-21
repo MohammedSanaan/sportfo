@@ -3,6 +3,7 @@
 import type { FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface OtpStepProps {
   maskedPhone: string;
@@ -29,6 +30,7 @@ export function OtpStep({
   cooldown,
   error,
 }: OtpStepProps) {
+  const { t } = useTranslation();
   const busy = isVerifying || isResending;
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -40,13 +42,13 @@ export function OtpStep({
   return (
     <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-6">
       <p className="text-sm text-ink-500">
-        Enter the 6-digit code we sent to{" "}
+        {t("auth.otpInstruction")}{" "}
         <span className="font-medium text-ink-800">{maskedPhone}</span>.
       </p>
 
       <Input
         id="otp-code"
-        label="Verification code"
+        label={t("auth.verificationCodeLabel")}
         type="text"
         inputMode="numeric"
         pattern="[0-9]*"
@@ -61,7 +63,7 @@ export function OtpStep({
       />
 
       <Button type="submit" variant="primary" disabled={busy || otp.length !== 6}>
-        {isVerifying ? "Verifying..." : "Verify code"}
+        {isVerifying ? t("auth.verifying") : t("auth.verifyCode")}
       </Button>
 
       <div className="flex items-center justify-between text-sm">
@@ -71,7 +73,7 @@ export function OtpStep({
           disabled={busy}
           className="font-medium text-brand-700 hover:text-brand-800 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          Change mobile number
+          {t("auth.changeNumber")}
         </button>
 
         <button
@@ -81,10 +83,10 @@ export function OtpStep({
           className="font-medium text-brand-700 hover:text-brand-800 disabled:cursor-not-allowed disabled:opacity-50"
         >
           {isResending
-            ? "Resending..."
+            ? t("auth.resending")
             : cooldown > 0
-              ? `Resend code in ${cooldown}s`
-              : "Resend code"}
+              ? t("auth.resendIn", { seconds: cooldown })
+              : t("auth.resendCode")}
         </button>
       </div>
     </form>

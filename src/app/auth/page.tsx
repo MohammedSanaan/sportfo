@@ -9,6 +9,7 @@ import { resolveAthleteDestination } from "@/lib/athlete/resolve-destination";
 import { Badge } from "@/components/ui/Badge";
 import { AuthFlow } from "@/features/auth/components/AuthFlow";
 import { getAuthMode } from "@/lib/auth-mode";
+import { getServerTranslations } from "@/i18n/server";
 
 export const metadata: Metadata = {
   title: "Sign In | SportFo",
@@ -24,10 +25,9 @@ export default async function AuthPage() {
     redirect(resolveAthleteDestination(profile));
   }
 
+  const { t } = await getServerTranslations();
   const description =
-    getAuthMode() === "demo"
-      ? "Enter your mobile number to continue to your athlete profile."
-      : "Enter your mobile number and we'll send you a secure verification code.";
+    getAuthMode() === "demo" ? t("auth.descriptionDemo") : t("auth.descriptionOtp");
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-1 items-center px-4 py-10 sm:px-6 sm:py-14">
@@ -58,14 +58,11 @@ export default async function AuthPage() {
           </Link>
 
           <div className="relative flex flex-col gap-4">
-            <Badge variant="onDark">Built for athletes. Designed for opportunity.</Badge>
+            <Badge variant="onDark">{t("auth.panelBadge")}</Badge>
             <h2 className="text-3xl font-bold leading-tight text-white">
-              Your sporting career deserves a professional home.
+              {t("auth.panelTitle")}
             </h2>
-            <p className="text-sm text-white/70">
-              Build your profile, showcase your achievements, and share a link people can
-              trust.
-            </p>
+            <p className="text-sm text-white/70">{t("auth.panelDescription")}</p>
           </div>
         </div>
 
@@ -73,7 +70,7 @@ export default async function AuthPage() {
             whole rounded-3xl shell reads as a single clean card. */}
         <div className="flex flex-col justify-center gap-6 p-6 sm:p-10 lg:p-12">
           <div className="flex flex-col gap-1.5 border-b border-border-default pb-5">
-            <h1 className="text-lg font-semibold text-ink-900">Join or sign in to SportFo</h1>
+            <h1 className="text-lg font-semibold text-ink-900">{t("auth.pageTitle")}</h1>
             <p className="text-sm text-ink-500">{description}</p>
           </div>
           <AuthFlow />

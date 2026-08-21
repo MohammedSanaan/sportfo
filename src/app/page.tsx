@@ -6,20 +6,23 @@ import { HowSportFoWorksSection } from "@/features/homepage/components/HowSportF
 import { StatsSection } from "@/features/homepage/components/StatsSection";
 import { ParentsSection } from "@/features/homepage/components/ParentsSection";
 import { AthleteStoriesSection } from "@/features/homepage/components/AthleteStoriesSection";
+import { getServerTranslations } from "@/i18n/server";
 
 // Landing page body, recreated from the supplied Stitch design (see the
 // integration report for section-by-section notes on image/font/CTA
 // choices). Section order matches the Stitch source exactly.
-export default function Home() {
+export default async function Home() {
+  const { t } = await getServerTranslations();
+
   return (
     <div className={`${lexend.variable} flex flex-1 flex-col font-stitch text-stitch-text`}>
-      <EcosystemHero />
-      <WhoWeServeSection />
-      <GapSection />
-      <HowSportFoWorksSection />
-      <StatsSection />
-      <ParentsSection />
-      <AthleteStoriesSection />
+      <EcosystemHero t={t} />
+      <WhoWeServeSection t={t} />
+      <GapSection t={t} />
+      <HowSportFoWorksSection t={t} />
+      <StatsSection t={t} />
+      <ParentsSection t={t} />
+      <AthleteStoriesSection t={t} />
     </div>
   );
 }

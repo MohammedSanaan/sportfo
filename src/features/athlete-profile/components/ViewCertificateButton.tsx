@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { getAchievementDocumentSignedUrl } from "@/features/athlete-registration/actions";
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface ViewCertificateButtonProps {
   achievementId: string;
@@ -23,6 +24,7 @@ type State =
 // Action call sits in between). A real <a target="_blank"> the athlete
 // clicks themselves has no such timing dependency.
 export function ViewCertificateButton({ achievementId }: ViewCertificateButtonProps) {
+  const { t } = useTranslation();
   const [state, setState] = useState<State>({ status: "idle" });
 
   async function handlePrepare() {
@@ -44,7 +46,7 @@ export function ViewCertificateButton({ achievementId }: ViewCertificateButtonPr
         rel="noopener noreferrer"
         className="text-sm font-medium text-brand-700 underline hover:text-brand-800"
       >
-        Open certificate
+        {t("profile.certificate.openCertificate")}
       </a>
     );
   }
@@ -57,7 +59,7 @@ export function ViewCertificateButton({ achievementId }: ViewCertificateButtonPr
         disabled={state.status === "loading"}
         className="text-sm font-medium text-brand-700 hover:text-brand-800 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        {state.status === "loading" ? "Preparing..." : "View certificate"}
+        {state.status === "loading" ? t("profile.certificate.preparing") : t("profile.certificate.view")}
       </button>
       {state.status === "error" && (
         <p role="alert" className="mt-1 text-xs text-red-600">

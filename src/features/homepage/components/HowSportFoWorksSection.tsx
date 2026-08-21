@@ -1,30 +1,11 @@
 import Link from "next/link";
+import type { TFunc } from "@/i18n/dictionary";
 
-const STEPS = [
-  {
-    number: "01",
-    title: "Discover & enroll",
-    description:
-      "Browse verified academies and coaches across 20+ sports near you, and book a free trial in minutes.",
-    icon: "search",
-  },
-  {
-    number: "02",
-    title: "Train & track",
-    description:
-      "Every session, milestone, and coach note is logged automatically into your child's SportFo profile.",
-    icon: "growth",
-  },
-  {
-    number: "03",
-    title: "Grow & get seen",
-    description:
-      "Compete in tournaments and community events that build real confidence, visibility, and opportunity.",
-    icon: "trophy",
-  },
-] as const;
+const STEP_KEYS = ["step1", "step2", "step3"] as const;
+const STEP_NUMBERS = ["01", "02", "03"] as const;
+const STEP_ICONS = ["search", "growth", "trophy"] as const;
 
-function StepIcon({ icon }: { icon: (typeof STEPS)[number]["icon"] }) {
+function StepIcon({ icon }: { icon: (typeof STEP_ICONS)[number] }) {
   if (icon === "search") {
     return (
       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -68,25 +49,32 @@ function StepIcon({ icon }: { icon: (typeof STEPS)[number]["icon"] }) {
 // the integration report for why. White background is deliberate: it's the
 // one light-tone break between GapSection and StatsSection's grays, not a
 // new palette.
-export function HowSportFoWorksSection() {
+export function HowSportFoWorksSection({ t }: { t: TFunc }) {
+  const steps = STEP_KEYS.map((key, i) => ({
+    number: STEP_NUMBERS[i],
+    title: t(`home.howItWorks.${key}Title`),
+    description: t(`home.howItWorks.${key}Description`),
+    icon: STEP_ICONS[i],
+  }));
+
   return (
     <section className="bg-white px-4 py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl text-center">
         <span className="inline-flex items-center rounded-full border border-stitch-orange/20 bg-stitch-orange/10 px-4 py-1 text-xs font-semibold tracking-wide text-stitch-blue uppercase">
-          How SportFo Works
+          {t("home.howItWorks.eyebrow")}
         </span>
 
         <h2 className="mx-auto mt-5 max-w-2xl text-3xl leading-tight font-bold text-stitch-navy sm:text-4xl md:text-5xl lg:text-6xl">
-          From first trial to real opportunity, <span className="text-stitch-blue">quantified.</span>
+          {t("home.howItWorks.titleStart")}{" "}
+          <span className="text-stitch-blue">{t("home.howItWorks.titleAccent")}</span>
         </h2>
 
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-gray-600">
-          Every session your child trains builds a fuller picture of their progress — logged
-          automatically, visible to you, and ready to open doors when it matters.
+          {t("home.howItWorks.subtitle")}
         </p>
 
         <div className="mt-12 grid grid-cols-1 gap-6 text-left md:grid-cols-3 md:gap-8">
-          {STEPS.map((step) => (
+          {steps.map((step) => (
             <div
               key={step.number}
               className="stitch-card-lift group relative flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white p-6 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover sm:p-8"
@@ -113,7 +101,7 @@ export function HowSportFoWorksSection() {
             href="/auth"
             className="inline-flex h-13 items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
           >
-            Start Your Child&apos;s Journey
+            {t("home.howItWorks.cta")}
           </Link>
         </div>
       </div>
