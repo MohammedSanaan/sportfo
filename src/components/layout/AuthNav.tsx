@@ -24,11 +24,15 @@ export async function AuthNav() {
 
   return (
     <>
-      <Link href="/auth" className={navLinkClassName}>
+      <Link
+        href="/auth"
+        className="inline-flex h-9 items-center justify-center rounded-full border border-border-strong px-4 text-sm font-medium text-ink-700 transition-colors hover:border-ink-400 hover:bg-surface-muted hover:text-ink-900"
+      >
         Login
       </Link>
       <Link
         href="/auth"
+        data-solid
         className="ml-1 inline-flex h-9 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
       >
         Join SportFo

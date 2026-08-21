@@ -1,11 +1,47 @@
 import type {
   AcademyCard,
+  AchievementCard,
   AthleteCard,
   CreatorCard,
   EcosystemNode,
   EventCard,
   OpportunityCard,
 } from "./types";
+import type { MediaKey } from "./media";
+
+// The ten disciplines SportFo launches with. Used for the hero's sport
+// count -- kept as a plain list now that the dedicated sport-showcase
+// section is gone. (Discovery's own filter chips are derived from
+// FEATURED_ATHLETES below, not from this list.)
+export const SPORTS = [
+  "Cricket",
+  "Football",
+  "Badminton",
+  "Tennis",
+  "Athletics",
+  "Basketball",
+  "Swimming",
+  "Hockey",
+  "Volleyball",
+  "Table Tennis",
+] as const;
+
+// One real photo per discipline for the hero's sport carousel -- the
+// eight-sport pitch/field diagram section was removed earlier for not
+// pulling its weight; this replaces it with something worth looking at
+// rather than reviving the diagram idea.
+export const SPORT_CARDS = [
+  { id: "cricket", name: "Cricket", photo: "sportCricket" },
+  { id: "football", name: "Football", photo: "footballer" },
+  { id: "badminton", name: "Badminton", photo: "sportBadminton" },
+  { id: "tennis", name: "Tennis", photo: "tennisCourtBlue" },
+  { id: "athletics", name: "Athletics", photo: "sprintStart" },
+  { id: "basketball", name: "Basketball", photo: "basketballCourt" },
+  { id: "swimming", name: "Swimming", photo: "swimmer" },
+  { id: "hockey", name: "Hockey", photo: "sportHockey" },
+  { id: "volleyball", name: "Volleyball", photo: "sportVolleyball" },
+  { id: "table-tennis", name: "Table Tennis", photo: "sportTableTennis" },
+] as const satisfies readonly { id: string; name: string; photo: MediaKey }[];
 
 /**
  * Sample content for the homepage.
@@ -16,11 +52,19 @@ import type {
  * is referenced outside the homepage feature.
  */
 
+// No fabricated headcounts. Athletes has no public-readable count yet (RLS
+// on athlete_profiles restricts reads to a user's own row -- a real count
+// needs a SECURITY DEFINER RPC exposing just the aggregate, not written
+// yet); Creators/Academies/Events have no backing table at all. Each one
+// gets an honest "Launching soon" treatment in Hero.tsx instead of a number
+// until it has a real source. Sports is handled separately in Hero.tsx --
+// SPORTS.length is already a genuine count of supported disciplines, not a
+// headcount claim.
 export const NETWORK_STATS = [
-  { value: "45,208", label: "Athletes" },
-  { value: "12,140", label: "Creators" },
-  { value: "1,286", label: "Academies" },
-  { value: "834", label: "Events" },
+  { label: "Athletes" },
+  { label: "Creators" },
+  { label: "Academies" },
+  { label: "Events" },
 ];
 
 export const FEATURED_ATHLETES: AthleteCard[] = [
@@ -37,6 +81,7 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 6,
     photo: "portraitB",
     mark: { label: "State ranking", value: "#3" },
+    achievements: ["Runner-up, State Open 2025", "Junior National squad, 2023"],
   },
   {
     id: "sf-2024-0892",
@@ -51,6 +96,7 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 11,
     photo: "footballer",
     mark: { label: "Appearances", value: "84" },
+    achievements: ["Regional Golden Boot, 2024", "Club Player of the Season, 2023"],
   },
   {
     id: "sf-2024-1130",
@@ -65,6 +111,7 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 3,
     photo: "trackAthlete",
     mark: { label: "Personal best", value: "2:04.71" },
+    achievements: ["2nd, State Athletics Championship 2025"],
   },
   {
     id: "sf-2024-0256",
@@ -79,6 +126,7 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 8,
     photo: "portraitA",
     mark: { label: "Points per game", value: "18.4" },
+    achievements: ["League All-Star, 2025", "Academy MVP, 2024"],
   },
   {
     id: "sf-2024-0603",
@@ -93,6 +141,7 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 14,
     photo: "portraitC",
     mark: { label: "Batting average", value: "48.6" },
+    achievements: ["State Championship winner, 2025", "Highest run-scorer, Zonal Trophy 2024"],
   },
   {
     id: "sf-2024-0771",
@@ -107,6 +156,7 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 7,
     photo: "portraitE",
     mark: { label: "Personal best", value: "2:01.38" },
+    achievements: ["National #9, 200m Freestyle 2025"],
   },
   {
     id: "sf-2024-0348",
@@ -121,6 +171,7 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 9,
     photo: "sprinter",
     mark: { label: "Personal best", value: "10.42" },
+    achievements: ["State #1, 100m 2025", "South Zone gold, 200m 2024"],
   },
   {
     id: "sf-2024-0925",
@@ -135,6 +186,232 @@ export const FEATURED_ATHLETES: AthleteCard[] = [
     achievementsCount: 5,
     photo: "tennisCourtBlue",
     mark: { label: "Win rate", value: "71%" },
+    achievements: ["Regional #6, WTA-affiliated circuit"],
+  },
+  {
+    id: "sf-2024-1204",
+    name: "Farhan Qureshi",
+    sport: "Hockey",
+    position: "Midfielder",
+    location: "Lahore, PK",
+    skillLevel: "Semi-Professional",
+    ranking: "National #7",
+    club: "Lahore Hockey Club",
+    verified: true,
+    achievementsCount: 6,
+    photo: "sportHockey",
+    mark: { label: "Assists", value: "22" },
+    achievements: ["National League runner-up, 2025"],
+  },
+  {
+    id: "sf-2024-1355",
+    name: "Meera Pillai",
+    sport: "Volleyball",
+    position: "Outside Hitter",
+    location: "Kochi, IN",
+    skillLevel: "Amateur",
+    ranking: "State #5",
+    club: "Kerala Spikers",
+    verified: false,
+    achievementsCount: 2,
+    photo: "sportVolleyball",
+    mark: { label: "Kills per set", value: "3.8" },
+    achievements: ["State Junior Championship, 2024"],
+  },
+  {
+    id: "sf-2024-1489",
+    name: "Wei Zhang",
+    sport: "Table Tennis",
+    position: "Singles",
+    location: "Shanghai, CN",
+    skillLevel: "Professional",
+    ranking: "National #12",
+    club: "Shanghai Paddle Club",
+    verified: true,
+    achievementsCount: 10,
+    photo: "sportTableTennis",
+    mark: { label: "Win rate", value: "78%" },
+    achievements: ["National Open quarterfinal, 2025"],
+  },
+  {
+    id: "sf-2024-1522",
+    name: "Ola Nilsson",
+    sport: "Swimming",
+    position: "100m Butterfly",
+    location: "Malmo, SE",
+    skillLevel: "Semi-Professional",
+    ranking: "National #4",
+    club: "Malmo Aquatics",
+    verified: true,
+    achievementsCount: 5,
+    photo: "swimmer",
+    mark: { label: "Personal best", value: "54.12" },
+    achievements: ["National #4, 100m Butterfly 2025"],
+  },
+  {
+    id: "sf-2024-1607",
+    name: "Carlos Fuentes",
+    sport: "Basketball",
+    position: "Shooting Guard",
+    location: "Barcelona, ES",
+    skillLevel: "Professional",
+    ranking: "League Top 15",
+    club: "Barcelona Rise",
+    verified: true,
+    achievementsCount: 9,
+    photo: "basketballCourt",
+    mark: { label: "Points per game", value: "16.9" },
+    achievements: ["League All-Defensive Team, 2024"],
+  },
+  {
+    id: "sf-2024-1748",
+    name: "Neha Kulkarni",
+    sport: "Cricket",
+    position: "Wicketkeeper-Batter",
+    location: "Nagpur, IN",
+    skillLevel: "Semi-Professional",
+    ranking: "State #4",
+    club: "Vidarbha Cricket Academy",
+    verified: false,
+    achievementsCount: 4,
+    photo: "sportCricket",
+    mark: { label: "Batting average", value: "39.2" },
+    achievements: ["State Women's Trophy, 2025"],
+  },
+  {
+    id: "sf-2024-1830",
+    name: "Tom Bennett",
+    sport: "Football",
+    position: "Centre Back",
+    location: "Leeds, UK",
+    skillLevel: "Amateur",
+    ranking: "Regional #9",
+    club: "Leeds Youth FC",
+    verified: false,
+    achievementsCount: 1,
+    photo: "footballer",
+    mark: { label: "Clean sheets", value: "9" },
+    achievements: ["Regional Youth League, top scorer defender 2024"],
+  },
+  {
+    id: "sf-2024-1966",
+    name: "Amara Okafor",
+    sport: "Athletics",
+    position: "Long Jump",
+    location: "Lagos, NG",
+    skillLevel: "Professional",
+    ranking: "National #2",
+    club: "Lagos Track Federation",
+    verified: true,
+    achievementsCount: 12,
+    photo: "trackAthlete",
+    mark: { label: "Personal best", value: "6.71m" },
+    achievements: ["National Championship gold, 2025", "African Games bronze, 2023"],
+  },
+  {
+    id: "sf-2024-2081",
+    name: "Yuki Tanaka",
+    sport: "Badminton",
+    position: "Men's Doubles",
+    location: "Osaka, JP",
+    skillLevel: "Semi-Professional",
+    ranking: "National #8",
+    club: "Osaka Shuttle Club",
+    verified: true,
+    achievementsCount: 7,
+    photo: "sprintStart",
+    mark: { label: "Win rate", value: "64%" },
+    achievements: ["National Doubles semifinal, 2025"],
+  },
+  {
+    id: "sf-2024-2199",
+    name: "Sofia Ricci",
+    sport: "Tennis",
+    position: "Singles",
+    location: "Rome, IT",
+    skillLevel: "Amateur",
+    ranking: "Regional #11",
+    club: "Rome Junior Tennis",
+    verified: false,
+    achievementsCount: 3,
+    photo: "portraitE",
+    mark: { label: "Win rate", value: "58%" },
+    achievements: ["Regional Junior Open, semifinalist 2025"],
+  },
+  {
+    id: "sf-2024-2304",
+    name: "Daniel Osei",
+    sport: "Basketball",
+    position: "Power Forward",
+    location: "Accra, GH",
+    skillLevel: "Semi-Professional",
+    ranking: "National #6",
+    club: "Accra Ballers",
+    verified: true,
+    achievementsCount: 8,
+    photo: "portraitA",
+    mark: { label: "Rebounds per game", value: "9.7" },
+    achievements: ["National League All-Star, 2024"],
+  },
+  {
+    id: "sf-2024-2417",
+    name: "Ingrid Larsen",
+    sport: "Swimming",
+    position: "400m Freestyle",
+    location: "Oslo, NO",
+    skillLevel: "Professional",
+    ranking: "National #1",
+    club: "Oslo Swim Federation",
+    verified: true,
+    achievementsCount: 15,
+    photo: "portraitB",
+    mark: { label: "Personal best", value: "4:08.55" },
+    achievements: ["National Champion, 2025", "European Junior Trials qualifier, 2023"],
+  },
+  {
+    id: "sf-2024-2538",
+    name: "Arjun Desai",
+    sport: "Hockey",
+    position: "Forward",
+    location: "Ahmedabad, IN",
+    skillLevel: "Amateur",
+    ranking: "State #10",
+    club: "Gujarat Hockey Academy",
+    verified: false,
+    achievementsCount: 2,
+    photo: "sportHockey",
+    mark: { label: "Goals", value: "11" },
+    achievements: ["State Junior League, 2024"],
+  },
+  {
+    id: "sf-2024-2661",
+    name: "Isabella Costa",
+    sport: "Volleyball",
+    position: "Setter",
+    location: "Sao Paulo, BR",
+    skillLevel: "Professional",
+    ranking: "National #3",
+    club: "Sao Paulo Vôlei",
+    verified: true,
+    achievementsCount: 13,
+    photo: "sportVolleyball",
+    mark: { label: "Assists per set", value: "10.4" },
+    achievements: ["National League champion, 2025"],
+  },
+  {
+    id: "sf-2024-2775",
+    name: "Ravi Chandran",
+    sport: "Table Tennis",
+    position: "Doubles",
+    location: "Chennai, IN",
+    skillLevel: "Semi-Professional",
+    ranking: "State #2",
+    club: "Chennai Paddlers",
+    verified: true,
+    achievementsCount: 6,
+    photo: "sportTableTennis",
+    mark: { label: "Win rate", value: "69%" },
+    achievements: ["State Doubles Championship, 2025"],
   },
 ];
 
@@ -274,6 +551,12 @@ export const EVENTS: EventCard[] = [
     location: "Pune, IN",
     type: "Trial",
     spots: "32 places",
+    daysFromNow: 3,
+    organizer: "Pune Elite Badminton Academy",
+    registrationStatus: "Filling fast",
+    description:
+      "Open trials for the state squad's shortlist. Bring verified ranking history and be ready for a singles ladder format across two courts.",
+    image: "racketDark",
   },
   {
     id: "ev-02",
@@ -284,6 +567,12 @@ export const EVENTS: EventCard[] = [
     location: "Manchester, UK",
     type: "Showcase",
     spots: "Scouts attending",
+    daysFromNow: 10,
+    organizer: "Northside FC Academy",
+    registrationStatus: "Open",
+    description:
+      "A scouted showcase match for U19 talent, with academy and semi-pro scouts confirmed to attend. Profiles are shared with attending scouts in advance.",
+    image: "footballPitch",
   },
   {
     id: "ev-03",
@@ -294,6 +583,12 @@ export const EVENTS: EventCard[] = [
     location: "Kochi, IN",
     type: "Tournament",
     spots: "Open entry",
+    daysFromNow: 24,
+    organizer: "Kerala Athletics Association",
+    registrationStatus: "Open",
+    description:
+      "Open-entry regional championship across track and field disciplines. Results feed directly into the SportFo verified record for entrants.",
+    image: "trackLanes",
   },
   {
     id: "ev-04",
@@ -304,6 +599,12 @@ export const EVENTS: EventCard[] = [
     location: "Madrid, ES",
     type: "Camp",
     spots: "40 places",
+    daysFromNow: 37,
+    organizer: "Madrid Rise Academy",
+    registrationStatus: "Open",
+    description:
+      "A five-day residential camp focused on point guard development and game IQ, run by the Madrid Rise coaching staff.",
+    image: "basketballCourt",
   },
   {
     id: "ev-05",
@@ -314,6 +615,11 @@ export const EVENTS: EventCard[] = [
     location: "Delhi, IN",
     type: "Trial",
     spots: "Squad of 22",
+    daysFromNow: 52,
+    organizer: "Delhi Cricket Association",
+    registrationStatus: "Waitlist",
+    description:
+      "Selection trials for the inter-district squad. Priority given to verified batting/bowling averages from the past season.",
   },
 ];
 
@@ -326,6 +632,10 @@ export const OPPORTUNITIES: OpportunityCard[] = [
     location: "Pune, IN",
     closes: "12 days",
     detail: "Verified state ranking required",
+    sport: "Badminton",
+    postedDate: "3 days ago",
+    description:
+      "Selecting a 12-athlete trial squad for the U19 state programme. Applicants must hold a verified state or national ranking and be available for a two-day assessment camp.",
   },
   {
     id: "op-02",
@@ -335,6 +645,10 @@ export const OPPORTUNITIES: OpportunityCard[] = [
     location: "Manchester, UK",
     closes: "5 days",
     detail: "Season-long, 8 athletes",
+    sport: "Football",
+    postedDate: "1 week ago",
+    description:
+      "Season-long kit and travel support for 8 academy athletes, covering match-day travel and training kit. Open to registered academy players with a verified profile.",
   },
   {
     id: "op-03",
@@ -344,6 +658,10 @@ export const OPPORTUNITIES: OpportunityCard[] = [
     location: "Kochi, IN",
     closes: "21 days",
     detail: "Full residential programme",
+    sport: "Athletics",
+    postedDate: "4 days ago",
+    description:
+      "Full residential scholarship covering coaching, accommodation and competition entries for distance and middle-distance athletes with a sub-2:10 800m or equivalent.",
   },
   {
     id: "op-04",
@@ -353,6 +671,10 @@ export const OPPORTUNITIES: OpportunityCard[] = [
     location: "Madrid, ES",
     closes: "9 days",
     detail: "Full-time, on-site",
+    sport: "Basketball",
+    postedDate: "2 days ago",
+    description:
+      "Full-time, on-site role supporting the academy's strength and conditioning programme across junior and semi-pro squads. Certification in S&C required.",
   },
   {
     id: "op-05",
@@ -362,6 +684,10 @@ export const OPPORTUNITIES: OpportunityCard[] = [
     location: "Remote",
     closes: "30 days",
     detail: "Cohort of 60",
+    sport: "Multi-sport",
+    postedDate: "6 days ago",
+    description:
+      "An 8-week remote certification programme for youth coaches across all eight SportFo disciplines, run in partnership with the academy network.",
   },
   {
     id: "op-06",
@@ -371,5 +697,18 @@ export const OPPORTUNITIES: OpportunityCard[] = [
     location: "Delhi, IN",
     closes: "16 days",
     detail: "Batters and seam bowlers",
+    sport: "Cricket",
+    postedDate: "5 days ago",
+    description:
+      "State-pathway selection camp for top-order batters and seam bowlers. Verified batting average or economy rate from the last domestic season required.",
   },
+];
+
+export const ACHIEVEMENTS: AchievementCard[] = [
+  { id: "ach-01", title: "State Championship — Gold", athleteName: "Rohit Verma", sport: "Cricket", org: "Delhi Cricket Association", year: "2025" },
+  { id: "ach-02", title: "Regional Golden Boot", athleteName: "Marcus Webb", sport: "Football", org: "Northside FC", year: "2024" },
+  { id: "ach-03", title: "National #9 Ranking", athleteName: "Ananya Iyer", sport: "Swimming", org: "Mumbai Aquatics Centre", year: "2025" },
+  { id: "ach-04", title: "State #1 Sprinter", athleteName: "Kabir Menon", sport: "Athletics", org: "Bengaluru Sprint Academy", year: "2025" },
+  { id: "ach-05", title: "League All-Star", athleteName: "Diego Alvarez", sport: "Basketball", org: "Madrid Rise Academy", year: "2025" },
+  { id: "ach-06", title: "Runner-up, State Open", athleteName: "Aditi Sharma", sport: "Badminton", org: "Pune Elite Badminton Academy", year: "2025" },
 ];

@@ -171,6 +171,31 @@ export const MEDIA = {
     alt: "An athlete photographed in profile against a dark background",
     focus: "55% 30%",
   },
+  sportCricket: {
+    src: "/media/sport-cricket.jpg",
+    alt: "A cricket batsman playing a shot, ball in flight",
+    focus: "50% 40%",
+  },
+  sportBadminton: {
+    src: "/media/sport-badminton.jpg",
+    alt: "Two badminton doubles pairs contesting a point at the net",
+    focus: "50% 55%",
+  },
+  sportHockey: {
+    src: "/media/sport-hockey.jpg",
+    alt: "Field hockey players contesting the ball with sticks raised",
+    focus: "50% 55%",
+  },
+  sportVolleyball: {
+    src: "/media/sport-volleyball.jpg",
+    alt: "A volleyball player mid-air spiking the ball",
+    focus: "50% 40%",
+  },
+  sportTableTennis: {
+    src: "/media/sport-table-tennis.jpg",
+    alt: "A table tennis player returning a shot across the table",
+    focus: "40% 45%",
+  },
 } as const satisfies Record<string, Media>;
 
 export type MediaKey = keyof typeof MEDIA;

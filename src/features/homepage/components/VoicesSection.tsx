@@ -1,7 +1,12 @@
 import { EditorialImage } from "./EditorialImage";
 import { Reveal } from "./Reveal";
 import { Container, Display, SpecLabel } from "./primitives";
-import { ACADEMIES, CREATORS } from "../data/mock-data";
+import { ACADEMIES, CREATORS, ECOSYSTEM_NODES } from "../data/mock-data";
+
+// Sponsors and Media are in the header nav but no longer have a full
+// section of their own -- this compact strip carries their anchors instead
+// of a whole diagram section, in line with keeping the page product-first.
+const STRIP_NODES = ECOSYSTEM_NODES.filter((n) => n.id === "sponsors" || n.id === "media");
 
 /**
  * Creators and academies in one band.
@@ -108,6 +113,33 @@ export function VoicesSection() {
             </ul>
           </Reveal>
         </div>
+
+        {/* Sponsors / Media -- a slim credibility strip rather than a full
+            section, since the diagram section that used to hold these was
+            explanatory rather than useful. */}
+        <Reveal delay={140}>
+          <div className="mt-14 grid grid-cols-1 gap-4 border-t border-border-default pt-8 sm:grid-cols-2 sm:gap-6">
+            {STRIP_NODES.map((node) => (
+              <div
+                key={node.id}
+                id={node.id}
+                className="scroll-mt-20 rounded-sm border border-border-default bg-surface p-5"
+              >
+                <div className="flex items-baseline justify-between gap-4">
+                  <h3 className="text-[13px] font-semibold tracking-[0.1em] text-ink-900 uppercase">
+                    {node.label}
+                  </h3>
+                  <span className="text-[13px] font-medium text-ink-800 tabular-nums">
+                    {node.count}
+                  </span>
+                </div>
+                <p className="mt-1.5 text-[13px] leading-relaxed text-ink-500">
+                  {node.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </Container>
     </section>
   );

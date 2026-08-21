@@ -1,31 +1,33 @@
 import { Hero } from "@/features/homepage/components/Hero";
-import { RecordSection } from "@/features/homepage/components/RecordSection";
-import { SportsShowcase } from "@/features/homepage/components/SportsShowcase";
-import { EcosystemSection } from "@/features/homepage/components/EcosystemSection";
+import { HeroDiscoveryBreak } from "@/features/homepage/components/HeroDiscoveryBreak";
 import { DiscoverySection } from "@/features/homepage/components/DiscoverySection";
 import { OpportunitiesSection } from "@/features/homepage/components/OpportunitiesSection";
-import { VoicesSection } from "@/features/homepage/components/VoicesSection";
 import { EventsSection } from "@/features/homepage/components/EventsSection";
+import { RecognitionSection } from "@/features/homepage/components/RecognitionSection";
+import { VoicesSection } from "@/features/homepage/components/VoicesSection";
 import { FinalCta } from "@/features/homepage/components/FinalCta";
 import { Footer } from "@/features/homepage/components/Footer";
+import { SportFilterProvider } from "@/features/homepage/components/SportFilterContext";
 
-// Section order is the page's argument, and the rhythm is deliberate:
-// dark photography, light product, dark index, light diagram, dark register,
-// light board, light band, light calendar, dark close. No two adjacent
-// sections share a layout or a background.
+// Section order follows what a visitor can actually do, not an explanation
+// of the ecosystem: people and profiles first, then opportunities, then
+// events, then the shortest possible proof (Recognition) before the close.
+// Rhythm stays deliberate — dark photography, light product, dark register,
+// light board, light calendar, dark proof strip, light band, dark close.
 export default function Home() {
   return (
-    <div className="flex flex-1 flex-col">
-      <Hero />
-      <RecordSection />
-      <SportsShowcase />
-      <EcosystemSection />
-      <DiscoverySection />
-      <OpportunitiesSection />
-      <VoicesSection />
-      <EventsSection />
-      <FinalCta />
-      <Footer />
-    </div>
+    <SportFilterProvider>
+      <div className="flex flex-1 flex-col">
+        <Hero />
+        <HeroDiscoveryBreak />
+        <DiscoverySection />
+        <OpportunitiesSection />
+        <EventsSection />
+        <RecognitionSection />
+        <VoicesSection />
+        <FinalCta />
+        <Footer />
+      </div>
+    </SportFilterProvider>
   );
 }

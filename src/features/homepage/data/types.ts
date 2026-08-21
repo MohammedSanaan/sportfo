@@ -21,6 +21,8 @@ export interface AthleteCard {
   photo?: MediaKey;
   // Headline performance mark, shown as the card's single number.
   mark?: { label: string; value: string };
+  // One or two short achievement lines shown on the discovery card/drawer.
+  achievements?: string[];
 }
 
 export interface CreatorCard {
@@ -52,19 +54,13 @@ export interface EventCard {
   location: string;
   type: "Trial" | "Tournament" | "Camp" | "Showcase";
   spots: string;
-}
-
-export interface SportVisual {
-  id: string;
-  name: string;
-  tagline: string;
-  // Playing-surface spec, printed beside the diagram to reinforce that
-  // SportFo describes sport in measurements rather than adjectives.
-  surface: string;
-  athletes: string;
-  events: string;
-  // Atmosphere behind the diagram. Absent for the disciplines with no
-  // photography in the licensed set -- the panel then runs drawing-only.
+  // Days from the reference "today" used for the compact week filter.
+  // Mocked as a fixed offset rather than a real date so filtering stays
+  // deterministic without a live clock.
+  daysFromNow: number;
+  organizer: string;
+  registrationStatus: "Open" | "Filling fast" | "Waitlist";
+  description: string;
   image?: MediaKey;
 }
 
@@ -76,6 +72,9 @@ export interface OpportunityCard {
   location: string;
   closes: string;
   detail: string;
+  sport: string;
+  postedDate: string;
+  description: string;
 }
 
 export interface EcosystemNode {
@@ -83,4 +82,13 @@ export interface EcosystemNode {
   label: string;
   description: string;
   count: string;
+}
+
+export interface AchievementCard {
+  id: string;
+  title: string;
+  athleteName: string;
+  sport: string;
+  org: string;
+  year: string;
 }

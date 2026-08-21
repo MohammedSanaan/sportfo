@@ -61,23 +61,23 @@ body {
   font-family: var(--font-sans);
 }
 
-* {
-  border-color: var(--color-border-default);
+/* Wrapped in Tailwind's own `base` layer -- left unlayered, this rule
+   (a bare `*` selector) would win over EVERY `border-{color}` utility in
+   the codebase regardless of specificity, because CSS Cascade Layers give
+   any unlayered rule priority over all layered ones. That was silently
+   swallowing every border-color utility on the page (border-white/10,
+   border-brand-200, etc. all rendered as this default instead), while
+   still leaving each element's own border *width* utility intact --
+   which is why nothing looked broken outright, just subtly wrong. */
+@layer base {
+  * {
+    border-color: var(--color-border-default);
+  }
 }
 
 :focus-visible {
   outline: 2px solid var(--color-brand-500);
   outline-offset: 2px;
-}
-
-/* Used by the homepage sports showcase's crossfade (SportsShowcase.tsx). */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 
 /* ------------------------------------------------------------------ */
@@ -121,16 +121,27 @@ body {
 
 /* The auth nav renders on the server and can't take a tone prop from the
    client-side Header, so its over-the-hero colours are applied here. Scoped
-   to the header only; the auth and registration pages are untouched. */
-.sf-authnav[data-over-hero="true"] a:not([class*="bg-"]),
-.sf-authnav[data-over-hero="true"] button:not([class*="bg-"]) {
+   to the header only; the auth and registration pages are untouched.
+   Uses an explicit `data-solid` marker (set on "Join SportFo" in
+   AuthNav.tsx) rather than a `[class*="bg-"]` substring match -- the old
+   version matched any class containing "bg-" anywhere in the string,
+   including `hover:bg-surface-muted` on the plain Login/Logout links,
+   which accidentally excluded them from the override and left them
+   rendering dark text on the dark hero. */
+.sf-authnav[data-over-hero="true"] a:not([data-solid]),
+.sf-authnav[data-over-hero="true"] button:not([data-solid]) {
   color: var(--color-steel-300);
+  /* Only visible on elements that also carry a border-width utility
+     (currently just "Login", styled as a ghost button) -- harmless on
+     Athlete Registration/Logout, which have no border to color. */
+  border-color: rgb(255 255 255 / 0.3);
 }
 
-.sf-authnav[data-over-hero="true"] a:not([class*="bg-"]):hover,
-.sf-authnav[data-over-hero="true"] button:not([class*="bg-"]):hover {
+.sf-authnav[data-over-hero="true"] a:not([data-solid]):hover,
+.sf-authnav[data-over-hero="true"] button:not([data-solid]):hover {
   color: #fff;
   background-color: rgb(255 255 255 / 0.1);
+  border-color: rgb(255 255 255 / 0.5);
 }
 
 /* Scroll reveal. Transform/opacity only, and inert under reduced motion. */
@@ -154,5 +165,128 @@ body {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+}
+
+/* Hero entrance + ambient drift. A one-time settle on first paint -- the
+   athlete should read as caught mid-motion, not pasted onto a static
+   backdrop -- followed by a slow, continuous Ken Burns drift so the photo
+   stays quietly alive instead of freezing the moment the settle finishes.
+   Both are scale/translate only (no layout shift) and stay within the
+   buffer HeroParallaxLayer's scroll pan moves inside, so nothing ever
+   exposes a raw edge. */
+@keyframes sf-hero-settle {
+  from {
+    transform: scale(1.09);
+  }
+  to {
+    transform: scale(1.045);
+  }
+}
+
+@keyframes sf-hero-drift {
+  from {
+    transform: scale(1.045) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.075) translate3d(-0.7%, -0.6%, 0);
+  }
+}
+
+.sf-hero-image {
+  animation:
+    sf-hero-settle 1.9s cubic-bezier(0.16, 1, 0.3, 1) both,
+    sf-hero-drift 17s ease-in-out 1.9s infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-hero-image {
+    animation: none;
+  }
+}
+
+/* Hero sheen. A soft diagonal light sweep drifting across the arena photo
+   on a loop -- transform + opacity only, the closest CSS-only equivalent
+   to the reference clip's motion-blur energy. */
+@keyframes sf-hero-sheen {
+  0% {
+    transform: translate3d(-35%, 0, 0) rotate(8deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  88% {
+    opacity: 0;
+  }
+  100% {
+    transform: translate3d(135%, 0, 0) rotate(8deg);
+    opacity: 0;
+  }
+}
+
+.sf-hero-sheen {
+  position: absolute;
+  inset: -20% -10%;
+  background: linear-gradient(
+    100deg,
+    transparent 42%,
+    rgba(214, 231, 255, 0.16) 50%,
+    transparent 58%
+  );
+  animation: sf-hero-sheen 10s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-hero-sheen {
+    display: none;
+  }
+}
+
+/* Hero sport carousel entrance. Held invisible on a JS timer (see
+   HeroSportsCarousel.tsx) well past the headline/CTA/stats' own Reveal
+   timing, so the slider arrives as a distinct second beat rather than
+   sitting there from the first frame while the copy fades in around it. */
+.sf-hero-slider-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sf-hero-slider-reveal[data-shown="true"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-hero-slider-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Overlay panel entrance (Discovery/Opportunities/Events detail panels). */
+@keyframes sf-overlay-in {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sf-reveal,
+  [class*="animate-[sf-overlay-in"] {
+    animation: none !important;
   }
 }

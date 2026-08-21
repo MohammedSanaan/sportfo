@@ -16,11 +16,11 @@ interface HeaderProps {
 
 const MARKETING_LINKS = [
   { href: "/#athletes", label: "Athletes" },
+  { href: "/#opportunities", label: "Opportunities" },
+  { href: "/#events", label: "Events" },
   { href: "/#creators", label: "Creators" },
   { href: "/#academies", label: "Academies" },
   { href: "/#sponsors", label: "Sponsors" },
-  { href: "/#events", label: "Events" },
-  { href: "/#media", label: "Media" },
 ];
 
 const navLinkBase = "rounded-md px-3 py-2 text-sm font-medium transition-colors";
