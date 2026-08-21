@@ -34,7 +34,7 @@ export function GapSection() {
           {PROBLEM_CARDS.map((card) => (
             <div
               key={card.title}
-              className="flex h-full flex-col rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white p-6 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] sm:p-8"
+              className="stitch-card-lift flex h-full flex-col rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white p-6 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover sm:p-8"
             >
               <h3 className="text-lg font-bold text-stitch-navy">{card.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-gray-600">{card.body}</p>

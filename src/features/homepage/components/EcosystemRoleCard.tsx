@@ -15,7 +15,7 @@ interface EcosystemRoleCardProps {
 
 export function EcosystemRoleCard({ title, description, ctaLabel, image, href }: EcosystemRoleCardProps) {
   return (
-    <div className="flex flex-col items-center overflow-hidden rounded-lg border border-gray-200 bg-white pb-4 text-center shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)]">
+    <div className="stitch-card-lift group flex flex-col items-center overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white pb-4 text-center shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover">
       <Image
         src={image.src}
         alt={image.alt}
@@ -28,14 +28,14 @@ export function EcosystemRoleCard({ title, description, ctaLabel, image, href }:
       {href ? (
         <Link
           href={href}
-          className="rounded px-6 py-1.5 text-sm font-semibold text-white shadow transition-colors bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
+          className="rounded px-6 py-1.5 text-sm font-semibold text-white shadow transition-colors bg-stitch-orange hover:bg-stitch-orange-hover group-hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
         >
           {ctaLabel}
         </Link>
       ) : (
         <button
           type="button"
-          className="rounded px-6 py-1.5 text-sm font-semibold text-white shadow transition-colors bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
+          className="rounded px-6 py-1.5 text-sm font-semibold text-white shadow transition-colors bg-stitch-orange hover:bg-stitch-orange-hover group-hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
         >
           {ctaLabel}
         </button>

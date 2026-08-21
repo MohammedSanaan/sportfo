@@ -65,8 +65,16 @@ body {
   font-family: var(--font-sans);
 }
 
-* {
-  border-color: var(--color-border-default);
+/* Wrapped in Tailwind's own `base` layer -- left unlayered, this rule (a
+   bare `*` selector) wins over EVERY `border-{color}` utility in the
+   codebase regardless of specificity, because CSS Cascade Layers give any
+   unlayered rule priority over all layered ones. That was silently
+   swallowing every border-color utility on the page (border-t-stitch-orange,
+   border-gray-200, etc. all rendering as this default instead). */
+@layer base {
+  * {
+    border-color: var(--color-border-default);
+  }
 }
 
 :focus-visible {
@@ -93,4 +101,41 @@ body {
     rgba(10, 50, 117, 0.55) 45%,
     rgba(10, 50, 117, 0) 100%
   );
+}
+
+/* Shared premium hover/tap lift -- one definition so Who We Serve, Gap
+   We're Closing, and How SportFo Works cards can never drift out of sync.
+   Transform-only (no layout properties), so it never triggers reflow. */
+.stitch-card-lift {
+  transition:
+    transform 300ms ease-out,
+    box-shadow 300ms ease-out;
+}
+
+.stitch-card-lift:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 25px -8px rgba(0, 0, 0, 0.15),
+    0 10px 10px -8px rgba(0, 0, 0, 0.08);
+}
+
+.stitch-card-lift:active {
+  transform: scale(0.98);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stitch-card-lift {
+    transition: box-shadow 300ms ease-out;
+  }
+
+  .stitch-card-lift:hover {
+    transform: none;
+    box-shadow:
+      0 10px 15px -3px rgba(0, 0, 0, 0.12),
+      0 4px 6px -4px rgba(0, 0, 0, 0.08);
+  }
+
+  .stitch-card-lift:active {
+    transform: none;
+  }
 }

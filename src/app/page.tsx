@@ -2,6 +2,7 @@ import { lexend } from "@/features/homepage/lexend";
 import { EcosystemHero } from "@/features/homepage/components/EcosystemHero";
 import { WhoWeServeSection } from "@/features/homepage/components/WhoWeServeSection";
 import { GapSection } from "@/features/homepage/components/GapSection";
+import { HowSportFoWorksSection } from "@/features/homepage/components/HowSportFoWorksSection";
 import { StatsSection } from "@/features/homepage/components/StatsSection";
 import { ParentsSection } from "@/features/homepage/components/ParentsSection";
 import { AthleteStoriesSection } from "@/features/homepage/components/AthleteStoriesSection";
@@ -15,6 +16,7 @@ export default function Home() {
       <EcosystemHero />
       <WhoWeServeSection />
       <GapSection />
+      <HowSportFoWorksSection />
       <StatsSection />
       <ParentsSection />
       <AthleteStoriesSection />
