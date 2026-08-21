@@ -12,31 +12,6 @@ export type Database = {
   __InternalSupabase: {
     PostgrestVersion: "14.15"
   }
-  graphql_public: {
-    Tables: {
-      [_ in never]: never
-    }
-    Views: {
-      [_ in never]: never
-    }
-    Functions: {
-      graphql: {
-        Args: {
-          extensions?: Json
-          operationName?: string
-          query?: string
-          variables?: Json
-        }
-        Returns: Json
-      }
-    }
-    Enums: {
-      [_ in never]: never
-    }
-    CompositeTypes: {
-      [_ in never]: never
-    }
-  }
   public: {
     Tables: {
       athlete_achievements: {
@@ -99,9 +74,11 @@ export type Database = {
           full_name: string | null
           gender: string | null
           id: string
+          is_public: boolean
           mobile_number: string | null
           nationality: string | null
           profile_status: string
+          public_slug: string | null
           scholarship_recipient: boolean | null
           school_college: string | null
           updated_at: string
@@ -119,9 +96,11 @@ export type Database = {
           full_name?: string | null
           gender?: string | null
           id?: string
+          is_public?: boolean
           mobile_number?: string | null
           nationality?: string | null
           profile_status?: string
+          public_slug?: string | null
           scholarship_recipient?: boolean | null
           school_college?: string | null
           updated_at?: string
@@ -139,9 +118,11 @@ export type Database = {
           full_name?: string | null
           gender?: string | null
           id?: string
+          is_public?: boolean
           mobile_number?: string | null
           nationality?: string | null
           profile_status?: string
+          public_slug?: string | null
           scholarship_recipient?: boolean | null
           school_college?: string | null
           updated_at?: string
@@ -195,6 +176,43 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      generate_athlete_public_slug: {
+        Args: { p_full_name: string }
+        Returns: string
+      }
+      get_public_athlete_achievements: {
+        Args: { p_slug: string }
+        Returns: {
+          achievement_date: string
+          achievement_type: string
+          description: string
+          has_document: boolean
+          issuing_organization: string
+          title: string
+        }[]
+      }
+      get_public_athlete_countries: {
+        Args: never
+        Returns: {
+          country: string
+        }[]
+      }
+      get_public_athlete_profile: {
+        Args: { p_slug: string }
+        Returns: {
+          city: string
+          club_academy: string
+          coach_mentor: string
+          country: string
+          full_name: string
+          nationality: string
+          position_role: string
+          primary_sport: string
+          school_college: string
+          skill_level: string
+          sport_discipline: string
+        }[]
+      }
       owns_athlete_profile: { Args: { profile_id: string }; Returns: boolean }
       save_athlete_registration: {
         Args: {
@@ -219,6 +237,25 @@ export type Database = {
           p_sport_discipline: string
         }
         Returns: Json
+      }
+      search_public_athletes: {
+        Args: {
+          p_city?: string
+          p_country?: string
+          p_page?: number
+          p_page_size?: number
+          p_query?: string
+          p_skill_level?: string
+          p_sport?: string
+        }
+        Returns: Json
+      }
+      set_athlete_profile_visibility: {
+        Args: { p_is_public: boolean }
+        Returns: {
+          is_public: boolean
+          public_slug: string
+        }[]
       }
     }
     Enums: {
@@ -348,9 +385,6 @@ export type CompositeTypes<
     : never
 
 export const Constants = {
-  graphql_public: {
-    Enums: {},
-  },
   public: {
     Enums: {},
   },

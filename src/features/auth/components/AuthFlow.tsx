@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/client";
 import { friendlyAuthErrorMessage } from "@/lib/supabase/auth-errors";
 import { lookupOwnAthleteProfile } from "@/lib/athlete/lookup-profile";
 import { resolveAthleteDestination } from "@/lib/athlete/resolve-destination";
+import { getAuthMode, DEMO_PHONE_METADATA_KEY } from "@/lib/auth-mode";
 import { DEFAULT_COUNTRY } from "@/lib/phone/countries";
 import { isValidE164, maskPhoneNumber, toE164 } from "@/lib/phone/e164";
 import { PhoneStep } from "./PhoneStep";
@@ -18,6 +19,7 @@ type Step = "phone" | "otp";
 export function AuthFlow() {
   const router = useRouter();
   const [supabase] = useState(() => createClient());
+  const [authMode] = useState(() => getAuthMode());
 
   const [step, setStep] = useState<Step>("phone");
   const [dialCode, setDialCode] = useState(DEFAULT_COUNTRY.dialCode);
@@ -37,6 +39,67 @@ export function AuthFlow() {
     }, 1000);
     return () => clearInterval(timer);
   }, [cooldown]);
+
+  // After either flow produces a real authenticated session, routing is
+  // identical: look up the athlete's own profile (RLS-scoped) and land
+  // them on the right destination. router.refresh() forces the header's
+  // server-rendered auth state to pick up the new session immediately
+  // (see Header/AuthNav -- they don't otherwise re-render on client nav).
+  async function routeAfterAuthentication(userId: string) {
+    const { data: profile, error: profileError } = await lookupOwnAthleteProfile(
+      supabase,
+      userId,
+    );
+
+    if (profileError) {
+      console.error("athlete profile lookup failed:", profileError);
+      router.push("/athlete/register");
+      router.refresh();
+      return;
+    }
+
+    router.push(resolveAthleteDestination(profile));
+    router.refresh();
+  }
+
+  async function continueDemo() {
+    const e164Phone = toE164(dialCode, localNumber);
+    if (!isValidE164(e164Phone)) {
+      setPhoneError("Enter a valid mobile number.");
+      return;
+    }
+
+    setPhoneError(undefined);
+    setIsSendingCode(true);
+
+    // Creates a real Supabase Auth session (a real auth.uid(), scoped by
+    // the same RLS policies as a phone-verified user) -- not a fake
+    // frontend-only login. The phone itself is unverified in this mode, so
+    // it's stored in user_metadata rather than the `phone` column Supabase
+    // reserves for verified numbers.
+    const { data, error } = await supabase.auth.signInAnonymously();
+
+    if (error || !data.session || !data.user) {
+      console.error("signInAnonymously failed:", error);
+      setIsSendingCode(false);
+      setPhoneError(friendlyAuthErrorMessage(error ?? new Error("No session returned")));
+      return;
+    }
+
+    const { error: updateError } = await supabase.auth.updateUser({
+      data: { [DEMO_PHONE_METADATA_KEY]: e164Phone },
+    });
+
+    if (updateError) {
+      console.error("updateUser (demo phone metadata) failed:", updateError);
+      setIsSendingCode(false);
+      setPhoneError(friendlyAuthErrorMessage(updateError));
+      return;
+    }
+
+    await routeAfterAuthentication(data.user.id);
+    setIsSendingCode(false);
+  }
 
   async function sendCode() {
     const e164Phone = toE164(dialCode, localNumber);
@@ -119,24 +182,8 @@ export function AuthFlow() {
       return;
     }
 
-    const { data: profile, error: profileError } = await lookupOwnAthleteProfile(
-      supabase,
-      userCheck.user.id,
-    );
-
+    await routeAfterAuthentication(userCheck.user.id);
     setIsVerifying(false);
-
-    if (profileError) {
-      console.error("athlete profile lookup failed:", profileError);
-      // Authenticated but the lookup itself failed -- registration is
-      // always a safe destination to fall back to.
-      router.push("/athlete/register");
-      router.refresh();
-      return;
-    }
-
-    router.push(resolveAthleteDestination(profile));
-    router.refresh();
   }
 
   function changeNumber() {
@@ -158,6 +205,24 @@ export function AuthFlow() {
         isResending={isResending}
         cooldown={cooldown}
         error={otpError}
+      />
+    );
+  }
+
+  if (authMode === "demo") {
+    return (
+      <PhoneStep
+        dialCode={dialCode}
+        localNumber={localNumber}
+        onDialCodeChange={setDialCode}
+        onLocalNumberChange={setLocalNumber}
+        onSubmit={continueDemo}
+        isSubmitting={isSendingCode}
+        error={phoneError}
+        fieldHelperText="We'll use this number for your athlete profile."
+        submitLabel="Continue"
+        submitBusyLabel="Continuing..."
+        note="Phone verification will be enabled before public launch."
       />
     );
   }

@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/server";
 import { getAuthUser } from "@/lib/supabase/auth-user";
-import { formatAuthPhone } from "@/lib/phone/format-auth-phone";
+import { resolveAthleteMobileNumber } from "@/lib/phone/resolve-athlete-phone";
 import { buildSaveRegistrationArgs } from "@/lib/athlete/registration-payload";
 import { friendlySaveError } from "@/lib/athlete/registration-errors";
 import type { Achievement, AthleteRegistrationFormValues } from "@/types/athlete";
@@ -56,7 +56,7 @@ async function persistRegistration(
   }
 
   const supabase = await createClient();
-  const args = buildSaveRegistrationArgs(values, status, formatAuthPhone(user.phone));
+  const args = buildSaveRegistrationArgs(values, status, resolveAthleteMobileNumber(user));
 
   const { data, error } = await supabase.rpc("save_athlete_registration", args);
 

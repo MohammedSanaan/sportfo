@@ -27,6 +27,8 @@ export function buildMockAthleteDraft(): AthleteDraft {
         "State-level Badminton Champion (2024, 2025). Selected for the national junior training camp.",
       scholarship_recipient: true,
       profile_status: "submitted",
+      is_public: true,
+      public_slug: "aditi-sharma",
       created_at: now,
       updated_at: now,
     },

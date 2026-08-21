@@ -9,18 +9,15 @@ export function RegistrationSuccess() {
         <p className="text-base text-ink-700">
           Your athlete profile has been created successfully.
         </p>
-        <p className="text-sm text-ink-500">
-          Your professional athlete profile is ready to view and share.
-        </p>
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link href="/athlete/me">
-            <Button type="button" variant="primary">
-              View My Profile
-            </Button>
-          </Link>
-          <Link href="/">
+        <div className="flex w-full flex-col-reverse gap-3 sm:w-auto sm:flex-row">
+          <Link href="/" className="sm:w-auto">
             <Button type="button" variant="secondary">
               Back to Home
+            </Button>
+          </Link>
+          <Link href="/athlete/profile" className="sm:w-auto">
+            <Button type="button" variant="primary">
+              View My Profile
             </Button>
           </Link>
         </div>

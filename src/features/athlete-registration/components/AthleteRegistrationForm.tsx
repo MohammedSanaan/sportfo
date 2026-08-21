@@ -351,22 +351,30 @@ export function AthleteRegistrationForm({
           </div>
         )}
 
-        <PersonalDetailsSection />
-        <SportsInformationSection />
-        <AchievementsSection
-          docOpsByField={docOpsByField}
-          onFileSelected={handleFileSelected}
-          onViewDocument={handleViewDocument}
-          onRemoveDocument={handleRemoveDocument}
-        />
+        <div id="section-personal" className="scroll-mt-24">
+          <PersonalDetailsSection />
+        </div>
+        <div id="section-sport" className="scroll-mt-24">
+          <SportsInformationSection />
+        </div>
+        <div id="section-achievements" className="scroll-mt-24">
+          <AchievementsSection
+            docOpsByField={docOpsByField}
+            onFileSelected={handleFileSelected}
+            onViewDocument={handleViewDocument}
+            onRemoveDocument={handleRemoveDocument}
+          />
+        </div>
         <AdditionalRecognitionSection />
-        <FormActions
-          onSaveDraft={handleSaveDraft}
-          isSavingDraft={isSavingDraft}
-          isSubmitting={isSubmitting}
-          draftLabel={draftPhaseLabel ?? "Saving draft..."}
-          submitLabel={submitPhaseLabel ?? "Creating profile..."}
-        />
+        <div id="section-review" className="scroll-mt-24">
+          <FormActions
+            onSaveDraft={handleSaveDraft}
+            isSavingDraft={isSavingDraft}
+            isSubmitting={isSubmitting}
+            draftLabel={draftPhaseLabel ?? "Saving draft..."}
+            submitLabel={submitPhaseLabel ?? "Creating profile..."}
+          />
+        </div>
       </form>
     </FormProvider>
   );

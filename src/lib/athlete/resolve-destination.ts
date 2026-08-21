@@ -6,13 +6,12 @@ type AthleteProfileLookup = Pick<
 > | null;
 
 // No profile yet, or a draft in progress, both continue the registration
-// flow. A submitted profile now has a real destination: the athlete's own
-// profile page.
+// flow. A submitted profile has its own dedicated view now.
 export function resolveAthleteDestination(
   profile: AthleteProfileLookup,
 ): string {
   if (!profile || profile.profile_status === "draft") {
     return "/athlete/register";
   }
-  return `/athlete/${profile.id}`;
+  return "/athlete/profile";
 }

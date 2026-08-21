@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AthleteRegistrationForm } from "@/features/athlete-registration/components/AthleteRegistrationForm";
+import { RegistrationStepNav } from "@/features/athlete-registration/components/RegistrationStepNav";
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
 import { loadAthleteDraft, mapDraftToFormValues } from "@/lib/athlete/registration-draft";
-import { formatAuthPhone } from "@/lib/phone/format-auth-phone";
+import { resolveAthleteMobileNumber } from "@/lib/phone/resolve-athlete-phone";
 
 export const metadata: Metadata = {
   title: "Create Your Athlete Profile | SportFo",
@@ -22,20 +23,23 @@ export default async function AthleteRegisterPage() {
     redirect("/auth");
   }
 
-  const authPhone = formatAuthPhone(user.phone);
+  const authPhone = resolveAthleteMobileNumber(user);
   const supabase = await createClient();
   const { draft, error: draftLoadFailed } = await loadAthleteDraft(supabase, user.id);
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-      <div className="mb-8 sm:mb-10">
-        <h1 className="text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-          Create Your Athlete Profile
-        </h1>
-        <p className="mt-3 max-w-2xl text-base text-ink-500">
-          Build your professional sports profile and showcase your talent,
-          experience and achievements.
-        </p>
+      <div className="mb-8 flex flex-col gap-5 sm:mb-10">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
+            Create Your Athlete Profile
+          </h1>
+          <p className="mt-3 max-w-2xl text-base text-ink-500">
+            Build your professional sports profile and showcase your talent,
+            experience and achievements.
+          </p>
+        </div>
+        {!draftLoadFailed && <RegistrationStepNav />}
       </div>
 
       {draftLoadFailed ? (

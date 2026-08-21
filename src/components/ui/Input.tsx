@@ -35,7 +35,7 @@ export function Input({
         aria-invalid={error ? true : undefined}
         aria-describedby={error ? `${id}-error` : undefined}
         className={cn(
-          "h-11 w-full rounded-lg border bg-surface px-3.5 text-sm text-ink-900 placeholder:text-ink-400",
+          "h-12 w-full rounded-xl border bg-surface px-3.5 text-sm text-ink-900 placeholder:text-ink-400",
           error ? "border-red-400" : "border-border-default",
           "transition-colors focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-100",
           className,

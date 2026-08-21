@@ -3,7 +3,7 @@ import { getAuthUser } from "@/lib/supabase/auth-user";
 import { LogoutButton } from "@/features/auth/components/LogoutButton";
 
 const navLinkClassName =
-  "rounded-md px-3 py-2 text-sm font-medium text-ink-600 transition-colors hover:bg-surface-muted hover:text-ink-900";
+  "flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-ink-600 transition-colors hover:bg-surface-muted hover:text-ink-900";
 
 // Isolated into its own async Server Component (rather than awaiting
 // directly in Header) so it can be wrapped in <Suspense> -- the session

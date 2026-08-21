@@ -33,7 +33,15 @@
      brand and ink scales, so the whole product still reads as one system.
 
      Palette: deep navy → dark royal/cobalt → lighter layered blue.
-     Shifted from near-black to rich dark-blue to feel premium and branded. */
+     Shifted from near-black to rich dark-blue to feel premium and branded.
+
+     Also covers the navy-950/900/800/700 names main's auth/profile pages
+     reference -- one definition, not two competing hex values under the
+     same custom property. Those pages render a slightly different (still
+     dark-navy) shade than their original design intended; the homepage's
+     already-verified palette was kept as the source of truth since it's
+     used far more broadly (every homepage section) and was the one under
+     active review this session. */
   --color-navy-975: #0a1628;
   --color-navy-950: #0d1a30;
   --color-navy-900: #112240;
@@ -48,6 +56,10 @@
   --color-silver-100: #eef1f6;
   --color-silver-50: #f5f7fb;
   --color-ice-300: #a9c6ff;
+
+  /* Status -- used sparingly (profile-strength/status indicators only). */
+  --color-success-500: #12b76a;
+  --color-success-50: #ecfdf3;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;

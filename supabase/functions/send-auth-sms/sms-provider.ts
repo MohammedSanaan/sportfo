@@ -6,7 +6,7 @@
 // rewriting the hook.
 
 export interface SmsProvider {
-  sendSms(input: { to: string; message: string }): Promise<void>;
+  sendSms(input: { to: string; otp: string }): Promise<void>;
 }
 
 // Thrown for any provider-side failure (config, timeout, rejection). The
@@ -27,42 +27,39 @@ export class SmsProviderError extends Error {
 
 const OUTBOUND_TIMEOUT_MS = 4000; // stays well under the Auth Hook's 5s budget
 
-// A generic JSON/HTTP SMS gateway adapter: POSTs { to, message, sender_id }
-// with a bearer API key. This is a placeholder shape -- real gateways vary
-// (Twilio is form-encoded with the account SID in the URL; many regional
-// providers use GET with query params, etc.). Swap this implementation for
-// whichever vendor is actually selected; the interface above is what stays
-// stable.
-class GenericHttpSmsProvider implements SmsProvider {
+interface GatewayResponseBody {
+  success?: unknown;
+}
+
+// Talks to SportFo's own SMS gateway service (see /sms-gateway) rather than
+// MSG91 directly -- the gateway is what actually holds the MSG91 AuthKey
+// and runs from the static IP MSG91 has whitelisted. This function never
+// constructs SMS copy itself; it only ever forwards {to, otp}.
+class SmsGatewayProvider implements SmsProvider {
   constructor(
-    private readonly baseUrl: string,
-    private readonly apiKey: string,
-    private readonly senderId: string | undefined,
+    private readonly gatewayUrl: string,
+    private readonly sharedSecret: string,
   ) {}
 
-  async sendSms({ to, message }: { to: string; message: string }): Promise<void> {
+  async sendSms({ to, otp }: { to: string; otp: string }): Promise<void> {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), OUTBOUND_TIMEOUT_MS);
 
     let response: Response;
     try {
-      response = await fetch(this.baseUrl, {
+      response = await fetch(this.gatewayUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${this.apiKey}`,
+          Authorization: `Bearer ${this.sharedSecret}`,
         },
-        body: JSON.stringify({
-          to,
-          message,
-          ...(this.senderId ? { sender_id: this.senderId } : {}),
-        }),
+        body: JSON.stringify({ to, otp }),
         signal: controller.signal,
       });
     } catch (cause) {
       const timedOut = cause instanceof DOMException && cause.name === "AbortError";
       throw new SmsProviderError(
-        timedOut ? "SMS provider request timed out" : "SMS provider request failed",
+        timedOut ? "SMS gateway request timed out" : "SMS gateway request failed",
         true,
         cause instanceof Error ? cause.message : String(cause),
       );
@@ -73,9 +70,28 @@ class GenericHttpSmsProvider implements SmsProvider {
     if (!response.ok) {
       const retryable = response.status === 429 || response.status >= 500;
       throw new SmsProviderError(
-        `SMS provider responded with ${response.status}`,
+        `SMS gateway responded with ${response.status}`,
         retryable,
         await response.text().catch(() => "<unreadable body>"),
+      );
+    }
+
+    // A 2xx status alone isn't proof of success -- confirm the body
+    // actually says so. Guards against a misconfigured proxy/load
+    // balancer in front of the gateway returning 200 with something
+    // else entirely (an HTML error page, an empty body, etc).
+    let body: GatewayResponseBody;
+    try {
+      body = (await response.json()) as GatewayResponseBody;
+    } catch {
+      throw new SmsProviderError("SMS gateway returned a malformed response", true);
+    }
+
+    if (body.success !== true) {
+      throw new SmsProviderError(
+        "SMS gateway reported failure",
+        true,
+        JSON.stringify(body).slice(0, 200),
       );
     }
   }
@@ -89,19 +105,18 @@ export function getSmsProvider(): SmsProvider {
   }
 
   switch (providerName) {
-    case "generic-http": {
-      const baseUrl = Deno.env.get("SMS_API_BASE_URL");
-      const apiKey = Deno.env.get("SMS_API_KEY");
-      const senderId = Deno.env.get("SMS_SENDER_ID");
+    case "sms-gateway": {
+      const gatewayUrl = Deno.env.get("SMS_GATEWAY_URL");
+      const sharedSecret = Deno.env.get("SMS_GATEWAY_SHARED_SECRET");
 
-      if (!baseUrl || !apiKey) {
+      if (!gatewayUrl || !sharedSecret) {
         throw new SmsProviderError(
-          "SMS_API_BASE_URL / SMS_API_KEY is not configured",
+          "SMS_GATEWAY_URL / SMS_GATEWAY_SHARED_SECRET is not configured",
           false,
         );
       }
 
-      return new GenericHttpSmsProvider(baseUrl, apiKey, senderId);
+      return new SmsGatewayProvider(gatewayUrl, sharedSecret);
     }
     default:
       throw new SmsProviderError(`Unknown SMS_PROVIDER: ${providerName}`, false);

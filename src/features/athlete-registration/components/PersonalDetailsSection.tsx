@@ -12,6 +12,7 @@ import {
   requiredTextRule,
   today,
 } from "@/lib/athlete-validation";
+import { getAuthMode } from "@/lib/auth-mode";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
 
 export function PersonalDetailsSection() {
@@ -20,6 +21,11 @@ export function PersonalDetailsSection() {
     control,
     formState: { errors },
   } = useFormContext<AthleteRegistrationFormValues>();
+
+  const mobileHelperText =
+    getAuthMode() === "demo"
+      ? "This is the number you entered when joining. Phone verification will be enabled before public launch."
+      : "This is the number you verified at login and can't be changed here.";
 
   return (
     <SectionCard
@@ -86,7 +92,7 @@ export function PersonalDetailsSection() {
           autoComplete="tel"
           readOnly
           aria-readonly
-          helperText="This is the number you verified at login and can't be changed here."
+          helperText={mobileHelperText}
           className="cursor-not-allowed bg-surface-muted text-ink-500"
           error={errors.personalDetails?.mobileNumber?.message}
           {...register("personalDetails.mobileNumber", mobileNumberRule)}
