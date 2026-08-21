@@ -43,6 +43,20 @@
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
+
+  /* Stitch landing-page palette/type -- additive tokens for the "/" route
+     only (see src/features/homepage/**). Named distinctly from --color-brand-*
+     so nothing elsewhere in the app (buttons, badges, auth, profile pages)
+     picks these up by accident. */
+  --color-stitch-navy: #0a3275;
+  --color-stitch-blue: #2c59a5;
+  --color-stitch-orange: #f26822;
+  --color-stitch-orange-hover: #d95a1a;
+  --color-stitch-gray: #f5f6f8;
+  --color-stitch-text: #333333;
+
+  --font-stitch: var(--font-lexend), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
 }
 
 body {
@@ -58,4 +72,25 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-brand-500);
   outline-offset: 2px;
+}
+
+/* Stitch landing page ("/") -- hero scrim and story-card bottom gradient.
+   Fixed rgba stops rather than Tailwind's from-/via-/to- utilities so the
+   navy stays exactly on-brand (#0a3275) regardless of opacity stacking. */
+.stitch-hero-scrim {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 50, 117, 0.85) 0%,
+    rgba(10, 50, 117, 0.45) 55%,
+    rgba(10, 50, 117, 0) 100%
+  );
+}
+
+.stitch-story-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(10, 50, 117, 0.95) 0%,
+    rgba(10, 50, 117, 0.55) 45%,
+    rgba(10, 50, 117, 0) 100%
+  );
 }

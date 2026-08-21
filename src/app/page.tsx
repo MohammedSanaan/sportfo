@@ -1,28 +1,21 @@
-import { createClient } from "@/lib/supabase/server";
-import { searchPublicAthletes, parseDiscoveryFilters } from "@/lib/athlete/discovery";
-import { Container } from "@/components/ui/Container";
-import { Hero } from "@/features/landing/components/Hero";
-import { DiscoverAthletesSection } from "@/features/landing/components/DiscoverAthletesSection";
-import { HowItWorksSection } from "@/features/landing/components/HowItWorksSection";
-import { SportingIdentitySection } from "@/features/landing/components/SportingIdentitySection";
-import { FutureEcosystemSection } from "@/features/landing/components/FutureEcosystemSection";
-import { FinalCtaSection } from "@/features/landing/components/FinalCtaSection";
+import { lexend } from "@/features/homepage/lexend";
+import { EcosystemHero } from "@/features/homepage/components/EcosystemHero";
+import { WhoWeServeSection } from "@/features/homepage/components/WhoWeServeSection";
+import { StatsSection } from "@/features/homepage/components/StatsSection";
+import { ParentsSection } from "@/features/homepage/components/ParentsSection";
+import { AthleteStoriesSection } from "@/features/homepage/components/AthleteStoriesSection";
 
-export default async function Home() {
-  const supabase = await createClient();
-  // Reuses the same public-safe discovery RPC as /athletes -- no separate
-  // query path, no private data, same security model. Only the first 3
-  // results (of up to 12 the RPC returns) are shown as a preview.
-  const { athletes } = await searchPublicAthletes(supabase, parseDiscoveryFilters({}));
-
+// Landing page body, recreated from the supplied Stitch design (see the
+// integration report for section-by-section notes on image/font/CTA
+// choices). Section order matches the Stitch source exactly.
+export default function Home() {
   return (
-    <Container className="flex flex-col gap-20 py-10 sm:gap-24 sm:py-14 lg:gap-28">
-      <Hero />
-      <DiscoverAthletesSection athletes={athletes.slice(0, 3)} />
-      <HowItWorksSection />
-      <SportingIdentitySection />
-      <FutureEcosystemSection />
-      <FinalCtaSection />
-    </Container>
+    <div className={`${lexend.variable} flex flex-1 flex-col font-stitch text-stitch-text`}>
+      <EcosystemHero />
+      <WhoWeServeSection />
+      <StatsSection />
+      <ParentsSection />
+      <AthleteStoriesSection />
+    </div>
   );
 }
