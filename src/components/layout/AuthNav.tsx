@@ -41,7 +41,7 @@ export async function AuthNav() {
         data-solid
         className="ml-1 inline-flex h-9 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
       >
-        Join SportFo
+        Register
       </Link>
     </>
   );

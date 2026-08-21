@@ -134,8 +134,8 @@ body {
 /* The auth nav renders on the server and can't take a tone prop from the
    client-side Header, so its over-the-hero colours are applied here. Scoped
    to the header only; the auth and registration pages are untouched.
-   Uses an explicit `data-solid` marker (set on "Join SportFo" in
-   AuthNav.tsx) rather than a `[class*="bg-"]` substring match -- the old
+   Uses an explicit `data-solid` marker (set on the solid "Register"
+   button in AuthNav.tsx) rather than a `[class*="bg-"]` substring match -- the old
    version matched any class containing "bg-" anywhere in the string,
    including `hover:bg-surface-muted` on the plain Login/Logout links,
    which accidentally excluded them from the override and left them

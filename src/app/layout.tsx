@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Inter, Instrument_Serif } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { AuthNav } from "@/components/layout/AuthNav";
+import { getAuthUser } from "@/lib/supabase/auth-user";
 import "./globals.css";
 
 const inter = Inter({
@@ -36,7 +37,14 @@ function AuthNavFallback() {
   );
 }
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  // getAuthUser is cache()-wrapped, so this and AuthNav's own call below
+  // de-dupe to a single Supabase request per render, not two. Needed here
+  // (rather than left entirely to AuthNav) only to decide whether Header
+  // shows its own compact, always-visible "Login" link on narrow screens --
+  // see the comment on that prop in Header.tsx for why.
+  const user = await getAuthUser();
+
   return (
     <html
       lang="en"
@@ -61,6 +69,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <AuthNav />
             </Suspense>
           }
+          isAuthenticated={Boolean(user)}
         />
         <main className="flex flex-1 flex-col">{children}</main>
       </body>

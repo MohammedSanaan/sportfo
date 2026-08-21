@@ -18,6 +18,14 @@ interface HeaderProps {
   // element in two places at once, which isn't a safe pattern for a
   // Suspense-wrapped Server Component boundary.
   mobileAuthNav: ReactNode;
+  // Below `sm`, authNav is hidden (see .sf-authnav below) and its full
+  // content only lives inside the hamburger panel -- which left a
+  // signed-out visitor with literally no visible way to sign in until they
+  // opened the menu. A signed-in user's full nav (View Profile/Register/
+  // Logout) is too much to also duplicate at this width, but a single
+  // compact "Login" link isn't, so that one link stays visible outside the
+  // menu specifically for a signed-out visitor.
+  isAuthenticated: boolean;
 }
 
 // The one link every page should offer to real discovery, not just the
@@ -36,7 +44,7 @@ const MARKETING_LINKS = [
 
 const navLinkBase = "rounded-md px-3 py-2 text-sm font-medium transition-colors";
 
-export function Header({ authNav, mobileAuthNav }: HeaderProps) {
+export function Header({ authNav, mobileAuthNav, isAuthenticated }: HeaderProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [searchOpen, setSearchOpen] = useState(false);
@@ -158,6 +166,20 @@ export function Header({ authNav, mobileAuthNav }: HeaderProps) {
           >
             {authNav}
           </nav>
+
+          {!isAuthenticated && (
+            <Link
+              href="/auth"
+              className={cn(
+                "inline-flex h-9 items-center justify-center rounded-full border px-3.5 text-sm font-medium transition-colors sm:hidden",
+                overHero
+                  ? "border-white/30 text-steel-300 hover:border-white/50 hover:bg-white/10 hover:text-white"
+                  : "border-border-strong text-ink-700 hover:border-ink-400 hover:bg-surface-muted hover:text-ink-900",
+              )}
+            >
+              Login
+            </Link>
+          )}
 
           <MobileMenuToggle
             triggerClassName={cn(
