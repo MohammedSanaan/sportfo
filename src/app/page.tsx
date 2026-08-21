@@ -1,6 +1,7 @@
 import { lexend } from "@/features/homepage/lexend";
 import { EcosystemHero } from "@/features/homepage/components/EcosystemHero";
 import { WhoWeServeSection } from "@/features/homepage/components/WhoWeServeSection";
+import { GapSection } from "@/features/homepage/components/GapSection";
 import { StatsSection } from "@/features/homepage/components/StatsSection";
 import { ParentsSection } from "@/features/homepage/components/ParentsSection";
 import { AthleteStoriesSection } from "@/features/homepage/components/AthleteStoriesSection";
@@ -13,6 +14,7 @@ export default function Home() {
     <div className={`${lexend.variable} flex flex-1 flex-col font-stitch text-stitch-text`}>
       <EcosystemHero />
       <WhoWeServeSection />
+      <GapSection />
       <StatsSection />
       <ParentsSection />
       <AthleteStoriesSection />
