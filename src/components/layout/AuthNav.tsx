@@ -14,8 +14,14 @@ export async function AuthNav() {
   if (user) {
     return (
       <>
+        {/* Stands in for a future "dashboard" -- there isn't one yet, so
+            this is where a signed-in athlete currently lands to see their
+            own profile. */}
+        <Link href="/athlete/profile" className={navLinkClassName}>
+          View Profile
+        </Link>
         <Link href="/athlete/register" className={navLinkClassName}>
-          Athlete Registration
+          Register
         </Link>
         <LogoutButton />
       </>
