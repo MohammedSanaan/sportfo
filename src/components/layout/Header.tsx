@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
+import { MobileMenuToggle } from "./MobileMenuToggle";
 
 interface HeaderProps {
   // Server-rendered Sign In / Join / Logout state, composed in from
@@ -12,7 +13,17 @@ interface HeaderProps {
   // usePathname()/scroll state and can't import the async AuthNav Server
   // Component directly once it's a Client Component itself.
   authNav: ReactNode;
+  // A second, independent instance of the same content for the mobile
+  // panel -- kept separate from `authNav` rather than rendering that same
+  // element in two places at once, which isn't a safe pattern for a
+  // Suspense-wrapped Server Component boundary.
+  mobileAuthNav: ReactNode;
 }
+
+// The one link every page should offer to real discovery, not just the
+// homepage's own on-page anchor. Homepage keeps its existing MARKETING_LINKS
+// unchanged below; this is additive, sitewide navigation main already had.
+const DISCOVER_LINK = { href: "/athletes", label: "Discover Athletes" };
 
 const MARKETING_LINKS = [
   { href: "/#athletes", label: "Athletes" },
@@ -25,7 +36,7 @@ const MARKETING_LINKS = [
 
 const navLinkBase = "rounded-md px-3 py-2 text-sm font-medium transition-colors";
 
-export function Header({ authNav }: HeaderProps) {
+export function Header({ authNav, mobileAuthNav }: HeaderProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [searchOpen, setSearchOpen] = useState(false);
@@ -73,7 +84,7 @@ export function Header({ authNav }: HeaderProps) {
           SportFo
         </Link>
 
-        {isHome && (
+        {isHome ? (
           <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
             {MARKETING_LINKS.map((link) => (
               <Link
@@ -89,6 +100,15 @@ export function Header({ authNav }: HeaderProps) {
                 {link.label}
               </Link>
             ))}
+          </nav>
+        ) : (
+          <nav aria-label="Primary" className="hidden items-center gap-0.5 sm:flex">
+            <Link
+              href={DISCOVER_LINK.href}
+              className={cn(navLinkBase, "text-ink-600 hover:bg-surface-muted hover:text-ink-900")}
+            >
+              {DISCOVER_LINK.label}
+            </Link>
           </nav>
         )}
 
@@ -134,10 +154,27 @@ export function Header({ authNav }: HeaderProps) {
           <nav
             aria-label={isHome ? "Account" : "Primary"}
             data-over-hero={overHero}
-            className="sf-authnav flex items-center gap-1"
+            className="sf-authnav hidden items-center gap-1 sm:flex"
           >
             {authNav}
           </nav>
+
+          <MobileMenuToggle
+            triggerClassName={cn(
+              "flex h-11 w-11 items-center justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200",
+              overHero
+                ? "text-white hover:bg-white/10"
+                : "text-ink-700 hover:bg-surface-muted",
+            )}
+          >
+            <Link
+              href={DISCOVER_LINK.href}
+              className="flex min-h-11 items-center rounded-lg px-3 text-base font-medium text-ink-700 hover:bg-surface-muted"
+            >
+              {DISCOVER_LINK.label}
+            </Link>
+            {mobileAuthNav}
+          </MobileMenuToggle>
         </div>
       </div>
     </header>

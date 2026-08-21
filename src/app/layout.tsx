@@ -56,6 +56,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               <AuthNav />
             </Suspense>
           }
+          mobileAuthNav={
+            <Suspense fallback={<AuthNavFallback />}>
+              <AuthNav />
+            </Suspense>
+          }
         />
         <main className="flex flex-1 flex-col">{children}</main>
       </body>

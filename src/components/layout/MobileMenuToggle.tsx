@@ -32,7 +32,17 @@ function CloseIcon() {
 // (Discover Athletes, AuthNav) is passed in as children so it can stay a
 // real async Server Component -- this toggle never needs to know what's
 // inside it.
-export function MobileMenuToggle({ children }: { children: ReactNode }) {
+export function MobileMenuToggle({
+  children,
+  triggerClassName,
+}: {
+  children: ReactNode;
+  // Lets a caller override the trigger's colours for a context this
+  // component doesn't know about on its own -- e.g. the homepage header
+  // sitting transparent over a dark hero image, where the default
+  // text-ink-700 would be unreadable. Falls back to the original styling.
+  triggerClassName?: string;
+}) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -43,7 +53,10 @@ export function MobileMenuToggle({ children }: { children: ReactNode }) {
         aria-controls="mobile-nav-panel"
         aria-label={open ? "Close menu" : "Open menu"}
         onClick={() => setOpen((value) => !value)}
-        className="flex h-11 w-11 items-center justify-center rounded-lg text-ink-700 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200"
+        className={
+          triggerClassName ??
+          "flex h-11 w-11 items-center justify-center rounded-lg text-ink-700 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200"
+        }
       >
         {open ? <CloseIcon /> : <MenuIcon />}
       </button>

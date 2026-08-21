@@ -366,8 +366,13 @@ function AthleteExpanded({ athlete, onClose }: { athlete: AthleteCard; onClose: 
         )}
 
         <div className="mt-auto flex flex-col gap-3 pt-8">
+          {/* /athlete/[id] does its own auth gate -- redirects a signed-out
+              visitor to /auth itself, so there's no need to duplicate that
+              check here. Signed in, it resolves to the real profile (or a
+              404 if this particular id has no match, since Discovery is
+              still showing demo athletes rather than real ones). */}
           <Link
-            href="/auth"
+            href={`/athlete/${athlete.id}`}
             className="inline-flex h-11 items-center justify-center rounded-full bg-ink-900 px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-800 focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             <TextRoll>View full profile</TextRoll>
