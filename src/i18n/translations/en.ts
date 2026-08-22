@@ -124,6 +124,44 @@ const en = {
         cta: "JOIN NOW",
       },
     },
+    community: {
+      eyebrow: "Community",
+      title: "Who We Serve",
+      subtitle: "Everyone who shapes an athlete's journey.",
+      roles: {
+        athletes: {
+          title: "Sportsman / Athletes",
+          description: "Players across all sports, including para athletes.",
+        },
+        academiesCoaches: {
+          title: "Academies & Coaches",
+          description: "Training clubs and coaches.",
+        },
+        performanceExperts: {
+          title: "Performance Experts",
+          description: "Physios, nutritionists, and trainers.",
+        },
+        mediaCreators: {
+          title: "Media & Creators",
+          description: "Photographers and content creators.",
+        },
+        managementLegal: {
+          title: "Sports Management & Legal",
+          description: "Managers, agents or legal advisors.",
+        },
+        eventOperations: {
+          title: "Event & Operations Staff",
+          description: "Referees and event coordinators.",
+        },
+        sponsorsCsr: {
+          title: "Sponsors & CSR",
+          description: "Brands and corporate sponsors.",
+        },
+        talentAnalytics: {
+          title: "Talent Discovery & Analytics",
+        },
+      },
+    },
     gap: {
       eyebrow: "The Gap We're Closing",
       title: "Talent shouldn't depend on luck or location.",

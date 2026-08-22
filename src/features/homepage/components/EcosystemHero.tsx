@@ -38,7 +38,7 @@ export function EcosystemHero({ t }: { t: TFunc }) {
 
       <div className="relative z-10 mt-10 flex w-full max-w-md flex-col items-center gap-3 sm:mt-12 sm:w-auto sm:flex-row sm:gap-4">
         <Link
-          href="#who-we-serve"
+          href="#community"
           className="inline-flex h-13 w-full items-center justify-center rounded border border-white/50 px-8 text-base font-bold text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
         >
           {t("home.hero.explore")}

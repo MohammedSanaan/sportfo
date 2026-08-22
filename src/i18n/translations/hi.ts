@@ -122,6 +122,44 @@ const hi: Dictionary = {
         cta: "अभी जुड़ें",
       },
     },
+    community: {
+      eyebrow: "समुदाय",
+      title: "हम किनकी सेवा करते हैं",
+      subtitle: "हर वह व्यक्ति जो किसी एथलीट के सफ़र को आकार देता है।",
+      roles: {
+        athletes: {
+          title: "खिलाड़ी / एथलीट",
+          description: "पैरा-एथलीटों सहित सभी खेलों के खिलाड़ी।",
+        },
+        academiesCoaches: {
+          title: "अकादमियाँ और कोच",
+          description: "प्रशिक्षण क्लब और कोच।",
+        },
+        performanceExperts: {
+          title: "प्रदर्शन विशेषज्ञ",
+          description: "फिज़ियो, न्यूट्रिशनिस्ट और ट्रेनर।",
+        },
+        mediaCreators: {
+          title: "मीडिया और क्रिएटर्स",
+          description: "फ़ोटोग्राफ़र और कंटेंट क्रिएटर।",
+        },
+        managementLegal: {
+          title: "स्पोर्ट्स मैनेजमेंट और लीगल",
+          description: "मैनेजर, एजेंट या कानूनी सलाहकार।",
+        },
+        eventOperations: {
+          title: "इवेंट और ऑपरेशन्स स्टाफ़",
+          description: "रेफ़री और इवेंट समन्वयक।",
+        },
+        sponsorsCsr: {
+          title: "प्रायोजक और CSR",
+          description: "ब्रांड और कॉर्पोरेट प्रायोजक।",
+        },
+        talentAnalytics: {
+          title: "टैलेंट डिस्कवरी और एनालिटिक्स",
+        },
+      },
+    },
     gap: {
       eyebrow: "जिस कमी को हम दूर कर रहे हैं",
       title: "प्रतिभा को किस्मत या जगह पर निर्भर नहीं होना चाहिए।",
