@@ -50,7 +50,7 @@ export function Header({ locale }: { locale: Locale }) {
             {translate(locale, "nav.discoverAthletes")}
           </Link>
           <Suspense fallback={null}>
-            <AuthNav locale={locale} />
+            <AuthNav locale={locale} variant="mobile" />
           </Suspense>
           {/* Placed inside the panel itself (not next to the hamburger
               trigger) so the always-visible mobile navbar stays uncrowded. */}

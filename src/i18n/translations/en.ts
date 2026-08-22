@@ -25,6 +25,13 @@ const en = {
   language: {
     selectorLabel: "Select language",
   },
+  account: {
+    sportfoId: "SportFo ID",
+    activeAs: "Active as",
+    myAccount: "My account",
+    activeAccount: "Active account",
+    roleAthlete: "Athlete",
+  },
   home: {
     hero: {
       title: "India's Complete Sports Ecosystem",
@@ -163,6 +170,11 @@ const en = {
     errorInvalidOtp: "Enter the 6-digit code.",
     errorOtpWrong: "That code isn't right. Double-check it and try again.",
     errorSessionCheckFailed: "We couldn't confirm your session. Please try again.",
+    mobileOrSportfoIdLabel: "Mobile number or SportFo ID",
+    mobileOrSportfoIdPlaceholder: "Mobile number or SportFo ID",
+    sportfoIdFoundNeedsPhone:
+      "We found this SportFo ID. Signing in with a SportFo ID will be available once phone verification is fully enabled -- please sign in with your mobile number for now.",
+    sportfoIdNotFound: "We couldn't find that SportFo ID. Please check it, or sign in with your mobile number.",
   },
   register: {
     pageTitle: "Create Your Athlete Profile",
@@ -248,6 +260,9 @@ const en = {
     success: {
       title: "You're all set",
       message: "Your athlete profile has been created successfully.",
+      welcome: "Welcome to SportFo",
+      yourSportfoId: "Your SportFo ID",
+      sportfoIdHelper: "Keep this ID handy. You can use it to identify your SportFo account.",
       backHome: "Back to Home",
       viewProfile: "View My Profile",
     },

@@ -23,6 +23,10 @@ interface ProfileHeroProps {
   // this is a picture of the athlete themselves, just atmosphere, the
   // same treatment already established for the landing hero and /auth.
   bannerImage?: string;
+  // Intentionally public identifier -- never the internal auth UUID. Omitted
+  // entirely (not just blank) when not provided, e.g. before the public
+  // profile RPC is extended to return it.
+  sportfoId?: string | null;
   locale: Locale;
 }
 
@@ -55,6 +59,7 @@ export function ProfileHero({
   actions,
   headingLevel = "h1",
   bannerImage,
+  sportfoId,
   locale,
 }: ProfileHeroProps) {
   const t = (key: string) => translate(locale, key);
@@ -96,6 +101,11 @@ export function ProfileHero({
                 {fullName || t("athletes.athleteFallback")}
               </NameHeading>
               {sportLine && <p className="text-base font-medium text-ink-600">{sportLine}</p>}
+              {sportfoId && (
+                <p className="text-xs font-medium tracking-wide text-ink-400 uppercase">
+                  {t("account.sportfoId")}: <span className="text-ink-600 normal-case">{sportfoId}</span>
+                </p>
+              )}
               {location && (
                 <p className="flex items-center gap-1 text-sm text-ink-400">
                   <LocationPinIcon />

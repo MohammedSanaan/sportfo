@@ -24,6 +24,7 @@ import { AdditionalRecognitionSection } from "./AdditionalRecognitionSection";
 import { FormActions } from "./FormActions";
 import { PersonalDetailsSection } from "./PersonalDetailsSection";
 import { RegistrationSuccess } from "./RegistrationSuccess";
+import { getOwnSportfoId } from "@/lib/sportfo-id/server";
 import { SportsInformationSection } from "./SportsInformationSection";
 import { useTranslation } from "@/i18n/LocaleProvider";
 
@@ -67,6 +68,7 @@ export function AthleteRegistrationForm({
   const [submitPhaseLabel, setSubmitPhaseLabel] = useState<string>();
   const [banner, setBanner] = useState<Banner | null>(null);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [sportfoId, setSportfoId] = useState<string | null>(null);
 
   function setDocOp(fieldId: string, state: DocumentOperationsByField[string] | undefined) {
     setDocOpsByField((prev) => {
@@ -328,11 +330,19 @@ export function AthleteRegistrationForm({
       return;
     }
 
+    // Already assigned at first login (see AuthFlow.tsx) -- this is a
+    // read, never a generation, so showing the success screen again on a
+    // resubmission surfaces the same, unchanged id.
+    const { data: userData } = await supabase.auth.getUser();
+    if (userData.user) {
+      setSportfoId(await getOwnSportfoId(supabase, userData.user.id));
+    }
+
     setIsRegistered(true);
   };
 
   if (isRegistered) {
-    return <RegistrationSuccess />;
+    return <RegistrationSuccess sportfoId={sportfoId} />;
   }
 
   return (

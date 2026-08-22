@@ -171,6 +171,30 @@ export type Database = {
           },
         ]
       }
+      sportfo_users: {
+        Row: {
+          created_at: string
+          id: string
+          sportfo_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          sportfo_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          sportfo_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -211,8 +235,10 @@ export type Database = {
           school_college: string
           skill_level: string
           sport_discipline: string
+          sportfo_id: string
         }[]
       }
+      ensure_sportfo_id: { Args: never; Returns: string }
       owns_athlete_profile: { Args: { profile_id: string }; Returns: boolean }
       save_athlete_registration: {
         Args: {
@@ -257,6 +283,7 @@ export type Database = {
           public_slug: string
         }[]
       }
+      sportfo_id_exists: { Args: { p_sportfo_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never

@@ -24,6 +24,13 @@ const kn: Dictionary = {
   language: {
     selectorLabel: "ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ",
   },
+  account: {
+    sportfoId: "SportFo ID",
+    activeAs: "ಈ ರೂಪದಲ್ಲಿ ಸಕ್ರಿಯ",
+    myAccount: "ನನ್ನ ಖಾತೆ",
+    activeAccount: "ಸಕ್ರಿಯ ಖಾತೆ",
+    roleAthlete: "ಕ್ರೀಡಾಪಟು",
+  },
   home: {
     hero: {
       title: "ಭಾರತದ ಸಂಪೂರ್ಣ ಕ್ರೀಡಾ ಪರಿಸರ ವ್ಯವಸ್ಥೆ",
@@ -162,6 +169,11 @@ const kn: Dictionary = {
     errorInvalidOtp: "6 ಅಂಕಿಗಳ ಕೋಡ್ ನಮೂದಿಸಿ.",
     errorOtpWrong: "ಆ ಕೋಡ್ ಸರಿಯಾಗಿಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     errorSessionCheckFailed: "ನಿಮ್ಮ ಸೆಷನ್ ಅನ್ನು ಖಚಿತಪಡಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    mobileOrSportfoIdLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅಥವಾ SportFo ID",
+    mobileOrSportfoIdPlaceholder: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅಥವಾ SportFo ID",
+    sportfoIdFoundNeedsPhone:
+      "ಈ SportFo ID ನಮಗೆ ಸಿಕ್ಕಿದೆ. ಫೋನ್ ಪರಿಶೀಲನೆ ಸಂಪೂರ್ಣವಾಗಿ ಸಕ್ರಿಯಗೊಂಡ ನಂತರ SportFo ID ಮೂಲಕ ಸೈನ್ ಇನ್ ಲಭ್ಯವಿರುತ್ತದೆ -- ಸದ್ಯಕ್ಕೆ ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯಿಂದ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
+    sportfoIdNotFound: "ಆ SportFo ID ನಮಗೆ ಸಿಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ, ಅಥವಾ ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯಿಂದ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
   },
   register: {
     pageTitle: "ನಿಮ್ಮ ಕ್ರೀಡಾಪಟು ಪ್ರೊಫೈಲ್ ರಚಿಸಿ",
@@ -247,6 +259,9 @@ const kn: Dictionary = {
     success: {
       title: "ನೀವು ಸಿದ್ಧರಿದ್ದೀರಿ",
       message: "ನಿಮ್ಮ ಕ್ರೀಡಾಪಟು ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
+      welcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ",
+      yourSportfoId: "ನಿಮ್ಮ SportFo ID",
+      sportfoIdHelper: "ಈ ID ಅನ್ನು ಜೋಪಾನವಾಗಿ ಇರಿಸಿ. ನಿಮ್ಮ SportFo ಖಾತೆಯನ್ನು ಗುರುತಿಸಲು ನೀವು ಇದನ್ನು ಬಳಸಬಹುದು.",
       backHome: "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
       viewProfile: "ನನ್ನ ಪ್ರೊಫೈಲ್ ವೀಕ್ಷಿಸಿ",
     },

@@ -24,6 +24,13 @@ const te: Dictionary = {
   language: {
     selectorLabel: "భాషను ఎంచుకోండి",
   },
+  account: {
+    sportfoId: "SportFo ID",
+    activeAs: "గా క్రియాశీలం",
+    myAccount: "నా ఖాతా",
+    activeAccount: "క్రియాశీల ఖాతా",
+    roleAthlete: "అథ్లెట్",
+  },
   home: {
     hero: {
       title: "భారతదేశపు సంపూర్ణ క్రీడా పర్యావరణ వ్యవస్థ",
@@ -162,6 +169,11 @@ const te: Dictionary = {
     errorInvalidOtp: "6 అంకెల కోడ్‌ను నమోదు చేయండి.",
     errorOtpWrong: "ఆ కోడ్ సరైనది కాదు. తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.",
     errorSessionCheckFailed: "మేము మీ సెషన్‌ను నిర్ధారించలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.",
+    mobileOrSportfoIdLabel: "మొబైల్ నంబర్ లేదా SportFo ID",
+    mobileOrSportfoIdPlaceholder: "మొబైల్ నంబర్ లేదా SportFo ID",
+    sportfoIdFoundNeedsPhone:
+      "ఈ SportFo ID మాకు కనుగొనబడింది. ఫోన్ ధృవీకరణ పూర్తిగా ప్రారంభించబడిన తర్వాత SportFo ID తో సైన్ ఇన్ అందుబాటులో ఉంటుంది -- ప్రస్తుతానికి దయచేసి మీ మొబైల్ నంబర్‌తో సైన్ ఇన్ చేయండి.",
+    sportfoIdNotFound: "ఆ SportFo ID మాకు కనుగొనబడలేదు. దయచేసి తనిఖీ చేయండి, లేదా మీ మొబైల్ నంబర్‌తో సైన్ ఇన్ చేయండి.",
   },
   register: {
     pageTitle: "మీ అథ్లెట్ ప్రొఫైల్‌ను సృష్టించండి",
@@ -247,6 +259,9 @@ const te: Dictionary = {
     success: {
       title: "మీరు సిద్ధంగా ఉన్నారు",
       message: "మీ అథ్లెట్ ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
+      welcome: "SportFo కు స్వాగతం",
+      yourSportfoId: "మీ SportFo ID",
+      sportfoIdHelper: "ఈ IDని జాగ్రత్తగా ఉంచుకోండి. మీ SportFo ఖాతాను గుర్తించడానికి మీరు దీన్ని ఉపయోగించవచ్చు.",
       backHome: "హోమ్‌కు తిరిగి వెళ్ళండి",
       viewProfile: "నా ప్రొఫైల్‌ను వీక్షించండి",
     },

@@ -24,6 +24,13 @@ const ta: Dictionary = {
   language: {
     selectorLabel: "மொழியைத் தேர்ந்தெடுக்கவும்",
   },
+  account: {
+    sportfoId: "SportFo ID",
+    activeAs: "இவராக செயலில்",
+    myAccount: "எனது கணக்கு",
+    activeAccount: "செயலில் உள்ள கணக்கு",
+    roleAthlete: "விளையாட்டு வீரர்",
+  },
   home: {
     hero: {
       title: "இந்தியாவின் முழுமையான விளையாட்டு சூழல் அமைப்பு",
@@ -162,6 +169,11 @@ const ta: Dictionary = {
     errorInvalidOtp: "6 இலக்க குறியீட்டை உள்ளிடவும்.",
     errorOtpWrong: "அந்த குறியீடு சரியில்லை. சரிபார்த்து மீண்டும் முயற்சிக்கவும்.",
     errorSessionCheckFailed: "உங்கள் அமர்வை உறுதிப்படுத்த முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+    mobileOrSportfoIdLabel: "மொபைல் எண் அல்லது SportFo ID",
+    mobileOrSportfoIdPlaceholder: "மொபைல் எண் அல்லது SportFo ID",
+    sportfoIdFoundNeedsPhone:
+      "இந்த SportFo ID எங்களுக்குக் கிடைத்தது. தொலைபேசி சரிபார்ப்பு முழுமையாக இயக்கப்பட்டதும் SportFo ID மூலம் உள்நுழைவது கிடைக்கும் -- தற்போதைக்கு உங்கள் மொபைல் எண்ணுடன் உள்நுழையவும்.",
+    sportfoIdNotFound: "அந்த SportFo ID எங்களுக்குக் கிடைக்கவில்லை. சரிபார்க்கவும், அல்லது உங்கள் மொபைல் எண்ணுடன் உள்நுழையவும்.",
   },
   register: {
     pageTitle: "உங்கள் விளையாட்டு வீரர் சுயவிவரத்தை உருவாக்கவும்",
@@ -247,6 +259,9 @@ const ta: Dictionary = {
     success: {
       title: "நீங்கள் தயார்",
       message: "உங்கள் விளையாட்டு வீரர் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
+      welcome: "SportFo க்கு வரவேற்கிறோம்",
+      yourSportfoId: "உங்கள் SportFo ID",
+      sportfoIdHelper: "இந்த ID-ஐ பத்திரமாக வைத்திருங்கள். உங்கள் SportFo கணக்கை அடையாளம் காண இதைப் பயன்படுத்தலாம்.",
       backHome: "முகப்புக்குத் திரும்பவும்",
       viewProfile: "எனது சுயவிவரத்தைப் பார்க்கவும்",
     },

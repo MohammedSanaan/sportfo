@@ -24,6 +24,13 @@ const ml: Dictionary = {
   language: {
     selectorLabel: "ഭാഷ തിരഞ്ഞെടുക്കുക",
   },
+  account: {
+    sportfoId: "SportFo ID",
+    activeAs: "സജീവം ഇപ്പോൾ",
+    myAccount: "എന്റെ അക്കൗണ്ട്",
+    activeAccount: "സജീവ അക്കൗണ്ട്",
+    roleAthlete: "അത്‌ലറ്റ്",
+  },
   home: {
     hero: {
       title: "ഇന്ത്യയുടെ സമ്പൂർണ്ണ കായിക ആവാസവ്യവസ്ഥ",
@@ -162,6 +169,11 @@ const ml: Dictionary = {
     errorInvalidOtp: "6 അക്ക കോഡ് നൽകുക.",
     errorOtpWrong: "ആ കോഡ് ശരിയല്ല. പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",
     errorSessionCheckFailed: "ഞങ്ങൾക്ക് നിങ്ങളുടെ സെഷൻ സ്ഥിരീകരിക്കാൻ കഴിഞ്ഞില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+    mobileOrSportfoIdLabel: "മൊബൈൽ നമ്പർ അല്ലെങ്കിൽ SportFo ID",
+    mobileOrSportfoIdPlaceholder: "മൊബൈൽ നമ്പർ അല്ലെങ്കിൽ SportFo ID",
+    sportfoIdFoundNeedsPhone:
+      "ഈ SportFo ID ഞങ്ങൾ കണ്ടെത്തി. ഫോൺ വെരിഫിക്കേഷൻ പൂർണ്ണമായി പ്രവർത്തനക്ഷമമായ ശേഷം SportFo ID ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യാൻ കഴിയും -- ഇപ്പോൾ ദയവായി നിങ്ങളുടെ മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക.",
+    sportfoIdNotFound: "ആ SportFo ID ഞങ്ങൾക്ക് കണ്ടെത്താനായില്ല. ദയവായി പരിശോധിക്കുക, അല്ലെങ്കിൽ നിങ്ങളുടെ മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക.",
   },
   register: {
     pageTitle: "നിങ്ങളുടെ അത്‌ലറ്റ് പ്രൊഫൈൽ സൃഷ്ടിക്കുക",
@@ -247,6 +259,9 @@ const ml: Dictionary = {
     success: {
       title: "നിങ്ങൾ തയ്യാറാണ്",
       message: "നിങ്ങളുടെ അത്‌ലറ്റ് പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
+      welcome: "SportFo ലേക്ക് സ്വാഗതം",
+      yourSportfoId: "നിങ്ങളുടെ SportFo ID",
+      sportfoIdHelper: "ഈ ID സൂക്ഷിച്ചു വയ്ക്കുക. നിങ്ങളുടെ SportFo അക്കൗണ്ട് തിരിച്ചറിയാൻ ഇത് ഉപയോഗിക്കാം.",
       backHome: "ഹോമിലേക്ക് മടങ്ങുക",
       viewProfile: "എന്റെ പ്രൊഫൈൽ കാണുക",
     },

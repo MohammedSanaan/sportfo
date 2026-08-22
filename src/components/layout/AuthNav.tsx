@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { getAuthUser } from "@/lib/supabase/auth-user";
+import { createClient } from "@/lib/supabase/server";
+import { lookupOwnAthleteProfile } from "@/lib/athlete/lookup-profile";
 import { LogoutButton } from "@/features/auth/components/LogoutButton";
+import { getOwnSportfoId } from "@/lib/sportfo-id/server";
+import { AccountMenu } from "./AccountMenu";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
 
@@ -10,11 +14,46 @@ const navLinkClassName =
 // Isolated into its own async Server Component (rather than awaiting
 // directly in Header) so it can be wrapped in <Suspense> -- the session
 // check shouldn't delay the rest of the shared layout from streaming.
-export async function AuthNav({ locale }: { locale: Locale }) {
+export async function AuthNav({
+  locale,
+  variant = "desktop",
+}: {
+  locale: Locale;
+  variant?: "desktop" | "mobile";
+}) {
   const user = await getAuthUser();
   const t = (key: string) => translate(locale, key);
 
   if (user) {
+    const supabase = await createClient();
+    // Both are RLS-scoped to this user's own rows -- neither can ever
+    // return another account's SportFo ID or profile. A missing
+    // sportfo_users row (should be rare: ensure_sportfo_id() runs at every
+    // login, see AuthFlow) never blocks rendering the rest of the header.
+    const [sportfoId, { data: profile }] = await Promise.all([
+      getOwnSportfoId(supabase, user.id),
+      lookupOwnAthleteProfile(supabase, user.id),
+    ]);
+
+    if (sportfoId) {
+      return (
+        <AccountMenu
+          sportfoId={sportfoId}
+          roleLabel={profile?.profile_status === "submitted" ? t("account.roleAthlete") : null}
+          myProfileHref="/athlete/register"
+          myProfileLabel={t("nav.athleteRegistration")}
+          activeAsLabel={t("account.activeAs")}
+          sportfoIdLabel={t("account.sportfoId")}
+          activeAccountLabel={t("account.activeAccount")}
+          locale={locale}
+          variant={variant}
+        />
+      );
+    }
+
+    // Fallback for the rare case a SportFo ID genuinely isn't available yet
+    // (e.g. this exact request raced ensure_sportfo_id() at login) -- the
+    // account is still fully authenticated, so navigation must not break.
     return (
       <>
         <Link href="/athlete/register" className={navLinkClassName}>

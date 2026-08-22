@@ -24,6 +24,13 @@ const hi: Dictionary = {
   language: {
     selectorLabel: "भाषा चुनें",
   },
+  account: {
+    sportfoId: "SportFo ID",
+    activeAs: "इस रूप में सक्रिय",
+    myAccount: "मेरा खाता",
+    activeAccount: "सक्रिय खाता",
+    roleAthlete: "एथलीट",
+  },
   home: {
     hero: {
       title: "भारत का संपूर्ण खेल पारिस्थितिकी तंत्र",
@@ -162,6 +169,11 @@ const hi: Dictionary = {
     errorInvalidOtp: "6 अंकों का कोड दर्ज करें।",
     errorOtpWrong: "यह कोड सही नहीं है। दोबारा जाँचें और फिर से प्रयास करें।",
     errorSessionCheckFailed: "हम आपके सत्र की पुष्टि नहीं कर पाए। कृपया फिर से प्रयास करें।",
+    mobileOrSportfoIdLabel: "मोबाइल नंबर या SportFo ID",
+    mobileOrSportfoIdPlaceholder: "मोबाइल नंबर या SportFo ID",
+    sportfoIdFoundNeedsPhone:
+      "हमें यह SportFo ID मिली। SportFo ID से साइन इन तभी उपलब्ध होगा जब फ़ोन सत्यापन पूरी तरह सक्षम हो जाए — अभी के लिए कृपया अपने मोबाइल नंबर से साइन इन करें।",
+    sportfoIdNotFound: "हमें वह SportFo ID नहीं मिली। कृपया जाँच लें, या अपने मोबाइल नंबर से साइन इन करें।",
   },
   register: {
     pageTitle: "अपनी एथलीट प्रोफ़ाइल बनाएं",
@@ -247,6 +259,9 @@ const hi: Dictionary = {
     success: {
       title: "आप तैयार हैं",
       message: "आपकी एथलीट प्रोफ़ाइल सफलतापूर्वक बना दी गई है।",
+      welcome: "SportFo में आपका स्वागत है",
+      yourSportfoId: "आपकी SportFo ID",
+      sportfoIdHelper: "इस ID को संभाल कर रखें। आप इसका उपयोग अपना SportFo खाता पहचानने के लिए कर सकते हैं।",
       backHome: "होम पर वापस जाएं",
       viewProfile: "मेरी प्रोफ़ाइल देखें",
     },

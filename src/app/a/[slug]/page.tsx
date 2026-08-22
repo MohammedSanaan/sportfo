@@ -72,6 +72,7 @@ export default async function PublicAthleteProfilePage({
           country={profile.country}
           actions={<ShareProfileButton />}
           bannerImage="/images/profile-banner-track.jpg"
+          sportfoId={profile.sportfo_id}
           locale={locale}
         />
 

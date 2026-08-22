@@ -15,6 +15,7 @@ import { ProfileActions } from "@/features/athlete-profile/components/ProfileAct
 import { ProfileVisibilityCard } from "@/features/athlete-profile/components/ProfileVisibilityCard";
 import { ProfileStrengthCard } from "@/features/athlete-profile/components/ProfileStrengthCard";
 import { getServerTranslations } from "@/i18n/server";
+import { getOwnSportfoId } from "@/lib/sportfo-id/server";
 
 export const metadata: Metadata = {
   title: "My Athlete Profile | SportFo",
@@ -37,6 +38,7 @@ export default async function AthleteProfilePage() {
   // client-supplied id, and never a service-role client.
   const { draft, error: loadFailed } = await loadAthleteDraft(supabase, user.id);
   const { locale, t } = await getServerTranslations();
+  const sportfoId = await getOwnSportfoId(supabase, user.id);
 
   if (loadFailed) {
     return (
@@ -82,6 +84,7 @@ export default async function AthleteProfilePage() {
             city={profile.city}
             country={profile.country}
             actions={<ProfileActions locale={locale} />}
+            sportfoId={sportfoId}
             locale={locale}
           />
 

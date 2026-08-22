@@ -29,7 +29,7 @@ export function PhoneNumberField({
 
   return (
     <FieldShell
-      label={t("auth.mobileNumberLabel")}
+      label={t("auth.mobileOrSportfoIdLabel")}
       htmlFor="phone-number"
       error={error}
       helperText={error ? undefined : resolvedHelperText}
@@ -55,16 +55,18 @@ export function PhoneNumberField({
         </select>
         <input
           id="phone-number"
-          type="tel"
-          inputMode="tel"
-          autoComplete="tel-national"
-          placeholder={t("auth.phonePlaceholder")}
+          type="text"
+          inputMode="text"
+          autoComplete="off"
+          placeholder={t("auth.mobileOrSportfoIdPlaceholder")}
           value={localNumber}
           disabled={disabled}
           aria-invalid={error ? true : undefined}
           aria-describedby={error ? "phone-number-error" : undefined}
           onChange={(e) =>
-            onLocalNumberChange(e.target.value.replace(/\D/g, "").slice(0, 14))
+            // Digits for a phone number, or letters+digits for a SportFo ID
+            // (SF482193) -- AuthFlow decides which this is on submit.
+            onLocalNumberChange(e.target.value.replace(/[^0-9A-Za-z]/g, "").slice(0, 14))
           }
           className={cn(
             "h-12 w-full rounded-xl border bg-surface px-3.5 text-sm text-ink-900 placeholder:text-ink-400",
