@@ -51,6 +51,35 @@ const en = {
       explore: "Explore SportFo",
       join: "Join SportFo",
     },
+    about: {
+      eyebrow: "About SportFo",
+      title: "Empowering India's Sports Community",
+      intro: "Millions train hard. Most never get seen.",
+      description: "SportFo is India's first unified platform connecting athletes, parents, coaches, academies, colleges, scouts, sponsors, CSR teams and everyone who powers Indian sports, all in one verified ecosystem.",
+      challenge: "We exist to solve India's biggest sports challenge, so every child who trains hard gets a real path forward.",
+      change: "SportFo changes that.",
+      exists: "If it exists in sports, it exists on SportFo.",
+      exploreSports: "Explore Sports",
+      joinSportfo: "Join SportFo",
+    },
+    vision: {
+      title: "Vision",
+      description: "To build India's most inclusive sports ecosystem where [[no talent is ever left behind]] — and [[every member of the sports community]] can connect, grow, earn, and succeed on one unified, transparent platform.",
+    },
+    mission: {
+      title: "Mission",
+      description: "To identify grassroots talent across India, support them with the right opportunities, resources, and guidance, and create a transparent stage where their skill is truly seen — ensuring every athlete grows according to their dedication, potential, and passion.",
+    },
+    bridge: {
+      line1: "Talent exists everywhere.",
+      line2: "Opportunity does not.",
+      line3: "SPORTFO bridges this gap.",
+    },
+    promise: {
+      find: "If an athlete has talent, SportFo will find them.",
+      support: "If an athlete has potential, SportFo will support them.",
+      reward: "If an athlete works hard, SportFo will reward them.",
+    },
     whoWeServe: {
       heading: "Who We Serve",
       subheading: "One platform, many roles – one connected sports economy.",

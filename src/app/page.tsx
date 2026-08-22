@@ -1,5 +1,7 @@
 import { lexend } from "@/features/homepage/lexend";
 import { EcosystemHero } from "@/features/homepage/components/EcosystemHero";
+import { AboutSportFoSection } from "@/features/homepage/components/AboutSportFoSection";
+import { VisionMissionSection } from "@/features/homepage/components/VisionMissionSection";
 import { WhoWeServeSection } from "@/features/homepage/components/WhoWeServeSection";
 import { GapSection } from "@/features/homepage/components/GapSection";
 import { HowSportFoWorksSection } from "@/features/homepage/components/HowSportFoWorksSection";
@@ -17,6 +19,8 @@ export default async function Home() {
   return (
     <div className={`${lexend.variable} flex flex-1 flex-col font-stitch text-stitch-text`}>
       <EcosystemHero t={t} />
+      <AboutSportFoSection t={t} />
+      <VisionMissionSection t={t} />
       <WhoWeServeSection t={t} />
       <GapSection t={t} />
       <HowSportFoWorksSection t={t} />
