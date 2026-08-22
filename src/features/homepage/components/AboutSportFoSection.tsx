@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import type { TFunc } from "@/i18n/dictionary";
 
 // Premium 2-column layout: copy left, a single framed local sports photo
@@ -32,21 +31,6 @@ export function AboutSportFoSection({ t }: { t: TFunc }) {
             <p className="text-base leading-relaxed font-semibold text-stitch-navy italic">
               {t("home.about.exists")}
             </p>
-          </div>
-
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
-            <Link
-              href="#sports"
-              className="inline-flex h-13 w-full items-center justify-center rounded border border-stitch-navy px-8 text-base font-bold text-stitch-navy transition-colors duration-300 hover:bg-stitch-navy hover:text-white sm:w-auto"
-            >
-              {t("home.about.exploreSports")}
-            </Link>
-            <Link
-              href="/auth"
-              className="inline-flex h-13 w-full items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover sm:w-auto"
-            >
-              {t("home.about.joinSportfo")}
-            </Link>
           </div>
         </div>
 
