@@ -8,7 +8,10 @@ import type { TFunc } from "@/i18n/dictionary";
 // integration report for why.
 export function EcosystemHero({ t }: { t: TFunc }) {
   return (
-    <section className="relative flex min-h-[520px] w-full flex-col items-center justify-between overflow-hidden bg-stitch-navy px-4 py-16 sm:min-h-[600px] sm:py-20">
+    <section
+      id="home"
+      className="relative flex min-h-[520px] w-full flex-col items-center justify-between overflow-hidden bg-stitch-navy px-4 py-16 sm:min-h-[600px] sm:py-20"
+    >
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-track.jpg"

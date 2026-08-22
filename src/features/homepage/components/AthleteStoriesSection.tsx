@@ -15,7 +15,7 @@ export function AthleteStoriesSection({ t }: { t: TFunc }) {
   ];
 
   return (
-    <section className="bg-stitch-gray py-12">
+    <section id="stories" className="scroll-mt-16 bg-stitch-gray py-12">
       <div className="mx-auto max-w-7xl px-4">
         <h2 className="mb-8 text-center text-2xl font-bold text-stitch-navy">
           {t("home.stories.heading")}

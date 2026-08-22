@@ -1,6 +1,15 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
+
+// Lets nav items rendered as children (see HeaderNav.tsx) close the panel
+// after handling their own click, without this toggle needing to know
+// anything about what it's rendering.
+const MobileMenuCloseContext = createContext<() => void>(() => {});
+
+export function useCloseMobileMenu() {
+  return useContext(MobileMenuCloseContext);
+}
 
 function MenuIcon() {
   return (
@@ -53,7 +62,9 @@ export function MobileMenuToggle({ children }: { children: ReactNode }) {
           id="mobile-nav-panel"
           className="absolute inset-x-0 top-16 z-30 flex flex-col gap-1 border-b border-border-default bg-surface px-4 pb-6 pt-3 shadow-lg"
         >
-          {children}
+          <MobileMenuCloseContext.Provider value={() => setOpen(false)}>
+            {children}
+          </MobileMenuCloseContext.Provider>
         </div>
       )}
     </div>

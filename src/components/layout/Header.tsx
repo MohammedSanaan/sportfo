@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { Container } from "@/components/ui/Container";
 import { AuthNav } from "./AuthNav";
 import { MobileMenuToggle } from "./MobileMenuToggle";
+import { HeaderNavDesktop, HeaderNavMobile } from "./HeaderNav";
 import { LanguageSelector } from "./LanguageSelector";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
@@ -15,17 +16,12 @@ function AuthNavFallback() {
   );
 }
 
-const navLinkClassName =
-  "flex min-h-11 items-center rounded-md px-3 text-sm font-medium text-ink-600 transition-colors hover:bg-surface-muted hover:text-ink-900";
-const mobileNavLinkClassName =
-  "flex min-h-11 items-center rounded-lg px-3 text-base font-medium text-ink-700 hover:bg-surface-muted";
-
-// Section-anchor navigation for the homepage. "home" always goes to "/".
-// The rest point at anchors on the homepage -- "who-we-serve" is a real,
-// existing section id; the others don't have a matching section yet, so
-// they're left as prepared (currently inert) anchors rather than fake
-// pages, per the task's explicit "leave prepared for the future without
-// breaking routing" instruction.
+// Section-anchor navigation for the homepage. "home" scrolls to the hero
+// (id="home") while on "/", or goes to "/" from any other page. "about"
+// and "community" are real, existing section ids. "sports", "opportunity",
+// and "contact" don't have a matching section yet, so they're left as
+// prepared (currently inert) anchors rather than fake pages -- HeaderNav's
+// scroll-spy simply never observes them until a matching id exists.
 const NAV_ITEMS = [
   { key: "home", href: "/" },
   { key: "about", href: "#about" },
@@ -37,6 +33,11 @@ const NAV_ITEMS = [
 ] as const;
 
 export function Header({ locale }: { locale: Locale }) {
+  const navItems = NAV_ITEMS.map((item) => ({
+    ...item,
+    label: translate(locale, `navigation.${item.key}`),
+  }));
+
   return (
     <header className="sticky top-0 z-40 border-b border-border-default bg-white/95 backdrop-blur">
       <Container className="relative flex h-16 items-center justify-between">
@@ -50,13 +51,7 @@ export function Header({ locale }: { locale: Locale }) {
           SportFo
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.key} href={item.href} className={navLinkClassName}>
-              {translate(locale, `navigation.${item.key}`)}
-            </Link>
-          ))}
-        </nav>
+        <HeaderNavDesktop items={navItems} />
 
         <div className="flex items-center gap-1">
           <Suspense fallback={<AuthNavFallback />}>
@@ -67,11 +62,7 @@ export function Header({ locale }: { locale: Locale }) {
           <LanguageSelector className="hidden lg:flex" />
 
           <MobileMenuToggle>
-            {NAV_ITEMS.map((item) => (
-              <Link key={item.key} href={item.href} className={mobileNavLinkClassName}>
-                {translate(locale, `navigation.${item.key}`)}
-              </Link>
-            ))}
+            <HeaderNavMobile items={navItems} />
             <div className="mt-2 border-t border-border-default pt-3">
               <Suspense fallback={null}>
                 <AuthNav locale={locale} variant="mobile" />
