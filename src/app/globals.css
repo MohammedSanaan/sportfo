@@ -190,3 +190,23 @@ body {
     transform: none;
   }
 }
+
+/* Subtle image zoom on Community card hover (see WhoWeServeSection.tsx).
+   Kept as a plain rule off the existing .stitch-card-lift:hover state --
+   the same stacked Tailwind arbitrary-variant approach
+   (motion-safe:group-hover:scale-[...]) silently produced no CSS rule at
+   all here, the same class of Tailwind/transform fragility that led to
+   .stitch-card-lift itself being extracted out of Tailwind utilities. */
+.stitch-card-image {
+  transition: transform 300ms ease-out;
+}
+
+.stitch-card-lift:hover .stitch-card-image {
+  transform: scale(1.03);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stitch-card-lift:hover .stitch-card-image {
+    transform: none;
+  }
+}

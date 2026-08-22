@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { TFunc } from "@/i18n/dictionary";
 
 const ROLE_KEYS = [
@@ -15,118 +16,38 @@ const ROLE_KEYS = [
 // title-only rather than inventing new descriptive copy for it.
 const ROLE_KEYS_WITHOUT_DESCRIPTION = new Set<(typeof ROLE_KEYS)[number]>(["talentAnalytics"]);
 
-const ROLE_ICONS = [
-  "medal",
-  "users",
-  "pulse",
-  "camera",
-  "briefcase",
-  "calendar",
-  "building",
-  "chart",
-] as const;
-
-function RoleIcon({ icon }: { icon: (typeof ROLE_ICONS)[number] }) {
-  if (icon === "medal") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="12" cy="15" r="5" strokeWidth="2" />
-        <path
-          d="M8.5 13.5L6 21l6-3 6 3-2.5-7.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-        />
-      </svg>
-    );
-  }
-  if (icon === "users") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="9" cy="8" r="3" strokeWidth="2" />
-        <path
-          d="M4 19c0-3 2.5-5 5-5s5 2 5 5M15 14c2.2.4 4 2.2 4 5M16 8a3 3 0 10-1-5.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-        />
-      </svg>
-    );
-  }
-  if (icon === "pulse") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M3 12h4l2-7 4 14 2-7h6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-        />
-      </svg>
-    );
-  }
-  if (icon === "camera") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path
-          d="M4 8h3l1.5-2h7L17 8h3a1 1 0 011 1v9a1 1 0 01-1 1H4a1 1 0 01-1-1V9a1 1 0 011-1z"
-          strokeLinejoin="round"
-          strokeWidth="2"
-        />
-        <circle cx="12" cy="13" r="3.5" strokeWidth="2" />
-      </svg>
-    );
-  }
-  if (icon === "briefcase") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="3" y="8" width="18" height="12" rx="2" strokeWidth="2" />
-        <path d="M8 8V6a2 2 0 012-2h4a2 2 0 012 2v2M3 13h18" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (icon === "calendar") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="4" y="5" width="16" height="16" rx="2" strokeWidth="2" />
-        <path d="M8 3v4M16 3v4M4 10h16" strokeLinecap="round" strokeWidth="2" />
-      </svg>
-    );
-  }
-  if (icon === "building") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M4 21V9l8-5 8 5v12" strokeLinejoin="round" strokeWidth="2" />
-        <path d="M9 21v-6h6v6M4 21h16" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-      </svg>
-    );
-  }
-  return (
-    <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M4 20V10M10 20V4M16 20v-7M22 20H2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
+// Licensed local stock already in public/images/** (see Hero.tsx in
+// features/landing for the source/license note). Each of the 8 cards gets
+// its own distinct image -- reusing the pre-icon-redesign mapping for the
+// 5 roles that already had one (athletes/academies/experts/media/
+// management), picking one of the old duplicate "Event & Operations
+// Staff" pair's two images for the now-single entry, freeing up the other
+// for Sponsors & CSR, and giving the new Talent Discovery & Analytics
+// category the one remaining not-yet-used asset.
+const ROLE_IMAGES: Record<(typeof ROLE_KEYS)[number], string> = {
+  athletes: "/images/carousel/athletics.jpg",
+  academiesCoaches: "/images/carousel/basketball.jpg",
+  performanceExperts: "/images/carousel/tennis.jpg",
+  mediaCreators: "/images/carousel/swimming.jpg",
+  managementLegal: "/images/carousel/cricket.jpg",
+  eventOperations: "/images/carousel/football.jpg",
+  sponsorsCsr: "/images/profile-banner-track.jpg",
+  talentAnalytics: "/images/hero-track.jpg",
+};
 
 // Icon-led "sports ecosystem" overview -- reuses GapSection/
 // HowSportFoWorksSection's eyebrow-pill/heading/subtitle rhythm and the
 // same stitch-card-lift + orange-top-accent card language as every other
-// homepage section, just with an icon badge in place of a topping photo.
-// Anchor id is "community" (not "who-we-serve") since Header's nav item
-// already points at #community.
+// homepage section. Anchor id is "community" (not "who-we-serve") since
+// Header's nav item already points at #community.
 export function WhoWeServeSection({ t }: { t: TFunc }) {
-  const roles = ROLE_KEYS.map((key, i) => ({
+  const roles = ROLE_KEYS.map((key) => ({
     key,
     title: t(`home.community.roles.${key}.title`),
     description: ROLE_KEYS_WITHOUT_DESCRIPTION.has(key)
       ? undefined
       : t(`home.community.roles.${key}.description`),
-    icon: ROLE_ICONS[i],
+    image: ROLE_IMAGES[key],
   }));
 
   return (
@@ -148,17 +69,25 @@ export function WhoWeServeSection({ t }: { t: TFunc }) {
           {roles.map((role) => (
             <div
               key={role.key}
-              className="stitch-card-lift group flex h-full flex-col items-center rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white p-6 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover"
+              className="stitch-card-lift group flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-full bg-stitch-orange/10 text-stitch-orange transition-colors duration-300 ease-out group-hover:bg-stitch-orange/20">
-                <RoleIcon icon={role.icon} />
-              </span>
+              <div className="relative aspect-video w-full overflow-hidden">
+                <Image
+                  src={role.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
+                  className="stitch-card-image object-cover"
+                />
+              </div>
 
-              <h3 className="mt-4 text-base font-bold text-stitch-navy">{role.title}</h3>
+              <div className="flex flex-1 flex-col p-6">
+                <h3 className="text-base font-bold text-stitch-navy">{role.title}</h3>
 
-              {role.description ? (
-                <p className="mt-2 text-sm leading-relaxed text-gray-600">{role.description}</p>
-              ) : null}
+                {role.description ? (
+                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{role.description}</p>
+                ) : null}
+              </div>
             </div>
           ))}
         </div>
