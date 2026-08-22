@@ -80,50 +80,6 @@ const en = {
       support: "If an athlete has potential, SportFo will support them.",
       reward: "If an athlete works hard, SportFo will reward them.",
     },
-    whoWeServe: {
-      heading: "Who We Serve",
-      subheading: "One platform, many roles – one connected sports economy.",
-      athletes: {
-        title: "Athletes",
-        description: "Players across all sports, including para athletes.",
-        cta: "Register Now",
-      },
-      academies: {
-        title: "Academies & Coaches",
-        description: "Training clubs and coaches.",
-        cta: "JOIN NOW",
-      },
-      experts: {
-        title: "Performance Experts",
-        description: "Physios, nutritionists, and trainers.",
-        cta: "JOIN NOW",
-      },
-      media: {
-        title: "Media & Creators",
-        description: "Photographers and content creators.",
-        cta: "JOIN NOW",
-      },
-      management: {
-        title: "Sports Management & Legal",
-        description: "Managers, agents or legal advisors.",
-        cta: "JOIN NOW",
-      },
-      operations1: {
-        title: "Event & Operations Staff",
-        description: "Managers, agents or legal advisors.",
-        cta: "JOIN NOW",
-      },
-      operations2: {
-        title: "Event & Operations Staff",
-        description: "Referees and event coordinators.",
-        cta: "JOIN NOW",
-      },
-      sponsors: {
-        title: "Sponsors & CSR",
-        description: "Brands and corporate sponsors.",
-        cta: "JOIN NOW",
-      },
-    },
     community: {
       eyebrow: "Community",
       title: "Who We Serve",
