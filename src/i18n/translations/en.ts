@@ -118,6 +118,59 @@ const en = {
         },
       },
     },
+    opportunities: {
+      eyebrow: "OPPORTUNITIES",
+      title: "Opportunities That Move You Forward",
+      subtitle: "Find your next opportunity in the sports ecosystem.",
+      events: {
+        title: "Events / Tournaments / Trials & Selections",
+        categories: "Football • Cricket • Athletics • Kabaddi • Basketball",
+        cta: "View Opportunities",
+      },
+      jobs: {
+        title: "Sports Jobs",
+        categories: "Coaches • Trainers • Physios • Academy Staff • Sports Management Roles",
+        postJob: "Post a Job",
+        viewAll: "View All Jobs",
+      },
+      courses: {
+        title: "Courses & Certifications",
+        description: "Academy programs, certifications, diplomas, sports degrees.",
+        cta: "Explore Courses",
+      },
+    },
+    platform: {
+      eyebrow: "SPORTFO ECOSYSTEM",
+      title: "Everything You Need in One Platform",
+      subtitle:
+        "One connected sports ecosystem for identity, discovery, opportunity, careers, and growth.",
+      features: {
+        verifiedIdentity: {
+          title: "Verified Sports Identity",
+          description: "Your official sports profile — achievements, videos, stats, certifications.",
+        },
+        discovery: {
+          title: "Discovery Engine",
+          description: "Get discovered by academies, colleges, scouts, and sponsors.",
+        },
+        academyCollege: {
+          title: "Academy & College Connect",
+          description: "Find the right training, education, and career pathway.",
+        },
+        eventsTrials: {
+          title: "Events & Trials",
+          description: "Register instantly. Track your selections. Get realtime updates.",
+        },
+        jobsMarketplace: {
+          title: "Sports Jobs Marketplace",
+          description: "Apply for roles. Hire talent. Build your sports career.",
+        },
+        sponsorshipCsr: {
+          title: "Sponsorship & CSR Matching",
+          description: "Connect with brands and foundations supporting sports.",
+        },
+      },
+    },
     gap: {
       eyebrow: "The Gap We're Closing",
       title: "Talent shouldn't depend on luck or location.",
