@@ -16,6 +16,8 @@ interface AccountMenuProps {
   roleLabel: string | null;
   myProfileHref: string;
   myProfileLabel: string;
+  discoverAthletesHref: string;
+  discoverAthletesLabel: string;
   activeAsLabel: string;
   sportfoIdLabel: string;
   activeAccountLabel: string;
@@ -43,6 +45,8 @@ export function AccountMenu({
   roleLabel,
   myProfileHref,
   myProfileLabel,
+  discoverAthletesHref,
+  discoverAthletesLabel,
   activeAsLabel,
   sportfoIdLabel,
   activeAccountLabel,
@@ -91,6 +95,12 @@ export function AccountMenu({
           )}
         </div>
         <Link
+          href={discoverAthletesHref}
+          className="flex min-h-11 items-center rounded-lg px-3 text-base font-medium text-ink-700 hover:bg-surface-muted"
+        >
+          {discoverAthletesLabel}
+        </Link>
+        <Link
           href={myProfileHref}
           className="flex min-h-11 items-center rounded-lg px-3 text-base font-medium text-ink-700 hover:bg-surface-muted"
         >
@@ -127,6 +137,14 @@ export function AccountMenu({
           role="menu"
           className="absolute right-0 z-50 mt-2 w-48 overflow-hidden rounded-xl border border-border-default bg-surface py-1 shadow-lg"
         >
+          <Link
+            href={discoverAthletesHref}
+            role="menuitem"
+            onClick={() => setOpen(false)}
+            className="block px-3.5 py-2 text-sm text-ink-700 transition-colors hover:bg-surface-muted"
+          >
+            {discoverAthletesLabel}
+          </Link>
           <Link
             href={myProfileHref}
             role="menuitem"

@@ -37,7 +37,7 @@ export function WhoWeServeSection({ t }: { t: TFunc }) {
   }));
 
   return (
-    <section className="bg-stitch-gray px-4 py-12">
+    <section id="who-we-serve" className="scroll-mt-16 bg-stitch-gray px-4 py-12">
       <div className="mx-auto max-w-7xl">
         <div className="mb-10 text-center">
           <div className="mb-2 flex items-center justify-center gap-4">

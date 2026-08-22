@@ -14,6 +14,11 @@ const navLinkClassName =
 // Isolated into its own async Server Component (rather than awaiting
 // directly in Header) so it can be wrapped in <Suspense> -- the session
 // check shouldn't delay the rest of the shared layout from streaming.
+//
+// "Discover Athletes" used to be its own standalone link in the main
+// header nav; now that the main nav is the Home/About/Community/... set,
+// it's preserved here instead (in the account area for signed-in users,
+// alongside Sign In/Join SportFo for guests) rather than being deleted.
 export async function AuthNav({
   locale,
   variant = "desktop",
@@ -42,6 +47,8 @@ export async function AuthNav({
           roleLabel={profile?.profile_status === "submitted" ? t("account.roleAthlete") : null}
           myProfileHref="/athlete/register"
           myProfileLabel={t("nav.athleteRegistration")}
+          discoverAthletesHref="/athletes"
+          discoverAthletesLabel={t("nav.discoverAthletes")}
           activeAsLabel={t("account.activeAs")}
           sportfoIdLabel={t("account.sportfoId")}
           activeAccountLabel={t("account.activeAccount")}
@@ -56,6 +63,9 @@ export async function AuthNav({
     // account is still fully authenticated, so navigation must not break.
     return (
       <>
+        <Link href="/athletes" className={navLinkClassName}>
+          {t("nav.discoverAthletes")}
+        </Link>
         <Link href="/athlete/register" className={navLinkClassName}>
           {t("nav.athleteRegistration")}
         </Link>
@@ -66,6 +76,9 @@ export async function AuthNav({
 
   return (
     <>
+      <Link href="/athletes" className={navLinkClassName}>
+        {t("nav.discoverAthletes")}
+      </Link>
       <Link href="/auth" className={navLinkClassName}>
         {t("nav.signIn")}
       </Link>

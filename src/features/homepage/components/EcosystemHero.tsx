@@ -21,24 +21,33 @@ export function EcosystemHero({ t }: { t: TFunc }) {
         <div className="stitch-hero-scrim absolute inset-0" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-4xl px-2 text-center">
-        <h1 className="text-3xl leading-tight font-bold text-white drop-shadow-md sm:text-4xl md:text-5xl">
+      <div className="relative z-10 mx-auto max-w-5xl px-2 text-center">
+        <p className="text-xs font-semibold tracking-[0.18em] text-white/80 uppercase drop-shadow-md sm:text-sm">
+          {t("home.hero.eyebrow")}
+        </p>
+        <h1 className="mt-3 text-3xl leading-tight font-bold whitespace-pre-line text-white drop-shadow-md sm:mt-4 sm:text-4xl md:text-5xl lg:text-6xl">
           {t("home.hero.title")}
         </h1>
-        <h2 className="mt-2 text-xl leading-snug font-semibold text-white drop-shadow-md sm:mt-4 sm:text-2xl md:text-3xl">
-          {t("home.hero.subtitle")}
+        <h2 className="mt-3 text-lg leading-snug font-semibold text-white drop-shadow-md sm:mt-4 sm:text-xl md:text-2xl">
+          {t("home.hero.secondaryTitle")}
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-base font-medium text-white drop-shadow-md sm:mt-6 sm:text-lg md:text-xl">
+        <p className="mx-auto mt-4 max-w-2xl text-base font-medium text-white drop-shadow-md sm:mt-6 sm:text-lg">
           {t("home.hero.description")}
         </p>
       </div>
 
-      <div className="relative z-10 mt-10 sm:mt-12">
+      <div className="relative z-10 mt-10 flex w-full max-w-md flex-col items-center gap-3 sm:mt-12 sm:w-auto sm:flex-row sm:gap-4">
+        <Link
+          href="#who-we-serve"
+          className="inline-flex h-13 w-full items-center justify-center rounded border border-white/50 px-8 text-base font-bold text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
+        >
+          {t("home.hero.explore")}
+        </Link>
         <Link
           href="/auth"
-          className="inline-flex h-13 items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy"
+          className="inline-flex h-13 w-full items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
         >
-          {t("home.hero.cta")}
+          {t("home.hero.join")}
         </Link>
       </div>
     </section>

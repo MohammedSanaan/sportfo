@@ -25,6 +25,15 @@ const en = {
   language: {
     selectorLabel: "Select language",
   },
+  navigation: {
+    home: "Home",
+    about: "About",
+    community: "Community",
+    sports: "Sports",
+    opportunity: "Opportunity",
+    stories: "Stories",
+    contact: "Contact",
+  },
   account: {
     sportfoId: "SportFo ID",
     activeAs: "Active as",
@@ -34,11 +43,13 @@ const en = {
   },
   home: {
     hero: {
-      title: "India's Complete Sports Ecosystem",
-      subtitle: "Where Talent Meets Opportunity",
+      eyebrow: "India's No 1 Unified Sports Platform",
+      title: "Building India's Sporting Future\nFrom Grassroots to Glory",
+      secondaryTitle: "Where every effort finds its stage",
       description:
-        "Connecting Athletes, Academies, Coaches, Experts, Creators, Sponsors & CSR Teams — All in One Platform",
-      cta: "Join as Sportsman / Athlete",
+        "Uniting Sports Community Through Technology, Transparency & Opportunity",
+      explore: "Explore SportFo",
+      join: "Join SportFo",
     },
     whoWeServe: {
       heading: "Who We Serve",

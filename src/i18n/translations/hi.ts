@@ -24,6 +24,15 @@ const hi: Dictionary = {
   language: {
     selectorLabel: "भाषा चुनें",
   },
+  navigation: {
+    home: "होम",
+    about: "हमारे बारे में",
+    community: "समुदाय",
+    sports: "खेल",
+    opportunity: "अवसर",
+    stories: "कहानियाँ",
+    contact: "संपर्क",
+  },
   account: {
     sportfoId: "SportFo ID",
     activeAs: "इस रूप में सक्रिय",
@@ -33,11 +42,12 @@ const hi: Dictionary = {
   },
   home: {
     hero: {
-      title: "भारत का संपूर्ण खेल पारिस्थितिकी तंत्र",
-      subtitle: "जहाँ प्रतिभा मिलती है अवसर से",
-      description:
-        "एथलीट, अकादमियों, कोचों, विशेषज्ञों, क्रिएटर्स, प्रायोजकों और CSR टीमों को एक ही मंच पर जोड़ना",
-      cta: "खिलाड़ी / एथलीट के रूप में जुड़ें",
+      eyebrow: "भारत का नंबर 1 एकीकृत खेल मंच",
+      title: "भारत के खेल भविष्य का निर्माण\nजमीनी स्तर से गौरव तक",
+      secondaryTitle: "जहाँ हर प्रयास को मिलता है अपना मंच",
+      description: "तकनीक, पारदर्शिता और अवसर के माध्यम से खेल समुदाय को जोड़ना",
+      explore: "SportFo को एक्सप्लोर करें",
+      join: "SportFo से जुड़ें",
     },
     whoWeServe: {
       heading: "हम किनकी सेवा करते हैं",
