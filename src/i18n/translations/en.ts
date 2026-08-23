@@ -3,7 +3,6 @@
 // key is missing anywhere else.
 const en = {
   common: {
-    loading: "Loading...",
     pleasePrefix: "Please",
   },
   nav: {
@@ -11,7 +10,6 @@ const en = {
     signIn: "Sign In",
     joinSportfo: "Join SportFo",
     athleteRegistration: "Athlete Registration",
-    myProfile: "My Profile",
     logout: "Logout",
     loggingOut: "Logging out...",
   },
@@ -37,7 +35,6 @@ const en = {
   account: {
     sportfoId: "SportFo ID",
     activeAs: "Active as",
-    myAccount: "My account",
     activeAccount: "Active account",
     roleAthlete: "Athlete",
   },
@@ -59,8 +56,6 @@ const en = {
       challenge: "We exist to solve India's biggest sports challenge, so every child who trains hard gets a real path forward.",
       change: "SportFo changes that.",
       exists: "If it exists in sports, it exists on SportFo.",
-      exploreSports: "Explore Sports",
-      joinSportfo: "Join SportFo",
     },
     vision: {
       title: "Vision",
@@ -221,10 +216,15 @@ const en = {
     },
     stories: {
       heading: "Inspiring Athlete Stories",
+      subheading: "Real journeys from athletes building their future with SportFo.",
       story1Title: "From Gully Cricket to State Trials",
+      story1Subtitle: "Athlete Journey",
       story2Title: "Two Setbacks, No Comeback",
-      story3Quote:
-        "“My daughter was too shy, join a team, Six months later, she's leading warm-ups.”",
+      story2Subtitle: "Athlete Spotlight",
+      story3Title: "Breaking Barriers, One Match at a Time",
+      story3Subtitle: "Athlete Story",
+      story4Title: "Discipline Behind Every Practice",
+      story4Subtitle: "Achievement",
     },
   },
   auth: {
@@ -235,11 +235,9 @@ const en = {
     panelTitle: "Your sporting career deserves a professional home.",
     panelDescription:
       "Build your profile, showcase your achievements, and share a link people can trust.",
-    mobileNumberLabel: "Mobile number",
     mobileHelperDemo: "We'll use this number for your athlete profile.",
     mobileHelperOtp: "We'll text a 6-digit code to this number.",
     countryCodeLabel: "Country code",
-    phonePlaceholder: "Mobile number",
     sendCode: "Send verification code",
     sendingCode: "Sending code...",
     continueLabel: "Continue",
@@ -274,7 +272,6 @@ const en = {
     stepSport: "Sport",
     stepAchievements: "Achievements",
     stepReview: "Review",
-    sessionExpired: "Your session has expired. Please sign in again.",
     uploadFailed: "Failed to upload document.",
     documentRemovedButSyncFailed:
       "Document removed, but we couldn't update our records. Please refresh and try again.",

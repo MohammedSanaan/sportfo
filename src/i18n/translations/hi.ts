@@ -2,7 +2,6 @@ import type { Dictionary } from "./en";
 
 const hi: Dictionary = {
   common: {
-    loading: "लोड हो रहा है...",
     pleasePrefix: "कृपया",
   },
   nav: {
@@ -10,7 +9,6 @@ const hi: Dictionary = {
     signIn: "साइन इन करें",
     joinSportfo: "SportFo से जुड़ें",
     athleteRegistration: "एथलीट पंजीकरण",
-    myProfile: "मेरी प्रोफ़ाइल",
     logout: "लॉगआउट",
     loggingOut: "लॉगआउट हो रहा है...",
   },
@@ -36,7 +34,6 @@ const hi: Dictionary = {
   account: {
     sportfoId: "SportFo ID",
     activeAs: "इस रूप में सक्रिय",
-    myAccount: "मेरा खाता",
     activeAccount: "सक्रिय खाता",
     roleAthlete: "एथलीट",
   },
@@ -57,8 +54,6 @@ const hi: Dictionary = {
       challenge: "हम भारत की सबसे बड़ी खेल चुनौती को हल करने के लिए मौजूद हैं, ताकि मेहनत करने वाले हर बच्चे को एक वास्तविक रास्ता मिल सके।",
       change: "SportFo यह बदल देता है।",
       exists: "अगर वह खेल में मौजूद है, तो वह SportFo पर भी मौजूद है।",
-      exploreSports: "खेल देखें",
-      joinSportfo: "SportFo से जुड़ें",
     },
     vision: {
       title: "विज़न",
@@ -218,10 +213,15 @@ const hi: Dictionary = {
     },
     stories: {
       heading: "प्रेरक एथलीट कहानियाँ",
+      subheading: "SportFo के साथ अपना भविष्य बनाने वाले एथलीटों की असली कहानियाँ।",
       story1Title: "गली क्रिकेट से राज्य ट्रायल तक",
+      story1Subtitle: "एथलीट यात्रा",
       story2Title: "दो असफलताएँ, कोई वापसी नहीं रुकी",
-      story3Quote:
-        "“मेरी बेटी बहुत शर्मीली थी, एक टीम से जुड़ी, छह महीने बाद वह वार्म-अप का नेतृत्व कर रही है।”",
+      story2Subtitle: "एथलीट स्पॉटलाइट",
+      story3Title: "हर मुकाबले में नई बाधाएँ पार",
+      story3Subtitle: "एथलीट कहानी",
+      story4Title: "हर अभ्यास के पीछे अनुशासन",
+      story4Subtitle: "उपलब्धि",
     },
   },
   auth: {
@@ -232,11 +232,9 @@ const hi: Dictionary = {
     panelTitle: "आपके खेल करियर को एक पेशेवर पहचान मिलनी चाहिए।",
     panelDescription:
       "अपनी प्रोफ़ाइल बनाएं, अपनी उपलब्धियाँ दिखाएं, और एक ऐसा लिंक साझा करें जिस पर लोग भरोसा करें।",
-    mobileNumberLabel: "मोबाइल नंबर",
     mobileHelperDemo: "हम इस नंबर का उपयोग आपकी एथलीट प्रोफ़ाइल के लिए करेंगे।",
     mobileHelperOtp: "हम इस नंबर पर 6 अंकों का कोड भेजेंगे।",
     countryCodeLabel: "देश कोड",
-    phonePlaceholder: "मोबाइल नंबर",
     sendCode: "सत्यापन कोड भेजें",
     sendingCode: "कोड भेजा जा रहा है...",
     continueLabel: "जारी रखें",
@@ -271,7 +269,6 @@ const hi: Dictionary = {
     stepSport: "खेल",
     stepAchievements: "उपलब्धियाँ",
     stepReview: "समीक्षा",
-    sessionExpired: "आपका सत्र समाप्त हो गया है। कृपया फिर से साइन इन करें।",
     uploadFailed: "दस्तावेज़ अपलोड करने में विफल।",
     documentRemovedButSyncFailed:
       "दस्तावेज़ हटा दिया गया, लेकिन हम अपने रिकॉर्ड अपडेट नहीं कर पाए। कृपया रीफ़्रेश करें और फिर से प्रयास करें।",

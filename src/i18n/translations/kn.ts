@@ -2,7 +2,6 @@ import type { Dictionary } from "./en";
 
 const kn: Dictionary = {
   common: {
-    loading: "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
     pleasePrefix: "ದಯವಿಟ್ಟು",
   },
   nav: {
@@ -10,7 +9,6 @@ const kn: Dictionary = {
     signIn: "ಸೈನ್ ಇನ್",
     joinSportfo: "SportFo ಗೆ ಸೇರಿ",
     athleteRegistration: "ಕ್ರೀಡಾಪಟು ನೋಂದಣಿ",
-    myProfile: "ನನ್ನ ಪ್ರೊಫೈಲ್",
     logout: "ಲಾಗ್ ಔಟ್",
     loggingOut: "ಲಾಗ್ ಔಟ್ ಆಗುತ್ತಿದೆ...",
   },
@@ -36,7 +34,6 @@ const kn: Dictionary = {
   account: {
     sportfoId: "SportFo ID",
     activeAs: "ಈ ರೂಪದಲ್ಲಿ ಸಕ್ರಿಯ",
-    myAccount: "ನನ್ನ ಖಾತೆ",
     activeAccount: "ಸಕ್ರಿಯ ಖಾತೆ",
     roleAthlete: "ಕ್ರೀಡಾಪಟು",
   },
@@ -59,8 +56,6 @@ const kn: Dictionary = {
       challenge: "ಪ್ರತಿಯೊಂದು ಕಠಿಣ ಪರಿಶ್ರಮ ಪಡುವ ಮಗುವಿಗೂ ನಿಜವಾದ ಮಾರ್ಗ ಸಿಗುವಂತೆ, ಭಾರತದ ಅತಿದೊಡ್ಡ ಕ್ರೀಡಾ ಸವಾಲನ್ನು ಪರಿಹರಿಸಲು ನಾವು ಇದ್ದೇವೆ.",
       change: "SportFo ಅದನ್ನು ಬದಲಾಯಿಸುತ್ತದೆ.",
       exists: "ಕ್ರೀಡೆಯಲ್ಲಿ ಅದು ಇದ್ದರೆ, ಅದು SportFo ನಲ್ಲಿಯೂ ಇರುತ್ತದೆ.",
-      exploreSports: "ಕ್ರೀಡೆಗಳನ್ನು ಅನ್ವೇಷಿಸಿ",
-      joinSportfo: "SportFo ಗೆ ಸೇರಿ",
     },
     vision: {
       title: "ದೂರದೃಷ್ಟಿ",
@@ -223,10 +218,15 @@ const kn: Dictionary = {
     },
     stories: {
       heading: "ಸ್ಫೂರ್ತಿದಾಯಕ ಕ್ರೀಡಾಪಟು ಕಥೆಗಳು",
+      subheading: "SportFo ಜೊತೆ ತಮ್ಮ ಭವಿಷ್ಯವನ್ನು ರೂಪಿಸುತ್ತಿರುವ ಕ್ರೀಡಾಪಟುಗಳ ನೈಜ ಪ್ರಯಾಣಗಳು.",
       story1Title: "ಗಲ್ಲಿ ಕ್ರಿಕೆಟ್‌ನಿಂದ ರಾಜ್ಯ ಟ್ರಯಲ್ಸ್‌ವರೆಗೆ",
+      story1Subtitle: "ಕ್ರೀಡಾಪಟು ಪಯಣ",
       story2Title: "ಎರಡು ಹಿನ್ನಡೆಗಳು, ಎಂದಿಗೂ ಹಿಂತಿರುಗಲಿಲ್ಲ",
-      story3Quote:
-        "“ನನ್ನ ಮಗಳು ತುಂಬಾ ನಾಚಿಕೆಪಡುತ್ತಿದ್ದಳು, ಒಂದು ತಂಡಕ್ಕೆ ಸೇರಿದಳು, ಆರು ತಿಂಗಳ ನಂತರ ಅವಳು ವಾರ್ಮ್-ಅಪ್ ಮುನ್ನಡೆಸುತ್ತಿದ್ದಾಳೆ.”",
+      story2Subtitle: "ಕ್ರೀಡಾಪಟು ಸ್ಪಾಟ್‌ಲೈಟ್",
+      story3Title: "ಪ್ರತಿ ಪಂದ್ಯದಲ್ಲೂ ಹೊಸ ಅಡೆತಡೆಗಳ ಮೀರುವಿಕೆ",
+      story3Subtitle: "ಕ್ರೀಡಾಪಟು ಕಥೆ",
+      story4Title: "ಪ್ರತಿ ಅಭ್ಯಾಸದ ಹಿಂದಿನ ಶಿಸ್ತು",
+      story4Subtitle: "ಸಾಧನೆ",
     },
   },
   auth: {
@@ -237,11 +237,9 @@ const kn: Dictionary = {
     panelTitle: "ನಿಮ್ಮ ಕ್ರೀಡಾ ವೃತ್ತಿಜೀವನಕ್ಕೆ ಒಂದು ವೃತ್ತಿಪರ ಮನೆ ಬೇಕು.",
     panelDescription:
       "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ನಿರ್ಮಿಸಿ, ನಿಮ್ಮ ಸಾಧನೆಗಳನ್ನು ಪ್ರದರ್ಶಿಸಿ ಮತ್ತು ಜನರು ನಂಬಬಹುದಾದ ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ.",
-    mobileNumberLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
     mobileHelperDemo: "ನಿಮ್ಮ ಕ್ರೀಡಾಪಟು ಪ್ರೊಫೈಲ್‌ಗಾಗಿ ನಾವು ಈ ಸಂಖ್ಯೆಯನ್ನು ಬಳಸುತ್ತೇವೆ.",
     mobileHelperOtp: "ಈ ಸಂಖ್ಯೆಗೆ ನಾವು 6 ಅಂಕಿಗಳ ಕೋಡ್ ಕಳುಹಿಸುತ್ತೇವೆ.",
     countryCodeLabel: "ದೇಶದ ಕೋಡ್",
-    phonePlaceholder: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
     sendCode: "ಪರಿಶೀಲನಾ ಕೋಡ್ ಕಳುಹಿಸಿ",
     sendingCode: "ಕೋಡ್ ಕಳುಹಿಸಲಾಗುತ್ತಿದೆ...",
     continueLabel: "ಮುಂದುವರಿಸಿ",
@@ -276,7 +274,6 @@ const kn: Dictionary = {
     stepSport: "ಕ್ರೀಡೆ",
     stepAchievements: "ಸಾಧನೆಗಳು",
     stepReview: "ಪರಿಶೀಲನೆ",
-    sessionExpired: "ನಿಮ್ಮ ಸೆಷನ್ ಅವಧಿ ಮುಗಿದಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
     uploadFailed: "ದಾಖಲೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ.",
     documentRemovedButSyncFailed:
       "ದಾಖಲೆ ತೆಗೆದುಹಾಕಲಾಗಿದೆ, ಆದರೆ ನಮ್ಮ ದಾಖಲೆಗಳನ್ನು ನವೀಕರಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ರಿಫ್ರೆಶ್ ಮಾಡಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",

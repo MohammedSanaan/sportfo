@@ -57,6 +57,30 @@
 
   --font-stitch: var(--font-lexend), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
+
+  /* Radix Accordion height animation (FAQ section) -- driven by the
+     --radix-accordion-content-height custom property Radix sets on the
+     content element itself. */
+  --animate-accordion-down: accordion-down 400ms ease-out;
+  --animate-accordion-up: accordion-up 350ms ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
 
 body {
@@ -208,5 +232,88 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .stitch-card-lift:hover .stitch-card-image {
     transform: none;
+  }
+}
+
+/* Who We Serve / Community carousel (see WhoWeServeSection.tsx). The role
+   list is duplicated once in the track so translate3d(-50%) always lands
+   exactly on the seam between the two copies -- a seamless loop regardless
+   of how many cards or how wide they render at a given breakpoint. */
+.who-we-serve-track {
+  animation: who-we-serve-scroll 42s linear infinite;
+  will-change: transform;
+}
+
+@keyframes who-we-serve-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.who-we-serve-scroller:hover .who-we-serve-track,
+.who-we-serve-scroller:focus-within .who-we-serve-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .who-we-serve-track {
+    animation: none;
+  }
+}
+
+/* Image-first normal state / expand-on-hover content area for Community
+   cards (see WhoWeServeSection.tsx). Each card has a fixed height set
+   inline, so flex-basis percentages on the image wrapper are all that's
+   needed to swing the image/content split from ~80/20 at rest to ~62/38
+   on hover -- the content div is flex-1 and simply fills whatever the
+   image wrapper cedes, so the card's own height never changes. */
+.stitch-card-media {
+  flex: 0 0 80%;
+  transition: flex-basis 450ms ease-out;
+}
+
+.stitch-card-lift:hover .stitch-card-media,
+.stitch-card-lift:focus-within .stitch-card-media {
+  flex-basis: 62%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stitch-card-media {
+    transition: none;
+  }
+}
+
+/* Description reveal on Community card hover -- reserves its box in
+   normal flow at all times (no height change, no layout shift) and only
+   animates opacity/transform. Hidden-until-hover applies solely on
+   hover-capable pointers; touch devices keep the description visible by
+   default since there is no hover to reveal it with. */
+.stitch-card-reveal {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 350ms ease-out,
+    transform 350ms ease-out;
+}
+
+@media (hover: hover) {
+  .stitch-card-reveal {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  .stitch-card-lift:hover .stitch-card-reveal,
+  .stitch-card-lift:focus-within .stitch-card-reveal {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stitch-card-reveal {
+    transition: none;
   }
 }

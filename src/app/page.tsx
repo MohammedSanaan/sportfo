@@ -10,6 +10,7 @@ import { HowSportFoWorksSection } from "@/features/homepage/components/HowSportF
 import { StatsSection } from "@/features/homepage/components/StatsSection";
 import { ParentsSection } from "@/features/homepage/components/ParentsSection";
 import { AthleteStoriesSection } from "@/features/homepage/components/AthleteStoriesSection";
+import { TextRevealFaqs } from "@/components/ui/text-reveal-faqs";
 import { getServerTranslations } from "@/i18n/server";
 
 // Landing page body, recreated from the supplied Stitch design (see the
@@ -31,6 +32,7 @@ export default async function Home() {
       <StatsSection t={t} />
       <ParentsSection t={t} />
       <AthleteStoriesSection t={t} />
+      <TextRevealFaqs />
     </div>
   );
 }

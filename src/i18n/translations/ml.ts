@@ -2,7 +2,6 @@ import type { Dictionary } from "./en";
 
 const ml: Dictionary = {
   common: {
-    loading: "ലോഡ് ചെയ്യുന്നു...",
     pleasePrefix: "ദയവായി",
   },
   nav: {
@@ -10,7 +9,6 @@ const ml: Dictionary = {
     signIn: "സൈൻ ഇൻ ചെയ്യുക",
     joinSportfo: "SportFo ൽ ചേരുക",
     athleteRegistration: "അത്‌ലറ്റ് രജിസ്ട്രേഷൻ",
-    myProfile: "എന്റെ പ്രൊഫൈൽ",
     logout: "ലോഗൗട്ട്",
     loggingOut: "ലോഗൗട്ട് ചെയ്യുന്നു...",
   },
@@ -36,7 +34,6 @@ const ml: Dictionary = {
   account: {
     sportfoId: "SportFo ID",
     activeAs: "സജീവം ഇപ്പോൾ",
-    myAccount: "എന്റെ അക്കൗണ്ട്",
     activeAccount: "സജീവ അക്കൗണ്ട്",
     roleAthlete: "അത്‌ലറ്റ്",
   },
@@ -59,8 +56,6 @@ const ml: Dictionary = {
       challenge: "കഠിനമായി പരിശീലനം നടത്തുന്ന ഓരോ കുട്ടിക്കും യഥാർത്ഥ വഴി ലഭിക്കാൻ, ഇന്ത്യയുടെ ഏറ്റവും വലിയ കായിക വെല്ലുവിളി പരിഹരിക്കാനാണ് ഞങ്ങൾ നിലകൊള്ളുന്നത്.",
       change: "SportFo അത് മാറ്റുന്നു.",
       exists: "കായികരംഗത്ത് അത് ഉണ്ടെങ്കിൽ, അത് SportFo-ലും ഉണ്ടാകും.",
-      exploreSports: "കായിക ഇനങ്ങൾ പര്യവേക്ഷണം ചെയ്യുക",
-      joinSportfo: "SportFo ൽ ചേരുക",
     },
     vision: {
       title: "ദർശനം",
@@ -220,10 +215,15 @@ const ml: Dictionary = {
     },
     stories: {
       heading: "പ്രചോദനാത്മക അത്‌ലറ്റ് കഥകൾ",
+      subheading: "SportFo യിലൂടെ തങ്ങളുടെ ഭാവി കെട്ടിപ്പടുക്കുന്ന അത്‌ലറ്റുകളുടെ യഥാർത്ഥ യാത്രകൾ.",
       story1Title: "ഗള്ളി ക്രിക്കറ്റിൽ നിന്ന് സ്റ്റേറ്റ് ട്രയൽസിലേക്ക്",
+      story1Subtitle: "അത്‌ലറ്റ് യാത്ര",
       story2Title: "രണ്ട് തിരിച്ചടികൾ, തിരിച്ചുവരവ് നിലച്ചില്ല",
-      story3Quote:
-        "“എന്റെ മകൾ വളരെ നാണക്കാരിയായിരുന്നു, ഒരു ടീമിൽ ചേർന്നു, ആറ് മാസത്തിനുശേഷം അവൾ വാം-അപ്പുകൾക്ക് നേതൃത്വം നൽകുന്നു.”",
+      story2Subtitle: "അത്‌ലറ്റ് സ്പോട്ട്‌ലൈറ്റ്",
+      story3Title: "ഓരോ മത്സരത്തിലും തടസ്സങ്ങൾ മറികടക്കുന്നു",
+      story3Subtitle: "അത്‌ലറ്റ് കഥ",
+      story4Title: "ഓരോ പരിശീലനത്തിനും പിന്നിലെ അച്ചടക്കം",
+      story4Subtitle: "നേട്ടം",
     },
   },
   auth: {
@@ -234,11 +234,9 @@ const ml: Dictionary = {
     panelTitle: "നിങ്ങളുടെ കായിക കരിയറിന് ഒരു പ്രൊഫഷണൽ ഇടം അർഹതയുണ്ട്.",
     panelDescription:
       "നിങ്ങളുടെ പ്രൊഫൈൽ നിർമ്മിക്കുക, നിങ്ങളുടെ നേട്ടങ്ങൾ പ്രദർശിപ്പിക്കുക, ആളുകൾക്ക് വിശ്വസിക്കാവുന്ന ഒരു ലിങ്ക് പങ്കിടുക.",
-    mobileNumberLabel: "മൊബൈൽ നമ്പർ",
     mobileHelperDemo: "നിങ്ങളുടെ അത്‌ലറ്റ് പ്രൊഫൈലിനായി ഞങ്ങൾ ഈ നമ്പർ ഉപയോഗിക്കും.",
     mobileHelperOtp: "ഈ നമ്പറിലേക്ക് ഞങ്ങൾ 6 അക്ക കോഡ് അയയ്ക്കും.",
     countryCodeLabel: "രാജ്യ കോഡ്",
-    phonePlaceholder: "മൊബൈൽ നമ്പർ",
     sendCode: "വെരിഫിക്കേഷൻ കോഡ് അയയ്ക്കുക",
     sendingCode: "കോഡ് അയയ്ക്കുന്നു...",
     continueLabel: "തുടരുക",
@@ -273,7 +271,6 @@ const ml: Dictionary = {
     stepSport: "കായികം",
     stepAchievements: "നേട്ടങ്ങൾ",
     stepReview: "അവലോകനം",
-    sessionExpired: "നിങ്ങളുടെ സെഷൻ കാലഹരണപ്പെട്ടു. ദയവായി വീണ്ടും സൈൻ ഇൻ ചെയ്യുക.",
     uploadFailed: "രേഖ അപ്‌ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.",
     documentRemovedButSyncFailed:
       "രേഖ നീക്കം ചെയ്തു, പക്ഷേ ഞങ്ങളുടെ റെക്കോർഡുകൾ അപ്‌ഡേറ്റ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി പുതുക്കി വീണ്ടും ശ്രമിക്കുക.",

@@ -64,28 +64,34 @@ export function WhoWeServeSection({ t }: { t: TFunc }) {
         <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-gray-600">
           {t("home.community.subtitle")}
         </p>
+      </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
-          {roles.map((role) => (
+      <div className="who-we-serve-scroller relative mx-auto mt-12 w-full max-w-[1600px] overflow-hidden px-4 sm:px-8">
+        <div className="who-we-serve-track flex w-max gap-6 text-center">
+          {[...roles, ...roles].map((role, index) => (
             <div
-              key={role.key}
-              className="stitch-card-lift group flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover"
+              key={`${role.key}-${index < roles.length ? "a" : "b"}`}
+              tabIndex={index < roles.length ? 0 : -1}
+              aria-hidden={index >= roles.length ? true : undefined}
+              className="stitch-card-lift relative flex h-[372px] w-[280px] shrink-0 flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] outline-none transition-colors duration-300 hover:border-t-stitch-orange-hover focus-visible:ring-2 focus-visible:ring-stitch-orange focus-visible:ring-offset-2 sm:w-[300px]"
             >
-              <div className="relative aspect-video w-full overflow-hidden">
+              <div className="stitch-card-media relative min-h-0 w-full overflow-hidden">
                 <Image
                   src={role.image}
                   alt=""
                   fill
-                  sizes="(min-width: 1024px) 22vw, (min-width: 640px) 45vw, 100vw"
+                  sizes="(min-width: 640px) 300px, 280px"
                   className="stitch-card-image object-cover"
                 />
               </div>
 
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-base font-bold text-stitch-navy">{role.title}</h3>
+              <div className="flex min-h-0 flex-1 flex-col justify-center gap-1 overflow-hidden px-5 py-3">
+                <h3 className="line-clamp-2 text-base font-bold text-stitch-navy">{role.title}</h3>
 
                 {role.description ? (
-                  <p className="mt-2 text-sm leading-relaxed text-gray-600">{role.description}</p>
+                  <p className="stitch-card-reveal line-clamp-3 text-sm leading-relaxed text-gray-600">
+                    {role.description}
+                  </p>
                 ) : null}
               </div>
             </div>

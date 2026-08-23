@@ -2,7 +2,6 @@ import type { Dictionary } from "./en";
 
 const te: Dictionary = {
   common: {
-    loading: "లోడ్ అవుతోంది...",
     pleasePrefix: "దయచేసి",
   },
   nav: {
@@ -10,7 +9,6 @@ const te: Dictionary = {
     signIn: "సైన్ ఇన్ చేయండి",
     joinSportfo: "SportFo లో చేరండి",
     athleteRegistration: "అథ్లెట్ నమోదు",
-    myProfile: "నా ప్రొఫైల్",
     logout: "లాగ్ అవుట్",
     loggingOut: "లాగ్ అవుట్ అవుతోంది...",
   },
@@ -36,7 +34,6 @@ const te: Dictionary = {
   account: {
     sportfoId: "SportFo ID",
     activeAs: "గా క్రియాశీలం",
-    myAccount: "నా ఖాతా",
     activeAccount: "క్రియాశీల ఖాతా",
     roleAthlete: "అథ్లెట్",
   },
@@ -59,8 +56,6 @@ const te: Dictionary = {
       challenge: "కష్టపడి శిక్షణ పొందే ప్రతి బిడ్డకూ నిజమైన మార్గం లభించేలా, భారతదేశపు అతిపెద్ద క్రీడా సవాలును పరిష్కరించడానికి మేము ఉన్నాము.",
       change: "SportFo దానిని మారుస్తుంది.",
       exists: "క్రీడలో అది ఉంటే, అది SportFo లోనూ ఉంటుంది.",
-      exploreSports: "క్రీడలను అన్వేషించండి",
-      joinSportfo: "SportFo లో చేరండి",
     },
     vision: {
       title: "దార్శనికత",
@@ -220,10 +215,15 @@ const te: Dictionary = {
     },
     stories: {
       heading: "స్ఫూర్తిదాయక అథ్లెట్ కథలు",
+      subheading: "SportFo తో తమ భవిష్యత్తును నిర్మించుకుంటున్న అథ్లెట్ల నిజమైన ప్రయాణాలు.",
       story1Title: "గల్లీ క్రికెట్ నుండి రాష్ట్ర ట్రయల్స్ వరకు",
+      story1Subtitle: "అథ్లెట్ ప్రయాణం",
       story2Title: "రెండు ఎదురుదెబ్బలు, వెనక్కి తగ్గలేదు",
-      story3Quote:
-        "“నా కూతురు చాలా బిడియస్తురాలిగా ఉండేది, ఒక టీమ్‌లో చేరింది, ఆరు నెలల తర్వాత ఆమె వార్మ్-అప్‌లకు నాయకత్వం వహిస్తోంది.”",
+      story2Subtitle: "అథ్లెట్ స్పాట్‌లైట్",
+      story3Title: "ప్రతి మ్యాచ్‌లోనూ కొత్త అడ్డంకులను దాటడం",
+      story3Subtitle: "అథ్లెట్ కథ",
+      story4Title: "ప్రతి అభ్యాసం వెనుక క్రమశిక్షణ",
+      story4Subtitle: "సాధన",
     },
   },
   auth: {
@@ -234,11 +234,9 @@ const te: Dictionary = {
     panelTitle: "మీ క్రీడా వృత్తికి ఒక వృత్తిపరమైన స్థానం అవసరం.",
     panelDescription:
       "మీ ప్రొఫైల్‌ను నిర్మించండి, మీ విజయాలను ప్రదర్శించండి, మరియు ప్రజలు నమ్మగలిగే లింక్‌ను పంచుకోండి.",
-    mobileNumberLabel: "మొబైల్ నంబర్",
     mobileHelperDemo: "మీ అథ్లెట్ ప్రొఫైల్ కోసం మేము ఈ నంబర్‌ను ఉపయోగిస్తాము.",
     mobileHelperOtp: "మేము ఈ నంబర్‌కు 6 అంకెల కోడ్‌ను పంపుతాము.",
     countryCodeLabel: "దేశ కోడ్",
-    phonePlaceholder: "మొబైల్ నంబర్",
     sendCode: "ధృవీకరణ కోడ్ పంపండి",
     sendingCode: "కోడ్ పంపబడుతోంది...",
     continueLabel: "కొనసాగించండి",
@@ -273,7 +271,6 @@ const te: Dictionary = {
     stepSport: "క్రీడ",
     stepAchievements: "విజయాలు",
     stepReview: "సమీక్ష",
-    sessionExpired: "మీ సెషన్ గడువు ముగిసింది. దయచేసి మళ్లీ సైన్ ఇన్ చేయండి.",
     uploadFailed: "పత్రాన్ని అప్‌లోడ్ చేయడంలో విఫలమైంది.",
     documentRemovedButSyncFailed:
       "పత్రం తీసివేయబడింది, కానీ మా రికార్డులను నవీకరించలేకపోయాము. దయచేసి రిఫ్రెష్ చేసి మళ్లీ ప్రయత్నించండి.",
