@@ -118,14 +118,17 @@ export function mapDraftToFormValues(
   };
 }
 
+// India is SportFo's primary target market -- nationality/country default
+// to it so most athletes never have to type it, while staying plain,
+// editable text fields for anyone else.
 export function buildEmptyFormValues(authPhone: string): AthleteRegistrationFormValues {
   return {
     personalDetails: {
       fullName: "",
       dateOfBirth: "",
       gender: "",
-      nationality: "",
-      country: "",
+      nationality: "Indian",
+      country: "India",
       city: "",
       mobileNumber: authPhone,
       email: "",

@@ -3,15 +3,15 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-// Shared rotation pool: the four sports already shown on first paint, plus two
-// more so the collage keeps cycling through fresh photography over time.
+// Shared rotation pool: the four panels on screen at once, plus one extra so
+// the collage keeps cycling through fresh imagery over time. Pool size must
+// stay above panelCount (4) for the panels to always show distinct photos.
 const IMAGE_POOL = [
-  "/images/carousel/tennis.jpg",
-  "/images/carousel/football.jpg",
-  "/images/carousel/basketball.jpg",
-  "/images/carousel/cricket.jpg",
-  "/images/carousel/athletics.jpg",
-  "/images/carousel/swimming.jpg",
+  "/images/hero/football.jpg",
+  "/images/hero/basketball.jpg",
+  "/images/hero/volleyball.jpg",
+  "/images/hero/table-tennis.jpg",
+  "/images/hero/hockey.jpg",
 ];
 
 const DISPLAY_MS = 5500;
@@ -41,7 +41,7 @@ function useReducedMotion() {
 // One shared tick per collage instance (mobile grid and desktop collage each
 // get their own). Every panel derives its photo purely from
 // `pool[(tick + panelIndex) % pool.length]`, so the four panels always show
-// four *consecutive, distinct* pool entries — with a 6-image pool that makes
+// four *consecutive, distinct* pool entries — with a 5-image pool that makes
 // it mathematically impossible for two panels to show the same photo, or for
 // a panel's outgoing and incoming photo to match.
 function useCollageTick() {
@@ -136,12 +136,11 @@ function HeroCollagePanelView({
               preload={eager && slot === 0}
               loading="eager"
               sizes={sizes}
-              className="object-cover"
+              className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
             />
           </div>
         );
       })}
-      <div className="absolute inset-0 bg-stitch-blue/20 mix-blend-multiply" />
     </div>
   );
 }

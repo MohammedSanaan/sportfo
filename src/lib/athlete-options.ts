@@ -20,6 +20,28 @@ export const SKILL_LEVELS: SelectOption[] = [
   { value: "professional", label: "Professional" },
 ];
 
+// The grassroots-to-international competition ladder, lowest to highest --
+// order matters wherever this list drives a <select>, so it always reads
+// top-down as "lowest tier first" rather than alphabetically.
+export const COMPETITION_LEVELS: SelectOption[] = [
+  { value: "taluk", label: "Taluk" },
+  { value: "district", label: "District" },
+  { value: "division", label: "Division / Zonal" },
+  { value: "state", label: "State" },
+  { value: "national", label: "National" },
+  { value: "international", label: "International / Olympics" },
+];
+
+// Which institutional pathway the athlete competes through -- independent
+// of competition_level (e.g. a University-track athlete can still compete
+// at National level).
+export const PARALLEL_TRACKS: SelectOption[] = [
+  { value: "school-college", label: "School / College" },
+  { value: "university", label: "University" },
+  { value: "corporate", label: "Corporate" },
+  { value: "professional", label: "Professional" },
+];
+
 export const GENDER_OPTIONS: SelectOption[] = [
   { value: "male", label: "Male" },
   { value: "female", label: "Female" },

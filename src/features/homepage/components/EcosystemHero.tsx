@@ -5,13 +5,13 @@ import { HeroCollage } from "./HeroCollagePanel";
 
 // Four panels, each slowly rotating through the sports photo pool with a
 // staggered crossfade so the collage stays the same shape while the imagery
-// underneath feels alive.
+// underneath feels alive. Straight rectangles, not diagonally clipped --
+// these particular source photos are thin, low-res crops with very
+// different brightness levels, and no amount of clip-path/mask cleverness
+// held up across every screen size and rotation. A clean grid with nothing
+// cropped into and nothing diagonally cut leaves no seam to go wrong --
+// zero gap between tiles so it reads as one continuous strip.
 const PANEL_COUNT = 4;
-
-const PANEL_CLIP = "polygon(14% 0%, 100% 0%, 86% 100%, 0% 100%)";
-// The final panel keeps a vertical right edge so the collage bleeds flush to
-// the viewport edge instead of leaving a triangular gap.
-const PANEL_CLIP_LAST = "polygon(14% 0%, 100% 0%, 100% 100%, 0% 100%)";
 
 export function EcosystemHero({ t }: { t: TFunc }) {
   return (
@@ -33,8 +33,8 @@ export function EcosystemHero({ t }: { t: TFunc }) {
         className="pointer-events-none absolute inset-0 [background:radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.28)_100%)]"
       />
 
-      <div className="relative z-10 flex w-full flex-col px-4 py-10 sm:px-6 sm:py-12 lg:flex-row lg:items-center lg:gap-6 lg:py-8 lg:pr-0 lg:pl-10 xl:py-10">
-        <div className="flex flex-col items-center text-center lg:w-[43%] lg:shrink-0 lg:items-start lg:pr-4 lg:text-left">
+      <div className="relative z-10 flex w-full flex-col px-4 py-10 sm:px-6 sm:py-12 lg:flex-row lg:items-center lg:gap-8 lg:py-14 lg:pr-6 lg:pl-10 xl:py-16">
+        <div className="flex flex-col items-center text-center lg:w-[42%] lg:shrink-0 lg:items-start lg:text-left">
           <p className="text-xs font-semibold tracking-[0.2em] text-white/75 uppercase sm:text-sm">
             {t("home.hero.eyebrow")}
           </p>
@@ -64,34 +64,22 @@ export function EcosystemHero({ t }: { t: TFunc }) {
           </div>
         </div>
 
-        {/* Mobile/tablet: flush grid, angled panels don't translate to narrow screens */}
-        <div className="mt-8 grid grid-cols-2 gap-1.5 sm:grid-cols-4 lg:hidden">
+        {/* One straight, flush grid for every screen size: 2x2 on mobile,
+            a single row of 4 from tablet up -- no gap between tiles, so the
+            four photos read as one continuous strip. From lg up, the strip
+            stretches to the row's full cross-height, then negative vertical
+            margins cancel the row's own py so it reaches the section's true
+            top/bottom edges instead of floating with navy letterboxing
+            above and below it. */}
+        <div className="mt-10 grid w-full grid-cols-2 overflow-hidden sm:grid-cols-4 lg:mt-0 lg:flex lg:flex-1 lg:items-stretch lg:self-stretch lg:-my-14 xl:-my-16">
           <HeroCollage
             panelCount={PANEL_COUNT}
             clipPaths={Array.from({ length: PANEL_COUNT }, () => "none")}
             wrapperClassNames={Array.from(
               { length: PANEL_COUNT },
-              () => "relative aspect-square overflow-hidden rounded-lg sm:rounded-md"
+              () => "group relative aspect-square overflow-hidden sm:aspect-[3/4] lg:aspect-auto lg:flex-1"
             )}
-            sizes="(min-width: 640px) 25vw, 50vw"
-          />
-        </div>
-
-        {/* Desktop: interlocking diagonal photo collage. Self-stretches to the
-            row's full height, then negative vertical margins cancel the
-            row's own py so the photos reach the hero's actual top/bottom
-            edges instead of floating with blue letterboxing around them. */}
-        <div className="relative hidden flex-1 items-stretch self-stretch drop-shadow-[0_20px_45px_rgba(0,0,0,0.35)] lg:flex lg:-my-8 xl:-my-10">
-          <HeroCollage
-            panelCount={PANEL_COUNT}
-            clipPaths={Array.from({ length: PANEL_COUNT }, (_, index) =>
-              index === PANEL_COUNT - 1 ? PANEL_CLIP_LAST : PANEL_CLIP
-            )}
-            wrapperClassNames={Array.from(
-              { length: PANEL_COUNT },
-              (_, index) => `relative h-full flex-1 overflow-hidden ${index === 0 ? "" : "-ml-12"}`
-            )}
-            sizes="20vw"
+            sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
           />
         </div>
       </div>

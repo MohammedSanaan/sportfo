@@ -3,12 +3,12 @@ import { EcosystemHero } from "@/features/homepage/components/EcosystemHero";
 import { AboutSportFoSection } from "@/features/homepage/components/AboutSportFoSection";
 import { VisionMissionSection } from "@/features/homepage/components/VisionMissionSection";
 import { WhoWeServeSection } from "@/features/homepage/components/WhoWeServeSection";
+import { SportsGallerySection } from "@/features/homepage/components/SportsGallerySection";
 import { OpportunitiesSection } from "@/features/homepage/components/OpportunitiesSection";
 import { PlatformFeaturesSection } from "@/features/homepage/components/PlatformFeaturesSection";
 import { GapSection } from "@/features/homepage/components/GapSection";
 import { HowSportFoWorksSection } from "@/features/homepage/components/HowSportFoWorksSection";
 import { StatsSection } from "@/features/homepage/components/StatsSection";
-import { ParentsSection } from "@/features/homepage/components/ParentsSection";
 import { AthleteStoriesSection } from "@/features/homepage/components/AthleteStoriesSection";
 import { TextRevealFaqs } from "@/components/ui/text-reveal-faqs";
 import { getServerTranslations } from "@/i18n/server";
@@ -25,12 +25,12 @@ export default async function Home() {
       <AboutSportFoSection t={t} />
       <VisionMissionSection t={t} />
       <WhoWeServeSection t={t} />
+      <SportsGallerySection t={t} />
       <OpportunitiesSection t={t} />
       <PlatformFeaturesSection t={t} />
       <GapSection t={t} />
       <HowSportFoWorksSection t={t} />
       <StatsSection t={t} />
-      <ParentsSection t={t} />
       <AthleteStoriesSection t={t} />
       <TextRevealFaqs />
     </div>

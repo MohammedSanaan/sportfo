@@ -15,10 +15,13 @@ const navLinkClassName =
 // directly in Header) so it can be wrapped in <Suspense> -- the session
 // check shouldn't delay the rest of the shared layout from streaming.
 //
-// "Discover Athletes" used to be its own standalone link in the main
-// header nav; now that the main nav is the Home/About/Community/... set,
-// it's preserved here instead (in the account area for signed-in users,
-// alongside Sign In/Join SportFo for guests) rather than being deleted.
+// "Discover Athletes" now lives in Header's main left-side nav (always
+// visible, signed in or not) instead of here -- this component only
+// renders the auth-state-dependent actions (Sign In/Join SportFo for
+// guests, My Profile/Logout for signed-in users without an AccountMenu).
+// The signed-in AccountMenu dropdown still carries its own "Discover
+// Athletes" entry (see AccountMenu.tsx) since that's a separate,
+// already-open-on-click surface, not part of the always-visible bar.
 export async function AuthNav({
   locale,
   variant = "desktop",
@@ -63,9 +66,6 @@ export async function AuthNav({
     // account is still fully authenticated, so navigation must not break.
     return (
       <>
-        <Link href="/athletes" className={navLinkClassName}>
-          {t("nav.discoverAthletes")}
-        </Link>
         <Link href="/athlete/register" className={navLinkClassName}>
           {t("nav.athleteRegistration")}
         </Link>
@@ -76,9 +76,6 @@ export async function AuthNav({
 
   return (
     <>
-      <Link href="/athletes" className={navLinkClassName}>
-        {t("nav.discoverAthletes")}
-      </Link>
       <Link href="/auth" className={navLinkClassName}>
         {t("nav.signIn")}
       </Link>

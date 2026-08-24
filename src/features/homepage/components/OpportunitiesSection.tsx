@@ -19,11 +19,18 @@ const CARD_IMAGES = {
 // below is deliberately a plain, handler-less <button> -- visually ready,
 // safely inert -- following the same precedent already established for
 // CTAs with no real destination (see the removed EcosystemRoleCard.tsx).
-function InertButton({ label, variant }: { label: string; variant: "primary" | "secondary" }) {
-  const primary =
-    "rounded px-5 py-2 text-sm font-semibold text-white shadow transition-colors bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2";
-  const secondary =
-    "rounded border border-stitch-navy/30 px-5 py-2 text-sm font-semibold text-stitch-navy transition-colors hover:bg-stitch-navy/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2";
+function InertButton({
+  label,
+  variant,
+  size = "md",
+}: {
+  label: string;
+  variant: "primary" | "secondary";
+  size?: "md" | "sm";
+}) {
+  const padding = size === "sm" ? "px-3.5 py-1.5 text-xs" : "px-5 py-2 text-sm";
+  const primary = `rounded ${padding} font-semibold whitespace-nowrap text-white shadow transition-colors bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2`;
+  const secondary = `rounded border border-stitch-navy/30 ${padding} font-semibold whitespace-nowrap text-stitch-navy transition-colors hover:bg-stitch-navy/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2`;
 
   return (
     <button type="button" className={variant === "primary" ? primary : secondary}>
@@ -64,8 +71,9 @@ export function OpportunitiesSection({ t }: { t: TFunc }) {
               <p className="mt-2 text-sm font-medium text-stitch-blue">
                 {t("home.opportunities.events.categories")}
               </p>
-              <div className="mt-6">
-                <InertButton label={t("home.opportunities.events.cta")} variant="primary" />
+              <div className="mt-auto flex flex-nowrap gap-3 pt-6">
+                <InertButton label={t("home.opportunities.events.postCta")} variant="primary" size="sm" />
+                <InertButton label={t("home.opportunities.events.cta")} variant="secondary" size="sm" />
               </div>
             </div>
           </div>
@@ -85,9 +93,9 @@ export function OpportunitiesSection({ t }: { t: TFunc }) {
               <p className="mt-2 text-sm font-medium text-stitch-blue">
                 {t("home.opportunities.jobs.categories")}
               </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <InertButton label={t("home.opportunities.jobs.viewAll")} variant="primary" />
-                <InertButton label={t("home.opportunities.jobs.postJob")} variant="secondary" />
+              <div className="mt-auto flex flex-wrap gap-3 pt-6">
+                <InertButton label={t("home.opportunities.jobs.postJob")} variant="primary" />
+                <InertButton label={t("home.opportunities.jobs.viewAll")} variant="secondary" />
               </div>
             </div>
           </div>
@@ -107,8 +115,9 @@ export function OpportunitiesSection({ t }: { t: TFunc }) {
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
                 {t("home.opportunities.courses.description")}
               </p>
-              <div className="mt-6">
-                <InertButton label={t("home.opportunities.courses.cta")} variant="primary" />
+              <div className="mt-auto flex flex-nowrap gap-3 pt-6">
+                <InertButton label={t("home.opportunities.courses.cta")} variant="primary" size="sm" />
+                <InertButton label={t("home.opportunities.courses.viewAll")} variant="secondary" size="sm" />
               </div>
             </div>
           </div>

@@ -37,6 +37,11 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local reference material (mockups, recordings, BRDs) -- not part of the
+# shipped app, never meant to enter git history
+/UI_images/
+/sportfo_doc/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

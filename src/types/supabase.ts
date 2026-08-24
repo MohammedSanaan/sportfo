@@ -133,8 +133,10 @@ export type Database = {
       athlete_sports: {
         Row: {
           athlete_profile_id: string
+          competition_level: string | null
           created_at: string
           id: string
+          parallel_track: string | null
           position_role: string | null
           primary_sport: string | null
           skill_level: string | null
@@ -143,8 +145,10 @@ export type Database = {
         }
         Insert: {
           athlete_profile_id: string
+          competition_level?: string | null
           created_at?: string
           id?: string
+          parallel_track?: string | null
           position_role?: string | null
           primary_sport?: string | null
           skill_level?: string | null
@@ -153,8 +157,10 @@ export type Database = {
         }
         Update: {
           athlete_profile_id?: string
+          competition_level?: string | null
           created_at?: string
           id?: string
+          parallel_track?: string | null
           position_role?: string | null
           primary_sport?: string | null
           skill_level?: string | null
@@ -200,6 +206,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      ensure_sportfo_id: { Args: never; Returns: string }
       generate_athlete_public_slug: {
         Args: { p_full_name: string }
         Returns: string
@@ -227,9 +234,11 @@ export type Database = {
           city: string
           club_academy: string
           coach_mentor: string
+          competition_level: string
           country: string
           full_name: string
           nationality: string
+          parallel_track: string
           position_role: string
           primary_sport: string
           school_college: string
@@ -238,7 +247,6 @@ export type Database = {
           sportfo_id: string
         }[]
       }
-      ensure_sportfo_id: { Args: never; Returns: string }
       owns_athlete_profile: { Args: { profile_id: string }; Returns: boolean }
       save_athlete_registration: {
         Args: {
@@ -267,9 +275,11 @@ export type Database = {
       search_public_athletes: {
         Args: {
           p_city?: string
+          p_competition_level?: string
           p_country?: string
           p_page?: number
           p_page_size?: number
+          p_parallel_track?: string
           p_query?: string
           p_skill_level?: string
           p_sport?: string

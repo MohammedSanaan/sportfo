@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
+import { getAuthUser } from "@/lib/supabase/auth-user";
 import {
   searchPublicAthletes,
   loadPublicAthleteCountries,
@@ -8,7 +9,7 @@ import {
   type RawDiscoverySearchParams,
 } from "@/lib/athlete/discovery";
 import { Container } from "@/components/ui/Container";
-import { AthleteCard } from "@/features/discovery/components/AthleteCard";
+import { AthleteDiscoveryGrid } from "@/features/discovery/components/AthleteDiscoveryGrid";
 import { DiscoveryFiltersForm } from "@/features/discovery/components/DiscoveryFiltersForm";
 import { DiscoveryPagination } from "@/features/discovery/components/DiscoveryPagination";
 import { DiscoveryStatus } from "@/features/discovery/components/DiscoveryStatus";
@@ -30,15 +31,23 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
   const rawParams = await searchParams;
   const filters = parseDiscoveryFilters(rawParams);
   const hasActiveFilters = Boolean(
-    filters.query || filters.sport || filters.country || filters.city || filters.skillLevel,
+    filters.query ||
+      filters.sport ||
+      filters.country ||
+      filters.city ||
+      filters.skillLevel ||
+      filters.competitionLevel ||
+      filters.parallelTrack,
   );
 
   const supabase = await createClient();
-  const [result, countries, { locale, t }] = await Promise.all([
+  const [result, countries, { locale, t }, user] = await Promise.all([
     searchPublicAthletes(supabase, filters),
     loadPublicAthleteCountries(supabase),
     getServerTranslations(),
+    getAuthUser(),
   ]);
+  const isLoggedIn = Boolean(user);
 
   return (
     <Container className="flex flex-col gap-8 py-10 sm:py-14">
@@ -74,11 +83,7 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
             )}
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {result.athletes.map((athlete) => (
-              <AthleteCard key={athlete.public_slug} athlete={athlete} locale={locale} />
-            ))}
-          </div>
+          <AthleteDiscoveryGrid athletes={result.athletes} locale={locale} isLoggedIn={isLoggedIn} />
 
           <DiscoveryPagination
             page={result.page}
