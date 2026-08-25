@@ -35,6 +35,7 @@ export function AthleteSportsSection({ sport, locale }: AthleteSportsSectionProp
           label={t("detailFields.primarySport")}
           value={getOptionLabel(PRIMARY_SPORTS, sport.primary_sport)}
         />
+        <DetailField label={t("detailFields.sportCategory")} value={sport.sport_category ?? ""} />
         <DetailField label={t("detailFields.skillLevel")} value={skillLabel} />
         <DetailField
           label={t("detailFields.discipline")}

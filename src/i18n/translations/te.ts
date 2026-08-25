@@ -299,6 +299,15 @@ const te: Dictionary = {
       title: "క్రీడా సమాచారం",
       description: "మీ ప్రధాన క్రీడ మరియు ప్రస్తుత నైపుణ్య స్థాయిని పంచుకోండి.",
       primarySport: "ప్రధాన క్రీడ",
+      primarySportSearchPlaceholder: "మీ క్రీడను శోధించండి లేదా ఎంచుకోండి...",
+      primarySportNoResults: "క్రీడలు కనుగొనబడలేదు",
+      category: "వర్గం",
+      categoryPlaceholder: "వర్గాన్ని ఎంచుకోండి",
+      categoryAutoHelper: "మీ క్రీడ ఆధారంగా స్వయంచాలకంగా ఎంపిక చేయబడింది.",
+      categoryMultiHelper:
+        "{sport} బహుళ SportFo వర్గాలకు చెందినది. మీ భాగస్వామ్యాన్ని ఉత్తమంగా సూచించే దాన్ని ఎంచుకోండి.",
+      categoryUnmappedHelper:
+        "ఈ క్రీడకు మా వద్ద ఇంకా వర్గ మ్యాపింగ్ లేదు — మా బృందం త్వరలో ఒకటి జోడిస్తుంది.",
       discipline: "క్రీడా విభాగం / ఉప-వర్గం",
       disciplinePlaceholder: "ఉదా. ఫ్రీస్టైల్, స్ప్రింట్, స్ట్రైకర్",
       position: "స్థానం / పాత్ర",
@@ -450,6 +459,7 @@ const te: Dictionary = {
     mobileNumber: "మొబైల్ నంబర్",
     email: "ఇమెయిల్ చిరునామా",
     primarySport: "ప్రధాన క్రీడ",
+    sportCategory: "వర్గం",
     skillLevel: "నైపుణ్య స్థాయి",
     discipline: "క్రీడా విభాగం / ఉప-వర్గం",
     position: "స్థానం / పాత్ర",

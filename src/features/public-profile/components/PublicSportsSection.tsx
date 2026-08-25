@@ -37,6 +37,7 @@ export function PublicSportsSection({ profile, locale }: PublicSportsSectionProp
           label={t("detailFields.primarySport")}
           value={getOptionLabel(PRIMARY_SPORTS, profile.primary_sport)}
         />
+        <DetailField label={t("detailFields.sportCategory")} value={profile.sport_category ?? ""} />
         <DetailField label={t("detailFields.skillLevel")} value={skillLabel} />
         <DetailField
           label={t("detailFields.discipline")}

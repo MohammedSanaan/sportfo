@@ -300,6 +300,15 @@ const en = {
       title: "Sports Information",
       description: "Share your primary sport and current skill level.",
       primarySport: "Primary Sport",
+      primarySportSearchPlaceholder: "Search or select your sport...",
+      primarySportNoResults: "No sports found",
+      category: "Category",
+      categoryPlaceholder: "Select category",
+      categoryAutoHelper: "Automatically selected based on your sport.",
+      categoryMultiHelper:
+        "{sport} belongs to multiple SportFo categories. Choose the one that best represents your participation.",
+      categoryUnmappedHelper:
+        "We don't have a category mapping for this sport yet — our team will add one soon.",
       discipline: "Sport Discipline / Sub-category",
       disciplinePlaceholder: "e.g. Freestyle, Sprint, Striker",
       position: "Position / Role",
@@ -451,6 +460,7 @@ const en = {
     mobileNumber: "Mobile Number",
     email: "Email Address",
     primarySport: "Primary Sport",
+    sportCategory: "Category",
     skillLevel: "Skill Level",
     discipline: "Sport Discipline / Sub-category",
     position: "Position / Role",

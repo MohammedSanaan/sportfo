@@ -138,6 +138,7 @@ export type Database = {
           position_role: string | null
           primary_sport: string | null
           skill_level: string | null
+          sport_category: string | null
           sport_discipline: string | null
           updated_at: string
         }
@@ -148,6 +149,7 @@ export type Database = {
           position_role?: string | null
           primary_sport?: string | null
           skill_level?: string | null
+          sport_category?: string | null
           sport_discipline?: string | null
           updated_at?: string
         }
@@ -158,6 +160,7 @@ export type Database = {
           position_role?: string | null
           primary_sport?: string | null
           skill_level?: string | null
+          sport_category?: string | null
           sport_discipline?: string | null
           updated_at?: string
         }
@@ -234,6 +237,7 @@ export type Database = {
           primary_sport: string
           school_college: string
           skill_level: string
+          sport_category: string
           sport_discipline: string
           sportfo_id: string
         }[]
@@ -260,6 +264,7 @@ export type Database = {
           p_scholarship_recipient: boolean
           p_school_college: string
           p_skill_level: string
+          p_sport_category: string
           p_sport_discipline: string
         }
         Returns: Json

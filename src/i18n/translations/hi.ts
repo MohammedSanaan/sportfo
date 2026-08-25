@@ -297,6 +297,15 @@ const hi: Dictionary = {
       title: "खेल जानकारी",
       description: "अपना मुख्य खेल और वर्तमान कौशल स्तर साझा करें।",
       primarySport: "मुख्य खेल",
+      primarySportSearchPlaceholder: "अपना खेल खोजें या चुनें...",
+      primarySportNoResults: "कोई खेल नहीं मिला",
+      category: "श्रेणी",
+      categoryPlaceholder: "श्रेणी चुनें",
+      categoryAutoHelper: "आपके खेल के आधार पर स्वतः चयनित।",
+      categoryMultiHelper:
+        "{sport} कई SportFo श्रेणियों में आता है। वह चुनें जो आपकी भागीदारी को सबसे अच्छी तरह दर्शाती हो।",
+      categoryUnmappedHelper:
+        "इस खेल के लिए अभी हमारे पास कोई श्रेणी मैपिंग नहीं है — हमारी टीम जल्द ही इसे जोड़ेगी।",
       discipline: "खेल अनुशासन / उप-श्रेणी",
       disciplinePlaceholder: "जैसे फ़्रीस्टाइल, स्प्रिंट, स्ट्राइकर",
       position: "स्थिति / भूमिका",
@@ -448,6 +457,7 @@ const hi: Dictionary = {
     mobileNumber: "मोबाइल नंबर",
     email: "ईमेल पता",
     primarySport: "मुख्य खेल",
+    sportCategory: "श्रेणी",
     skillLevel: "कौशल स्तर",
     discipline: "खेल अनुशासन / उप-श्रेणी",
     position: "स्थिति / भूमिका",

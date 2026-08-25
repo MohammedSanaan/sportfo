@@ -302,6 +302,15 @@ const kn: Dictionary = {
       title: "ಕ್ರೀಡಾ ಮಾಹಿತಿ",
       description: "ನಿಮ್ಮ ಮುಖ್ಯ ಕ್ರೀಡೆ ಮತ್ತು ಪ್ರಸ್ತುತ ಕೌಶಲ್ಯ ಮಟ್ಟವನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
       primarySport: "ಮುಖ್ಯ ಕ್ರೀಡೆ",
+      primarySportSearchPlaceholder: "ನಿಮ್ಮ ಕ್ರೀಡೆಯನ್ನು ಹುಡುಕಿ ಅಥವಾ ಆಯ್ಕೆಮಾಡಿ...",
+      primarySportNoResults: "ಯಾವುದೇ ಕ್ರೀಡೆ ಕಂಡುಬಂದಿಲ್ಲ",
+      category: "ವರ್ಗ",
+      categoryPlaceholder: "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+      categoryAutoHelper: "ನಿಮ್ಮ ಕ್ರೀಡೆಯ ಆಧಾರದ ಮೇಲೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ.",
+      categoryMultiHelper:
+        "{sport} ಹಲವಾರು SportFo ವರ್ಗಗಳಿಗೆ ಸೇರಿದೆ. ನಿಮ್ಮ ಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ಉತ್ತಮವಾಗಿ ಪ್ರತಿನಿಧಿಸುವುದನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+      categoryUnmappedHelper:
+        "ಈ ಕ್ರೀಡೆಗೆ ನಮ್ಮಲ್ಲಿ ಇನ್ನೂ ವರ್ಗ ಮ್ಯಾಪಿಂಗ್ ಇಲ್ಲ — ನಮ್ಮ ತಂಡ ಶೀಘ್ರದಲ್ಲೇ ಒಂದನ್ನು ಸೇರಿಸುತ್ತದೆ.",
       discipline: "ಕ್ರೀಡಾ ವಿಭಾಗ / ಉಪ-ವರ್ಗ",
       disciplinePlaceholder: "ಉದಾ. ಫ್ರೀಸ್ಟೈಲ್, ಸ್ಪ್ರಿಂಟ್, ಸ್ಟ್ರೈಕರ್",
       position: "ಸ್ಥಾನ / ಪಾತ್ರ",
@@ -453,6 +462,7 @@ const kn: Dictionary = {
     mobileNumber: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
     email: "ಇಮೇಲ್ ವಿಳಾಸ",
     primarySport: "ಮುಖ್ಯ ಕ್ರೀಡೆ",
+    sportCategory: "ವರ್ಗ",
     skillLevel: "ಕೌಶಲ್ಯ ಮಟ್ಟ",
     discipline: "ಕ್ರೀಡಾ ವಿಭಾಗ / ಉಪ-ವರ್ಗ",
     position: "ಸ್ಥಾನ / ಪಾತ್ರ",

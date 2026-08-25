@@ -29,6 +29,10 @@ export interface PersonalDetails {
 
 export interface SportsInformation {
   primarySport: string;
+  // Kept as a separate canonical value, never combined into primarySport
+  // (e.g. never "Team Sports - Cricket") -- see src/lib/sports/catalog.ts
+  // for how it's resolved from primarySport.
+  sportCategory: string;
   discipline: string;
   position: string;
   skillLevel: SkillLevel | "";

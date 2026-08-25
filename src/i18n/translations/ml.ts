@@ -299,6 +299,15 @@ const ml: Dictionary = {
       title: "കായിക വിവരങ്ങൾ",
       description: "നിങ്ങളുടെ പ്രധാന കായിക ഇനവും നിലവിലെ നൈപുണ്യ നിലവാരവും പങ്കിടുക.",
       primarySport: "പ്രധാന കായിക ഇനം",
+      primarySportSearchPlaceholder: "നിങ്ങളുടെ കായിക ഇനം തിരയുക അല്ലെങ്കിൽ തിരഞ്ഞെടുക്കുക...",
+      primarySportNoResults: "കായിക ഇനങ്ങളൊന്നും കണ്ടെത്തിയില്ല",
+      category: "വിഭാഗം",
+      categoryPlaceholder: "വിഭാഗം തിരഞ്ഞെടുക്കുക",
+      categoryAutoHelper: "നിങ്ങളുടെ കായിക ഇനത്തിന്റെ അടിസ്ഥാനത്തിൽ സ്വയമേവ തിരഞ്ഞെടുത്തു.",
+      categoryMultiHelper:
+        "{sport} ഒന്നിലധികം SportFo വിഭാഗങ്ങളിൽ ഉൾപ്പെടുന്നു. നിങ്ങളുടെ പങ്കാളിത്തത്തെ ഏറ്റവും നന്നായി പ്രതിനിധീകരിക്കുന്നത് തിരഞ്ഞെടുക്കുക.",
+      categoryUnmappedHelper:
+        "ഈ കായിക ഇനത്തിന് ഞങ്ങൾക്ക് ഇതുവരെ വിഭാഗ മാപ്പിംഗ് ഇല്ല — ഞങ്ങളുടെ ടീം ഉടൻ ഒന്ന് ചേർക്കും.",
       discipline: "കായിക വിഭാഗം / ഉപവിഭാഗം",
       disciplinePlaceholder: "ഉദാ. ഫ്രീസ്റ്റൈൽ, സ്പ്രിന്റ്, സ്ട്രൈക്കർ",
       position: "സ്ഥാനം / റോൾ",
@@ -450,6 +459,7 @@ const ml: Dictionary = {
     mobileNumber: "മൊബൈൽ നമ്പർ",
     email: "ഇമെയിൽ വിലാസം",
     primarySport: "പ്രധാന കായിക ഇനം",
+    sportCategory: "വിഭാഗം",
     skillLevel: "നൈപുണ്യ നിലവാരം",
     discipline: "കായിക വിഭാഗം / ഉപവിഭാഗം",
     position: "സ്ഥാനം / റോൾ",

@@ -1,17 +1,11 @@
 import type { SelectOption } from "@/types/athlete";
+import { SPORT_OPTIONS } from "@/lib/sports/catalog";
 
-// Static for now. Designed to be swapped for a database-backed fetch later
-// without changing how consuming components read the list.
-export const PRIMARY_SPORTS: SelectOption[] = [
-  { value: "football", label: "Football" },
-  { value: "cricket", label: "Cricket" },
-  { value: "basketball", label: "Basketball" },
-  { value: "swimming", label: "Swimming" },
-  { value: "athletics", label: "Athletics" },
-  { value: "tennis", label: "Tennis" },
-  { value: "badminton", label: "Badminton" },
-  { value: "volleyball", label: "Volleyball" },
-];
+// The full canonical SportFo sports list -- see src/lib/sports/catalog.ts,
+// the single source of truth for sport options and sport->category
+// resolution. Re-exported here so existing importers (discovery filters,
+// profile display) don't need to change their import path.
+export const PRIMARY_SPORTS: SelectOption[] = SPORT_OPTIONS;
 
 export const SKILL_LEVELS: SelectOption[] = [
   { value: "beginner", label: "Beginner" },
