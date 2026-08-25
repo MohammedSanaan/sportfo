@@ -9,10 +9,11 @@ import { resolveAthleteMobileNumber } from "@/lib/phone/resolve-athlete-phone";
 import { getServerTranslations } from "@/i18n/server";
 
 interface AthleteRegistrationScreenProps {
-  /** Where an unauthenticated visitor is sent back to after signing in.
-   * /athlete/register (its own canonical URL) by default; the /register
-   * hub passes /register/athlete so the redirect round-trips back to the
-   * hub instead of silently switching URLs on the visitor. */
+  /** This screen's own canonical URL -- used both as the draft-load-failure
+   * "reload" link and as the `next` target an unauthenticated visitor is
+   * returned to after signing in. /athlete/register by default; the
+   * /register hub passes /register/athlete so either path round-trips back
+   * to itself instead of silently switching URLs on the visitor. */
   reloadHref?: string;
   /** Heading + intro copy are the caller's job on the hub route (it has
    * its own "Register with SportFo" / "Select Your Category" header) --
@@ -34,7 +35,7 @@ export async function AthleteRegistrationScreen({
   // rather than relying on Proxy alone.
   const user = await getAuthUser();
   if (!user) {
-    redirect("/auth");
+    redirect(`/auth?next=${encodeURIComponent(reloadHref)}`);
   }
 
   const authPhone = resolveAthleteMobileNumber(user);

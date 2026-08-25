@@ -49,7 +49,7 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
   if (category.id !== "athlete") {
     const user = await getAuthUser();
     if (!user) {
-      redirect("/auth");
+      redirect(`/auth?next=${encodeURIComponent(`/register/${category.slug}`)}`);
     }
   }
 

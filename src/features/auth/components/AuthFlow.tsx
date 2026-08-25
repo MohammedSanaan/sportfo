@@ -19,7 +19,14 @@ const RESEND_COOLDOWN_SECONDS = 30;
 
 type Step = "phone" | "otp";
 
-export function AuthFlow() {
+interface AuthFlowProps {
+  // Already validated server-side by the /auth page (resolveSafeNextPath)
+  // -- null means absent/invalid, so routeAfterAuthentication falls back
+  // to its existing resolveAthleteDestination behavior.
+  safeNext?: string | null;
+}
+
+export function AuthFlow({ safeNext = null }: AuthFlowProps) {
   const router = useRouter();
   const { t } = useTranslation();
   const [supabase] = useState(() => createClient());
@@ -44,11 +51,14 @@ export function AuthFlow() {
     return () => clearInterval(timer);
   }, [cooldown]);
 
-  // After either flow produces a real authenticated session, routing is
-  // identical: look up the athlete's own profile (RLS-scoped) and land
-  // them on the right destination. router.refresh() forces the header's
-  // server-rendered auth state to pick up the new session immediately
-  // (see Header/AuthNav -- they don't otherwise re-render on client nav).
+  // After either flow produces a real authenticated session, routing
+  // prefers the visitor's original destination (safeNext, e.g. the
+  // registration category they picked before being sent to sign in) over
+  // the default Athlete-flow routing -- but only once a real session
+  // exists, same as the unauthenticated-visitor case. router.refresh()
+  // forces the header's server-rendered auth state to pick up the new
+  // session immediately (see Header/AuthNav -- they don't otherwise
+  // re-render on client nav).
   async function routeAfterAuthentication(userId: string) {
     // Idempotent get-or-create: assigns a permanent SportFo ID the first
     // time this account ever authenticates, and is a safe no-op (returns
@@ -57,6 +67,12 @@ export function AuthFlow() {
     const sportfoIdResult = await ensureSportfoId(supabase);
     if (!sportfoIdResult.ok) {
       console.error("ensureSportfoId failed:", sportfoIdResult.error);
+    }
+
+    if (safeNext) {
+      router.push(safeNext);
+      router.refresh();
+      return;
     }
 
     const { data: profile, error: profileError } = await lookupOwnAthleteProfile(

@@ -17,7 +17,15 @@ export async function proxy(request: NextRequest) {
   );
 
   if (isProtectedRoute && !user) {
-    const redirectResponse = NextResponse.redirect(new URL("/auth", request.url));
+    // Carries the visitor's original destination through /auth so a
+    // signed-out click on e.g. /register/performance-expert returns them
+    // there after login instead of always landing on the Athlete flow.
+    // /auth itself re-validates this (see resolveSafeNextPath) rather than
+    // trusting it just because Proxy generated it -- the query param is
+    // still attacker-visible/editable in the browser.
+    const authUrl = new URL("/auth", request.url);
+    authUrl.searchParams.set("next", pathname);
+    const redirectResponse = NextResponse.redirect(authUrl);
     // Carry over any cookie changes updateSupabaseSession already queued
     // (e.g. clearing an invalid/expired session) instead of discarding them.
     response.cookies.getAll().forEach((cookie) => {

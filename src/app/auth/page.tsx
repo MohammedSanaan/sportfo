@@ -9,6 +9,7 @@ import { resolveAthleteDestination } from "@/lib/athlete/resolve-destination";
 import { Badge } from "@/components/ui/Badge";
 import { AuthFlow } from "@/features/auth/components/AuthFlow";
 import { getAuthMode } from "@/lib/auth-mode";
+import { resolveSafeNextPath } from "@/lib/auth/safe-redirect";
 import { getServerTranslations } from "@/i18n/server";
 
 export const metadata: Metadata = {
@@ -16,10 +17,26 @@ export const metadata: Metadata = {
   description: "Join or sign in to SportFo with your mobile number.",
 };
 
-export default async function AuthPage() {
+interface AuthPageProps {
+  // Where to return the visitor after a successful sign-in -- set by
+  // Proxy/AthleteRegistrationScreen/the registration hub when they redirect
+  // a signed-out visitor here from e.g. /register/performance-expert.
+  // Untrusted input (a query param anyone can edit), so it's validated by
+  // resolveSafeNextPath before ever being used for a redirect, both below
+  // and in AuthFlow after login.
+  searchParams: Promise<{ next?: string }>;
+}
+
+export default async function AuthPage({ searchParams }: AuthPageProps) {
+  const { next } = await searchParams;
+  const safeNext = resolveSafeNextPath(next);
+
   const user = await getAuthUser();
 
   if (user) {
+    if (safeNext) {
+      redirect(safeNext);
+    }
     const supabase = await createClient();
     const { data: profile } = await lookupOwnAthleteProfile(supabase, user.id);
     redirect(resolveAthleteDestination(profile));
@@ -73,7 +90,7 @@ export default async function AuthPage() {
             <h1 className="text-lg font-semibold text-ink-900">{t("auth.pageTitle")}</h1>
             <p className="text-sm text-ink-500">{description}</p>
           </div>
-          <AuthFlow />
+          <AuthFlow safeNext={safeNext} />
         </div>
       </div>
     </div>
