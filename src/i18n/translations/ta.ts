@@ -90,7 +90,7 @@ const ta: Dictionary = {
           description: "பாரா விளையாட்டு வீரர்கள் உட்பட அனைத்து விளையாட்டுகளிலும் உள்ள வீரர்கள்.",
         },
         academiesCoaches: {
-          title: "அகாடமிகள் & பயிற்சியாளர்கள்",
+          title: "அகாடமிகள், பயிற்சியாளர்கள் & பெற்றோர்",
           description: "பயிற்சி கிளப்புகள் மற்றும் பயிற்சியாளர்கள்.",
         },
         performanceExperts: {
@@ -356,12 +356,13 @@ const ta: Dictionary = {
     },
     success: {
       title: "நீங்கள் தயார்",
-      message: "உங்கள் விளையாட்டு வீரர் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
-      welcome: "SportFo க்கு வரவேற்கிறோம்",
+      message: "உங்கள் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
+      welcome: "SportFo க்கு வரவேற்கிறோம், விளையாட்டு வீரரே!",
       yourSportfoId: "உங்கள் SportFo ID",
       sportfoIdHelper: "இந்த ID-ஐ பத்திரமாக வைத்திருங்கள். உங்கள் SportFo கணக்கை அடையாளம் காண இதைப் பயன்படுத்தலாம்.",
-      backHome: "முகப்புக்குத் திரும்பவும்",
-      viewProfile: "எனது சுயவிவரத்தைப் பார்க்கவும்",
+      viewDashboard: "டாஷ்போர்டைப் பார்க்கவும்",
+      completeProfile: "சுயவிவரத்தை முடிக்கவும்",
+      exploreCommunity: "சமூகத்தை ஆராயுங்கள்",
     },
     banners: {
       draftSaved: "வரைவு சேமிக்கப்பட்டது.",
@@ -486,6 +487,214 @@ const ta: Dictionary = {
       other: "மற்றவை",
     },
     scholarship: { yes: "ஆம்", no: "இல்லை" },
+  },
+  registerHub: {
+    pageTitle: "SportFo உடன் பதிவு செய்யுங்கள்",
+    pageSubtitle: "உங்கள் வகையைத் தேர்ந்தெடுக்கவும்",
+    chooseCategory: "வகையைத் தேர்ந்தெடுக்கவும்",
+    formDetailsTitle: "உங்கள் விவரங்கள்",
+    pendingNoticeShort:
+      "இந்த வகை இன்னும் SportFo உடன் இணைக்கப்படவில்லை. இப்போது படிவத்தை பூர்த்தி செய்யுங்கள், பதிவு தொடங்கியவுடன் உங்களுக்குத் தெரிவிப்போம்.",
+    pendingNotice:
+      "விவரங்களுக்கு நன்றி! {category} பதிவு இன்னும் செயலில் இல்லை, எனவே எதுவும் சேமிக்கப்படவில்லை. அது திறக்கும் தருணத்தில் உங்களுக்குத் தெரிவிப்போம்.",
+    actions: {
+      registerNow: "இப்போது பதிவு செய்யவும்",
+    },
+    upload: {
+      helper: "PDF, JPG, அல்லது PNG. அதிகபட்சம் {size}.",
+    },
+    validation: {
+      required: "இந்த புலம் தேவை.",
+      invalidUrl: "செல்லுபடியாகும் URL-ஐ உள்ளிடவும் (எ.கா. https://example.com).",
+      numberRange: "{min} மற்றும் {max} இடையே ஒரு எண்ணை உள்ளிடவும்.",
+    },
+    notFound: {
+      title: "வகை கிடைக்கவில்லை",
+      description: "அந்த பதிவு வகையை எங்களால் கண்டுபிடிக்க முடியவில்லை.",
+      action: "ஒரு வகையைத் தேர்ந்தெடுக்கவும்",
+    },
+    categories: {
+      athlete: {
+        formTitle: "ஒரு விளையாட்டு வீரராக பதிவு செய்யவும்",
+      },
+      academyCoachParent: {
+        formTitle: "அகாடமி / பயிற்சியாளர் / பெற்றோராக பதிவு செய்யவும்",
+        fields: {
+          academyCoachName: { label: "அகாடமி / பயிற்சியாளர் பெயர்" },
+          sportsOffered: {
+            label: "வழங்கப்படும் விளையாட்டுகள்",
+            placeholder: "எ.கா. கிரிக்கெட், கால்பந்து, பேட்மிண்டன்",
+          },
+          ageGroupsTrained: {
+            label: "பயிற்சி அளிக்கப்படும் வயது குழுக்கள்",
+            placeholder: "எ.கா. அண்டர்-12, அண்டர்-16, பெரியவர்கள்",
+          },
+          coachCertification: { label: "பயிற்சியாளர் சான்றிதழ்" },
+          experienceLevel: {
+            label: "அனுபவ நிலை",
+            options: {
+              "0-2 years": "0-2 ஆண்டுகள்",
+              "3-5 years": "3-5 ஆண்டுகள்",
+              "6-10 years": "6-10 ஆண்டுகள்",
+              "10+ years": "10+ ஆண்டுகள்",
+            },
+          },
+          location: { label: "இடம்" },
+          uploadAcademyInfo: { label: "அகாடமி தகவலைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "செயல்திறன் நிபுணராக பதிவு செய்யவும்",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          expertise: {
+            label: "நிபுணத்துவம்",
+            options: {
+              "Sports Physiotherapist": "ஸ்போர்ட்ஸ் பிசியோதெரபிஸ்ட்",
+              Nutritionist: "நியூட்ரிஷனிஸ்ட்",
+              "Sports Psychologist": "ஸ்போர்ட்ஸ் சைக்காலஜிஸ்ட்",
+              "Strength & Conditioning": "ஸ்ட்ரெங்த் & கண்டிஷனிங்",
+              "Performance Trainer": "பெர்ஃபார்மன்ஸ் ட்ரெய்னர்",
+              "Rehabilitation Specialist": "மறுவாழ்வு நிபுணர்",
+              Other: "மற்றவை",
+            },
+          },
+          experienceLevel: {
+            label: "அனுபவ நிலை",
+            options: {
+              "0-2 years": "0-2 ஆண்டுகள்",
+              "3-5 years": "3-5 ஆண்டுகள்",
+              "6-10 years": "6-10 ஆண்டுகள்",
+              "10+ years": "10+ ஆண்டுகள்",
+            },
+          },
+          servicesOffered: {
+            label: "வழங்கப்படும் சேவைகள்",
+            placeholder: "எ.கா. காயம் மீட்பு, வலிமை திட்டங்கள்",
+          },
+          certifications: { label: "சான்றிதழ்கள்" },
+          location: { label: "இடம்" },
+          uploadCertificate: { label: "சான்றிதழைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "மீடியா & கிரியேட்டராக பதிவு செய்யவும்",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          portfolioLink: { label: "போர்ட்ஃபோலியோ இணைப்பு" },
+          contentType: {
+            label: "உள்ளடக்க வகை",
+            options: {
+              Photography: "புகைப்படம்",
+              Videography: "வீடியோகிராஃபி",
+              Journalism: "பத்திரிகை",
+              "Sports Writing": "ஸ்போர்ட்ஸ் எழுத்து",
+              "Social Media": "சமூக ஊடகம்",
+              Broadcasting: "ஒளிபரப்பு",
+              Other: "மற்றவை",
+            },
+          },
+          socialMediaHandles: {
+            label: "சமூக ஊடக ஹேண்டில்கள்",
+            placeholder: "எ.கா. @yourhandle (இன்ஸ்டாகிராம், யூடியூப், X)",
+          },
+          location: { label: "இடம்" },
+          uploadPortfolio: { label: "போர்ட்ஃபோலியோவைப் பதிவேற்றவும்" },
+        },
+      },
+      managementLegal: {
+        formTitle: "ஸ்போர்ட்ஸ் மேனேஜ்மென்ட் & லீகல் ஆக பதிவு செய்யவும்",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          role: {
+            label: "பங்கு",
+            options: { Manager: "மேலாளர்", Agent: "முகவர்", Lawyer: "வழக்கறிஞர்", Consultant: "ஆலோசகர்" },
+          },
+          licenseNumber: { label: "உரிமத் எண்" },
+          organization: { label: "நிறுவனம்" },
+          experienceLevel: {
+            label: "அனுபவ நிலை",
+            options: {
+              "0-2 years": "0-2 ஆண்டுகள்",
+              "3-5 years": "3-5 ஆண்டுகள்",
+              "6-10 years": "6-10 ஆண்டுகள்",
+              "10+ years": "10+ ஆண்டுகள்",
+            },
+          },
+          location: { label: "இடம்" },
+          uploadLicense: { label: "உரிமத்தைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      eventOperations: {
+        formTitle: "ஈவென்ட் & ஆபரேஷன்ஸ் பணியாளராக பதிவு செய்யவும்",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          role: {
+            label: "பங்கு",
+            options: { Referee: "நடுவர்", Umpire: "அம்பயர்", Volunteer: "தன்னார்வலர்", Coordinator: "ஒருங்கிணைப்பாளர்" },
+          },
+          certification: { label: "சான்றிதழ்" },
+          experienceYears: { label: "அனுபவ ஆண்டுகள்" },
+          availability: { label: "கிடைக்கும் நேரம்", placeholder: "எ.கா. வார இறுதி நாட்கள், மாலை நேரங்கள்" },
+          location: { label: "இடம்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "ஸ்பான்சர் & CSR ஆக பதிவு செய்யவும்",
+        fields: {
+          organizationName: { label: "நிறுவனத்தின் பெயர்" },
+          contactPerson: { label: "தொடர்பு நபர்" },
+          sponsorshipInterest: {
+            label: "ஸ்பான்சர்ஷிப் ஆர்வம்",
+            options: {
+              Youth: "இளையோர்",
+              Women: "பெண்கள்",
+              Grassroots: "கிராஸ்ரூட்ஸ்",
+              "Para Sports": "பாரா விளையாட்டுகள்",
+              Academies: "அகாடமிகள்",
+              Events: "நிகழ்வுகள்",
+              "Talent Development": "திறமை மேம்பாடு",
+              Other: "மற்றவை",
+            },
+          },
+          budgetRange: {
+            label: "பட்ஜெட் வரம்பு",
+            options: {
+              "Under ₹1L": "₹1L க்கும் குறைவாக",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "விளையாட்டு கவனம்",
+            placeholder: "எ.கா. கிரிக்கெட், தடகளம், பாரா விளையாட்டுகள்",
+          },
+          location: { label: "இடம்" },
+          uploadProposal: { label: "முன்மொழிவைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "டேலன்ட் டிஸ்கவரி & அனலிடிக்ஸ் ஆக பதிவு செய்யவும்",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          role: {
+            label: "பங்கு",
+            options: { Scout: "ஸ்கவுட்", Analyst: "அனலிஸ்ட்", "Data Expert": "டேட்டா நிபுணர்" },
+          },
+          toolsUsed: { label: "பயன்படுத்தப்பட்ட கருவிகள்", placeholder: "எ.கா. Hudl, Dartfish" },
+          experienceYears: { label: "அனுபவ ஆண்டுகள்" },
+          sportsSpecialization: { label: "விளையாட்டு நிபுணத்துவம்", placeholder: "எ.கா. கால்பந்து, தடகளம்" },
+          location: { label: "இடம்" },
+          uploadPortfolioReport: { label: "போர்ட்ஃபோலியோ / அறிக்கையைப் பதிவேற்றவும்" },
+        },
+      },
+    },
   },
 };
 

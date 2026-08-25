@@ -1,5 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { TFunc } from "@/i18n/dictionary";
+import { REGISTRATION_CATEGORIES } from "@/lib/registration/categories";
 
 const ROLE_KEYS = [
   "athletes",
@@ -11,6 +13,13 @@ const ROLE_KEYS = [
   "sponsorsCsr",
   "talentAnalytics",
 ] as const;
+
+// Each of these 8 role cards is the entry point into
+// /register/{category} -- one registration route per Community role, kept
+// in the same order the cards render in.
+const ROLE_REGISTER_HREF: Record<(typeof ROLE_KEYS)[number], string> = Object.fromEntries(
+  REGISTRATION_CATEGORIES.map((category) => [category.roleKey, `/register/${category.slug}`]),
+) as Record<(typeof ROLE_KEYS)[number], string>;
 
 // The one role with no supporting line in the original copy -- rendered
 // title-only rather than inventing new descriptive copy for it.
@@ -48,6 +57,7 @@ export function WhoWeServeSection({ t }: { t: TFunc }) {
       ? undefined
       : t(`home.community.roles.${key}.description`),
     image: ROLE_IMAGES[key],
+    href: ROLE_REGISTER_HREF[key],
   }));
 
   return (
@@ -67,9 +77,10 @@ export function WhoWeServeSection({ t }: { t: TFunc }) {
 
         <div className="mt-12 grid grid-cols-1 gap-6 text-center sm:grid-cols-2 lg:grid-cols-4">
           {roles.map((role) => (
-            <div
+            <Link
               key={role.key}
-              className="stitch-card-lift group flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover"
+              href={role.href}
+              className="stitch-card-lift group flex h-full flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 hover:border-t-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
             >
               <div className="relative aspect-video w-full overflow-hidden">
                 <Image
@@ -88,7 +99,7 @@ export function WhoWeServeSection({ t }: { t: TFunc }) {
                   <p className="mt-2 text-sm leading-relaxed text-gray-600">{role.description}</p>
                 ) : null}
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

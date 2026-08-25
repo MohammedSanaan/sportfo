@@ -90,7 +90,7 @@ const en = {
           description: "Players across all sports, including para athletes.",
         },
         academiesCoaches: {
-          title: "Academies & Coaches",
+          title: "Academies, Coaches & Parents",
           description: "Training clubs and coaches.",
         },
         performanceExperts: {
@@ -355,12 +355,13 @@ const en = {
     },
     success: {
       title: "You're all set",
-      message: "Your athlete profile has been created successfully.",
-      welcome: "Welcome to SportFo",
+      message: "Your profile has been created successfully.",
+      welcome: "Welcome to SportFo, Athlete!",
       yourSportfoId: "Your SportFo ID",
       sportfoIdHelper: "Keep this ID handy. You can use it to identify your SportFo account.",
-      backHome: "Back to Home",
-      viewProfile: "View My Profile",
+      viewDashboard: "View Dashboard",
+      completeProfile: "Complete Profile",
+      exploreCommunity: "Explore Community",
     },
     banners: {
       draftSaved: "Draft saved.",
@@ -485,6 +486,237 @@ const en = {
       other: "Other",
     },
     scholarship: { yes: "Yes", no: "No" },
+  },
+  registerHub: {
+    pageTitle: "Register with SportFo",
+    pageSubtitle: "Select Your Category",
+    chooseCategory: "Choose Category",
+    formDetailsTitle: "Your Details",
+    pendingNoticeShort:
+      "This category isn't connected to SportFo yet. Fill out the form now and we'll notify you the moment registration goes live.",
+    pendingNotice:
+      "Thanks for the details! {category} registration isn't live yet, so nothing was saved. We'll let you know the moment it opens.",
+    actions: {
+      registerNow: "Register Now",
+    },
+    upload: {
+      helper: "PDF, JPG, or PNG. Max {size}.",
+    },
+    validation: {
+      required: "This field is required.",
+      invalidUrl: "Enter a valid URL (e.g. https://example.com).",
+      numberRange: "Enter a number between {min} and {max}.",
+    },
+    notFound: {
+      title: "Category not found",
+      description: "We couldn't find that registration category.",
+      action: "Choose a category",
+    },
+    categories: {
+      athlete: {
+        formTitle: "Register as an Athlete",
+      },
+      academyCoachParent: {
+        formTitle: "Register as an Academy / Coach / Parent",
+        fields: {
+          academyCoachName: { label: "Academy / Coach Name" },
+          sportsOffered: {
+            label: "Sports Offered",
+            placeholder: "e.g. Cricket, Football, Badminton",
+          },
+          ageGroupsTrained: {
+            label: "Age Groups Trained",
+            placeholder: "e.g. Under-12, Under-16, Adults",
+          },
+          coachCertification: { label: "Coach Certification" },
+          experienceLevel: {
+            label: "Experience Level",
+            options: {
+              "0-2 years": "0-2 years",
+              "3-5 years": "3-5 years",
+              "6-10 years": "6-10 years",
+              "10+ years": "10+ years",
+            },
+          },
+          location: { label: "Location" },
+          uploadAcademyInfo: { label: "Upload Academy Info" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "Register as a Performance Expert",
+        fields: {
+          fullName: { label: "Full Name" },
+          expertise: {
+            label: "Expertise",
+            options: {
+              "Sports Physiotherapist": "Sports Physiotherapist",
+              Nutritionist: "Nutritionist",
+              "Sports Psychologist": "Sports Psychologist",
+              "Strength & Conditioning": "Strength & Conditioning",
+              "Performance Trainer": "Performance Trainer",
+              "Rehabilitation Specialist": "Rehabilitation Specialist",
+              Other: "Other",
+            },
+          },
+          experienceLevel: {
+            label: "Experience Level",
+            options: {
+              "0-2 years": "0-2 years",
+              "3-5 years": "3-5 years",
+              "6-10 years": "6-10 years",
+              "10+ years": "10+ years",
+            },
+          },
+          servicesOffered: {
+            label: "Services Offered",
+            placeholder: "e.g. Injury recovery, strength programs",
+          },
+          certifications: { label: "Certifications" },
+          location: { label: "Location" },
+          uploadCertificate: { label: "Upload Certificate" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "Register as Media & Creator",
+        fields: {
+          fullName: { label: "Full Name" },
+          portfolioLink: { label: "Portfolio Link" },
+          contentType: {
+            label: "Content Type",
+            options: {
+              Photography: "Photography",
+              Videography: "Videography",
+              Journalism: "Journalism",
+              "Sports Writing": "Sports Writing",
+              "Social Media": "Social Media",
+              Broadcasting: "Broadcasting",
+              Other: "Other",
+            },
+          },
+          socialMediaHandles: {
+            label: "Social Media Handles",
+            placeholder: "e.g. @yourhandle (Instagram, YouTube, X)",
+          },
+          location: { label: "Location" },
+          uploadPortfolio: { label: "Upload Portfolio" },
+        },
+      },
+      managementLegal: {
+        formTitle: "Register as Sports Management & Legal",
+        fields: {
+          fullName: { label: "Full Name" },
+          role: {
+            label: "Role",
+            options: {
+              Manager: "Manager",
+              Agent: "Agent",
+              Lawyer: "Lawyer",
+              Consultant: "Consultant",
+            },
+          },
+          licenseNumber: { label: "License Number" },
+          organization: { label: "Organization" },
+          experienceLevel: {
+            label: "Experience Level",
+            options: {
+              "0-2 years": "0-2 years",
+              "3-5 years": "3-5 years",
+              "6-10 years": "6-10 years",
+              "10+ years": "10+ years",
+            },
+          },
+          location: { label: "Location" },
+          uploadLicense: { label: "Upload License" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      eventOperations: {
+        formTitle: "Register as Event & Operations Staff",
+        fields: {
+          fullName: { label: "Full Name" },
+          role: {
+            label: "Role",
+            options: {
+              Referee: "Referee",
+              Umpire: "Umpire",
+              Volunteer: "Volunteer",
+              Coordinator: "Coordinator",
+            },
+          },
+          certification: { label: "Certification" },
+          experienceYears: { label: "Experience Years" },
+          availability: {
+            label: "Availability",
+            placeholder: "e.g. Weekends, Evenings",
+          },
+          location: { label: "Location" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "Register as Sponsor & CSR",
+        fields: {
+          organizationName: { label: "Organization Name" },
+          contactPerson: { label: "Contact Person" },
+          sponsorshipInterest: {
+            label: "Sponsorship Interest",
+            options: {
+              Youth: "Youth",
+              Women: "Women",
+              Grassroots: "Grassroots",
+              "Para Sports": "Para Sports",
+              Academies: "Academies",
+              Events: "Events",
+              "Talent Development": "Talent Development",
+              Other: "Other",
+            },
+          },
+          budgetRange: {
+            label: "Budget Range",
+            options: {
+              "Under ₹1L": "Under ₹1L",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "Sports Focus",
+            placeholder: "e.g. Cricket, Athletics, Para Sports",
+          },
+          location: { label: "Location" },
+          uploadProposal: { label: "Upload Proposal" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "Register as Talent Discovery & Analytics",
+        fields: {
+          fullName: { label: "Full Name" },
+          role: {
+            label: "Role",
+            options: {
+              Scout: "Scout",
+              Analyst: "Analyst",
+              "Data Expert": "Data Expert",
+            },
+          },
+          toolsUsed: {
+            label: "Tools Used",
+            placeholder: "e.g. Hudl, Dartfish",
+          },
+          experienceYears: { label: "Experience Years" },
+          sportsSpecialization: {
+            label: "Sports Specialization",
+            placeholder: "e.g. Football, Athletics",
+          },
+          location: { label: "Location" },
+          uploadPortfolioReport: { label: "Upload Portfolio / Report" },
+        },
+      },
+    },
   },
 } as const;
 

@@ -88,7 +88,7 @@ const hi: Dictionary = {
           description: "पैरा-एथलीटों सहित सभी खेलों के खिलाड़ी।",
         },
         academiesCoaches: {
-          title: "अकादमियाँ और कोच",
+          title: "अकादमियाँ, कोच और अभिभावक",
           description: "प्रशिक्षण क्लब और कोच।",
         },
         performanceExperts: {
@@ -352,12 +352,13 @@ const hi: Dictionary = {
     },
     success: {
       title: "आप तैयार हैं",
-      message: "आपकी एथलीट प्रोफ़ाइल सफलतापूर्वक बना दी गई है।",
-      welcome: "SportFo में आपका स्वागत है",
+      message: "आपकी प्रोफ़ाइल सफलतापूर्वक बना दी गई है।",
+      welcome: "SportFo में आपका स्वागत है, एथलीट!",
       yourSportfoId: "आपकी SportFo ID",
       sportfoIdHelper: "इस ID को संभाल कर रखें। आप इसका उपयोग अपना SportFo खाता पहचानने के लिए कर सकते हैं।",
-      backHome: "होम पर वापस जाएं",
-      viewProfile: "मेरी प्रोफ़ाइल देखें",
+      viewDashboard: "डैशबोर्ड देखें",
+      completeProfile: "प्रोफ़ाइल पूरी करें",
+      exploreCommunity: "समुदाय देखें",
     },
     banners: {
       draftSaved: "ड्राफ़्ट सहेजा गया।",
@@ -482,6 +483,213 @@ const hi: Dictionary = {
       other: "अन्य",
     },
     scholarship: { yes: "हाँ", no: "नहीं" },
+  },
+  registerHub: {
+    pageTitle: "SportFo के साथ पंजीकरण करें",
+    pageSubtitle: "अपनी श्रेणी चुनें",
+    chooseCategory: "श्रेणी चुनें",
+    formDetailsTitle: "आपका विवरण",
+    pendingNoticeShort:
+      "यह श्रेणी अभी SportFo से नहीं जुड़ी है। अभी फ़ॉर्म भरें, पंजीकरण शुरू होते ही हम आपको सूचित करेंगे।",
+    pendingNotice:
+      "विवरण देने के लिए धन्यवाद! {category} पंजीकरण अभी लाइव नहीं है, इसलिए कुछ भी सहेजा नहीं गया। शुरू होते ही हम आपको बताएंगे।",
+    actions: {
+      registerNow: "अभी पंजीकरण करें",
+    },
+    upload: {
+      helper: "PDF, JPG, या PNG। अधिकतम {size}।",
+    },
+    validation: {
+      required: "यह फ़ील्ड आवश्यक है।",
+      invalidUrl: "एक मान्य URL दर्ज करें (जैसे https://example.com)।",
+      numberRange: "{min} और {max} के बीच एक संख्या दर्ज करें।",
+    },
+    notFound: {
+      title: "श्रेणी नहीं मिली",
+      description: "हमें वह पंजीकरण श्रेणी नहीं मिली।",
+      action: "एक श्रेणी चुनें",
+    },
+    categories: {
+      athlete: {
+        formTitle: "एक एथलीट के रूप में पंजीकरण करें",
+      },
+      academyCoachParent: {
+        formTitle: "अकादमी / कोच / अभिभावक के रूप में पंजीकरण करें",
+        fields: {
+          academyCoachName: { label: "अकादमी / कोच का नाम" },
+          sportsOffered: { label: "प्रस्तावित खेल", placeholder: "जैसे क्रिकेट, फुटबॉल, बैडमिंटन" },
+          ageGroupsTrained: {
+            label: "प्रशिक्षित आयु समूह",
+            placeholder: "जैसे अंडर-12, अंडर-16, वयस्क",
+          },
+          coachCertification: { label: "कोच प्रमाणन" },
+          experienceLevel: {
+            label: "अनुभव स्तर",
+            options: {
+              "0-2 years": "0-2 वर्ष",
+              "3-5 years": "3-5 वर्ष",
+              "6-10 years": "6-10 वर्ष",
+              "10+ years": "10+ वर्ष",
+            },
+          },
+          location: { label: "स्थान" },
+          uploadAcademyInfo: { label: "अकादमी जानकारी अपलोड करें" },
+          uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "परफॉर्मेंस एक्सपर्ट के रूप में पंजीकरण करें",
+        fields: {
+          fullName: { label: "पूरा नाम" },
+          expertise: {
+            label: "विशेषज्ञता",
+            options: {
+              "Sports Physiotherapist": "स्पोर्ट्स फिजियोथेरेपिस्ट",
+              Nutritionist: "न्यूट्रिशनिस्ट",
+              "Sports Psychologist": "स्पोर्ट्स साइकोलॉजिस्ट",
+              "Strength & Conditioning": "स्ट्रेंथ एंड कंडीशनिंग",
+              "Performance Trainer": "परफॉर्मेंस ट्रेनर",
+              "Rehabilitation Specialist": "रिहैबिलिटेशन स्पेशलिस्ट",
+              Other: "अन्य",
+            },
+          },
+          experienceLevel: {
+            label: "अनुभव स्तर",
+            options: {
+              "0-2 years": "0-2 वर्ष",
+              "3-5 years": "3-5 वर्ष",
+              "6-10 years": "6-10 वर्ष",
+              "10+ years": "10+ वर्ष",
+            },
+          },
+          servicesOffered: {
+            label: "दी जाने वाली सेवाएं",
+            placeholder: "जैसे चोट से रिकवरी, स्ट्रेंथ प्रोग्राम",
+          },
+          certifications: { label: "प्रमाणपत्र" },
+          location: { label: "स्थान" },
+          uploadCertificate: { label: "प्रमाणपत्र अपलोड करें" },
+          uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "मीडिया और क्रिएटर के रूप में पंजीकरण करें",
+        fields: {
+          fullName: { label: "पूरा नाम" },
+          portfolioLink: { label: "पोर्टफोलियो लिंक" },
+          contentType: {
+            label: "कंटेंट प्रकार",
+            options: {
+              Photography: "फोटोग्राफी",
+              Videography: "वीडियोग्राफी",
+              Journalism: "पत्रकारिता",
+              "Sports Writing": "स्पोर्ट्स राइटिंग",
+              "Social Media": "सोशल मीडिया",
+              Broadcasting: "प्रसारण",
+              Other: "अन्य",
+            },
+          },
+          socialMediaHandles: {
+            label: "सोशल मीडिया हैंडल",
+            placeholder: "जैसे @yourhandle (इंस्टाग्राम, यूट्यूब, X)",
+          },
+          location: { label: "स्थान" },
+          uploadPortfolio: { label: "पोर्टफोलियो अपलोड करें" },
+        },
+      },
+      managementLegal: {
+        formTitle: "स्पोर्ट्स मैनेजमेंट और लीगल के रूप में पंजीकरण करें",
+        fields: {
+          fullName: { label: "पूरा नाम" },
+          role: {
+            label: "भूमिका",
+            options: { Manager: "मैनेजर", Agent: "एजेंट", Lawyer: "वकील", Consultant: "सलाहकार" },
+          },
+          licenseNumber: { label: "लाइसेंस नंबर" },
+          organization: { label: "संगठन" },
+          experienceLevel: {
+            label: "अनुभव स्तर",
+            options: {
+              "0-2 years": "0-2 वर्ष",
+              "3-5 years": "3-5 वर्ष",
+              "6-10 years": "6-10 वर्ष",
+              "10+ years": "10+ वर्ष",
+            },
+          },
+          location: { label: "स्थान" },
+          uploadLicense: { label: "लाइसेंस अपलोड करें" },
+          uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
+        },
+      },
+      eventOperations: {
+        formTitle: "इवेंट और ऑपरेशंस स्टाफ के रूप में पंजीकरण करें",
+        fields: {
+          fullName: { label: "पूरा नाम" },
+          role: {
+            label: "भूमिका",
+            options: {
+              Referee: "रेफरी",
+              Umpire: "अंपायर",
+              Volunteer: "स्वयंसेवक",
+              Coordinator: "समन्वयक",
+            },
+          },
+          certification: { label: "प्रमाणन" },
+          experienceYears: { label: "अनुभव के वर्ष" },
+          availability: { label: "उपलब्धता", placeholder: "जैसे सप्ताहांत, शाम" },
+          location: { label: "स्थान" },
+          uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "स्पॉन्सर और CSR के रूप में पंजीकरण करें",
+        fields: {
+          organizationName: { label: "संगठन का नाम" },
+          contactPerson: { label: "संपर्क व्यक्ति" },
+          sponsorshipInterest: {
+            label: "स्पॉन्सरशिप रुचि",
+            options: {
+              Youth: "युवा",
+              Women: "महिलाएं",
+              Grassroots: "ग्रासरूट्स",
+              "Para Sports": "पैरा स्पोर्ट्स",
+              Academies: "अकादमियां",
+              Events: "इवेंट्स",
+              "Talent Development": "टैलेंट डेवलपमेंट",
+              Other: "अन्य",
+            },
+          },
+          budgetRange: {
+            label: "बजट रेंज",
+            options: {
+              "Under ₹1L": "₹1L से कम",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: { label: "खेल फोकस", placeholder: "जैसे क्रिकेट, एथलेटिक्स, पैरा स्पोर्ट्स" },
+          location: { label: "स्थान" },
+          uploadProposal: { label: "प्रस्ताव अपलोड करें" },
+          uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "टैलेंट डिस्कवरी और एनालिटिक्स के रूप में पंजीकरण करें",
+        fields: {
+          fullName: { label: "पूरा नाम" },
+          role: {
+            label: "भूमिका",
+            options: { Scout: "स्काउट", Analyst: "एनालिस्ट", "Data Expert": "डेटा एक्सपर्ट" },
+          },
+          toolsUsed: { label: "उपयोग किए गए टूल्स", placeholder: "जैसे Hudl, Dartfish" },
+          experienceYears: { label: "अनुभव के वर्ष" },
+          sportsSpecialization: { label: "खेल विशेषज्ञता", placeholder: "जैसे फुटबॉल, एथलेटिक्स" },
+          location: { label: "स्थान" },
+          uploadPortfolioReport: { label: "पोर्टफोलियो / रिपोर्ट अपलोड करें" },
+        },
+      },
+    },
   },
 };
 

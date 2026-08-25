@@ -90,7 +90,7 @@ const te: Dictionary = {
           description: "పారా అథ్లెట్లతో సహా అన్ని క్రీడలలోని ఆటగాళ్ళు.",
         },
         academiesCoaches: {
-          title: "అకాడమీలు & కోచ్‌లు",
+          title: "అకాడమీలు, కోచ్‌లు & తల్లిదండ్రులు",
           description: "శిక్షణా క్లబ్‌లు మరియు కోచ్‌లు.",
         },
         performanceExperts: {
@@ -354,12 +354,13 @@ const te: Dictionary = {
     },
     success: {
       title: "మీరు సిద్ధంగా ఉన్నారు",
-      message: "మీ అథ్లెట్ ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
-      welcome: "SportFo కు స్వాగతం",
+      message: "మీ ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
+      welcome: "SportFo కు స్వాగతం, అథ్లెట్!",
       yourSportfoId: "మీ SportFo ID",
       sportfoIdHelper: "ఈ IDని జాగ్రత్తగా ఉంచుకోండి. మీ SportFo ఖాతాను గుర్తించడానికి మీరు దీన్ని ఉపయోగించవచ్చు.",
-      backHome: "హోమ్‌కు తిరిగి వెళ్ళండి",
-      viewProfile: "నా ప్రొఫైల్‌ను వీక్షించండి",
+      viewDashboard: "డాష్‌బోర్డ్‌ను వీక్షించండి",
+      completeProfile: "ప్రొఫైల్‌ను పూర్తి చేయండి",
+      exploreCommunity: "కమ్యూనిటీని అన్వేషించండి",
     },
     banners: {
       draftSaved: "డ్రాఫ్ట్ సేవ్ చేయబడింది.",
@@ -484,6 +485,214 @@ const te: Dictionary = {
       other: "ఇతర",
     },
     scholarship: { yes: "అవును", no: "కాదు" },
+  },
+  registerHub: {
+    pageTitle: "SportFo తో నమోదు చేసుకోండి",
+    pageSubtitle: "మీ వర్గాన్ని ఎంచుకోండి",
+    chooseCategory: "వర్గాన్ని ఎంచుకోండి",
+    formDetailsTitle: "మీ వివరాలు",
+    pendingNoticeShort:
+      "ఈ వర్గం ఇంకా SportFo కి కనెక్ట్ కాలేదు. ఇప్పుడు ఫారమ్‌ను పూరించండి, నమోదు ప్రారంభమైన వెంటనే మేము మీకు తెలియజేస్తాము.",
+    pendingNotice:
+      "వివరాలు ఇచ్చినందుకు ధన్యవాదాలు! {category} నమోదు ఇంకా లైవ్‌లో లేదు, కాబట్టి ఏమీ సేవ్ చేయబడలేదు. అది తెరిచిన వెంటనే మేము మీకు తెలియజేస్తాము.",
+    actions: {
+      registerNow: "ఇప్పుడు నమోదు చేసుకోండి",
+    },
+    upload: {
+      helper: "PDF, JPG, లేదా PNG. గరిష్టం {size}.",
+    },
+    validation: {
+      required: "ఈ ఫీల్డ్ అవసరం.",
+      invalidUrl: "చెల్లుబాటు అయ్యే URLని నమోదు చేయండి (ఉదా. https://example.com).",
+      numberRange: "{min} మరియు {max} మధ్య సంఖ్యను నమోదు చేయండి.",
+    },
+    notFound: {
+      title: "వర్గం కనుగొనబడలేదు",
+      description: "ఆ నమోదు వర్గం మాకు కనుగొనబడలేదు.",
+      action: "ఒక వర్గాన్ని ఎంచుకోండి",
+    },
+    categories: {
+      athlete: {
+        formTitle: "అథ్లెట్‌గా నమోదు చేసుకోండి",
+      },
+      academyCoachParent: {
+        formTitle: "అకాడమీ / కోచ్ / తల్లిదండ్రులుగా నమోదు చేసుకోండి",
+        fields: {
+          academyCoachName: { label: "అకాడమీ / కోచ్ పేరు" },
+          sportsOffered: {
+            label: "అందించే క్రీడలు",
+            placeholder: "ఉదా. క్రికెట్, ఫుట్‌బాల్, బ్యాడ్మింటన్",
+          },
+          ageGroupsTrained: {
+            label: "శిక్షణ ఇచ్చే వయస్సు గ్రూపులు",
+            placeholder: "ఉదా. అండర్-12, అండర్-16, పెద్దలు",
+          },
+          coachCertification: { label: "కోచ్ సర్టిఫికేషన్" },
+          experienceLevel: {
+            label: "అనుభవ స్థాయి",
+            options: {
+              "0-2 years": "0-2 సంవత్సరాలు",
+              "3-5 years": "3-5 సంవత్సరాలు",
+              "6-10 years": "6-10 సంవత్సరాలు",
+              "10+ years": "10+ సంవత్సరాలు",
+            },
+          },
+          location: { label: "ప్రాంతం" },
+          uploadAcademyInfo: { label: "అకాడమీ సమాచారాన్ని అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "పెర్ఫార్మెన్స్ ఎక్స్‌పర్ట్‌గా నమోదు చేసుకోండి",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          expertise: {
+            label: "నైపుణ్యం",
+            options: {
+              "Sports Physiotherapist": "స్పోర్ట్స్ ఫిజియోథెరపిస్ట్",
+              Nutritionist: "న్యూట్రిషనిస్ట్",
+              "Sports Psychologist": "స్పోర్ట్స్ సైకాలజిస్ట్",
+              "Strength & Conditioning": "స్ట్రెంత్ & కండిషనింగ్",
+              "Performance Trainer": "పెర్ఫార్మెన్స్ ట్రైనర్",
+              "Rehabilitation Specialist": "రిహాబిలిటేషన్ స్పెషలిస్ట్",
+              Other: "ఇతర",
+            },
+          },
+          experienceLevel: {
+            label: "అనుభవ స్థాయి",
+            options: {
+              "0-2 years": "0-2 సంవత్సరాలు",
+              "3-5 years": "3-5 సంవత్సరాలు",
+              "6-10 years": "6-10 సంవత్సరాలు",
+              "10+ years": "10+ సంవత్సరాలు",
+            },
+          },
+          servicesOffered: {
+            label: "అందించే సేవలు",
+            placeholder: "ఉదా. గాయం రికవరీ, స్ట్రెంత్ ప్రోగ్రామ్‌లు",
+          },
+          certifications: { label: "సర్టిఫికేషన్లు" },
+          location: { label: "ప్రాంతం" },
+          uploadCertificate: { label: "సర్టిఫికేట్‌ను అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "మీడియా & క్రియేటర్‌గా నమోదు చేసుకోండి",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          portfolioLink: { label: "పోర్ట్‌ఫోలియో లింక్" },
+          contentType: {
+            label: "కంటెంట్ రకం",
+            options: {
+              Photography: "ఫోటోగ్రఫీ",
+              Videography: "వీడియోగ్రఫీ",
+              Journalism: "జర్నలిజం",
+              "Sports Writing": "స్పోర్ట్స్ రైటింగ్",
+              "Social Media": "సోషల్ మీడియా",
+              Broadcasting: "బ్రాడ్‌కాస్టింగ్",
+              Other: "ఇతర",
+            },
+          },
+          socialMediaHandles: {
+            label: "సోషల్ మీడియా హ్యాండిల్స్",
+            placeholder: "ఉదా. @yourhandle (ఇన్‌స్టాగ్రామ్, యూట్యూబ్, X)",
+          },
+          location: { label: "ప్రాంతం" },
+          uploadPortfolio: { label: "పోర్ట్‌ఫోలియోను అప్‌లోడ్ చేయండి" },
+        },
+      },
+      managementLegal: {
+        formTitle: "స్పోర్ట్స్ మేనేజ్‌మెంట్ & లీగల్‌గా నమోదు చేసుకోండి",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          role: {
+            label: "పాత్ర",
+            options: { Manager: "మేనేజర్", Agent: "ఏజెంట్", Lawyer: "న్యాయవాది", Consultant: "కన్సల్టెంట్" },
+          },
+          licenseNumber: { label: "లైసెన్స్ నంబర్" },
+          organization: { label: "సంస్థ" },
+          experienceLevel: {
+            label: "అనుభవ స్థాయి",
+            options: {
+              "0-2 years": "0-2 సంవత్సరాలు",
+              "3-5 years": "3-5 సంవత్సరాలు",
+              "6-10 years": "6-10 సంవత్సరాలు",
+              "10+ years": "10+ సంవత్సరాలు",
+            },
+          },
+          location: { label: "ప్రాంతం" },
+          uploadLicense: { label: "లైసెన్స్‌ను అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      eventOperations: {
+        formTitle: "ఈవెంట్ & ఆపరేషన్స్ స్టాఫ్‌గా నమోదు చేసుకోండి",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          role: {
+            label: "పాత్ర",
+            options: { Referee: "రిఫరీ", Umpire: "అంపైర్", Volunteer: "వాలంటీర్", Coordinator: "కోఆర్డినేటర్" },
+          },
+          certification: { label: "సర్టిఫికేషన్" },
+          experienceYears: { label: "అనుభవ సంవత్సరాలు" },
+          availability: { label: "అందుబాటు", placeholder: "ఉదా. వారాంతాలు, సాయంత్రాలు" },
+          location: { label: "ప్రాంతం" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "స్పాన్సర్ & CSR గా నమోదు చేసుకోండి",
+        fields: {
+          organizationName: { label: "సంస్థ పేరు" },
+          contactPerson: { label: "సంప్రదింపు వ్యక్తి" },
+          sponsorshipInterest: {
+            label: "స్పాన్సర్‌షిప్ ఆసక్తి",
+            options: {
+              Youth: "యువత",
+              Women: "మహిళలు",
+              Grassroots: "గ్రాస్‌రూట్స్",
+              "Para Sports": "పారా స్పోర్ట్స్",
+              Academies: "అకాడమీలు",
+              Events: "ఈవెంట్‌లు",
+              "Talent Development": "టాలెంట్ డెవలప్‌మెంట్",
+              Other: "ఇతర",
+            },
+          },
+          budgetRange: {
+            label: "బడ్జెట్ పరిధి",
+            options: {
+              "Under ₹1L": "₹1L కంటే తక్కువ",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "క్రీడా దృష్టి",
+            placeholder: "ఉదా. క్రికెట్, అథ్లెటిక్స్, పారా స్పోర్ట్స్",
+          },
+          location: { label: "ప్రాంతం" },
+          uploadProposal: { label: "ప్రతిపాదనను అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "టాలెంట్ డిస్కవరీ & అనలిటిక్స్‌గా నమోదు చేసుకోండి",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          role: {
+            label: "పాత్ర",
+            options: { Scout: "స్కౌట్", Analyst: "అనలిస్ట్", "Data Expert": "డేటా ఎక్స్‌పర్ట్" },
+          },
+          toolsUsed: { label: "ఉపయోగించిన సాధనాలు", placeholder: "ఉదా. Hudl, Dartfish" },
+          experienceYears: { label: "అనుభవ సంవత్సరాలు" },
+          sportsSpecialization: { label: "క్రీడా ప్రత్యేకత", placeholder: "ఉదా. ఫుట్‌బాల్, అథ్లెటిక్స్" },
+          location: { label: "ప్రాంతం" },
+          uploadPortfolioReport: { label: "పోర్ట్‌ఫోలియో / నివేదికను అప్‌లోడ్ చేయండి" },
+        },
+      },
+    },
   },
 };
 

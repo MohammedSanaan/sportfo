@@ -31,15 +31,20 @@ export function RegistrationSuccess({ sportfoId }: RegistrationSuccessProps) {
         )}
 
         <p className="text-base text-ink-700">{t("register.success.message")}</p>
-        <div className="flex w-full flex-col-reverse gap-3 sm:w-auto sm:flex-row">
-          <Link href="/" className="sm:w-auto">
-            <Button type="button" variant="secondary">
-              {t("register.success.backHome")}
-            </Button>
-          </Link>
+        <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
           <Link href="/athlete/profile" className="sm:w-auto">
             <Button type="button" variant="primary">
-              {t("register.success.viewProfile")}
+              {t("register.success.viewDashboard")}
+            </Button>
+          </Link>
+          <Link href="/athlete/register" className="sm:w-auto">
+            <Button type="button" variant="secondary">
+              {t("register.success.completeProfile")}
+            </Button>
+          </Link>
+          <Link href="/#community" className="sm:w-auto">
+            <Button type="button" variant="secondary">
+              {t("register.success.exploreCommunity")}
             </Button>
           </Link>
         </div>

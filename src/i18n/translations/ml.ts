@@ -90,7 +90,7 @@ const ml: Dictionary = {
           description: "പാരാ അത്‌ലറ്റുകൾ ഉൾപ്പെടെ എല്ലാ കായിക ഇനങ്ങളിലെയും കളിക്കാർ.",
         },
         academiesCoaches: {
-          title: "അക്കാദമികളും കോച്ചുകളും",
+          title: "അക്കാദമികൾ, കോച്ചുകൾ & രക്ഷിതാക്കൾ",
           description: "പരിശീലന ക്ലബ്ബുകളും കോച്ചുകളും.",
         },
         performanceExperts: {
@@ -354,12 +354,13 @@ const ml: Dictionary = {
     },
     success: {
       title: "നിങ്ങൾ തയ്യാറാണ്",
-      message: "നിങ്ങളുടെ അത്‌ലറ്റ് പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
-      welcome: "SportFo ലേക്ക് സ്വാഗതം",
+      message: "നിങ്ങളുടെ പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
+      welcome: "SportFo ലേക്ക് സ്വാഗതം, അത്‌ലറ്റ്!",
       yourSportfoId: "നിങ്ങളുടെ SportFo ID",
       sportfoIdHelper: "ഈ ID സൂക്ഷിച്ചു വയ്ക്കുക. നിങ്ങളുടെ SportFo അക്കൗണ്ട് തിരിച്ചറിയാൻ ഇത് ഉപയോഗിക്കാം.",
-      backHome: "ഹോമിലേക്ക് മടങ്ങുക",
-      viewProfile: "എന്റെ പ്രൊഫൈൽ കാണുക",
+      viewDashboard: "ഡാഷ്ബോർഡ് കാണുക",
+      completeProfile: "പ്രൊഫൈൽ പൂർത്തിയാക്കുക",
+      exploreCommunity: "കമ്മ്യൂണിറ്റി പര്യവേക്ഷണം ചെയ്യുക",
     },
     banners: {
       draftSaved: "ഡ്രാഫ്റ്റ് സേവ് ചെയ്തു.",
@@ -484,6 +485,214 @@ const ml: Dictionary = {
       other: "മറ്റുള്ളവ",
     },
     scholarship: { yes: "അതെ", no: "ഇല്ല" },
+  },
+  registerHub: {
+    pageTitle: "SportFo യുമായി രജിസ്റ്റർ ചെയ്യുക",
+    pageSubtitle: "നിങ്ങളുടെ വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    chooseCategory: "വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    formDetailsTitle: "നിങ്ങളുടെ വിവരങ്ങൾ",
+    pendingNoticeShort:
+      "ഈ വിഭാഗം ഇതുവരെ SportFo യുമായി ബന്ധിപ്പിച്ചിട്ടില്ല. ഇപ്പോൾ ഫോം പൂരിപ്പിക്കുക, രജിസ്ട്രേഷൻ ആരംഭിക്കുന്ന ഉടൻ ഞങ്ങൾ നിങ്ങളെ അറിയിക്കും.",
+    pendingNotice:
+      "വിവരങ്ങൾക്ക് നന്ദി! {category} രജിസ്ട്രേഷൻ ഇതുവരെ ലൈവ് അല്ല, അതിനാൽ ഒന്നും സേവ് ചെയ്തിട്ടില്ല. അത് തുറക്കുന്ന ഉടൻ ഞങ്ങൾ നിങ്ങളെ അറിയിക്കും.",
+    actions: {
+      registerNow: "ഇപ്പോൾ രജിസ്റ്റർ ചെയ്യുക",
+    },
+    upload: {
+      helper: "PDF, JPG, അല്ലെങ്കിൽ PNG. പരമാവധി {size}.",
+    },
+    validation: {
+      required: "ഈ ഫീൽഡ് ആവശ്യമാണ്.",
+      invalidUrl: "സാധുവായ URL നൽകുക (ഉദാ. https://example.com).",
+      numberRange: "{min} നും {max} നും ഇടയിലുള്ള ഒരു സംഖ്യ നൽകുക.",
+    },
+    notFound: {
+      title: "വിഭാഗം കണ്ടെത്തിയില്ല",
+      description: "ആ രജിസ്ട്രേഷൻ വിഭാഗം ഞങ്ങൾക്ക് കണ്ടെത്താനായില്ല.",
+      action: "ഒരു വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    },
+    categories: {
+      athlete: {
+        formTitle: "ഒരു അത്‌ലറ്റ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+      },
+      academyCoachParent: {
+        formTitle: "അക്കാദമി / കോച്ച് / രക്ഷിതാവ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        fields: {
+          academyCoachName: { label: "അക്കാദമി / കോച്ച് പേര്" },
+          sportsOffered: {
+            label: "നൽകുന്ന കായിക ഇനങ്ങൾ",
+            placeholder: "ഉദാ. ക്രിക്കറ്റ്, ഫുട്ബോൾ, ബാഡ്മിന്റൺ",
+          },
+          ageGroupsTrained: {
+            label: "പരിശീലനം നൽകുന്ന പ്രായ ഗ്രൂപ്പുകൾ",
+            placeholder: "ഉദാ. അണ്ടർ-12, അണ്ടർ-16, മുതിർന്നവർ",
+          },
+          coachCertification: { label: "കോച്ച് സർട്ടിഫിക്കേഷൻ" },
+          experienceLevel: {
+            label: "അനുഭവ നിലവാരം",
+            options: {
+              "0-2 years": "0-2 വർഷം",
+              "3-5 years": "3-5 വർഷം",
+              "6-10 years": "6-10 വർഷം",
+              "10+ years": "10+ വർഷം",
+            },
+          },
+          location: { label: "സ്ഥലം" },
+          uploadAcademyInfo: { label: "അക്കാദമി വിവരങ്ങൾ അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "പെർഫോമൻസ് എക്സ്പേർട്ട് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          expertise: {
+            label: "വൈദഗ്ധ്യം",
+            options: {
+              "Sports Physiotherapist": "സ്പോർട്സ് ഫിസിയോതെറാപ്പിസ്റ്റ്",
+              Nutritionist: "ന്യൂട്രീഷനിസ്റ്റ്",
+              "Sports Psychologist": "സ്പോർട്സ് സൈക്കോളജിസ്റ്റ്",
+              "Strength & Conditioning": "സ്ട്രെങ്ത് & കണ്ടീഷനിംഗ്",
+              "Performance Trainer": "പെർഫോമൻസ് ട്രെയിനർ",
+              "Rehabilitation Specialist": "റീഹാബിലിറ്റേഷൻ സ്പെഷ്യലിസ്റ്റ്",
+              Other: "മറ്റുള്ളവ",
+            },
+          },
+          experienceLevel: {
+            label: "അനുഭവ നിലവാരം",
+            options: {
+              "0-2 years": "0-2 വർഷം",
+              "3-5 years": "3-5 വർഷം",
+              "6-10 years": "6-10 വർഷം",
+              "10+ years": "10+ വർഷം",
+            },
+          },
+          servicesOffered: {
+            label: "നൽകുന്ന സേവനങ്ങൾ",
+            placeholder: "ഉദാ. പരിക്ക് വീണ്ടെടുക്കൽ, സ്ട്രെങ്ത് പ്രോഗ്രാമുകൾ",
+          },
+          certifications: { label: "സർട്ടിഫിക്കേഷനുകൾ" },
+          location: { label: "സ്ഥലം" },
+          uploadCertificate: { label: "സർട്ടിഫിക്കറ്റ് അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "മീഡിയ & ക്രിയേറ്റർ ആയി രജിസ്റ്റർ ചെയ്യുക",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          portfolioLink: { label: "പോർട്ട്‌ഫോളിയോ ലിങ്ക്" },
+          contentType: {
+            label: "ഉള്ളടക്ക തരം",
+            options: {
+              Photography: "ഫോട്ടോഗ്രഫി",
+              Videography: "വീഡിയോഗ്രഫി",
+              Journalism: "ജേണലിസം",
+              "Sports Writing": "സ്പോർട്സ് റൈറ്റിംഗ്",
+              "Social Media": "സോഷ്യൽ മീഡിയ",
+              Broadcasting: "ബ്രോഡ്കാസ്റ്റിംഗ്",
+              Other: "മറ്റുള്ളവ",
+            },
+          },
+          socialMediaHandles: {
+            label: "സോഷ്യൽ മീഡിയ ഹാൻഡിലുകൾ",
+            placeholder: "ഉദാ. @yourhandle (ഇൻസ്റ്റാഗ്രാം, യൂട്യൂബ്, X)",
+          },
+          location: { label: "സ്ഥലം" },
+          uploadPortfolio: { label: "പോർട്ട്‌ഫോളിയോ അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      managementLegal: {
+        formTitle: "സ്പോർട്സ് മാനേജ്‌മെന്റ് & ലീഗൽ ആയി രജിസ്റ്റർ ചെയ്യുക",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          role: {
+            label: "റോൾ",
+            options: { Manager: "മാനേജർ", Agent: "ഏജന്റ്", Lawyer: "അഭിഭാഷകൻ", Consultant: "കൺസൾട്ടന്റ്" },
+          },
+          licenseNumber: { label: "ലൈസൻസ് നമ്പർ" },
+          organization: { label: "സ്ഥാപനം" },
+          experienceLevel: {
+            label: "അനുഭവ നിലവാരം",
+            options: {
+              "0-2 years": "0-2 വർഷം",
+              "3-5 years": "3-5 വർഷം",
+              "6-10 years": "6-10 വർഷം",
+              "10+ years": "10+ വർഷം",
+            },
+          },
+          location: { label: "സ്ഥലം" },
+          uploadLicense: { label: "ലൈസൻസ് അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      eventOperations: {
+        formTitle: "ഇവന്റ് & ഓപ്പറേഷൻസ് സ്റ്റാഫ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          role: {
+            label: "റോൾ",
+            options: { Referee: "റഫറി", Umpire: "അമ്പയർ", Volunteer: "വളണ്ടിയർ", Coordinator: "കോർഡിനേറ്റർ" },
+          },
+          certification: { label: "സർട്ടിഫിക്കേഷൻ" },
+          experienceYears: { label: "അനുഭവ വർഷങ്ങൾ" },
+          availability: { label: "ലഭ്യത", placeholder: "ഉദാ. വാരാന്ത്യങ്ങൾ, വൈകുന്നേരങ്ങൾ" },
+          location: { label: "സ്ഥലം" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "സ്പോൺസർ & CSR ആയി രജിസ്റ്റർ ചെയ്യുക",
+        fields: {
+          organizationName: { label: "സ്ഥാപനത്തിന്റെ പേര്" },
+          contactPerson: { label: "ബന്ധപ്പെടേണ്ട വ്യക്തി" },
+          sponsorshipInterest: {
+            label: "സ്പോൺസർഷിപ്പ് താൽപ്പര്യം",
+            options: {
+              Youth: "യുവാക്കൾ",
+              Women: "സ്ത്രീകൾ",
+              Grassroots: "ഗ്രാസ്റൂട്ട്സ്",
+              "Para Sports": "പാരാ സ്പോർട്സ്",
+              Academies: "അക്കാദമികൾ",
+              Events: "ഇവന്റുകൾ",
+              "Talent Development": "ടാലന്റ് ഡെവലപ്മെന്റ്",
+              Other: "മറ്റുള്ളവ",
+            },
+          },
+          budgetRange: {
+            label: "ബജറ്റ് പരിധി",
+            options: {
+              "Under ₹1L": "₹1L ൽ താഴെ",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "കായിക ഫോക്കസ്",
+            placeholder: "ഉദാ. ക്രിക്കറ്റ്, അത്‌ലറ്റിക്സ്, പാരാ സ്പോർട്സ്",
+          },
+          location: { label: "സ്ഥലം" },
+          uploadProposal: { label: "പ്രൊപ്പോസൽ അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "ടാലന്റ് ഡിസ്കവറി & അനലിറ്റിക്സ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          role: {
+            label: "റോൾ",
+            options: { Scout: "സ്കൗട്ട്", Analyst: "അനലിസ്റ്റ്", "Data Expert": "ഡാറ്റ എക്സ്പേർട്ട്" },
+          },
+          toolsUsed: { label: "ഉപയോഗിച്ച ടൂളുകൾ", placeholder: "ഉദാ. Hudl, Dartfish" },
+          experienceYears: { label: "അനുഭവ വർഷങ്ങൾ" },
+          sportsSpecialization: { label: "കായിക സ്പെഷ്യലൈസേഷൻ", placeholder: "ഉദാ. ഫുട്ബോൾ, അത്‌ലറ്റിക്സ്" },
+          location: { label: "സ്ഥലം" },
+          uploadPortfolioReport: { label: "പോർട്ട്‌ഫോളിയോ / റിപ്പോർട്ട് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+    },
   },
 };
 
