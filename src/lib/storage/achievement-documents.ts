@@ -97,7 +97,7 @@ export async function deleteAchievementDocumentObject(
   return { ok: true };
 }
 
-function friendlyStorageError(error: { message?: string; statusCode?: string }): string {
+export function friendlyStorageError(error: { message?: string; statusCode?: string }): string {
   const message = (error.message ?? "").toLowerCase();
 
   if (message.includes("exceeded") || message.includes("too large")) {

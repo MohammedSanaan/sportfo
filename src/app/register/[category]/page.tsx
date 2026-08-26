@@ -9,6 +9,7 @@ import {
   getRegistrationCategoryBySlug,
 } from "@/lib/registration/categories";
 import { getAuthUser } from "@/lib/supabase/auth-user";
+import { createClient } from "@/lib/supabase/server";
 import { getServerTranslations } from "@/i18n/server";
 import { translate } from "@/i18n/dictionary";
 import { DEFAULT_LOCALE } from "@/i18n/config";
@@ -46,10 +47,22 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
   // Athlete's own screen re-verifies auth itself (see
   // AthleteRegistrationScreen); the other 7 categories share this one gate
   // since they have no independent auth-checking entry point of their own.
+  let initialFields: Record<string, unknown> | undefined;
   if (category.id !== "athlete") {
     const user = await getAuthUser();
     if (!user) {
       redirect(`/auth?next=${encodeURIComponent(`/register/${category.slug}`)}`);
+    }
+
+    // Pre-fill with whatever this account already submitted for this
+    // category, same idea as loadAthleteDraft for the Athlete flow. A
+    // missing/failed lookup just renders a blank form -- never blocks it.
+    const supabase = await createClient();
+    const { data } = await supabase.rpc("get_own_role_registration", {
+      p_registration_type: category.registrationType,
+    });
+    if (data && typeof data === "object" && "fields" in data) {
+      initialFields = (data as { fields?: Record<string, unknown> }).fields;
     }
   }
 
@@ -70,7 +83,7 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
           {category.id === "athlete" ? (
             <AthleteRegistrationScreen reloadHref="/register/athlete" showHeading={false} />
           ) : (
-            <GenericCategoryForm category={category} />
+            <GenericCategoryForm category={category} initialFields={initialFields} />
           )}
         </div>
       </div>

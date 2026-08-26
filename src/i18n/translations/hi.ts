@@ -489,20 +489,29 @@ const hi: Dictionary = {
     pageSubtitle: "अपनी श्रेणी चुनें",
     chooseCategory: "श्रेणी चुनें",
     formDetailsTitle: "आपका विवरण",
-    pendingNoticeShort:
-      "यह श्रेणी अभी SportFo से नहीं जुड़ी है। अभी फ़ॉर्म भरें, पंजीकरण शुरू होते ही हम आपको सूचित करेंगे।",
-    pendingNotice:
-      "विवरण देने के लिए धन्यवाद! {category} पंजीकरण अभी लाइव नहीं है, इसलिए कुछ भी सहेजा नहीं गया। शुरू होते ही हम आपको बताएंगे।",
     actions: {
       registerNow: "अभी पंजीकरण करें",
+      registering: "पंजीकरण हो रहा है...",
+      viewRegistration: "पंजीकरण देखें",
     },
     upload: {
       helper: "PDF, JPG, या PNG। अधिकतम {size}।",
+      currentFile: "वर्तमान फ़ाइल: {name}",
     },
     validation: {
       required: "यह फ़ील्ड आवश्यक है।",
       invalidUrl: "एक मान्य URL दर्ज करें (जैसे https://example.com)।",
       numberRange: "{min} और {max} के बीच एक संख्या दर्ज करें।",
+    },
+    errors: {
+      title: "पंजीकरण पूरा नहीं हो सका।",
+      sessionExpired: "आपका सत्र समाप्त हो गया है। कृपया फिर से साइन इन करें।",
+      uploadFailed: "हम आपका दस्तावेज़ अपलोड नहीं कर सके। कृपया पुनः प्रयास करें।",
+      saveFailed: "सहेजते समय कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+    },
+    success: {
+      title: "पंजीकरण सफल",
+      yourSportfoId: "आपकी SportFo ID",
     },
     notFound: {
       title: "श्रेणी नहीं मिली",
@@ -515,6 +524,8 @@ const hi: Dictionary = {
       },
       academyCoachParent: {
         formTitle: "अकादमी / कोच / अभिभावक के रूप में पंजीकरण करें",
+        successWelcome: "SportFo में आपका स्वागत है, कोच/अकादमी!",
+        successMessage: "आपका पंजीकरण पूर्ण हो गया है।",
         fields: {
           academyCoachName: { label: "अकादमी / कोच का नाम" },
           sportsOffered: { label: "प्रस्तावित खेल", placeholder: "जैसे क्रिकेट, फुटबॉल, बैडमिंटन" },
@@ -539,6 +550,8 @@ const hi: Dictionary = {
       },
       performanceExpert: {
         formTitle: "परफॉर्मेंस एक्सपर्ट के रूप में पंजीकरण करें",
+        successWelcome: "SportFo में आपका स्वागत है, परफॉर्मेंस एक्सपर्ट!",
+        successMessage: "आपकी प्रोफ़ाइल सफलतापूर्वक बना दी गई है।",
         fields: {
           fullName: { label: "पूरा नाम" },
           expertise: {
@@ -574,6 +587,8 @@ const hi: Dictionary = {
       },
       mediaCreator: {
         formTitle: "मीडिया और क्रिएटर के रूप में पंजीकरण करें",
+        successWelcome: "SportFo में आपका स्वागत है, क्रिएटर!",
+        successMessage: "आपका पंजीकरण पूर्ण हो गया है।",
         fields: {
           fullName: { label: "पूरा नाम" },
           portfolioLink: { label: "पोर्टफोलियो लिंक" },
@@ -599,6 +614,8 @@ const hi: Dictionary = {
       },
       managementLegal: {
         formTitle: "स्पोर्ट्स मैनेजमेंट और लीगल के रूप में पंजीकरण करें",
+        successWelcome: "SportFo में आपका स्वागत है, स्पोर्ट्स मैनेजर!",
+        successMessage: "आपकी प्रोफ़ाइल बना दी गई है।",
         fields: {
           fullName: { label: "पूरा नाम" },
           role: {
@@ -623,6 +640,8 @@ const hi: Dictionary = {
       },
       eventOperations: {
         formTitle: "इवेंट और ऑपरेशंस स्टाफ के रूप में पंजीकरण करें",
+        successWelcome: "SportFo में आपका स्वागत है, इवेंट स्टाफ!",
+        successMessage: "पंजीकरण सफल रहा।",
         fields: {
           fullName: { label: "पूरा नाम" },
           role: {
@@ -643,6 +662,8 @@ const hi: Dictionary = {
       },
       sponsorCsr: {
         formTitle: "स्पॉन्सर और CSR के रूप में पंजीकरण करें",
+        successWelcome: "SportFo में आपका स्वागत है, स्पॉन्सर!",
+        successMessage: "आपकी पार्टनरशिप प्रोफ़ाइल सफलतापूर्वक बना दी गई है।",
         fields: {
           organizationName: { label: "संगठन का नाम" },
           contactPerson: { label: "संपर्क व्यक्ति" },
@@ -676,6 +697,8 @@ const hi: Dictionary = {
       },
       talentAnalytics: {
         formTitle: "टैलेंट डिस्कवरी और एनालिटिक्स के रूप में पंजीकरण करें",
+        successWelcome: "SportFo में आपका स्वागत है, एनालिस्ट!",
+        successMessage: "आपकी प्रोफ़ाइल बना दी गई है।",
         fields: {
           fullName: { label: "पूरा नाम" },
           role: {
@@ -689,6 +712,62 @@ const hi: Dictionary = {
           uploadPortfolioReport: { label: "पोर्टफोलियो / रिपोर्ट अपलोड करें" },
         },
       },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "पंजीकरण एनालिटिक्स",
+    pageSubtitle: "एडमिन डैशबोर्ड -- सभी SportFo श्रेणियों में पंजीकरण गतिविधि।",
+    kpi: {
+      today: "आज",
+      week: "इस सप्ताह",
+      month: "इस महीने",
+      year: "इस वर्ष",
+    },
+    filters: {
+      timeRange: "समय सीमा",
+      today: "आज",
+      last7Days: "पिछले 7 दिन",
+      thisMonth: "इस महीने",
+      thisYear: "इस वर्ष",
+      customRange: "कस्टम रेंज",
+      from: "से",
+      to: "तक",
+      category: "श्रेणी",
+      allCategories: "सभी श्रेणियाँ",
+      status: "स्थिति",
+      allStatuses: "सभी",
+      apply: "लागू करें",
+    },
+    status: {
+      draft: "ड्राफ्ट",
+      submitted: "सबमिट किया गया",
+      verified: "सत्यापित",
+      rejected: "अस्वीकृत",
+    },
+    trend: {
+      title: "पंजीकरण रुझान",
+      empty: "इस अवधि में अभी तक कोई पंजीकरण नहीं है।",
+    },
+    breakdown: {
+      title: "श्रेणी विभाजन",
+      empty: "इस अवधि में अभी तक कोई पंजीकरण नहीं है।",
+    },
+    table: {
+      title: "हाल के पंजीकरण",
+      sportfoId: "SportFo ID",
+      name: "नाम",
+      category: "श्रेणी",
+      registeredDate: "पंजीकरण तिथि",
+      status: "स्थिति",
+      empty: "इन फ़िल्टर से कोई पंजीकरण मेल नहीं खाता।",
+      pageInfo: "पृष्ठ {page} / {totalPages} (कुल {total})",
+      previous: "पिछला",
+      next: "अगला",
+    },
+    accessDenied: {
+      title: "पहुंच अस्वीकृत",
+      description: "इस पृष्ठ को देखने की आपको अनुमति नहीं है।",
+      action: "होम पर वापस जाएं",
     },
   },
 };

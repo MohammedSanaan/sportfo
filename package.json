@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test src/lib/sports/catalog.test.ts src/lib/registration/categories.test.ts src/lib/auth/safe-redirect.test.ts"
+    "test": "node --test src/lib/sports/catalog.test.ts src/lib/registration/categories.test.ts src/lib/auth/safe-redirect.test.ts src/lib/admin/dashboard-range.test.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.4",

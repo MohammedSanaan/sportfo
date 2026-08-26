@@ -23,6 +23,10 @@ test("accepts the existing athlete routes", () => {
   assert.equal(resolveSafeNextPath("/athlete/profile"), "/athlete/profile");
 });
 
+test("accepts the admin dashboard route", () => {
+  assert.equal(resolveSafeNextPath("/admin/dashboard"), "/admin/dashboard");
+});
+
 test("rejects an unknown registration category slug", () => {
   assert.equal(resolveSafeNextPath("/register/abcxyz"), null);
 });

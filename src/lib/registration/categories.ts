@@ -74,6 +74,10 @@ export interface RegistrationCategoryConfig {
    * see GenericCategoryForm's pending-persistence notice -- never a faked
    * success screen. */
   persistence: "live" | "pending";
+  /** snake_case value stored in registrations.registration_type and passed
+   * to the save_role_registration/get_own_role_registration RPCs -- kept
+   * distinct from the camelCase `id` used everywhere in the TS/i18n side. */
+  registrationType: string;
   /** Absent for athlete (reuses the real AthleteRegistrationForm). */
   fields?: RegistrationField[];
 }
@@ -86,12 +90,14 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     slug: "athlete",
     roleKey: "athletes",
     persistence: "live",
+    registrationType: "athlete",
   },
   {
     id: "academyCoachParent",
     slug: "academy-coach-parent",
     roleKey: "academiesCoaches",
-    persistence: "pending",
+    persistence: "live",
+    registrationType: "academy_coach_parent",
     fields: [
       { id: "academyCoachName", type: "text", required: true },
       { id: "sportsOffered", type: "text", required: true, hasPlaceholder: true },
@@ -107,7 +113,8 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     id: "performanceExpert",
     slug: "performance-expert",
     roleKey: "performanceExperts",
-    persistence: "pending",
+    persistence: "live",
+    registrationType: "performance_expert",
     fields: [
       { id: "fullName", type: "text", required: true },
       {
@@ -136,7 +143,8 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     id: "mediaCreator",
     slug: "media-creator",
     roleKey: "mediaCreators",
-    persistence: "pending",
+    persistence: "live",
+    registrationType: "media_creator",
     fields: [
       { id: "fullName", type: "text", required: true },
       { id: "portfolioLink", type: "url", required: false },
@@ -163,7 +171,8 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     id: "managementLegal",
     slug: "management-legal",
     roleKey: "managementLegal",
-    persistence: "pending",
+    persistence: "live",
+    registrationType: "management_legal",
     fields: [
       { id: "fullName", type: "text", required: true },
       {
@@ -184,7 +193,8 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     id: "eventOperations",
     slug: "event-operations",
     roleKey: "eventOperations",
-    persistence: "pending",
+    persistence: "live",
+    registrationType: "event_operations",
     fields: [
       { id: "fullName", type: "text", required: true },
       {
@@ -204,7 +214,8 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     id: "sponsorCsr",
     slug: "sponsor-csr",
     roleKey: "sponsorsCsr",
-    persistence: "pending",
+    persistence: "live",
+    registrationType: "sponsor_csr",
     fields: [
       { id: "organizationName", type: "text", required: true },
       { id: "contactPerson", type: "text", required: true },
@@ -239,7 +250,8 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     id: "talentAnalytics",
     slug: "talent-analytics",
     roleKey: "talentAnalytics",
-    persistence: "pending",
+    persistence: "live",
+    registrationType: "talent_analytics",
     fields: [
       { id: "fullName", type: "text", required: true },
       {
@@ -259,6 +271,15 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
 
 export function getRegistrationCategoryBySlug(slug: string): RegistrationCategoryConfig | undefined {
   return REGISTRATION_CATEGORIES.find((category) => category.slug === slug);
+}
+
+// Reverse lookup for the admin dashboard, which only ever has the
+// snake_case `registration_type` value stored in the database (never the
+// camelCase `id`) to work from.
+export function getRegistrationCategoryByType(
+  registrationType: string,
+): RegistrationCategoryConfig | undefined {
+  return REGISTRATION_CATEGORIES.find((category) => category.registrationType === registrationType);
 }
 
 export const DEFAULT_REGISTRATION_CATEGORY_SLUG = "athlete";

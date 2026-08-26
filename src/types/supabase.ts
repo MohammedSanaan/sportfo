@@ -10,10 +10,66 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.15"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
+      academy_coach_profiles: {
+        Row: {
+          academy_coach_name: string | null
+          academy_info_path: string | null
+          age_groups_trained: string | null
+          coach_certification: string | null
+          created_at: string
+          experience_level: string | null
+          id: string
+          id_proof_path: string | null
+          location: string | null
+          registration_id: string | null
+          sports_offered: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          academy_coach_name?: string | null
+          academy_info_path?: string | null
+          age_groups_trained?: string | null
+          coach_certification?: string | null
+          created_at?: string
+          experience_level?: string | null
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          registration_id?: string | null
+          sports_offered?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          academy_coach_name?: string | null
+          academy_info_path?: string | null
+          age_groups_trained?: string | null
+          coach_certification?: string | null
+          created_at?: string
+          experience_level?: string | null
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          registration_id?: string | null
+          sports_offered?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "academy_coach_profiles_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       athlete_achievements: {
         Row: {
           achievement_date: string | null
@@ -174,10 +230,329 @@ export type Database = {
           },
         ]
       }
+      creator_profiles: {
+        Row: {
+          content_type: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          location: string | null
+          portfolio_link: string | null
+          portfolio_path: string | null
+          registration_id: string | null
+          social_media_handles: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          content_type?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          portfolio_link?: string | null
+          portfolio_path?: string | null
+          registration_id?: string | null
+          social_media_handles?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          content_type?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          portfolio_link?: string | null
+          portfolio_path?: string | null
+          registration_id?: string | null
+          social_media_handles?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "creator_profiles_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      event_staff_profiles: {
+        Row: {
+          availability: string | null
+          certification: string | null
+          created_at: string
+          experience_years: number | null
+          full_name: string | null
+          id: string
+          id_proof_path: string | null
+          location: string | null
+          registration_id: string | null
+          role: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          availability?: string | null
+          certification?: string | null
+          created_at?: string
+          experience_years?: number | null
+          full_name?: string | null
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          registration_id?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          availability?: string | null
+          certification?: string | null
+          created_at?: string
+          experience_years?: number | null
+          full_name?: string | null
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          registration_id?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_staff_profiles_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      management_legal_profiles: {
+        Row: {
+          created_at: string
+          experience_level: string | null
+          full_name: string | null
+          id: string
+          id_proof_path: string | null
+          license_number: string | null
+          license_path: string | null
+          location: string | null
+          organization: string | null
+          registration_id: string | null
+          role: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          experience_level?: string | null
+          full_name?: string | null
+          id?: string
+          id_proof_path?: string | null
+          license_number?: string | null
+          license_path?: string | null
+          location?: string | null
+          organization?: string | null
+          registration_id?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          experience_level?: string | null
+          full_name?: string | null
+          id?: string
+          id_proof_path?: string | null
+          license_number?: string | null
+          license_path?: string | null
+          location?: string | null
+          organization?: string | null
+          registration_id?: string | null
+          role?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "management_legal_profiles_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      performance_expert_profiles: {
+        Row: {
+          certificate_path: string | null
+          certifications: string | null
+          created_at: string
+          experience_level: string | null
+          expertise: string | null
+          full_name: string | null
+          id: string
+          id_proof_path: string | null
+          location: string | null
+          registration_id: string | null
+          services_offered: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          certificate_path?: string | null
+          certifications?: string | null
+          created_at?: string
+          experience_level?: string | null
+          expertise?: string | null
+          full_name?: string | null
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          registration_id?: string | null
+          services_offered?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          certificate_path?: string | null
+          certifications?: string | null
+          created_at?: string
+          experience_level?: string | null
+          expertise?: string | null
+          full_name?: string | null
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          registration_id?: string | null
+          services_offered?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "performance_expert_profiles_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      registrations: {
+        Row: {
+          created_at: string
+          display_name: string | null
+          id: string
+          profile_id: string
+          registered_at: string | null
+          registration_type: string
+          sportfo_user_id: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          profile_id: string
+          registered_at?: string | null
+          registration_type: string
+          sportfo_user_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          profile_id?: string
+          registered_at?: string | null
+          registration_type?: string
+          sportfo_user_id?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "registrations_sportfo_user_id_fkey"
+            columns: ["sportfo_user_id"]
+            isOneToOne: false
+            referencedRelation: "sportfo_users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sponsor_profiles: {
+        Row: {
+          budget_range: string | null
+          contact_person: string | null
+          created_at: string
+          id: string
+          id_proof_path: string | null
+          location: string | null
+          organization_name: string | null
+          proposal_path: string | null
+          registration_id: string | null
+          sponsorship_interest: string[] | null
+          sports_focus: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          budget_range?: string | null
+          contact_person?: string | null
+          created_at?: string
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          organization_name?: string | null
+          proposal_path?: string | null
+          registration_id?: string | null
+          sponsorship_interest?: string[] | null
+          sports_focus?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          budget_range?: string | null
+          contact_person?: string | null
+          created_at?: string
+          id?: string
+          id_proof_path?: string | null
+          location?: string | null
+          organization_name?: string | null
+          proposal_path?: string | null
+          registration_id?: string | null
+          sponsorship_interest?: string[] | null
+          sports_focus?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "sponsor_profiles_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sportfo_users: {
         Row: {
           created_at: string
           id: string
+          is_admin: boolean
           sportfo_id: string
           updated_at: string
           user_id: string
@@ -185,6 +560,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          is_admin?: boolean
           sportfo_id: string
           updated_at?: string
           user_id: string
@@ -192,20 +568,105 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          is_admin?: boolean
           sportfo_id?: string
           updated_at?: string
           user_id?: string
         }
         Relationships: []
       }
+      talent_analytics_profiles: {
+        Row: {
+          created_at: string
+          experience_years: number | null
+          full_name: string | null
+          id: string
+          location: string | null
+          portfolio_report_path: string | null
+          registration_id: string | null
+          role: string | null
+          sports_specialization: string | null
+          tools_used: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          experience_years?: number | null
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          portfolio_report_path?: string | null
+          registration_id?: string | null
+          role?: string | null
+          sports_specialization?: string | null
+          tools_used?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          experience_years?: number | null
+          full_name?: string | null
+          id?: string
+          location?: string | null
+          portfolio_report_path?: string | null
+          registration_id?: string | null
+          role?: string | null
+          sports_specialization?: string | null
+          tools_used?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "talent_analytics_profiles_registration_id_fkey"
+            columns: ["registration_id"]
+            isOneToOne: true
+            referencedRelation: "registrations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      admin_category_breakdown: {
+        Args: { p_from?: string; p_to?: string }
+        Returns: {
+          registration_type: string
+          registrations: number
+        }[]
+      }
+      admin_list_registrations: {
+        Args: {
+          p_category?: string
+          p_from?: string
+          p_page?: number
+          p_page_size?: number
+          p_status?: string
+          p_to?: string
+        }
+        Returns: Json
+      }
+      admin_registration_kpis: { Args: never; Returns: Json }
+      admin_registration_trend: {
+        Args: { p_from: string; p_to: string }
+        Returns: {
+          day: string
+          registrations: number
+        }[]
+      }
+      ensure_sportfo_id: { Args: never; Returns: string }
       generate_athlete_public_slug: {
         Args: { p_full_name: string }
         Returns: string
+      }
+      get_own_role_registration: {
+        Args: { p_registration_type: string }
+        Returns: Json
       }
       get_public_athlete_achievements: {
         Args: { p_slug: string }
@@ -242,7 +703,7 @@ export type Database = {
           sportfo_id: string
         }[]
       }
-      ensure_sportfo_id: { Args: never; Returns: string }
+      is_current_user_admin: { Args: never; Returns: boolean }
       owns_athlete_profile: { Args: { profile_id: string }; Returns: boolean }
       save_athlete_registration: {
         Args: {
@@ -267,6 +728,10 @@ export type Database = {
           p_sport_category: string
           p_sport_discipline: string
         }
+        Returns: Json
+      }
+      save_role_registration: {
+        Args: { p_fields: Json; p_registration_type: string; p_status: string }
         Returns: Json
       }
       search_public_athletes: {

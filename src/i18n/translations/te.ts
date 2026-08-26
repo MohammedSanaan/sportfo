@@ -491,20 +491,29 @@ const te: Dictionary = {
     pageSubtitle: "మీ వర్గాన్ని ఎంచుకోండి",
     chooseCategory: "వర్గాన్ని ఎంచుకోండి",
     formDetailsTitle: "మీ వివరాలు",
-    pendingNoticeShort:
-      "ఈ వర్గం ఇంకా SportFo కి కనెక్ట్ కాలేదు. ఇప్పుడు ఫారమ్‌ను పూరించండి, నమోదు ప్రారంభమైన వెంటనే మేము మీకు తెలియజేస్తాము.",
-    pendingNotice:
-      "వివరాలు ఇచ్చినందుకు ధన్యవాదాలు! {category} నమోదు ఇంకా లైవ్‌లో లేదు, కాబట్టి ఏమీ సేవ్ చేయబడలేదు. అది తెరిచిన వెంటనే మేము మీకు తెలియజేస్తాము.",
     actions: {
       registerNow: "ఇప్పుడు నమోదు చేసుకోండి",
+      registering: "నమోదు చేస్తోంది...",
+      viewRegistration: "నమోదును వీక్షించండి",
     },
     upload: {
       helper: "PDF, JPG, లేదా PNG. గరిష్టం {size}.",
+      currentFile: "ప్రస్తుత ఫైల్: {name}",
     },
     validation: {
       required: "ఈ ఫీల్డ్ అవసరం.",
       invalidUrl: "చెల్లుబాటు అయ్యే URLని నమోదు చేయండి (ఉదా. https://example.com).",
       numberRange: "{min} మరియు {max} మధ్య సంఖ్యను నమోదు చేయండి.",
+    },
+    errors: {
+      title: "నమోదు పూర్తి చేయలేకపోయాము.",
+      sessionExpired: "మీ సెషన్ గడువు ముగిసింది. దయచేసి మళ్లీ సైన్ ఇన్ చేయండి.",
+      uploadFailed: "మీ పత్రాన్ని అప్‌లోడ్ చేయలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.",
+      saveFailed: "సేవ్ చేసేటప్పుడు ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి.",
+    },
+    success: {
+      title: "నమోదు విజయవంతమైంది",
+      yourSportfoId: "మీ SportFo ID",
     },
     notFound: {
       title: "వర్గం కనుగొనబడలేదు",
@@ -517,6 +526,8 @@ const te: Dictionary = {
       },
       academyCoachParent: {
         formTitle: "అకాడమీ / కోచ్ / తల్లిదండ్రులుగా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, కోచ్/అకాడమీ!",
+        successMessage: "మీ నమోదు పూర్తయింది.",
         fields: {
           academyCoachName: { label: "అకాడమీ / కోచ్ పేరు" },
           sportsOffered: {
@@ -544,6 +555,8 @@ const te: Dictionary = {
       },
       performanceExpert: {
         formTitle: "పెర్ఫార్మెన్స్ ఎక్స్‌పర్ట్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, పెర్ఫార్మెన్స్ ఎక్స్‌పర్ట్!",
+        successMessage: "మీ ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
         fields: {
           fullName: { label: "పూర్తి పేరు" },
           expertise: {
@@ -579,6 +592,8 @@ const te: Dictionary = {
       },
       mediaCreator: {
         formTitle: "మీడియా & క్రియేటర్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, క్రియేటర్!",
+        successMessage: "మీ నమోదు పూర్తయింది.",
         fields: {
           fullName: { label: "పూర్తి పేరు" },
           portfolioLink: { label: "పోర్ట్‌ఫోలియో లింక్" },
@@ -604,6 +619,8 @@ const te: Dictionary = {
       },
       managementLegal: {
         formTitle: "స్పోర్ట్స్ మేనేజ్‌మెంట్ & లీగల్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, స్పోర్ట్స్ మేనేజర్!",
+        successMessage: "మీ ప్రొఫైల్ సృష్టించబడింది.",
         fields: {
           fullName: { label: "పూర్తి పేరు" },
           role: {
@@ -628,6 +645,8 @@ const te: Dictionary = {
       },
       eventOperations: {
         formTitle: "ఈవెంట్ & ఆపరేషన్స్ స్టాఫ్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, ఈవెంట్ స్టాఫ్!",
+        successMessage: "నమోదు విజయవంతమైంది.",
         fields: {
           fullName: { label: "పూర్తి పేరు" },
           role: {
@@ -643,6 +662,8 @@ const te: Dictionary = {
       },
       sponsorCsr: {
         formTitle: "స్పాన్సర్ & CSR గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, స్పాన్సర్!",
+        successMessage: "మీ భాగస్వామ్య ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
         fields: {
           organizationName: { label: "సంస్థ పేరు" },
           contactPerson: { label: "సంప్రదింపు వ్యక్తి" },
@@ -679,6 +700,8 @@ const te: Dictionary = {
       },
       talentAnalytics: {
         formTitle: "టాలెంట్ డిస్కవరీ & అనలిటిక్స్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, అనలిస్ట్!",
+        successMessage: "మీ ప్రొఫైల్ సృష్టించబడింది.",
         fields: {
           fullName: { label: "పూర్తి పేరు" },
           role: {
@@ -692,6 +715,62 @@ const te: Dictionary = {
           uploadPortfolioReport: { label: "పోర్ట్‌ఫోలియో / నివేదికను అప్‌లోడ్ చేయండి" },
         },
       },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "నమోదు అనలిటిక్స్",
+    pageSubtitle: "అడ్మిన్ డాష్‌బోర్డ్ -- అన్ని SportFo వర్గాలలో నమోదు కార్యకలాపం.",
+    kpi: {
+      today: "ఈరోజు",
+      week: "ఈ వారం",
+      month: "ఈ నెల",
+      year: "ఈ సంవత్సరం",
+    },
+    filters: {
+      timeRange: "కాల పరిధి",
+      today: "ఈరోజు",
+      last7Days: "గత 7 రోజులు",
+      thisMonth: "ఈ నెల",
+      thisYear: "ఈ సంవత్సరం",
+      customRange: "అనుకూల పరిధి",
+      from: "నుండి",
+      to: "వరకు",
+      category: "వర్గం",
+      allCategories: "అన్ని వర్గాలు",
+      status: "స్థితి",
+      allStatuses: "అన్నీ",
+      apply: "వర్తింపజేయండి",
+    },
+    status: {
+      draft: "డ్రాఫ్ట్",
+      submitted: "సమర్పించబడింది",
+      verified: "ధృవీకరించబడింది",
+      rejected: "తిరస్కరించబడింది",
+    },
+    trend: {
+      title: "నమోదు ధోరణి",
+      empty: "ఈ కాలంలో ఇంకా నమోదులు లేవు.",
+    },
+    breakdown: {
+      title: "వర్గ విభజన",
+      empty: "ఈ కాలంలో ఇంకా నమోదులు లేవు.",
+    },
+    table: {
+      title: "ఇటీవలి నమోదులు",
+      sportfoId: "SportFo ID",
+      name: "పేరు",
+      category: "వర్గం",
+      registeredDate: "నమోదు తేదీ",
+      status: "స్థితి",
+      empty: "ఈ ఫిల్టర్‌లకు నమోదులు ఏవీ సరిపోలలేదు.",
+      pageInfo: "పేజీ {page} / {totalPages} (మొత్తం {total})",
+      previous: "మునుపటి",
+      next: "తదుపరి",
+    },
+    accessDenied: {
+      title: "యాక్సెస్ నిరాకరించబడింది",
+      description: "ఈ పేజీని వీక్షించడానికి మీకు అనుమతి లేదు.",
+      action: "హోమ్‌కు తిరిగి వెళ్ళండి",
     },
   },
 };

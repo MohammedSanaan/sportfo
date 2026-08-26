@@ -493,20 +493,29 @@ const ta: Dictionary = {
     pageSubtitle: "உங்கள் வகையைத் தேர்ந்தெடுக்கவும்",
     chooseCategory: "வகையைத் தேர்ந்தெடுக்கவும்",
     formDetailsTitle: "உங்கள் விவரங்கள்",
-    pendingNoticeShort:
-      "இந்த வகை இன்னும் SportFo உடன் இணைக்கப்படவில்லை. இப்போது படிவத்தை பூர்த்தி செய்யுங்கள், பதிவு தொடங்கியவுடன் உங்களுக்குத் தெரிவிப்போம்.",
-    pendingNotice:
-      "விவரங்களுக்கு நன்றி! {category} பதிவு இன்னும் செயலில் இல்லை, எனவே எதுவும் சேமிக்கப்படவில்லை. அது திறக்கும் தருணத்தில் உங்களுக்குத் தெரிவிப்போம்.",
     actions: {
       registerNow: "இப்போது பதிவு செய்யவும்",
+      registering: "பதிவு செய்யப்படுகிறது...",
+      viewRegistration: "பதிவைப் பார்க்கவும்",
     },
     upload: {
       helper: "PDF, JPG, அல்லது PNG. அதிகபட்சம் {size}.",
+      currentFile: "தற்போதைய கோப்பு: {name}",
     },
     validation: {
       required: "இந்த புலம் தேவை.",
       invalidUrl: "செல்லுபடியாகும் URL-ஐ உள்ளிடவும் (எ.கா. https://example.com).",
       numberRange: "{min} மற்றும் {max} இடையே ஒரு எண்ணை உள்ளிடவும்.",
+    },
+    errors: {
+      title: "பதிவை முடிக்க முடியவில்லை.",
+      sessionExpired: "உங்கள் அமர்வு காலாவதியானது. மீண்டும் உள்நுழையவும்.",
+      uploadFailed: "உங்கள் ஆவணத்தைப் பதிவேற்ற முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+      saveFailed: "சேமிக்கும் போது ஏதோ தவறு நடந்தது. மீண்டும் முயற்சிக்கவும்.",
+    },
+    success: {
+      title: "பதிவு வெற்றிகரமாக முடிந்தது",
+      yourSportfoId: "உங்கள் SportFo ID",
     },
     notFound: {
       title: "வகை கிடைக்கவில்லை",
@@ -519,6 +528,8 @@ const ta: Dictionary = {
       },
       academyCoachParent: {
         formTitle: "அகாடமி / பயிற்சியாளர் / பெற்றோராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், பயிற்சியாளர்/அகாடமி!",
+        successMessage: "உங்கள் பதிவு முடிந்தது.",
         fields: {
           academyCoachName: { label: "அகாடமி / பயிற்சியாளர் பெயர்" },
           sportsOffered: {
@@ -546,6 +557,8 @@ const ta: Dictionary = {
       },
       performanceExpert: {
         formTitle: "செயல்திறன் நிபுணராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், செயல்திறன் நிபுணரே!",
+        successMessage: "உங்கள் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
         fields: {
           fullName: { label: "முழுப் பெயர்" },
           expertise: {
@@ -581,6 +594,8 @@ const ta: Dictionary = {
       },
       mediaCreator: {
         formTitle: "மீடியா & கிரியேட்டராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், கிரியேட்டரே!",
+        successMessage: "உங்கள் பதிவு முடிந்தது.",
         fields: {
           fullName: { label: "முழுப் பெயர்" },
           portfolioLink: { label: "போர்ட்ஃபோலியோ இணைப்பு" },
@@ -606,6 +621,8 @@ const ta: Dictionary = {
       },
       managementLegal: {
         formTitle: "ஸ்போர்ட்ஸ் மேனேஜ்மென்ட் & லீகல் ஆக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், ஸ்போர்ட்ஸ் மேனேஜரே!",
+        successMessage: "உங்கள் சுயவிவரம் உருவாக்கப்பட்டது.",
         fields: {
           fullName: { label: "முழுப் பெயர்" },
           role: {
@@ -630,6 +647,8 @@ const ta: Dictionary = {
       },
       eventOperations: {
         formTitle: "ஈவென்ட் & ஆபரேஷன்ஸ் பணியாளராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், ஈவென்ட் பணியாளரே!",
+        successMessage: "பதிவு வெற்றிகரமாக முடிந்தது.",
         fields: {
           fullName: { label: "முழுப் பெயர்" },
           role: {
@@ -645,6 +664,8 @@ const ta: Dictionary = {
       },
       sponsorCsr: {
         formTitle: "ஸ்பான்சர் & CSR ஆக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், ஸ்பான்சரே!",
+        successMessage: "உங்கள் பங்குதாரர் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
         fields: {
           organizationName: { label: "நிறுவனத்தின் பெயர்" },
           contactPerson: { label: "தொடர்பு நபர்" },
@@ -681,6 +702,8 @@ const ta: Dictionary = {
       },
       talentAnalytics: {
         formTitle: "டேலன்ட் டிஸ்கவரி & அனலிடிக்ஸ் ஆக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், அனலிஸ்டே!",
+        successMessage: "உங்கள் சுயவிவரம் உருவாக்கப்பட்டது.",
         fields: {
           fullName: { label: "முழுப் பெயர்" },
           role: {
@@ -694,6 +717,62 @@ const ta: Dictionary = {
           uploadPortfolioReport: { label: "போர்ட்ஃபோலியோ / அறிக்கையைப் பதிவேற்றவும்" },
         },
       },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "பதிவு பகுப்பாய்வு",
+    pageSubtitle: "நிர்வாக டாஷ்போர்டு -- அனைத்து SportFo வகைகளிலும் பதிவு செயல்பாடு.",
+    kpi: {
+      today: "இன்று",
+      week: "இந்த வாரம்",
+      month: "இந்த மாதம்",
+      year: "இந்த ஆண்டு",
+    },
+    filters: {
+      timeRange: "கால வரம்பு",
+      today: "இன்று",
+      last7Days: "கடந்த 7 நாட்கள்",
+      thisMonth: "இந்த மாதம்",
+      thisYear: "இந்த ஆண்டு",
+      customRange: "தனிப்பயன் வரம்பு",
+      from: "இருந்து",
+      to: "வரை",
+      category: "வகை",
+      allCategories: "அனைத்து வகைகள்",
+      status: "நிலை",
+      allStatuses: "அனைத்தும்",
+      apply: "பயன்படுத்து",
+    },
+    status: {
+      draft: "வரைவு",
+      submitted: "சமர்ப்பிக்கப்பட்டது",
+      verified: "சரிபார்க்கப்பட்டது",
+      rejected: "நிராகரிக்கப்பட்டது",
+    },
+    trend: {
+      title: "பதிவு போக்கு",
+      empty: "இந்த காலகட்டத்தில் இன்னும் பதிவுகள் இல்லை.",
+    },
+    breakdown: {
+      title: "வகை பிரிவு",
+      empty: "இந்த காலகட்டத்தில் இன்னும் பதிவுகள் இல்லை.",
+    },
+    table: {
+      title: "சமீபத்திய பதிவுகள்",
+      sportfoId: "SportFo ID",
+      name: "பெயர்",
+      category: "வகை",
+      registeredDate: "பதிவு தேதி",
+      status: "நிலை",
+      empty: "இந்த வடிப்பான்களுக்கு பதிவுகள் எதுவும் பொருந்தவில்லை.",
+      pageInfo: "பக்கம் {page} / {totalPages} (மொத்தம் {total})",
+      previous: "முந்தைய",
+      next: "அடுத்தது",
+    },
+    accessDenied: {
+      title: "அணுகல் மறுக்கப்பட்டது",
+      description: "இந்தப் பக்கத்தைப் பார்க்க உங்களுக்கு அனுமதி இல்லை.",
+      action: "முகப்புக்குத் திரும்பவும்",
     },
   },
 };

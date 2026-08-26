@@ -10,7 +10,12 @@ import { getRegistrationCategoryBySlug } from "../registration/categories.ts";
 const SAFE_ORIGIN = "https://sportfo.invalid";
 
 // Exact-match post-login destinations outside the registration hub.
-const ALLOWED_EXACT_PATHS = new Set(["/athlete/register", "/athlete/profile"]);
+// /admin/dashboard is included here so an anonymous admin who clicked
+// straight into it round-trips back through /auth correctly -- the actual
+// authorization check still happens entirely server-side on that page
+// (is_current_user_admin()), never here; this only decides where a login
+// is allowed to redirect to.
+const ALLOWED_EXACT_PATHS = new Set(["/athlete/register", "/athlete/profile", "/admin/dashboard"]);
 
 // Validates a `?next=` post-login redirect target end to end: same-origin,
 // path-only, AND matching one of SportFo's actual registration routes --

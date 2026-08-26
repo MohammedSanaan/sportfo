@@ -491,20 +491,29 @@ const ml: Dictionary = {
     pageSubtitle: "നിങ്ങളുടെ വിഭാഗം തിരഞ്ഞെടുക്കുക",
     chooseCategory: "വിഭാഗം തിരഞ്ഞെടുക്കുക",
     formDetailsTitle: "നിങ്ങളുടെ വിവരങ്ങൾ",
-    pendingNoticeShort:
-      "ഈ വിഭാഗം ഇതുവരെ SportFo യുമായി ബന്ധിപ്പിച്ചിട്ടില്ല. ഇപ്പോൾ ഫോം പൂരിപ്പിക്കുക, രജിസ്ട്രേഷൻ ആരംഭിക്കുന്ന ഉടൻ ഞങ്ങൾ നിങ്ങളെ അറിയിക്കും.",
-    pendingNotice:
-      "വിവരങ്ങൾക്ക് നന്ദി! {category} രജിസ്ട്രേഷൻ ഇതുവരെ ലൈവ് അല്ല, അതിനാൽ ഒന്നും സേവ് ചെയ്തിട്ടില്ല. അത് തുറക്കുന്ന ഉടൻ ഞങ്ങൾ നിങ്ങളെ അറിയിക്കും.",
     actions: {
       registerNow: "ഇപ്പോൾ രജിസ്റ്റർ ചെയ്യുക",
+      registering: "രജിസ്റ്റർ ചെയ്യുന്നു...",
+      viewRegistration: "രജിസ്ട്രേഷൻ കാണുക",
     },
     upload: {
       helper: "PDF, JPG, അല്ലെങ്കിൽ PNG. പരമാവധി {size}.",
+      currentFile: "നിലവിലെ ഫയൽ: {name}",
     },
     validation: {
       required: "ഈ ഫീൽഡ് ആവശ്യമാണ്.",
       invalidUrl: "സാധുവായ URL നൽകുക (ഉദാ. https://example.com).",
       numberRange: "{min} നും {max} നും ഇടയിലുള്ള ഒരു സംഖ്യ നൽകുക.",
+    },
+    errors: {
+      title: "രജിസ്ട്രേഷൻ പൂർത്തിയാക്കാൻ കഴിഞ്ഞില്ല.",
+      sessionExpired: "നിങ്ങളുടെ സെഷൻ കാലഹരണപ്പെട്ടു. ദയവായി വീണ്ടും സൈൻ ഇൻ ചെയ്യുക.",
+      uploadFailed: "നിങ്ങളുടെ ഡോക്യുമെന്റ് അപ്‌ലോഡ് ചെയ്യാൻ ഞങ്ങൾക്ക് കഴിഞ്ഞില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+      saveFailed: "സേവ് ചെയ്യുന്നതിനിടെ എന്തോ പിശക് സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+    },
+    success: {
+      title: "രജിസ്ട്രേഷൻ വിജയകരം",
+      yourSportfoId: "നിങ്ങളുടെ SportFo ID",
     },
     notFound: {
       title: "വിഭാഗം കണ്ടെത്തിയില്ല",
@@ -517,6 +526,8 @@ const ml: Dictionary = {
       },
       academyCoachParent: {
         formTitle: "അക്കാദമി / കോച്ച് / രക്ഷിതാവ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, കോച്ച്/അക്കാദമി!",
+        successMessage: "നിങ്ങളുടെ രജിസ്ട്രേഷൻ പൂർത്തിയായി.",
         fields: {
           academyCoachName: { label: "അക്കാദമി / കോച്ച് പേര്" },
           sportsOffered: {
@@ -544,6 +555,8 @@ const ml: Dictionary = {
       },
       performanceExpert: {
         formTitle: "പെർഫോമൻസ് എക്സ്പേർട്ട് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, പെർഫോമൻസ് എക്സ്പേർട്ട്!",
+        successMessage: "നിങ്ങളുടെ പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
         fields: {
           fullName: { label: "മുഴുവൻ പേര്" },
           expertise: {
@@ -579,6 +592,8 @@ const ml: Dictionary = {
       },
       mediaCreator: {
         formTitle: "മീഡിയ & ക്രിയേറ്റർ ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, ക്രിയേറ്റർ!",
+        successMessage: "നിങ്ങളുടെ രജിസ്ട്രേഷൻ പൂർത്തിയായി.",
         fields: {
           fullName: { label: "മുഴുവൻ പേര്" },
           portfolioLink: { label: "പോർട്ട്‌ഫോളിയോ ലിങ്ക്" },
@@ -604,6 +619,8 @@ const ml: Dictionary = {
       },
       managementLegal: {
         formTitle: "സ്പോർട്സ് മാനേജ്‌മെന്റ് & ലീഗൽ ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, സ്പോർട്സ് മാനേജർ!",
+        successMessage: "നിങ്ങളുടെ പ്രൊഫൈൽ സൃഷ്ടിച്ചു.",
         fields: {
           fullName: { label: "മുഴുവൻ പേര്" },
           role: {
@@ -628,6 +645,8 @@ const ml: Dictionary = {
       },
       eventOperations: {
         formTitle: "ഇവന്റ് & ഓപ്പറേഷൻസ് സ്റ്റാഫ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, ഇവന്റ് സ്റ്റാഫ്!",
+        successMessage: "രജിസ്ട്രേഷൻ വിജയകരം.",
         fields: {
           fullName: { label: "മുഴുവൻ പേര്" },
           role: {
@@ -643,6 +662,8 @@ const ml: Dictionary = {
       },
       sponsorCsr: {
         formTitle: "സ്പോൺസർ & CSR ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, സ്പോൺസർ!",
+        successMessage: "നിങ്ങളുടെ പങ്കാളിത്ത പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
         fields: {
           organizationName: { label: "സ്ഥാപനത്തിന്റെ പേര്" },
           contactPerson: { label: "ബന്ധപ്പെടേണ്ട വ്യക്തി" },
@@ -679,6 +700,8 @@ const ml: Dictionary = {
       },
       talentAnalytics: {
         formTitle: "ടാലന്റ് ഡിസ്കവറി & അനലിറ്റിക്സ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, അനലിസ്റ്റ്!",
+        successMessage: "നിങ്ങളുടെ പ്രൊഫൈൽ സൃഷ്ടിച്ചു.",
         fields: {
           fullName: { label: "മുഴുവൻ പേര്" },
           role: {
@@ -692,6 +715,62 @@ const ml: Dictionary = {
           uploadPortfolioReport: { label: "പോർട്ട്‌ഫോളിയോ / റിപ്പോർട്ട് അപ്‌ലോഡ് ചെയ്യുക" },
         },
       },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "രജിസ്ട്രേഷൻ അനലിറ്റിക്സ്",
+    pageSubtitle: "അഡ്മിൻ ഡാഷ്ബോർഡ് -- എല്ലാ SportFo വിഭാഗങ്ങളിലുമുള്ള രജിസ്ട്രേഷൻ പ്രവർത്തനം.",
+    kpi: {
+      today: "ഇന്ന്",
+      week: "ഈ ആഴ്ച",
+      month: "ഈ മാസം",
+      year: "ഈ വർഷം",
+    },
+    filters: {
+      timeRange: "സമയ പരിധി",
+      today: "ഇന്ന്",
+      last7Days: "കഴിഞ്ഞ 7 ദിവസം",
+      thisMonth: "ഈ മാസം",
+      thisYear: "ഈ വർഷം",
+      customRange: "ഇഷ്ടാനുസൃത പരിധി",
+      from: "മുതൽ",
+      to: "വരെ",
+      category: "വിഭാഗം",
+      allCategories: "എല്ലാ വിഭാഗങ്ങളും",
+      status: "നില",
+      allStatuses: "എല്ലാം",
+      apply: "പ്രയോഗിക്കുക",
+    },
+    status: {
+      draft: "ഡ്രാഫ്റ്റ്",
+      submitted: "സമർപ്പിച്ചു",
+      verified: "പരിശോധിച്ചു",
+      rejected: "നിരസിച്ചു",
+    },
+    trend: {
+      title: "രജിസ്ട്രേഷൻ ട്രെൻഡ്",
+      empty: "ഈ കാലയളവിൽ ഇതുവരെ രജിസ്ട്രേഷനുകൾ ഇല്ല.",
+    },
+    breakdown: {
+      title: "വിഭാഗം തിരിച്ചുള്ള വിഭജനം",
+      empty: "ഈ കാലയളവിൽ ഇതുവരെ രജിസ്ട്രേഷനുകൾ ഇല്ല.",
+    },
+    table: {
+      title: "സമീപകാല രജിസ്ട്രേഷനുകൾ",
+      sportfoId: "SportFo ID",
+      name: "പേര്",
+      category: "വിഭാഗം",
+      registeredDate: "രജിസ്റ്റർ ചെയ്ത തീയതി",
+      status: "നില",
+      empty: "ഈ ഫിൽട്ടറുകൾക്ക് ചേരുന്ന രജിസ്ട്രേഷനുകൾ ഇല്ല.",
+      pageInfo: "പേജ് {page} / {totalPages} (ആകെ {total})",
+      previous: "മുമ്പത്തേത്",
+      next: "അടുത്തത്",
+    },
+    accessDenied: {
+      title: "ആക്‌സസ് നിഷേധിച്ചു",
+      description: "ഈ പേജ് കാണാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
+      action: "ഹോമിലേക്ക് മടങ്ങുക",
     },
   },
 };

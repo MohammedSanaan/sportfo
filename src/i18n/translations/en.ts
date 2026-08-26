@@ -492,20 +492,29 @@ const en = {
     pageSubtitle: "Select Your Category",
     chooseCategory: "Choose Category",
     formDetailsTitle: "Your Details",
-    pendingNoticeShort:
-      "This category isn't connected to SportFo yet. Fill out the form now and we'll notify you the moment registration goes live.",
-    pendingNotice:
-      "Thanks for the details! {category} registration isn't live yet, so nothing was saved. We'll let you know the moment it opens.",
     actions: {
       registerNow: "Register Now",
+      registering: "Registering...",
+      viewRegistration: "View Registration",
     },
     upload: {
       helper: "PDF, JPG, or PNG. Max {size}.",
+      currentFile: "Current file: {name}",
     },
     validation: {
       required: "This field is required.",
       invalidUrl: "Enter a valid URL (e.g. https://example.com).",
       numberRange: "Enter a number between {min} and {max}.",
+    },
+    errors: {
+      title: "Registration could not be completed.",
+      sessionExpired: "Your session has expired. Please sign in again.",
+      uploadFailed: "We couldn't upload your document. Please try again.",
+      saveFailed: "Something went wrong while saving. Please try again.",
+    },
+    success: {
+      title: "Registration Successful",
+      yourSportfoId: "Your SportFo ID",
     },
     notFound: {
       title: "Category not found",
@@ -518,6 +527,8 @@ const en = {
       },
       academyCoachParent: {
         formTitle: "Register as an Academy / Coach / Parent",
+        successWelcome: "Welcome to SportFo, Coach/Academy!",
+        successMessage: "Your registration is complete.",
         fields: {
           academyCoachName: { label: "Academy / Coach Name" },
           sportsOffered: {
@@ -545,6 +556,8 @@ const en = {
       },
       performanceExpert: {
         formTitle: "Register as a Performance Expert",
+        successWelcome: "Welcome to SportFo, Performance Expert!",
+        successMessage: "Your profile has been created successfully.",
         fields: {
           fullName: { label: "Full Name" },
           expertise: {
@@ -580,6 +593,8 @@ const en = {
       },
       mediaCreator: {
         formTitle: "Register as Media & Creator",
+        successWelcome: "Welcome to SportFo, Creator!",
+        successMessage: "Your registration is complete.",
         fields: {
           fullName: { label: "Full Name" },
           portfolioLink: { label: "Portfolio Link" },
@@ -605,6 +620,8 @@ const en = {
       },
       managementLegal: {
         formTitle: "Register as Sports Management & Legal",
+        successWelcome: "Welcome to SportFo, Sports Manager!",
+        successMessage: "Your profile has been created.",
         fields: {
           fullName: { label: "Full Name" },
           role: {
@@ -634,6 +651,8 @@ const en = {
       },
       eventOperations: {
         formTitle: "Register as Event & Operations Staff",
+        successWelcome: "Welcome to SportFo, Event Staff!",
+        successMessage: "Registration successful.",
         fields: {
           fullName: { label: "Full Name" },
           role: {
@@ -657,6 +676,8 @@ const en = {
       },
       sponsorCsr: {
         formTitle: "Register as Sponsor & CSR",
+        successWelcome: "Welcome to SportFo, Sponsor!",
+        successMessage: "Your partnership profile has been created successfully.",
         fields: {
           organizationName: { label: "Organization Name" },
           contactPerson: { label: "Contact Person" },
@@ -693,6 +714,8 @@ const en = {
       },
       talentAnalytics: {
         formTitle: "Register as Talent Discovery & Analytics",
+        successWelcome: "Welcome to SportFo, Analyst!",
+        successMessage: "Your profile has been created.",
         fields: {
           fullName: { label: "Full Name" },
           role: {
@@ -716,6 +739,62 @@ const en = {
           uploadPortfolioReport: { label: "Upload Portfolio / Report" },
         },
       },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "Registration Analytics",
+    pageSubtitle: "Admin dashboard -- registration activity across every SportFo category.",
+    kpi: {
+      today: "Today",
+      week: "This Week",
+      month: "This Month",
+      year: "This Year",
+    },
+    filters: {
+      timeRange: "Time Range",
+      today: "Today",
+      last7Days: "Last 7 Days",
+      thisMonth: "This Month",
+      thisYear: "This Year",
+      customRange: "Custom Range",
+      from: "From",
+      to: "To",
+      category: "Category",
+      allCategories: "All Categories",
+      status: "Status",
+      allStatuses: "All",
+      apply: "Apply",
+    },
+    status: {
+      draft: "Draft",
+      submitted: "Submitted",
+      verified: "Verified",
+      rejected: "Rejected",
+    },
+    trend: {
+      title: "Registration Trend",
+      empty: "No registrations in this period yet.",
+    },
+    breakdown: {
+      title: "Category Breakdown",
+      empty: "No registrations in this period yet.",
+    },
+    table: {
+      title: "Recent Registrations",
+      sportfoId: "SportFo ID",
+      name: "Name",
+      category: "Category",
+      registeredDate: "Registered Date",
+      status: "Status",
+      empty: "No registrations match these filters.",
+      pageInfo: "Page {page} of {totalPages} ({total} total)",
+      previous: "Previous",
+      next: "Next",
+    },
+    accessDenied: {
+      title: "Access Denied",
+      description: "You don't have permission to view this page.",
+      action: "Back to Home",
     },
   },
 } as const;

@@ -494,20 +494,29 @@ const kn: Dictionary = {
     pageSubtitle: "ನಿಮ್ಮ ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     chooseCategory: "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     formDetailsTitle: "ನಿಮ್ಮ ವಿವರಗಳು",
-    pendingNoticeShort:
-      "ಈ ವರ್ಗ ಇನ್ನೂ SportFo ಗೆ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ. ಈಗ ಫಾರ್ಮ್ ಭರ್ತಿ ಮಾಡಿ, ನೋಂದಣಿ ಪ್ರಾರಂಭವಾದ ತಕ್ಷಣ ನಾವು ನಿಮಗೆ ತಿಳಿಸುತ್ತೇವೆ.",
-    pendingNotice:
-      "ವಿವರಗಳಿಗಾಗಿ ಧನ್ಯವಾದಗಳು! {category} ನೋಂದಣಿ ಇನ್ನೂ ಲೈವ್ ಆಗಿಲ್ಲ, ಆದ್ದರಿಂದ ಏನನ್ನೂ ಉಳಿಸಲಾಗಿಲ್ಲ. ಅದು ತೆರೆದ ತಕ್ಷಣ ನಾವು ನಿಮಗೆ ತಿಳಿಸುತ್ತೇವೆ.",
     actions: {
       registerNow: "ಈಗ ನೋಂದಣಿ ಮಾಡಿ",
+      registering: "ನೋಂದಣಿ ಮಾಡಲಾಗುತ್ತಿದೆ...",
+      viewRegistration: "ನೋಂದಣಿಯನ್ನು ವೀಕ್ಷಿಸಿ",
     },
     upload: {
       helper: "PDF, JPG, ಅಥವಾ PNG. ಗರಿಷ್ಠ {size}.",
+      currentFile: "ಪ್ರಸ್ತುತ ಫೈಲ್: {name}",
     },
     validation: {
       required: "ಈ ಕ್ಷೇತ್ರ ಅಗತ್ಯವಿದೆ.",
       invalidUrl: "ಮಾನ್ಯವಾದ URL ನಮೂದಿಸಿ (ಉದಾ. https://example.com).",
       numberRange: "{min} ಮತ್ತು {max} ನಡುವಿನ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.",
+    },
+    errors: {
+      title: "ನೋಂದಣಿ ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.",
+      sessionExpired: "ನಿಮ್ಮ ಸೆಷನ್ ಮುಗಿದಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
+      uploadFailed: "ನಿಮ್ಮ ದಾಖಲೆಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ನಮಗೆ ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+      saveFailed: "ಉಳಿಸುವಾಗ ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    },
+    success: {
+      title: "ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ",
+      yourSportfoId: "ನಿಮ್ಮ SportFo ID",
     },
     notFound: {
       title: "ವರ್ಗ ಕಂಡುಬಂದಿಲ್ಲ",
@@ -520,6 +529,8 @@ const kn: Dictionary = {
       },
       academyCoachParent: {
         formTitle: "ಅಕಾಡೆಮಿ / ಕೋಚ್ / ಪೋಷಕರಾಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಕೋಚ್/ಅಕಾಡೆಮಿ!",
+        successMessage: "ನಿಮ್ಮ ನೋಂದಣಿ ಪೂರ್ಣಗೊಂಡಿದೆ.",
         fields: {
           academyCoachName: { label: "ಅಕಾಡೆಮಿ / ಕೋಚ್ ಹೆಸರು" },
           sportsOffered: {
@@ -547,6 +558,8 @@ const kn: Dictionary = {
       },
       performanceExpert: {
         formTitle: "ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಎಕ್ಸ್‌ಪರ್ಟ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಎಕ್ಸ್‌ಪರ್ಟ್!",
+        successMessage: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
         fields: {
           fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
           expertise: {
@@ -582,6 +595,8 @@ const kn: Dictionary = {
       },
       mediaCreator: {
         formTitle: "ಮೀಡಿಯಾ ಮತ್ತು ಕ್ರಿಯೇಟರ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಕ್ರಿಯೇಟರ್!",
+        successMessage: "ನಿಮ್ಮ ನೋಂದಣಿ ಪೂರ್ಣಗೊಂಡಿದೆ.",
         fields: {
           fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
           portfolioLink: { label: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ ಲಿಂಕ್" },
@@ -607,6 +622,8 @@ const kn: Dictionary = {
       },
       managementLegal: {
         formTitle: "ಸ್ಪೋರ್ಟ್ಸ್ ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್ ಮತ್ತು ಲೀಗಲ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಸ್ಪೋರ್ಟ್ಸ್ ಮ್ಯಾನೇಜರ್!",
+        successMessage: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ರಚಿಸಲಾಗಿದೆ.",
         fields: {
           fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
           role: {
@@ -631,6 +648,8 @@ const kn: Dictionary = {
       },
       eventOperations: {
         formTitle: "ಈವೆಂಟ್ ಮತ್ತು ಆಪರೇಶನ್ಸ್ ಸಿಬ್ಬಂದಿಯಾಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಈವೆಂಟ್ ಸಿಬ್ಬಂದಿ!",
+        successMessage: "ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ.",
         fields: {
           fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
           role: {
@@ -651,6 +670,8 @@ const kn: Dictionary = {
       },
       sponsorCsr: {
         formTitle: "ಸ್ಪಾನ್ಸರ್ ಮತ್ತು CSR ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಸ್ಪಾನ್ಸರ್!",
+        successMessage: "ನಿಮ್ಮ ಪಾಲುದಾರಿಕೆ ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
         fields: {
           organizationName: { label: "ಸಂಸ್ಥೆಯ ಹೆಸರು" },
           contactPerson: { label: "ಸಂಪರ್ಕ ವ್ಯಕ್ತಿ" },
@@ -687,6 +708,8 @@ const kn: Dictionary = {
       },
       talentAnalytics: {
         formTitle: "ಟ್ಯಾಲೆಂಟ್ ಡಿಸ್ಕವರಿ ಮತ್ತು ಅನಾಲಿಟಿಕ್ಸ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಅನಾಲಿಸ್ಟ್!",
+        successMessage: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ರಚಿಸಲಾಗಿದೆ.",
         fields: {
           fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
           role: {
@@ -700,6 +723,62 @@ const kn: Dictionary = {
           uploadPortfolioReport: { label: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ / ವರದಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
         },
       },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "ನೋಂದಣಿ ಅನಾಲಿಟಿಕ್ಸ್",
+    pageSubtitle: "ಅಡ್ಮಿನ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ -- ಎಲ್ಲಾ SportFo ವರ್ಗಗಳಾದ್ಯಂತ ನೋಂದಣಿ ಚಟುವಟಿಕೆ.",
+    kpi: {
+      today: "ಇಂದು",
+      week: "ಈ ವಾರ",
+      month: "ಈ ತಿಂಗಳು",
+      year: "ಈ ವರ್ಷ",
+    },
+    filters: {
+      timeRange: "ಸಮಯ ವ್ಯಾಪ್ತಿ",
+      today: "ಇಂದು",
+      last7Days: "ಕಳೆದ 7 ದಿನಗಳು",
+      thisMonth: "ಈ ತಿಂಗಳು",
+      thisYear: "ಈ ವರ್ಷ",
+      customRange: "ಕಸ್ಟಮ್ ವ್ಯಾಪ್ತಿ",
+      from: "ಇಂದ",
+      to: "ವರೆಗೆ",
+      category: "ವರ್ಗ",
+      allCategories: "ಎಲ್ಲಾ ವರ್ಗಗಳು",
+      status: "ಸ್ಥಿತಿ",
+      allStatuses: "ಎಲ್ಲಾ",
+      apply: "ಅನ್ವಯಿಸಿ",
+    },
+    status: {
+      draft: "ಡ್ರಾಫ್ಟ್",
+      submitted: "ಸಲ್ಲಿಸಲಾಗಿದೆ",
+      verified: "ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+      rejected: "ತಿರಸ್ಕರಿಸಲಾಗಿದೆ",
+    },
+    trend: {
+      title: "ನೋಂದಣಿ ಟ್ರೆಂಡ್",
+      empty: "ಈ ಅವಧಿಯಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ನೋಂದಣಿಗಳಿಲ್ಲ.",
+    },
+    breakdown: {
+      title: "ವರ್ಗ ವಿಭಜನೆ",
+      empty: "ಈ ಅವಧಿಯಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ನೋಂದಣಿಗಳಿಲ್ಲ.",
+    },
+    table: {
+      title: "ಇತ್ತೀಚಿನ ನೋಂದಣಿಗಳು",
+      sportfoId: "SportFo ID",
+      name: "ಹೆಸರು",
+      category: "ವರ್ಗ",
+      registeredDate: "ನೋಂದಣಿ ದಿನಾಂಕ",
+      status: "ಸ್ಥಿತಿ",
+      empty: "ಈ ಫಿಲ್ಟರ್‌ಗಳಿಗೆ ಯಾವುದೇ ನೋಂದಣಿ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ.",
+      pageInfo: "ಪುಟ {page} / {totalPages} (ಒಟ್ಟು {total})",
+      previous: "ಹಿಂದಿನ",
+      next: "ಮುಂದಿನ",
+    },
+    accessDenied: {
+      title: "ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ",
+      description: "ಈ ಪುಟವನ್ನು ವೀಕ್ಷಿಸಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
+      action: "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
     },
   },
 };
