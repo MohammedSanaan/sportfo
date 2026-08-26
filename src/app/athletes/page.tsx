@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import {
@@ -16,8 +17,7 @@ import { DiscoveryStatus } from "@/features/discovery/components/DiscoveryStatus
 import { getServerTranslations } from "@/i18n/server";
 
 // Static, deliberately simple metadata -- no per-query/per-filter dynamic
-// SEO for this milestone (see task scope). Not in src/proxy.ts's
-// PROTECTED_ROUTES -- this route is public, same as /a/[slug].
+// SEO for this milestone (see task scope).
 export const metadata: Metadata = {
   title: "Discover Athletes | SportFo",
   description: "Discover athletes by sport, location and experience on SportFo.",
@@ -28,6 +28,16 @@ interface AthletesPageProps {
 }
 
 export default async function AthletesPage({ searchParams }: AthletesPageProps) {
+  // In src/proxy.ts's PROTECTED_ROUTES -- that's an optimistic check only,
+  // so this re-verifies the session directly with Supabase, same pattern
+  // as AthleteRegistrationScreen. Discover Athletes is authenticated-only
+  // (unlike /a/[slug], which stays intentionally public); a signed-out
+  // visitor is bounced to /auth and returned here after login.
+  const user = await getAuthUser();
+  if (!user) {
+    redirect("/auth?next=/athletes");
+  }
+
   const rawParams = await searchParams;
   const filters = parseDiscoveryFilters(rawParams);
   const hasActiveFilters = Boolean(
@@ -41,12 +51,15 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
   );
 
   const supabase = await createClient();
-  const [result, countries, { locale, t }, user] = await Promise.all([
+  const [result, countries, { locale, t }] = await Promise.all([
     searchPublicAthletes(supabase, filters),
     loadPublicAthleteCountries(supabase),
     getServerTranslations(),
-    getAuthUser(),
   ]);
+  // The redirect above already guarantees a signed-in user by this point --
+  // isLoggedIn is always true here, but AthleteDiscoveryGrid/
+  // AthleteExpandedPanel keep the prop rather than assuming their caller's
+  // auth state, in case a future public-preview mode reuses them.
   const isLoggedIn = Boolean(user);
 
   return (

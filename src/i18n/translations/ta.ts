@@ -3,10 +3,11 @@ import type { Dictionary } from "./en";
 const ta: Dictionary = {
   common: {
     pleasePrefix: "தயவுசெய்து",
+    dismiss: "மூடு",
   },
   nav: {
     discoverAthletes: "விளையாட்டு வீரர்களைக் கண்டறியவும்",
-    signIn: "உள்நுழையவும்",
+    signIn: "உள்நுழைவு",
     joinSportfo: "SportFo இல் இணையுங்கள்",
     athleteRegistration: "விளையாட்டு வீரர் பதிவு",
     logout: "வெளியேறு",
@@ -56,9 +57,23 @@ const ta: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "இவராக செயலில்",
-    activeAccount: "செயலில் உள்ள கணக்கு",
-    roleAthlete: "விளையாட்டு வீரர்",
+    sportfoUser: "SportFo உறுப்பினர்",
+    viewProfile: "சுயவிவரத்தைப் பார்க்கவும்",
+    viewDashboard: "டாஷ்போர்டைப் பார்க்கவும்",
+    signOut: "வெளியேறு",
+    welcome: "வரவேற்கிறோம், {name}",
+    welcomeBack: "மீண்டும் வரவேற்கிறோம், {name}",
+    signedInAs: "இதுவாக உள்நுழைந்துள்ளீர்கள்:",
+    roles: {
+      athlete: "விளையாட்டு வீரர்",
+      academyCoachParent: "அகாடமி / பயிற்சியாளர் / பெற்றோர்",
+      performanceExpert: "செயல்திறன் நிபுணர்",
+      mediaCreator: "மீடியா கிரியேட்டர்",
+      managementLegal: "ஸ்போர்ட்ஸ் மேனேஜ்மென்ட் & லீகல்",
+      eventOperations: "ஈவென்ட் & ஆபரேஷன்ஸ் பணியாளர்",
+      sponsorCsr: "ஸ்பான்சர் & CSR",
+      talentAnalytics: "டேலன்ட் டிஸ்கவரி & அனலிடிக்ஸ்",
+    },
   },
   home: {
     hero: {
@@ -251,7 +266,11 @@ const ta: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo இல் சேரவும் அல்லது உள்நுழையவும்",
+    pageTitle: "மீண்டும் வரவேற்கிறோம்",
+    pageSubtitle: "SportFo இல் உள்நுழையவும்",
+    registerPageTitle: "உங்கள் SportFo கணக்கை உருவாக்கவும்",
+    registerPageSubtitle: "பதிவைத் தொடர உங்கள் மொபைல் எண்ணைச் சரிபார்க்கவும்",
+    continueRegistration: "பதிவைத் தொடரவும்",
     descriptionDemo: "உங்கள் விளையாட்டு வீரர் சுயவிவரத்திற்குத் தொடர உங்கள் மொபைல் எண்ணை உள்ளிடவும்.",
     descriptionOtp: "உங்கள் மொபைல் எண்ணை உள்ளிடவும், நாங்கள் உங்களுக்கு பாதுகாப்பான சரிபார்ப்புக் குறியீட்டை அனுப்புவோம்.",
     panelBadge: "விளையாட்டு வீரர்களுக்காக உருவாக்கப்பட்டது. வாய்ப்புக்காக வடிவமைக்கப்பட்டது.",
@@ -279,7 +298,7 @@ const ta: Dictionary = {
     errorOtpWrong: "அந்த குறியீடு சரியில்லை. சரிபார்த்து மீண்டும் முயற்சிக்கவும்.",
     errorSessionCheckFailed: "உங்கள் அமர்வை உறுதிப்படுத்த முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
     mobileOrSportfoIdLabel: "மொபைல் எண் அல்லது SportFo ID",
-    mobileOrSportfoIdPlaceholder: "மொபைல் எண் அல்லது SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 அல்லது SportFo ID",
     sportfoIdFoundNeedsPhone:
       "இந்த SportFo ID எங்களுக்குக் கிடைத்தது. தொலைபேசி சரிபார்ப்பு முழுமையாக இயக்கப்பட்டதும் SportFo ID மூலம் உள்நுழைவது கிடைக்கும் -- தற்போதைக்கு உங்கள் மொபைல் எண்ணுடன் உள்நுழையவும்.",
     sportfoIdNotFound: "அந்த SportFo ID எங்களுக்குக் கிடைக்கவில்லை. சரிபார்க்கவும், அல்லது உங்கள் மொபைல் எண்ணுடன் உள்நுழையவும்.",
@@ -291,6 +310,10 @@ const ta: Dictionary = {
     loadFailed: "உங்கள் சேமிக்கப்பட்ட தகவலை ஏற்ற முடியவில்லை.",
     reload: "இந்தப் பக்கத்தை மீண்டும் ஏற்ற முயற்சிக்கவும்",
     contactSupport: "இது தொடர்ந்து நடந்தால், ஆதரவைத் தொடர்பு கொள்ளவும்.",
+    alreadyRegistered: {
+      title: "நீங்கள் ஏற்கனவே ஒரு விளையாட்டு வீரராக பதிவு செய்யப்பட்டுள்ளீர்கள்",
+      description: "கீழே உங்கள் விவரங்களை மதிப்பாய்வு செய்து புதுப்பிக்கலாம்.",
+    },
     stepPersonal: "தனிப்பட்ட",
     stepSport: "விளையாட்டு",
     stepAchievements: "சாதனைகள்",
@@ -320,6 +343,15 @@ const ta: Dictionary = {
       title: "விளையாட்டு தகவல்",
       description: "உங்கள் முதன்மை விளையாட்டு மற்றும் தற்போதைய திறன் நிலையைப் பகிரவும்.",
       primarySport: "முதன்மை விளையாட்டு",
+      primarySportSearchPlaceholder: "உங்கள் விளையாட்டைத் தேடவும் அல்லது தேர்ந்தெடுக்கவும்...",
+      primarySportNoResults: "விளையாட்டுகள் எதுவும் கிடைக்கவில்லை",
+      category: "வகை",
+      categoryPlaceholder: "வகையைத் தேர்ந்தெடுக்கவும்",
+      categoryAutoHelper: "உங்கள் விளையாட்டின் அடிப்படையில் தானாகத் தேர்ந்தெடுக்கப்பட்டது.",
+      categoryMultiHelper:
+        "{sport} பல SportFo வகைகளுக்குச் சொந்தமானது. உங்கள் பங்களிப்பை சிறப்பாக பிரதிநிதித்துவப்படுத்தும் ஒன்றைத் தேர்ந்தெடுக்கவும்.",
+      categoryUnmappedHelper:
+        "இந்த விளையாட்டிற்கு எங்களிடம் இன்னும் வகை மேப்பிங் இல்லை — எங்கள் குழு விரைவில் ஒன்றைச் சேர்க்கும்.",
       discipline: "விளையாட்டு பிரிவு / துணை வகை",
       disciplinePlaceholder: "எ.கா. ஃப்ரீஸ்டைல், ஸ்பிரிண்ட், ஸ்ட்ரைக்கர்",
       position: "பதவி / பாத்திரம்",
@@ -366,12 +398,13 @@ const ta: Dictionary = {
     },
     success: {
       title: "நீங்கள் தயார்",
-      message: "உங்கள் விளையாட்டு வீரர் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
-      welcome: "SportFo க்கு வரவேற்கிறோம்",
+      message: "உங்கள் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
+      welcome: "SportFo க்கு வரவேற்கிறோம், விளையாட்டு வீரரே!",
       yourSportfoId: "உங்கள் SportFo ID",
       sportfoIdHelper: "இந்த ID-ஐ பத்திரமாக வைத்திருங்கள். உங்கள் SportFo கணக்கை அடையாளம் காண இதைப் பயன்படுத்தலாம்.",
-      backHome: "முகப்புக்குத் திரும்பவும்",
-      viewProfile: "எனது சுயவிவரத்தைப் பார்க்கவும்",
+      viewDashboard: "டாஷ்போர்டைப் பார்க்கவும்",
+      completeProfile: "சுயவிவரத்தை முடிக்கவும்",
+      exploreCommunity: "சமூகத்தை ஆராயுங்கள்",
     },
     banners: {
       draftSaved: "வரைவு சேமிக்கப்பட்டது.",
@@ -379,6 +412,9 @@ const ta: Dictionary = {
         "வரைவு சேமிக்கப்பட்டது, ஆனால் {n} ஆவணம்{plural} பதிவேற்றத் தவறியது. கோப்பை மீண்டும் தேர்ந்தெடுக்கவும் அல்லது மீண்டும் சேமிக்கவும்.",
       createdWithFailures:
         "உங்கள் சுயவிவரம் உருவாக்கப்பட்டது, ஆனால் {n} ஆவணம்{plural} பதிவேற்றத் தவறியது. கோப்பை மீண்டும் தேர்ந்தெடுக்கவும் அல்லது மீண்டும் சமர்ப்பிக்கவும்.",
+      draftRestored: "நீங்கள் சரிபார்க்கப்பட்டீர்கள் -- உங்கள் படிவத்தை மீட்டமைத்துள்ளோம்.",
+      draftRestoredReselectFiles:
+        "நீங்கள் சரிபார்க்கப்பட்டீர்கள் -- உங்கள் படிவத்தை மீட்டமைத்துள்ளோம். நீங்கள் பதிவேற்றிக் கொண்டிருந்த கோப்பு(கள்)யை மீண்டும் தேர்ந்தெடுக்கவும்.",
     },
   },
   profile: {
@@ -481,6 +517,7 @@ const ta: Dictionary = {
     mobileNumber: "மொபைல் எண்",
     email: "மின்னஞ்சல் முகவரி",
     primarySport: "முதன்மை விளையாட்டு",
+    sportCategory: "வகை",
     skillLevel: "திறன் நிலை",
     competitionLevel: "போட்டி நிலை",
     parallelTrack: "பாதை",
@@ -521,6 +558,301 @@ const ta: Dictionary = {
       other: "மற்றவை",
     },
     scholarship: { yes: "ஆம்", no: "இல்லை" },
+  },
+  registerHub: {
+    pageTitle: "SportFo உடன் பதிவு செய்யுங்கள்",
+    pageSubtitle: "உங்கள் வகையைத் தேர்ந்தெடுக்கவும்",
+    chooseCategory: "வகையைத் தேர்ந்தெடுக்கவும்",
+    alreadyRegistered: {
+      title: "நீங்கள் ஏற்கனவே {role} ஆக பதிவு செய்யப்பட்டுள்ளீர்கள்",
+      description: "கீழே உங்கள் விவரங்களை மதிப்பாய்வு செய்து புதுப்பிக்கலாம்.",
+    },
+    formDetailsTitle: "உங்கள் விவரங்கள்",
+    actions: {
+      registerNow: "இப்போது பதிவு செய்யவும்",
+      registering: "பதிவு செய்யப்படுகிறது...",
+      viewRegistration: "பதிவைப் பார்க்கவும்",
+    },
+    upload: {
+      helper: "PDF, JPG, அல்லது PNG. அதிகபட்சம் {size}.",
+      currentFile: "தற்போதைய கோப்பு: {name}",
+    },
+    validation: {
+      required: "இந்த புலம் தேவை.",
+      invalidUrl: "செல்லுபடியாகும் URL-ஐ உள்ளிடவும் (எ.கா. https://example.com).",
+      numberRange: "{min} மற்றும் {max} இடையே ஒரு எண்ணை உள்ளிடவும்.",
+    },
+    errors: {
+      title: "பதிவை முடிக்க முடியவில்லை.",
+      uploadFailed: "உங்கள் ஆவணத்தைப் பதிவேற்ற முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
+      saveFailed: "சேமிக்கும் போது ஏதோ தவறு நடந்தது. மீண்டும் முயற்சிக்கவும்.",
+    },
+    banners: {
+      draftRestored: "நீங்கள் சரிபார்க்கப்பட்டீர்கள் -- உங்கள் படிவத்தை மீட்டமைத்துள்ளோம்.",
+      draftRestoredReselectFiles:
+        "நீங்கள் சரிபார்க்கப்பட்டீர்கள் -- உங்கள் படிவத்தை மீட்டமைத்துள்ளோம். நீங்கள் பதிவேற்றிக் கொண்டிருந்த கோப்பு(கள்)யை மீண்டும் தேர்ந்தெடுக்கவும்.",
+    },
+    success: {
+      title: "பதிவு வெற்றிகரமாக முடிந்தது",
+      yourSportfoId: "உங்கள் SportFo ID",
+    },
+    notFound: {
+      title: "வகை கிடைக்கவில்லை",
+      description: "அந்த பதிவு வகையை எங்களால் கண்டுபிடிக்க முடியவில்லை.",
+      action: "ஒரு வகையைத் தேர்ந்தெடுக்கவும்",
+    },
+    categories: {
+      athlete: {
+        formTitle: "ஒரு விளையாட்டு வீரராக பதிவு செய்யவும்",
+      },
+      academyCoachParent: {
+        formTitle: "அகாடமி / பயிற்சியாளர் / பெற்றோராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், பயிற்சியாளர்/அகாடமி!",
+        successMessage: "உங்கள் பதிவு முடிந்தது.",
+        fields: {
+          academyCoachName: { label: "அகாடமி / பயிற்சியாளர் பெயர்" },
+          sportsOffered: {
+            label: "வழங்கப்படும் விளையாட்டுகள்",
+            placeholder: "எ.கா. கிரிக்கெட், கால்பந்து, பேட்மிண்டன்",
+          },
+          ageGroupsTrained: {
+            label: "பயிற்சி அளிக்கப்படும் வயது குழுக்கள்",
+            placeholder: "எ.கா. அண்டர்-12, அண்டர்-16, பெரியவர்கள்",
+          },
+          coachCertification: { label: "பயிற்சியாளர் சான்றிதழ்" },
+          experienceLevel: {
+            label: "அனுபவ நிலை",
+            options: {
+              "0-2 years": "0-2 ஆண்டுகள்",
+              "3-5 years": "3-5 ஆண்டுகள்",
+              "6-10 years": "6-10 ஆண்டுகள்",
+              "10+ years": "10+ ஆண்டுகள்",
+            },
+          },
+          location: { label: "இடம்" },
+          uploadAcademyInfo: { label: "அகாடமி தகவலைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "செயல்திறன் நிபுணராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், செயல்திறன் நிபுணரே!",
+        successMessage: "உங்கள் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          expertise: {
+            label: "நிபுணத்துவம்",
+            options: {
+              "Sports Physiotherapist": "ஸ்போர்ட்ஸ் பிசியோதெரபிஸ்ட்",
+              Nutritionist: "நியூட்ரிஷனிஸ்ட்",
+              "Sports Psychologist": "ஸ்போர்ட்ஸ் சைக்காலஜிஸ்ட்",
+              "Strength & Conditioning": "ஸ்ட்ரெங்த் & கண்டிஷனிங்",
+              "Performance Trainer": "பெர்ஃபார்மன்ஸ் ட்ரெய்னர்",
+              "Rehabilitation Specialist": "மறுவாழ்வு நிபுணர்",
+              Other: "மற்றவை",
+            },
+          },
+          experienceLevel: {
+            label: "அனுபவ நிலை",
+            options: {
+              "0-2 years": "0-2 ஆண்டுகள்",
+              "3-5 years": "3-5 ஆண்டுகள்",
+              "6-10 years": "6-10 ஆண்டுகள்",
+              "10+ years": "10+ ஆண்டுகள்",
+            },
+          },
+          servicesOffered: {
+            label: "வழங்கப்படும் சேவைகள்",
+            placeholder: "எ.கா. காயம் மீட்பு, வலிமை திட்டங்கள்",
+          },
+          certifications: { label: "சான்றிதழ்கள்" },
+          location: { label: "இடம்" },
+          uploadCertificate: { label: "சான்றிதழைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "மீடியா & கிரியேட்டராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், கிரியேட்டரே!",
+        successMessage: "உங்கள் பதிவு முடிந்தது.",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          portfolioLink: { label: "போர்ட்ஃபோலியோ இணைப்பு" },
+          contentType: {
+            label: "உள்ளடக்க வகை",
+            options: {
+              Photography: "புகைப்படம்",
+              Videography: "வீடியோகிராஃபி",
+              Journalism: "பத்திரிகை",
+              "Sports Writing": "ஸ்போர்ட்ஸ் எழுத்து",
+              "Social Media": "சமூக ஊடகம்",
+              Broadcasting: "ஒளிபரப்பு",
+              Other: "மற்றவை",
+            },
+          },
+          socialMediaHandles: {
+            label: "சமூக ஊடக ஹேண்டில்கள்",
+            placeholder: "எ.கா. @yourhandle (இன்ஸ்டாகிராம், யூடியூப், X)",
+          },
+          location: { label: "இடம்" },
+          uploadPortfolio: { label: "போர்ட்ஃபோலியோவைப் பதிவேற்றவும்" },
+        },
+      },
+      managementLegal: {
+        formTitle: "ஸ்போர்ட்ஸ் மேனேஜ்மென்ட் & லீகல் ஆக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், ஸ்போர்ட்ஸ் மேனேஜரே!",
+        successMessage: "உங்கள் சுயவிவரம் உருவாக்கப்பட்டது.",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          role: {
+            label: "பங்கு",
+            options: { Manager: "மேலாளர்", Agent: "முகவர்", Lawyer: "வழக்கறிஞர்", Consultant: "ஆலோசகர்" },
+          },
+          licenseNumber: { label: "உரிமத் எண்" },
+          organization: { label: "நிறுவனம்" },
+          experienceLevel: {
+            label: "அனுபவ நிலை",
+            options: {
+              "0-2 years": "0-2 ஆண்டுகள்",
+              "3-5 years": "3-5 ஆண்டுகள்",
+              "6-10 years": "6-10 ஆண்டுகள்",
+              "10+ years": "10+ ஆண்டுகள்",
+            },
+          },
+          location: { label: "இடம்" },
+          uploadLicense: { label: "உரிமத்தைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      eventOperations: {
+        formTitle: "ஈவென்ட் & ஆபரேஷன்ஸ் பணியாளராக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், ஈவென்ட் பணியாளரே!",
+        successMessage: "பதிவு வெற்றிகரமாக முடிந்தது.",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          role: {
+            label: "பங்கு",
+            options: { Referee: "நடுவர்", Umpire: "அம்பயர்", Volunteer: "தன்னார்வலர்", Coordinator: "ஒருங்கிணைப்பாளர்" },
+          },
+          certification: { label: "சான்றிதழ்" },
+          experienceYears: { label: "அனுபவ ஆண்டுகள்" },
+          availability: { label: "கிடைக்கும் நேரம்", placeholder: "எ.கா. வார இறுதி நாட்கள், மாலை நேரங்கள்" },
+          location: { label: "இடம்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "ஸ்பான்சர் & CSR ஆக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், ஸ்பான்சரே!",
+        successMessage: "உங்கள் பங்குதாரர் சுயவிவரம் வெற்றிகரமாக உருவாக்கப்பட்டது.",
+        fields: {
+          organizationName: { label: "நிறுவனத்தின் பெயர்" },
+          contactPerson: { label: "தொடர்பு நபர்" },
+          sponsorshipInterest: {
+            label: "ஸ்பான்சர்ஷிப் ஆர்வம்",
+            options: {
+              Youth: "இளையோர்",
+              Women: "பெண்கள்",
+              Grassroots: "கிராஸ்ரூட்ஸ்",
+              "Para Sports": "பாரா விளையாட்டுகள்",
+              Academies: "அகாடமிகள்",
+              Events: "நிகழ்வுகள்",
+              "Talent Development": "திறமை மேம்பாடு",
+              Other: "மற்றவை",
+            },
+          },
+          budgetRange: {
+            label: "பட்ஜெட் வரம்பு",
+            options: {
+              "Under ₹1L": "₹1L க்கும் குறைவாக",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "விளையாட்டு கவனம்",
+            placeholder: "எ.கா. கிரிக்கெட், தடகளம், பாரா விளையாட்டுகள்",
+          },
+          location: { label: "இடம்" },
+          uploadProposal: { label: "முன்மொழிவைப் பதிவேற்றவும்" },
+          uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "டேலன்ட் டிஸ்கவரி & அனலிடிக்ஸ் ஆக பதிவு செய்யவும்",
+        successWelcome: "SportFo க்கு வரவேற்கிறோம், அனலிஸ்டே!",
+        successMessage: "உங்கள் சுயவிவரம் உருவாக்கப்பட்டது.",
+        fields: {
+          fullName: { label: "முழுப் பெயர்" },
+          role: {
+            label: "பங்கு",
+            options: { Scout: "ஸ்கவுட்", Analyst: "அனலிஸ்ட்", "Data Expert": "டேட்டா நிபுணர்" },
+          },
+          toolsUsed: { label: "பயன்படுத்தப்பட்ட கருவிகள்", placeholder: "எ.கா. Hudl, Dartfish" },
+          experienceYears: { label: "அனுபவ ஆண்டுகள்" },
+          sportsSpecialization: { label: "விளையாட்டு நிபுணத்துவம்", placeholder: "எ.கா. கால்பந்து, தடகளம்" },
+          location: { label: "இடம்" },
+          uploadPortfolioReport: { label: "போர்ட்ஃபோலியோ / அறிக்கையைப் பதிவேற்றவும்" },
+        },
+      },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "பதிவு பகுப்பாய்வு",
+    pageSubtitle: "நிர்வாக டாஷ்போர்டு -- அனைத்து SportFo வகைகளிலும் பதிவு செயல்பாடு.",
+    kpi: {
+      today: "இன்று",
+      week: "இந்த வாரம்",
+      month: "இந்த மாதம்",
+      year: "இந்த ஆண்டு",
+    },
+    filters: {
+      timeRange: "கால வரம்பு",
+      today: "இன்று",
+      last7Days: "கடந்த 7 நாட்கள்",
+      thisMonth: "இந்த மாதம்",
+      thisYear: "இந்த ஆண்டு",
+      customRange: "தனிப்பயன் வரம்பு",
+      from: "இருந்து",
+      to: "வரை",
+      category: "வகை",
+      allCategories: "அனைத்து வகைகள்",
+      status: "நிலை",
+      allStatuses: "அனைத்தும்",
+      apply: "பயன்படுத்து",
+    },
+    status: {
+      draft: "வரைவு",
+      submitted: "சமர்ப்பிக்கப்பட்டது",
+      verified: "சரிபார்க்கப்பட்டது",
+      rejected: "நிராகரிக்கப்பட்டது",
+    },
+    trend: {
+      title: "பதிவு போக்கு",
+      empty: "இந்த காலகட்டத்தில் இன்னும் பதிவுகள் இல்லை.",
+    },
+    breakdown: {
+      title: "வகை பிரிவு",
+      empty: "இந்த காலகட்டத்தில் இன்னும் பதிவுகள் இல்லை.",
+    },
+    table: {
+      title: "சமீபத்திய பதிவுகள்",
+      sportfoId: "SportFo ID",
+      name: "பெயர்",
+      category: "வகை",
+      registeredDate: "பதிவு தேதி",
+      status: "நிலை",
+      empty: "இந்த வடிப்பான்களுக்கு பதிவுகள் எதுவும் பொருந்தவில்லை.",
+      pageInfo: "பக்கம் {page} / {totalPages} (மொத்தம் {total})",
+      previous: "முந்தைய",
+      next: "அடுத்தது",
+    },
+    accessDenied: {
+      title: "அணுகல் மறுக்கப்பட்டது",
+      description: "இந்தப் பக்கத்தைப் பார்க்க உங்களுக்கு அனுமதி இல்லை.",
+      action: "முகப்புக்குத் திரும்பவும்",
+    },
   },
 };
 

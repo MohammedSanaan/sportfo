@@ -55,8 +55,11 @@ export function EcosystemHero({ t }: { t: TFunc }) {
             >
               {t("home.hero.explore")}
             </Link>
+            {/* Gateway to category selection, not straight to /auth -- the
+                product flow is Hero -> Community (category picker) ->
+                /register/{category}, which itself gates on auth. */}
             <Link
-              href="/auth"
+              href="#community"
               className="inline-flex h-13 w-full items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
             >
               {t("home.hero.join")}

@@ -132,6 +132,16 @@ body {
   outline-offset: 2px;
 }
 
+/* In-page anchor navigation (Header nav, Hero's "Join SportFo" -> #community,
+   success screens' "Explore Community" -> /#community) scrolls smoothly.
+   Gated behind no-preference so prefers-reduced-motion gets the browser's
+   plain instant jump instead -- no JS scroll handler needed either way. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 /* Stitch landing page ("/") -- hero scrim and story-card bottom gradient.
    Fixed rgba stops rather than Tailwind's from-/via-/to- utilities so the
    navy stays exactly on-brand (#0a3275) regardless of opacity stacking. */

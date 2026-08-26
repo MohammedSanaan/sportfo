@@ -3,10 +3,11 @@ import type { Dictionary } from "./en";
 const te: Dictionary = {
   common: {
     pleasePrefix: "దయచేసి",
+    dismiss: "మూసివేయండి",
   },
   nav: {
     discoverAthletes: "అథ్లెట్లను కనుగొనండి",
-    signIn: "సైన్ ఇన్ చేయండి",
+    signIn: "లాగిన్",
     joinSportfo: "SportFo లో చేరండి",
     athleteRegistration: "అథ్లెట్ నమోదు",
     logout: "లాగ్ అవుట్",
@@ -56,9 +57,23 @@ const te: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "గా క్రియాశీలం",
-    activeAccount: "క్రియాశీల ఖాతా",
-    roleAthlete: "అథ్లెట్",
+    sportfoUser: "SportFo సభ్యుడు",
+    viewProfile: "ప్రొఫైల్‌ను వీక్షించండి",
+    viewDashboard: "డాష్‌బోర్డ్‌ను వీక్షించండి",
+    signOut: "సైన్ అవుట్",
+    welcome: "స్వాగతం, {name}",
+    welcomeBack: "తిరిగి స్వాగతం, {name}",
+    signedInAs: "ఇలా సైన్ ఇన్ అయ్యారు:",
+    roles: {
+      athlete: "అథ్లెట్",
+      academyCoachParent: "అకాడమీ / కోచ్ / తల్లిదండ్రులు",
+      performanceExpert: "పెర్ఫార్మెన్స్ ఎక్స్‌పర్ట్",
+      mediaCreator: "మీడియా క్రియేటర్",
+      managementLegal: "స్పోర్ట్స్ మేనేజ్‌మెంట్ & లీగల్",
+      eventOperations: "ఈవెంట్ & ఆపరేషన్స్ స్టాఫ్",
+      sponsorCsr: "స్పాన్సర్ & CSR",
+      talentAnalytics: "టాలెంట్ డిస్కవరీ & అనలిటిక్స్",
+    },
   },
   home: {
     hero: {
@@ -249,7 +264,11 @@ const te: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo లో చేరండి లేదా సైన్ ఇన్ చేయండి",
+    pageTitle: "తిరిగి స్వాగతం",
+    pageSubtitle: "SportFo కి లాగిన్ అవ్వండి",
+    registerPageTitle: "మీ SportFo ఖాతాను సృష్టించండి",
+    registerPageSubtitle: "నమోదును కొనసాగించడానికి మీ మొబైల్ నంబర్‌ను ధృవీకరించండి",
+    continueRegistration: "నమోదును కొనసాగించండి",
     descriptionDemo: "మీ అథ్లెట్ ప్రొఫైల్‌కు కొనసాగించడానికి మీ మొబైల్ నంబర్‌ను నమోదు చేయండి.",
     descriptionOtp: "మీ మొబైల్ నంబర్‌ను నమోదు చేయండి, మేము మీకు సురక్షితమైన ధృవీకరణ కోడ్‌ను పంపుతాము.",
     panelBadge: "అథ్లెట్ల కోసం నిర్మించబడింది. అవకాశం కోసం రూపొందించబడింది.",
@@ -277,7 +296,7 @@ const te: Dictionary = {
     errorOtpWrong: "ఆ కోడ్ సరైనది కాదు. తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.",
     errorSessionCheckFailed: "మేము మీ సెషన్‌ను నిర్ధారించలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.",
     mobileOrSportfoIdLabel: "మొబైల్ నంబర్ లేదా SportFo ID",
-    mobileOrSportfoIdPlaceholder: "మొబైల్ నంబర్ లేదా SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 లేదా SportFo ID",
     sportfoIdFoundNeedsPhone:
       "ఈ SportFo ID మాకు కనుగొనబడింది. ఫోన్ ధృవీకరణ పూర్తిగా ప్రారంభించబడిన తర్వాత SportFo ID తో సైన్ ఇన్ అందుబాటులో ఉంటుంది -- ప్రస్తుతానికి దయచేసి మీ మొబైల్ నంబర్‌తో సైన్ ఇన్ చేయండి.",
     sportfoIdNotFound: "ఆ SportFo ID మాకు కనుగొనబడలేదు. దయచేసి తనిఖీ చేయండి, లేదా మీ మొబైల్ నంబర్‌తో సైన్ ఇన్ చేయండి.",
@@ -289,6 +308,10 @@ const te: Dictionary = {
     loadFailed: "మేము మీ సేవ్ చేసిన సమాచారాన్ని లోడ్ చేయలేకపోయాము.",
     reload: "ఈ పేజీని మళ్లీ లోడ్ చేయడానికి ప్రయత్నించండి",
     contactSupport: "ఇది పదేపదే జరిగితే, మద్దతును సంప్రదించండి.",
+    alreadyRegistered: {
+      title: "మీరు ఇప్పటికే అథ్లెట్‌గా నమోదు చేసుకున్నారు",
+      description: "మీరు క్రింద మీ వివరాలను సమీక్షించి నవీకరించవచ్చు.",
+    },
     stepPersonal: "వ్యక్తిగత",
     stepSport: "క్రీడ",
     stepAchievements: "విజయాలు",
@@ -318,6 +341,15 @@ const te: Dictionary = {
       title: "క్రీడా సమాచారం",
       description: "మీ ప్రధాన క్రీడ మరియు ప్రస్తుత నైపుణ్య స్థాయిని పంచుకోండి.",
       primarySport: "ప్రధాన క్రీడ",
+      primarySportSearchPlaceholder: "మీ క్రీడను శోధించండి లేదా ఎంచుకోండి...",
+      primarySportNoResults: "క్రీడలు కనుగొనబడలేదు",
+      category: "వర్గం",
+      categoryPlaceholder: "వర్గాన్ని ఎంచుకోండి",
+      categoryAutoHelper: "మీ క్రీడ ఆధారంగా స్వయంచాలకంగా ఎంపిక చేయబడింది.",
+      categoryMultiHelper:
+        "{sport} బహుళ SportFo వర్గాలకు చెందినది. మీ భాగస్వామ్యాన్ని ఉత్తమంగా సూచించే దాన్ని ఎంచుకోండి.",
+      categoryUnmappedHelper:
+        "ఈ క్రీడకు మా వద్ద ఇంకా వర్గ మ్యాపింగ్ లేదు — మా బృందం త్వరలో ఒకటి జోడిస్తుంది.",
       discipline: "క్రీడా విభాగం / ఉప-వర్గం",
       disciplinePlaceholder: "ఉదా. ఫ్రీస్టైల్, స్ప్రింట్, స్ట్రైకర్",
       position: "స్థానం / పాత్ర",
@@ -364,12 +396,13 @@ const te: Dictionary = {
     },
     success: {
       title: "మీరు సిద్ధంగా ఉన్నారు",
-      message: "మీ అథ్లెట్ ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
-      welcome: "SportFo కు స్వాగతం",
+      message: "మీ ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
+      welcome: "SportFo కు స్వాగతం, అథ్లెట్!",
       yourSportfoId: "మీ SportFo ID",
       sportfoIdHelper: "ఈ IDని జాగ్రత్తగా ఉంచుకోండి. మీ SportFo ఖాతాను గుర్తించడానికి మీరు దీన్ని ఉపయోగించవచ్చు.",
-      backHome: "హోమ్‌కు తిరిగి వెళ్ళండి",
-      viewProfile: "నా ప్రొఫైల్‌ను వీక్షించండి",
+      viewDashboard: "డాష్‌బోర్డ్‌ను వీక్షించండి",
+      completeProfile: "ప్రొఫైల్‌ను పూర్తి చేయండి",
+      exploreCommunity: "కమ్యూనిటీని అన్వేషించండి",
     },
     banners: {
       draftSaved: "డ్రాఫ్ట్ సేవ్ చేయబడింది.",
@@ -377,6 +410,9 @@ const te: Dictionary = {
         "డ్రాఫ్ట్ సేవ్ చేయబడింది, కానీ {n} పత్రం{plural} అప్‌లోడ్ కాలేదు. ఫైల్‌ను మళ్లీ ఎంచుకోండి లేదా మళ్లీ సేవ్ చేయండి.",
       createdWithFailures:
         "మీ ప్రొఫైల్ సృష్టించబడింది, కానీ {n} పత్రం{plural} అప్‌లోడ్ కాలేదు. ఫైల్‌ను మళ్లీ ఎంచుకోండి లేదా మళ్లీ సమర్పించండి.",
+      draftRestored: "మీరు ధృవీకరించబడ్డారు -- మేము మీ ఫారమ్‌ను పునరుద్ధరించాము.",
+      draftRestoredReselectFiles:
+        "మీరు ధృవీకరించబడ్డారు -- మేము మీ ఫారమ్‌ను పునరుద్ధరించాము. మీరు అప్‌లోడ్ చేస్తున్న ఫైల్(లు)ను దయచేసి మళ్లీ ఎంచుకోండి.",
     },
   },
   profile: {
@@ -478,6 +514,7 @@ const te: Dictionary = {
     mobileNumber: "మొబైల్ నంబర్",
     email: "ఇమెయిల్ చిరునామా",
     primarySport: "ప్రధాన క్రీడ",
+    sportCategory: "వర్గం",
     skillLevel: "నైపుణ్య స్థాయి",
     competitionLevel: "పోటీ స్థాయి",
     parallelTrack: "ట్రాక్",
@@ -518,6 +555,301 @@ const te: Dictionary = {
       other: "ఇతర",
     },
     scholarship: { yes: "అవును", no: "కాదు" },
+  },
+  registerHub: {
+    pageTitle: "SportFo తో నమోదు చేసుకోండి",
+    pageSubtitle: "మీ వర్గాన్ని ఎంచుకోండి",
+    chooseCategory: "వర్గాన్ని ఎంచుకోండి",
+    alreadyRegistered: {
+      title: "మీరు ఇప్పటికే {role} గా నమోదు చేసుకున్నారు",
+      description: "మీరు క్రింద మీ వివరాలను సమీక్షించి నవీకరించవచ్చు.",
+    },
+    formDetailsTitle: "మీ వివరాలు",
+    actions: {
+      registerNow: "ఇప్పుడు నమోదు చేసుకోండి",
+      registering: "నమోదు చేస్తోంది...",
+      viewRegistration: "నమోదును వీక్షించండి",
+    },
+    upload: {
+      helper: "PDF, JPG, లేదా PNG. గరిష్టం {size}.",
+      currentFile: "ప్రస్తుత ఫైల్: {name}",
+    },
+    validation: {
+      required: "ఈ ఫీల్డ్ అవసరం.",
+      invalidUrl: "చెల్లుబాటు అయ్యే URLని నమోదు చేయండి (ఉదా. https://example.com).",
+      numberRange: "{min} మరియు {max} మధ్య సంఖ్యను నమోదు చేయండి.",
+    },
+    errors: {
+      title: "నమోదు పూర్తి చేయలేకపోయాము.",
+      uploadFailed: "మీ పత్రాన్ని అప్‌లోడ్ చేయలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.",
+      saveFailed: "సేవ్ చేసేటప్పుడు ఏదో తప్పు జరిగింది. దయచేసి మళ్లీ ప్రయత్నించండి.",
+    },
+    banners: {
+      draftRestored: "మీరు ధృవీకరించబడ్డారు -- మేము మీ ఫారమ్‌ను పునరుద్ధరించాము.",
+      draftRestoredReselectFiles:
+        "మీరు ధృవీకరించబడ్డారు -- మేము మీ ఫారమ్‌ను పునరుద్ధరించాము. మీరు అప్‌లోడ్ చేస్తున్న ఫైల్(లు)ను దయచేసి మళ్లీ ఎంచుకోండి.",
+    },
+    success: {
+      title: "నమోదు విజయవంతమైంది",
+      yourSportfoId: "మీ SportFo ID",
+    },
+    notFound: {
+      title: "వర్గం కనుగొనబడలేదు",
+      description: "ఆ నమోదు వర్గం మాకు కనుగొనబడలేదు.",
+      action: "ఒక వర్గాన్ని ఎంచుకోండి",
+    },
+    categories: {
+      athlete: {
+        formTitle: "అథ్లెట్‌గా నమోదు చేసుకోండి",
+      },
+      academyCoachParent: {
+        formTitle: "అకాడమీ / కోచ్ / తల్లిదండ్రులుగా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, కోచ్/అకాడమీ!",
+        successMessage: "మీ నమోదు పూర్తయింది.",
+        fields: {
+          academyCoachName: { label: "అకాడమీ / కోచ్ పేరు" },
+          sportsOffered: {
+            label: "అందించే క్రీడలు",
+            placeholder: "ఉదా. క్రికెట్, ఫుట్‌బాల్, బ్యాడ్మింటన్",
+          },
+          ageGroupsTrained: {
+            label: "శిక్షణ ఇచ్చే వయస్సు గ్రూపులు",
+            placeholder: "ఉదా. అండర్-12, అండర్-16, పెద్దలు",
+          },
+          coachCertification: { label: "కోచ్ సర్టిఫికేషన్" },
+          experienceLevel: {
+            label: "అనుభవ స్థాయి",
+            options: {
+              "0-2 years": "0-2 సంవత్సరాలు",
+              "3-5 years": "3-5 సంవత్సరాలు",
+              "6-10 years": "6-10 సంవత్సరాలు",
+              "10+ years": "10+ సంవత్సరాలు",
+            },
+          },
+          location: { label: "ప్రాంతం" },
+          uploadAcademyInfo: { label: "అకాడమీ సమాచారాన్ని అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "పెర్ఫార్మెన్స్ ఎక్స్‌పర్ట్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, పెర్ఫార్మెన్స్ ఎక్స్‌పర్ట్!",
+        successMessage: "మీ ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          expertise: {
+            label: "నైపుణ్యం",
+            options: {
+              "Sports Physiotherapist": "స్పోర్ట్స్ ఫిజియోథెరపిస్ట్",
+              Nutritionist: "న్యూట్రిషనిస్ట్",
+              "Sports Psychologist": "స్పోర్ట్స్ సైకాలజిస్ట్",
+              "Strength & Conditioning": "స్ట్రెంత్ & కండిషనింగ్",
+              "Performance Trainer": "పెర్ఫార్మెన్స్ ట్రైనర్",
+              "Rehabilitation Specialist": "రిహాబిలిటేషన్ స్పెషలిస్ట్",
+              Other: "ఇతర",
+            },
+          },
+          experienceLevel: {
+            label: "అనుభవ స్థాయి",
+            options: {
+              "0-2 years": "0-2 సంవత్సరాలు",
+              "3-5 years": "3-5 సంవత్సరాలు",
+              "6-10 years": "6-10 సంవత్సరాలు",
+              "10+ years": "10+ సంవత్సరాలు",
+            },
+          },
+          servicesOffered: {
+            label: "అందించే సేవలు",
+            placeholder: "ఉదా. గాయం రికవరీ, స్ట్రెంత్ ప్రోగ్రామ్‌లు",
+          },
+          certifications: { label: "సర్టిఫికేషన్లు" },
+          location: { label: "ప్రాంతం" },
+          uploadCertificate: { label: "సర్టిఫికేట్‌ను అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "మీడియా & క్రియేటర్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, క్రియేటర్!",
+        successMessage: "మీ నమోదు పూర్తయింది.",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          portfolioLink: { label: "పోర్ట్‌ఫోలియో లింక్" },
+          contentType: {
+            label: "కంటెంట్ రకం",
+            options: {
+              Photography: "ఫోటోగ్రఫీ",
+              Videography: "వీడియోగ్రఫీ",
+              Journalism: "జర్నలిజం",
+              "Sports Writing": "స్పోర్ట్స్ రైటింగ్",
+              "Social Media": "సోషల్ మీడియా",
+              Broadcasting: "బ్రాడ్‌కాస్టింగ్",
+              Other: "ఇతర",
+            },
+          },
+          socialMediaHandles: {
+            label: "సోషల్ మీడియా హ్యాండిల్స్",
+            placeholder: "ఉదా. @yourhandle (ఇన్‌స్టాగ్రామ్, యూట్యూబ్, X)",
+          },
+          location: { label: "ప్రాంతం" },
+          uploadPortfolio: { label: "పోర్ట్‌ఫోలియోను అప్‌లోడ్ చేయండి" },
+        },
+      },
+      managementLegal: {
+        formTitle: "స్పోర్ట్స్ మేనేజ్‌మెంట్ & లీగల్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, స్పోర్ట్స్ మేనేజర్!",
+        successMessage: "మీ ప్రొఫైల్ సృష్టించబడింది.",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          role: {
+            label: "పాత్ర",
+            options: { Manager: "మేనేజర్", Agent: "ఏజెంట్", Lawyer: "న్యాయవాది", Consultant: "కన్సల్టెంట్" },
+          },
+          licenseNumber: { label: "లైసెన్స్ నంబర్" },
+          organization: { label: "సంస్థ" },
+          experienceLevel: {
+            label: "అనుభవ స్థాయి",
+            options: {
+              "0-2 years": "0-2 సంవత్సరాలు",
+              "3-5 years": "3-5 సంవత్సరాలు",
+              "6-10 years": "6-10 సంవత్సరాలు",
+              "10+ years": "10+ సంవత్సరాలు",
+            },
+          },
+          location: { label: "ప్రాంతం" },
+          uploadLicense: { label: "లైసెన్స్‌ను అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      eventOperations: {
+        formTitle: "ఈవెంట్ & ఆపరేషన్స్ స్టాఫ్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, ఈవెంట్ స్టాఫ్!",
+        successMessage: "నమోదు విజయవంతమైంది.",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          role: {
+            label: "పాత్ర",
+            options: { Referee: "రిఫరీ", Umpire: "అంపైర్", Volunteer: "వాలంటీర్", Coordinator: "కోఆర్డినేటర్" },
+          },
+          certification: { label: "సర్టిఫికేషన్" },
+          experienceYears: { label: "అనుభవ సంవత్సరాలు" },
+          availability: { label: "అందుబాటు", placeholder: "ఉదా. వారాంతాలు, సాయంత్రాలు" },
+          location: { label: "ప్రాంతం" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "స్పాన్సర్ & CSR గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, స్పాన్సర్!",
+        successMessage: "మీ భాగస్వామ్య ప్రొఫైల్ విజయవంతంగా సృష్టించబడింది.",
+        fields: {
+          organizationName: { label: "సంస్థ పేరు" },
+          contactPerson: { label: "సంప్రదింపు వ్యక్తి" },
+          sponsorshipInterest: {
+            label: "స్పాన్సర్‌షిప్ ఆసక్తి",
+            options: {
+              Youth: "యువత",
+              Women: "మహిళలు",
+              Grassroots: "గ్రాస్‌రూట్స్",
+              "Para Sports": "పారా స్పోర్ట్స్",
+              Academies: "అకాడమీలు",
+              Events: "ఈవెంట్‌లు",
+              "Talent Development": "టాలెంట్ డెవలప్‌మెంట్",
+              Other: "ఇతర",
+            },
+          },
+          budgetRange: {
+            label: "బడ్జెట్ పరిధి",
+            options: {
+              "Under ₹1L": "₹1L కంటే తక్కువ",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "క్రీడా దృష్టి",
+            placeholder: "ఉదా. క్రికెట్, అథ్లెటిక్స్, పారా స్పోర్ట్స్",
+          },
+          location: { label: "ప్రాంతం" },
+          uploadProposal: { label: "ప్రతిపాదనను అప్‌లోడ్ చేయండి" },
+          uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "టాలెంట్ డిస్కవరీ & అనలిటిక్స్‌గా నమోదు చేసుకోండి",
+        successWelcome: "SportFo కు స్వాగతం, అనలిస్ట్!",
+        successMessage: "మీ ప్రొఫైల్ సృష్టించబడింది.",
+        fields: {
+          fullName: { label: "పూర్తి పేరు" },
+          role: {
+            label: "పాత్ర",
+            options: { Scout: "స్కౌట్", Analyst: "అనలిస్ట్", "Data Expert": "డేటా ఎక్స్‌పర్ట్" },
+          },
+          toolsUsed: { label: "ఉపయోగించిన సాధనాలు", placeholder: "ఉదా. Hudl, Dartfish" },
+          experienceYears: { label: "అనుభవ సంవత్సరాలు" },
+          sportsSpecialization: { label: "క్రీడా ప్రత్యేకత", placeholder: "ఉదా. ఫుట్‌బాల్, అథ్లెటిక్స్" },
+          location: { label: "ప్రాంతం" },
+          uploadPortfolioReport: { label: "పోర్ట్‌ఫోలియో / నివేదికను అప్‌లోడ్ చేయండి" },
+        },
+      },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "నమోదు అనలిటిక్స్",
+    pageSubtitle: "అడ్మిన్ డాష్‌బోర్డ్ -- అన్ని SportFo వర్గాలలో నమోదు కార్యకలాపం.",
+    kpi: {
+      today: "ఈరోజు",
+      week: "ఈ వారం",
+      month: "ఈ నెల",
+      year: "ఈ సంవత్సరం",
+    },
+    filters: {
+      timeRange: "కాల పరిధి",
+      today: "ఈరోజు",
+      last7Days: "గత 7 రోజులు",
+      thisMonth: "ఈ నెల",
+      thisYear: "ఈ సంవత్సరం",
+      customRange: "అనుకూల పరిధి",
+      from: "నుండి",
+      to: "వరకు",
+      category: "వర్గం",
+      allCategories: "అన్ని వర్గాలు",
+      status: "స్థితి",
+      allStatuses: "అన్నీ",
+      apply: "వర్తింపజేయండి",
+    },
+    status: {
+      draft: "డ్రాఫ్ట్",
+      submitted: "సమర్పించబడింది",
+      verified: "ధృవీకరించబడింది",
+      rejected: "తిరస్కరించబడింది",
+    },
+    trend: {
+      title: "నమోదు ధోరణి",
+      empty: "ఈ కాలంలో ఇంకా నమోదులు లేవు.",
+    },
+    breakdown: {
+      title: "వర్గ విభజన",
+      empty: "ఈ కాలంలో ఇంకా నమోదులు లేవు.",
+    },
+    table: {
+      title: "ఇటీవలి నమోదులు",
+      sportfoId: "SportFo ID",
+      name: "పేరు",
+      category: "వర్గం",
+      registeredDate: "నమోదు తేదీ",
+      status: "స్థితి",
+      empty: "ఈ ఫిల్టర్‌లకు నమోదులు ఏవీ సరిపోలలేదు.",
+      pageInfo: "పేజీ {page} / {totalPages} (మొత్తం {total})",
+      previous: "మునుపటి",
+      next: "తదుపరి",
+    },
+    accessDenied: {
+      title: "యాక్సెస్ నిరాకరించబడింది",
+      description: "ఈ పేజీని వీక్షించడానికి మీకు అనుమతి లేదు.",
+      action: "హోమ్‌కు తిరిగి వెళ్ళండి",
+    },
   },
 };
 

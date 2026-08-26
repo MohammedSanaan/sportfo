@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { friendlyAuthErrorMessage } from "@/lib/supabase/auth-errors";
-import { lookupOwnAthleteProfile } from "@/lib/athlete/lookup-profile";
-import { resolveAthleteDestination } from "@/lib/athlete/resolve-destination";
+import { getPostLoginDestination } from "@/lib/auth/post-login-destination";
+import { storeWelcomePayload } from "@/lib/account/welcome-storage";
 import { getAuthMode, DEMO_PHONE_METADATA_KEY } from "@/lib/auth-mode";
 import { ensureSportfoId, checkSportfoIdExists } from "@/lib/sportfo-id/client";
 import { isSportfoIdFormat, canonicalizeSportfoId } from "@/lib/sportfo-id/format";
@@ -19,7 +19,19 @@ const RESEND_COOLDOWN_SECONDS = 30;
 
 type Step = "phone" | "otp";
 
-export function AuthFlow() {
+interface AuthFlowProps {
+  // Already validated server-side by the /auth page (resolveSafeNextPath)
+  // -- null means absent/invalid, so getPostLoginDestination falls back to
+  // its own registration-based routing.
+  safeNext?: string | null;
+  // Pure UI signal (mirrors the /auth page's own `mode=register` copy
+  // switch) -- "register" swaps the phone step's call-to-action to
+  // registration-flavored copy. Never affects routing/auth logic itself,
+  // which is identical either way.
+  intent?: "login" | "register";
+}
+
+export function AuthFlow({ safeNext = null, intent = "login" }: AuthFlowProps) {
   const router = useRouter();
   const { t } = useTranslation();
   const [supabase] = useState(() => createClient());
@@ -44,11 +56,13 @@ export function AuthFlow() {
     return () => clearInterval(timer);
   }, [cooldown]);
 
-  // After either flow produces a real authenticated session, routing is
-  // identical: look up the athlete's own profile (RLS-scoped) and land
-  // them on the right destination. router.refresh() forces the header's
-  // server-rendered auth state to pick up the new session immediately
-  // (see Header/AuthNav -- they don't otherwise re-render on client nav).
+  // After either flow produces a real authenticated session, routing goes
+  // through the one centralized getPostLoginDestination() decision (same
+  // helper the already-authenticated branch of the /auth page uses) --
+  // never re-derived here with separate logic. router.refresh() forces the
+  // header's server-rendered auth state to pick up the new session
+  // immediately (see Header/AuthNav -- they don't otherwise re-render on
+  // client nav).
   async function routeAfterAuthentication(userId: string) {
     // Idempotent get-or-create: assigns a permanent SportFo ID the first
     // time this account ever authenticates, and is a safe no-op (returns
@@ -59,19 +73,21 @@ export function AuthFlow() {
       console.error("ensureSportfoId failed:", sportfoIdResult.error);
     }
 
-    const { data: profile, error: profileError } = await lookupOwnAthleteProfile(
-      supabase,
-      userId,
-    );
+    const result = await getPostLoginDestination(supabase, userId, safeNext);
 
-    if (profileError) {
-      console.error("athlete profile lookup failed:", profileError);
-      router.push("/athlete/register");
-      router.refresh();
-      return;
+    // Only an account with an existing *submitted* registration gets the
+    // "welcome back" treatment -- a brand-new sign-in with nothing
+    // registered yet is about to land on Community to pick a category, not
+    // be welcomed "back" to something that doesn't exist yet.
+    if (result.hasSubmittedRegistration) {
+      storeWelcomePayload({
+        displayName: result.displayName,
+        roleId: result.category?.id ?? null,
+        sportfoId: result.sportfoId,
+      });
     }
 
-    router.push(resolveAthleteDestination(profile));
+    router.push(result.destination);
     router.refresh();
   }
 
@@ -259,7 +275,7 @@ export function AuthFlow() {
         isSubmitting={isSendingCode}
         error={phoneError}
         fieldHelperText={t("auth.mobileHelperDemo")}
-        submitLabel={t("auth.continueLabel")}
+        submitLabel={intent === "register" ? t("auth.continueRegistration") : t("auth.continueLabel")}
         submitBusyLabel={t("auth.continuing")}
         note={t("auth.demoNote")}
       />
@@ -275,6 +291,7 @@ export function AuthFlow() {
       onSubmit={sendCode}
       isSubmitting={isSendingCode}
       error={phoneError}
+      submitLabel={intent === "register" ? t("auth.continueRegistration") : undefined}
     />
   );
 }

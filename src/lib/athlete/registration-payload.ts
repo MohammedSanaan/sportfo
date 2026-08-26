@@ -67,6 +67,7 @@ export function buildSaveRegistrationArgs(
       additionalRecognition.scholarshipRecipient,
     ),
     p_primary_sport: emptyToNull(sportsInformation.primarySport),
+    p_sport_category: emptyToNull(sportsInformation.sportCategory),
     p_sport_discipline: emptyToNull(sportsInformation.discipline),
     p_position_role: emptyToNull(sportsInformation.position),
     p_skill_level: emptyToNull(sportsInformation.skillLevel),

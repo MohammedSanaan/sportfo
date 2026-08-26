@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
-import { lookupOwnAthleteProfile } from "@/lib/athlete/lookup-profile";
 import { LogoutButton } from "@/features/auth/components/LogoutButton";
-import { getOwnSportfoId } from "@/lib/sportfo-id/server";
+import { getOwnAccountIdentity } from "@/lib/account/identity";
 import { AccountMenu } from "./AccountMenu";
+import { JoinCommunityLink } from "./JoinCommunityLink";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
 
@@ -15,13 +15,13 @@ const navLinkClassName =
 // directly in Header) so it can be wrapped in <Suspense> -- the session
 // check shouldn't delay the rest of the shared layout from streaming.
 //
-// "Discover Athletes" now lives in Header's main left-side nav (always
-// visible, signed in or not) instead of here -- this component only
-// renders the auth-state-dependent actions (Sign In/Join SportFo for
-// guests, My Profile/Logout for signed-in users without an AccountMenu).
-// The signed-in AccountMenu dropdown still carries its own "Discover
-// Athletes" entry (see AccountMenu.tsx) since that's a separate,
-// already-open-on-click surface, not part of the always-visible bar.
+// "Discover Athletes" lives in Header's main left-side nav (always
+// visible, signed in or not -- see Header.tsx's discoverAthletesLink)
+// instead of here, so this component only renders the auth-state-
+// dependent actions themselves (AccountMenu/logout for signed-in users,
+// Sign In/Join SportFo for guests). /athletes still has its own server-
+// side auth check and its entry in src/proxy.ts's PROTECTED_ROUTES, so a
+// guest clicking it there is redirected rather than shown the page.
 export async function AuthNav({
   locale,
   variant = "desktop",
@@ -34,27 +34,27 @@ export async function AuthNav({
 
   if (user) {
     const supabase = await createClient();
-    // Both are RLS-scoped to this user's own rows -- neither can ever
-    // return another account's SportFo ID or profile. A missing
-    // sportfo_users row (should be rare: ensure_sportfo_id() runs at every
-    // login, see AuthFlow) never blocks rendering the rest of the header.
-    const [sportfoId, { data: profile }] = await Promise.all([
-      getOwnSportfoId(supabase, user.id),
-      lookupOwnAthleteProfile(supabase, user.id),
-    ]);
+    // RLS-scoped to this user's own rows throughout -- can never resolve
+    // another account's name, SportFo ID, admin status, or registrations.
+    const identity = await getOwnAccountIdentity(supabase, user.id);
 
-    if (sportfoId) {
+    if (identity.sportfoId) {
+      const roleLabel = identity.category ? t(`account.roles.${identity.category.id}`) : null;
+
       return (
         <AccountMenu
-          sportfoId={sportfoId}
-          roleLabel={profile?.profile_status === "submitted" ? t("account.roleAthlete") : null}
-          myProfileHref="/athlete/register"
-          myProfileLabel={t("nav.athleteRegistration")}
-          discoverAthletesHref="/athletes"
-          discoverAthletesLabel={t("nav.discoverAthletes")}
-          activeAsLabel={t("account.activeAs")}
+          displayName={identity.displayName}
+          sportfoId={identity.sportfoId}
+          roleLabel={roleLabel}
+          profileHref={identity.profileHref}
+          isAdmin={identity.isAdmin}
+          dashboardHref="/admin/dashboard"
           sportfoIdLabel={t("account.sportfoId")}
-          activeAccountLabel={t("account.activeAccount")}
+          sportfoUserLabel={t("account.sportfoUser")}
+          viewProfileLabel={t("account.viewProfile")}
+          viewDashboardLabel={t("account.viewDashboard")}
+          signOutLabel={t("account.signOut")}
+          signingOutLabel={t("nav.loggingOut")}
           locale={locale}
           variant={variant}
         />
@@ -74,17 +74,18 @@ export async function AuthNav({
     );
   }
 
+  // Guest: no Discover Athletes (authenticated-only), just Login and the
+  // Join SportFo CTA -- which scrolls to Community/"Who We Serve" (the
+  // real category-selection gateway) rather than jumping straight to
+  // /auth or assuming Athlete.
   return (
     <>
       <Link href="/auth" className={navLinkClassName}>
         {t("nav.signIn")}
       </Link>
-      <Link
-        href="/auth"
-        className="ml-0 inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition-all hover:bg-brand-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2 sm:ml-1"
-      >
+      <JoinCommunityLink className="ml-0 inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition-all hover:bg-brand-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2 sm:ml-1">
         {t("nav.joinSportfo")}
-      </Link>
+      </JoinCommunityLink>
     </>
   );
 }

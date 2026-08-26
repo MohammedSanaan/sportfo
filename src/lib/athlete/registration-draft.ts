@@ -92,6 +92,7 @@ export function mapDraftToFormValues(
     },
     sportsInformation: {
       primarySport: sport?.primary_sport ?? "",
+      sportCategory: sport?.sport_category ?? "",
       discipline: sport?.sport_discipline ?? "",
       position: sport?.position_role ?? "",
       skillLevel: (sport?.skill_level as DbSkillLevel | null) ?? "",
@@ -138,6 +139,7 @@ export function buildEmptyFormValues(authPhone: string): AthleteRegistrationForm
     },
     sportsInformation: {
       primarySport: "",
+      sportCategory: "",
       discipline: "",
       position: "",
       skillLevel: "",

@@ -4,10 +4,11 @@
 const en = {
   common: {
     pleasePrefix: "Please",
+    dismiss: "Dismiss",
   },
   nav: {
     discoverAthletes: "Discover Athletes",
-    signIn: "Sign In",
+    signIn: "Login",
     joinSportfo: "Join SportFo",
     athleteRegistration: "Athlete Registration",
     logout: "Logout",
@@ -57,9 +58,23 @@ const en = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "Active as",
-    activeAccount: "Active account",
-    roleAthlete: "Athlete",
+    sportfoUser: "SportFo User",
+    viewProfile: "View Profile",
+    viewDashboard: "View Dashboard",
+    signOut: "Sign Out",
+    welcome: "Welcome, {name}",
+    welcomeBack: "Welcome back, {name}",
+    signedInAs: "Signed in as:",
+    roles: {
+      athlete: "Athlete",
+      academyCoachParent: "Academy / Coach / Parent",
+      performanceExpert: "Performance Expert",
+      mediaCreator: "Media Creator",
+      managementLegal: "Sports Management & Legal",
+      eventOperations: "Event & Operations Staff",
+      sponsorCsr: "Sponsor & CSR",
+      talentAnalytics: "Talent Discovery & Analytics",
+    },
   },
   home: {
     hero: {
@@ -250,7 +265,11 @@ const en = {
     },
   },
   auth: {
-    pageTitle: "Join or sign in to SportFo",
+    pageTitle: "Welcome back",
+    pageSubtitle: "Login to SportFo",
+    registerPageTitle: "Create your SportFo account",
+    registerPageSubtitle: "Verify your mobile number to continue registration",
+    continueRegistration: "Continue registration",
     descriptionDemo: "Enter your mobile number to continue to your athlete profile.",
     descriptionOtp: "Enter your mobile number and we'll send you a secure verification code.",
     panelBadge: "Built for athletes. Designed for opportunity.",
@@ -278,7 +297,7 @@ const en = {
     errorOtpWrong: "That code isn't right. Double-check it and try again.",
     errorSessionCheckFailed: "We couldn't confirm your session. Please try again.",
     mobileOrSportfoIdLabel: "Mobile number or SportFo ID",
-    mobileOrSportfoIdPlaceholder: "Mobile number or SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 or SportFo ID",
     sportfoIdFoundNeedsPhone:
       "We found this SportFo ID. Signing in with a SportFo ID will be available once phone verification is fully enabled -- please sign in with your mobile number for now.",
     sportfoIdNotFound: "We couldn't find that SportFo ID. Please check it, or sign in with your mobile number.",
@@ -290,6 +309,10 @@ const en = {
     loadFailed: "We couldn't load your saved information.",
     reload: "try reloading this page",
     contactSupport: "If this keeps happening, contact support.",
+    alreadyRegistered: {
+      title: "You're already registered as an Athlete",
+      description: "You can review and update your details below.",
+    },
     stepPersonal: "Personal",
     stepSport: "Sport",
     stepAchievements: "Achievements",
@@ -319,6 +342,15 @@ const en = {
       title: "Sports Information",
       description: "Share your primary sport and current skill level.",
       primarySport: "Primary Sport",
+      primarySportSearchPlaceholder: "Search or select your sport...",
+      primarySportNoResults: "No sports found",
+      category: "Category",
+      categoryPlaceholder: "Select category",
+      categoryAutoHelper: "Automatically selected based on your sport.",
+      categoryMultiHelper:
+        "{sport} belongs to multiple SportFo categories. Choose the one that best represents your participation.",
+      categoryUnmappedHelper:
+        "We don't have a category mapping for this sport yet — our team will add one soon.",
       discipline: "Sport Discipline / Sub-category",
       disciplinePlaceholder: "e.g. Freestyle, Sprint, Striker",
       position: "Position / Role",
@@ -365,12 +397,13 @@ const en = {
     },
     success: {
       title: "You're all set",
-      message: "Your athlete profile has been created successfully.",
-      welcome: "Welcome to SportFo",
+      message: "Your profile has been created successfully.",
+      welcome: "Welcome to SportFo, Athlete!",
       yourSportfoId: "Your SportFo ID",
       sportfoIdHelper: "Keep this ID handy. You can use it to identify your SportFo account.",
-      backHome: "Back to Home",
-      viewProfile: "View My Profile",
+      viewDashboard: "View Dashboard",
+      completeProfile: "Complete Profile",
+      exploreCommunity: "Explore Community",
     },
     banners: {
       draftSaved: "Draft saved.",
@@ -378,6 +411,9 @@ const en = {
         "Draft saved, but {n} document{plural} failed to upload. Select the file again or save once more to retry.",
       createdWithFailures:
         "Your profile was created, but {n} document{plural} failed to upload. Select the file again or submit once more to retry.",
+      draftRestored: "You're verified -- we restored your form.",
+      draftRestoredReselectFiles:
+        "You're verified -- we restored your form. Please reselect any files you were uploading.",
     },
   },
   profile: {
@@ -480,6 +516,7 @@ const en = {
     mobileNumber: "Mobile Number",
     email: "Email Address",
     primarySport: "Primary Sport",
+    sportCategory: "Category",
     skillLevel: "Skill Level",
     competitionLevel: "Competition Level",
     parallelTrack: "Track",
@@ -520,6 +557,324 @@ const en = {
       other: "Other",
     },
     scholarship: { yes: "Yes", no: "No" },
+  },
+  registerHub: {
+    pageTitle: "Register with SportFo",
+    pageSubtitle: "Select Your Category",
+    chooseCategory: "Choose Category",
+    formDetailsTitle: "Your Details",
+    alreadyRegistered: {
+      title: "You're already registered as {role}",
+      description: "You can review and update your details below.",
+    },
+    actions: {
+      registerNow: "Register Now",
+      registering: "Registering...",
+      viewRegistration: "View Registration",
+    },
+    upload: {
+      helper: "PDF, JPG, or PNG. Max {size}.",
+      currentFile: "Current file: {name}",
+    },
+    validation: {
+      required: "This field is required.",
+      invalidUrl: "Enter a valid URL (e.g. https://example.com).",
+      numberRange: "Enter a number between {min} and {max}.",
+    },
+    errors: {
+      title: "Registration could not be completed.",
+      uploadFailed: "We couldn't upload your document. Please try again.",
+      saveFailed: "Something went wrong while saving. Please try again.",
+    },
+    banners: {
+      draftRestored: "You're verified -- we restored your form.",
+      draftRestoredReselectFiles:
+        "You're verified -- we restored your form. Please reselect any files you were uploading.",
+    },
+    success: {
+      title: "Registration Successful",
+      yourSportfoId: "Your SportFo ID",
+    },
+    notFound: {
+      title: "Category not found",
+      description: "We couldn't find that registration category.",
+      action: "Choose a category",
+    },
+    categories: {
+      athlete: {
+        formTitle: "Register as an Athlete",
+      },
+      academyCoachParent: {
+        formTitle: "Register as an Academy / Coach / Parent",
+        successWelcome: "Welcome to SportFo, Coach/Academy!",
+        successMessage: "Your registration is complete.",
+        fields: {
+          academyCoachName: { label: "Academy / Coach Name" },
+          sportsOffered: {
+            label: "Sports Offered",
+            placeholder: "e.g. Cricket, Football, Badminton",
+          },
+          ageGroupsTrained: {
+            label: "Age Groups Trained",
+            placeholder: "e.g. Under-12, Under-16, Adults",
+          },
+          coachCertification: { label: "Coach Certification" },
+          experienceLevel: {
+            label: "Experience Level",
+            options: {
+              "0-2 years": "0-2 years",
+              "3-5 years": "3-5 years",
+              "6-10 years": "6-10 years",
+              "10+ years": "10+ years",
+            },
+          },
+          location: { label: "Location" },
+          uploadAcademyInfo: { label: "Upload Academy Info" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "Register as a Performance Expert",
+        successWelcome: "Welcome to SportFo, Performance Expert!",
+        successMessage: "Your profile has been created successfully.",
+        fields: {
+          fullName: { label: "Full Name" },
+          expertise: {
+            label: "Expertise",
+            options: {
+              "Sports Physiotherapist": "Sports Physiotherapist",
+              Nutritionist: "Nutritionist",
+              "Sports Psychologist": "Sports Psychologist",
+              "Strength & Conditioning": "Strength & Conditioning",
+              "Performance Trainer": "Performance Trainer",
+              "Rehabilitation Specialist": "Rehabilitation Specialist",
+              Other: "Other",
+            },
+          },
+          experienceLevel: {
+            label: "Experience Level",
+            options: {
+              "0-2 years": "0-2 years",
+              "3-5 years": "3-5 years",
+              "6-10 years": "6-10 years",
+              "10+ years": "10+ years",
+            },
+          },
+          servicesOffered: {
+            label: "Services Offered",
+            placeholder: "e.g. Injury recovery, strength programs",
+          },
+          certifications: { label: "Certifications" },
+          location: { label: "Location" },
+          uploadCertificate: { label: "Upload Certificate" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "Register as Media & Creator",
+        successWelcome: "Welcome to SportFo, Creator!",
+        successMessage: "Your registration is complete.",
+        fields: {
+          fullName: { label: "Full Name" },
+          portfolioLink: { label: "Portfolio Link" },
+          contentType: {
+            label: "Content Type",
+            options: {
+              Photography: "Photography",
+              Videography: "Videography",
+              Journalism: "Journalism",
+              "Sports Writing": "Sports Writing",
+              "Social Media": "Social Media",
+              Broadcasting: "Broadcasting",
+              Other: "Other",
+            },
+          },
+          socialMediaHandles: {
+            label: "Social Media Handles",
+            placeholder: "e.g. @yourhandle (Instagram, YouTube, X)",
+          },
+          location: { label: "Location" },
+          uploadPortfolio: { label: "Upload Portfolio" },
+        },
+      },
+      managementLegal: {
+        formTitle: "Register as Sports Management & Legal",
+        successWelcome: "Welcome to SportFo, Sports Manager!",
+        successMessage: "Your profile has been created.",
+        fields: {
+          fullName: { label: "Full Name" },
+          role: {
+            label: "Role",
+            options: {
+              Manager: "Manager",
+              Agent: "Agent",
+              Lawyer: "Lawyer",
+              Consultant: "Consultant",
+            },
+          },
+          licenseNumber: { label: "License Number" },
+          organization: { label: "Organization" },
+          experienceLevel: {
+            label: "Experience Level",
+            options: {
+              "0-2 years": "0-2 years",
+              "3-5 years": "3-5 years",
+              "6-10 years": "6-10 years",
+              "10+ years": "10+ years",
+            },
+          },
+          location: { label: "Location" },
+          uploadLicense: { label: "Upload License" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      eventOperations: {
+        formTitle: "Register as Event & Operations Staff",
+        successWelcome: "Welcome to SportFo, Event Staff!",
+        successMessage: "Registration successful.",
+        fields: {
+          fullName: { label: "Full Name" },
+          role: {
+            label: "Role",
+            options: {
+              Referee: "Referee",
+              Umpire: "Umpire",
+              Volunteer: "Volunteer",
+              Coordinator: "Coordinator",
+            },
+          },
+          certification: { label: "Certification" },
+          experienceYears: { label: "Experience Years" },
+          availability: {
+            label: "Availability",
+            placeholder: "e.g. Weekends, Evenings",
+          },
+          location: { label: "Location" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "Register as Sponsor & CSR",
+        successWelcome: "Welcome to SportFo, Sponsor!",
+        successMessage: "Your partnership profile has been created successfully.",
+        fields: {
+          organizationName: { label: "Organization Name" },
+          contactPerson: { label: "Contact Person" },
+          sponsorshipInterest: {
+            label: "Sponsorship Interest",
+            options: {
+              Youth: "Youth",
+              Women: "Women",
+              Grassroots: "Grassroots",
+              "Para Sports": "Para Sports",
+              Academies: "Academies",
+              Events: "Events",
+              "Talent Development": "Talent Development",
+              Other: "Other",
+            },
+          },
+          budgetRange: {
+            label: "Budget Range",
+            options: {
+              "Under ₹1L": "Under ₹1L",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "Sports Focus",
+            placeholder: "e.g. Cricket, Athletics, Para Sports",
+          },
+          location: { label: "Location" },
+          uploadProposal: { label: "Upload Proposal" },
+          uploadIdProof: { label: "Upload ID Proof" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "Register as Talent Discovery & Analytics",
+        successWelcome: "Welcome to SportFo, Analyst!",
+        successMessage: "Your profile has been created.",
+        fields: {
+          fullName: { label: "Full Name" },
+          role: {
+            label: "Role",
+            options: {
+              Scout: "Scout",
+              Analyst: "Analyst",
+              "Data Expert": "Data Expert",
+            },
+          },
+          toolsUsed: {
+            label: "Tools Used",
+            placeholder: "e.g. Hudl, Dartfish",
+          },
+          experienceYears: { label: "Experience Years" },
+          sportsSpecialization: {
+            label: "Sports Specialization",
+            placeholder: "e.g. Football, Athletics",
+          },
+          location: { label: "Location" },
+          uploadPortfolioReport: { label: "Upload Portfolio / Report" },
+        },
+      },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "Registration Analytics",
+    pageSubtitle: "Admin dashboard -- registration activity across every SportFo category.",
+    kpi: {
+      today: "Today",
+      week: "This Week",
+      month: "This Month",
+      year: "This Year",
+    },
+    filters: {
+      timeRange: "Time Range",
+      today: "Today",
+      last7Days: "Last 7 Days",
+      thisMonth: "This Month",
+      thisYear: "This Year",
+      customRange: "Custom Range",
+      from: "From",
+      to: "To",
+      category: "Category",
+      allCategories: "All Categories",
+      status: "Status",
+      allStatuses: "All",
+      apply: "Apply",
+    },
+    status: {
+      draft: "Draft",
+      submitted: "Submitted",
+      verified: "Verified",
+      rejected: "Rejected",
+    },
+    trend: {
+      title: "Registration Trend",
+      empty: "No registrations in this period yet.",
+    },
+    breakdown: {
+      title: "Category Breakdown",
+      empty: "No registrations in this period yet.",
+    },
+    table: {
+      title: "Recent Registrations",
+      sportfoId: "SportFo ID",
+      name: "Name",
+      category: "Category",
+      registeredDate: "Registered Date",
+      status: "Status",
+      empty: "No registrations match these filters.",
+      pageInfo: "Page {page} of {totalPages} ({total} total)",
+      previous: "Previous",
+      next: "Next",
+    },
+    accessDenied: {
+      title: "Access Denied",
+      description: "You don't have permission to view this page.",
+      action: "Back to Home",
+    },
   },
 } as const;
 

@@ -3,10 +3,11 @@ import type { Dictionary } from "./en";
 const kn: Dictionary = {
   common: {
     pleasePrefix: "ದಯವಿಟ್ಟು",
+    dismiss: "ಮುಚ್ಚಿ",
   },
   nav: {
     discoverAthletes: "ಕ್ರೀಡಾಪಟುಗಳನ್ನು ಹುಡುಕಿ",
-    signIn: "ಸೈನ್ ಇನ್",
+    signIn: "ಲಾಗಿನ್",
     joinSportfo: "SportFo ಗೆ ಸೇರಿ",
     athleteRegistration: "ಕ್ರೀಡಾಪಟು ನೋಂದಣಿ",
     logout: "ಲಾಗ್ ಔಟ್",
@@ -56,9 +57,23 @@ const kn: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "ಈ ರೂಪದಲ್ಲಿ ಸಕ್ರಿಯ",
-    activeAccount: "ಸಕ್ರಿಯ ಖಾತೆ",
-    roleAthlete: "ಕ್ರೀಡಾಪಟು",
+    sportfoUser: "SportFo ಸದಸ್ಯ",
+    viewProfile: "ಪ್ರೊಫೈಲ್ ವೀಕ್ಷಿಸಿ",
+    viewDashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ವೀಕ್ಷಿಸಿ",
+    signOut: "ಸೈನ್ ಔಟ್",
+    welcome: "ಸ್ವಾಗತ, {name}",
+    welcomeBack: "ಮತ್ತೆ ಸ್ವಾಗತ, {name}",
+    signedInAs: "ಹೀಗೆ ಸೈನ್ ಇನ್ ಆಗಿದ್ದೀರಿ:",
+    roles: {
+      athlete: "ಕ್ರೀಡಾಪಟು",
+      academyCoachParent: "ಅಕಾಡೆಮಿ / ಕೋಚ್ / ಪೋಷಕ",
+      performanceExpert: "ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಎಕ್ಸ್‌ಪರ್ಟ್",
+      mediaCreator: "ಮೀಡಿಯಾ ಕ್ರಿಯೇಟರ್",
+      managementLegal: "ಸ್ಪೋರ್ಟ್ಸ್ ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್ ಮತ್ತು ಲೀಗಲ್",
+      eventOperations: "ಈವೆಂಟ್ ಮತ್ತು ಆಪರೇಶನ್ಸ್ ಸಿಬ್ಬಂದಿ",
+      sponsorCsr: "ಸ್ಪಾನ್ಸರ್ ಮತ್ತು CSR",
+      talentAnalytics: "ಟ್ಯಾಲೆಂಟ್ ಡಿಸ್ಕವರಿ ಮತ್ತು ಅನಾಲಿಟಿಕ್ಸ್",
+    },
   },
   home: {
     hero: {
@@ -252,7 +267,11 @@ const kn: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo ಗೆ ಸೇರಿ ಅಥವಾ ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    pageTitle: "ಮತ್ತೆ ಸ್ವಾಗತ",
+    pageSubtitle: "SportFo ಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
+    registerPageTitle: "ನಿಮ್ಮ SportFo ಖಾತೆಯನ್ನು ರಚಿಸಿ",
+    registerPageSubtitle: "ನೋಂದಣಿಯನ್ನು ಮುಂದುವರಿಸಲು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ಪರಿಶೀಲಿಸಿ",
+    continueRegistration: "ನೋಂದಣಿ ಮುಂದುವರಿಸಿ",
     descriptionDemo: "ನಿಮ್ಮ ಕ್ರೀಡಾಪಟು ಪ್ರೊಫೈಲ್‌ಗೆ ಮುಂದುವರಿಯಲು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.",
     descriptionOtp: "ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ ಮತ್ತು ನಾವು ನಿಮಗೆ ಸುರಕ್ಷಿತ ಪರಿಶೀಲನಾ ಕೋಡ್ ಕಳುಹಿಸುತ್ತೇವೆ.",
     panelBadge: "ಕ್ರೀಡಾಪಟುಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ. ಅವಕಾಶಕ್ಕಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
@@ -280,7 +299,7 @@ const kn: Dictionary = {
     errorOtpWrong: "ಆ ಕೋಡ್ ಸರಿಯಾಗಿಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     errorSessionCheckFailed: "ನಿಮ್ಮ ಸೆಷನ್ ಅನ್ನು ಖಚಿತಪಡಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     mobileOrSportfoIdLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅಥವಾ SportFo ID",
-    mobileOrSportfoIdPlaceholder: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅಥವಾ SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 ಅಥವಾ SportFo ID",
     sportfoIdFoundNeedsPhone:
       "ಈ SportFo ID ನಮಗೆ ಸಿಕ್ಕಿದೆ. ಫೋನ್ ಪರಿಶೀಲನೆ ಸಂಪೂರ್ಣವಾಗಿ ಸಕ್ರಿಯಗೊಂಡ ನಂತರ SportFo ID ಮೂಲಕ ಸೈನ್ ಇನ್ ಲಭ್ಯವಿರುತ್ತದೆ -- ಸದ್ಯಕ್ಕೆ ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯಿಂದ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
     sportfoIdNotFound: "ಆ SportFo ID ನಮಗೆ ಸಿಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ, ಅಥವಾ ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯಿಂದ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
@@ -292,6 +311,10 @@ const kn: Dictionary = {
     loadFailed: "ನಿಮ್ಮ ಉಳಿಸಿದ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.",
     reload: "ಈ ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಿ",
     contactSupport: "ಇದು ಮತ್ತೆ ಮತ್ತೆ ಸಂಭವಿಸಿದರೆ, ಬೆಂಬಲವನ್ನು ಸಂಪರ್ಕಿಸಿ.",
+    alreadyRegistered: {
+      title: "ನೀವು ಈಗಾಗಲೇ ಕ್ರೀಡಾಪಟುವಾಗಿ ನೋಂದಾಯಿಸಿಕೊಂಡಿದ್ದೀರಿ",
+      description: "ನೀವು ಕೆಳಗೆ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ನವೀಕರಿಸಬಹುದು.",
+    },
     stepPersonal: "ವೈಯಕ್ತಿಕ",
     stepSport: "ಕ್ರೀಡೆ",
     stepAchievements: "ಸಾಧನೆಗಳು",
@@ -321,6 +344,15 @@ const kn: Dictionary = {
       title: "ಕ್ರೀಡಾ ಮಾಹಿತಿ",
       description: "ನಿಮ್ಮ ಮುಖ್ಯ ಕ್ರೀಡೆ ಮತ್ತು ಪ್ರಸ್ತುತ ಕೌಶಲ್ಯ ಮಟ್ಟವನ್ನು ಹಂಚಿಕೊಳ್ಳಿ.",
       primarySport: "ಮುಖ್ಯ ಕ್ರೀಡೆ",
+      primarySportSearchPlaceholder: "ನಿಮ್ಮ ಕ್ರೀಡೆಯನ್ನು ಹುಡುಕಿ ಅಥವಾ ಆಯ್ಕೆಮಾಡಿ...",
+      primarySportNoResults: "ಯಾವುದೇ ಕ್ರೀಡೆ ಕಂಡುಬಂದಿಲ್ಲ",
+      category: "ವರ್ಗ",
+      categoryPlaceholder: "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+      categoryAutoHelper: "ನಿಮ್ಮ ಕ್ರೀಡೆಯ ಆಧಾರದ ಮೇಲೆ ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಆಯ್ಕೆಮಾಡಲಾಗಿದೆ.",
+      categoryMultiHelper:
+        "{sport} ಹಲವಾರು SportFo ವರ್ಗಗಳಿಗೆ ಸೇರಿದೆ. ನಿಮ್ಮ ಭಾಗವಹಿಸುವಿಕೆಯನ್ನು ಉತ್ತಮವಾಗಿ ಪ್ರತಿನಿಧಿಸುವುದನ್ನು ಆಯ್ಕೆಮಾಡಿ.",
+      categoryUnmappedHelper:
+        "ಈ ಕ್ರೀಡೆಗೆ ನಮ್ಮಲ್ಲಿ ಇನ್ನೂ ವರ್ಗ ಮ್ಯಾಪಿಂಗ್ ಇಲ್ಲ — ನಮ್ಮ ತಂಡ ಶೀಘ್ರದಲ್ಲೇ ಒಂದನ್ನು ಸೇರಿಸುತ್ತದೆ.",
       discipline: "ಕ್ರೀಡಾ ವಿಭಾಗ / ಉಪ-ವರ್ಗ",
       disciplinePlaceholder: "ಉದಾ. ಫ್ರೀಸ್ಟೈಲ್, ಸ್ಪ್ರಿಂಟ್, ಸ್ಟ್ರೈಕರ್",
       position: "ಸ್ಥಾನ / ಪಾತ್ರ",
@@ -367,12 +399,13 @@ const kn: Dictionary = {
     },
     success: {
       title: "ನೀವು ಸಿದ್ಧರಿದ್ದೀರಿ",
-      message: "ನಿಮ್ಮ ಕ್ರೀಡಾಪಟು ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
-      welcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ",
+      message: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
+      welcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಕ್ರೀಡಾಪಟುವೇ!",
       yourSportfoId: "ನಿಮ್ಮ SportFo ID",
       sportfoIdHelper: "ಈ ID ಅನ್ನು ಜೋಪಾನವಾಗಿ ಇರಿಸಿ. ನಿಮ್ಮ SportFo ಖಾತೆಯನ್ನು ಗುರುತಿಸಲು ನೀವು ಇದನ್ನು ಬಳಸಬಹುದು.",
-      backHome: "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
-      viewProfile: "ನನ್ನ ಪ್ರೊಫೈಲ್ ವೀಕ್ಷಿಸಿ",
+      viewDashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ವೀಕ್ಷಿಸಿ",
+      completeProfile: "ಪ್ರೊಫೈಲ್ ಪೂರ್ಣಗೊಳಿಸಿ",
+      exploreCommunity: "ಸಮುದಾಯವನ್ನು ಅನ್ವೇಷಿಸಿ",
     },
     banners: {
       draftSaved: "ಡ್ರಾಫ್ಟ್ ಉಳಿಸಲಾಗಿದೆ.",
@@ -380,6 +413,9 @@ const kn: Dictionary = {
         "ಡ್ರಾಫ್ಟ್ ಉಳಿಸಲಾಗಿದೆ, ಆದರೆ {n} ದಾಖಲೆ{plural} ಅಪ್‌ಲೋಡ್ ಆಗಲಿಲ್ಲ. ಫೈಲ್ ಅನ್ನು ಮತ್ತೆ ಆಯ್ಕೆಮಾಡಿ ಅಥವಾ ಮತ್ತೊಮ್ಮೆ ಉಳಿಸಿ.",
       createdWithFailures:
         "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ರಚಿಸಲಾಗಿದೆ, ಆದರೆ {n} ದಾಖಲೆ{plural} ಅಪ್‌ಲೋಡ್ ಆಗಲಿಲ್ಲ. ಫೈಲ್ ಅನ್ನು ಮತ್ತೆ ಆಯ್ಕೆಮಾಡಿ ಅಥವಾ ಮತ್ತೊಮ್ಮೆ ಸಲ್ಲಿಸಿ.",
+      draftRestored: "ನೀವು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿದ್ದೀರಿ -- ನಾವು ನಿಮ್ಮ ಫಾರ್ಮ್ ಅನ್ನು ಪುನಃಸ್ಥಾಪಿಸಿದ್ದೇವೆ.",
+      draftRestoredReselectFiles:
+        "ನೀವು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿದ್ದೀರಿ -- ನಾವು ನಿಮ್ಮ ಫಾರ್ಮ್ ಅನ್ನು ಪುನಃಸ್ಥಾಪಿಸಿದ್ದೇವೆ. ದಯವಿಟ್ಟು ನೀವು ಅಪ್‌ಲೋಡ್ ಮಾಡುತ್ತಿದ್ದ ಫೈಲ್‌ಗಳನ್ನು ಮತ್ತೆ ಆಯ್ಕೆಮಾಡಿ.",
     },
   },
   profile: {
@@ -482,6 +518,7 @@ const kn: Dictionary = {
     mobileNumber: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
     email: "ಇಮೇಲ್ ವಿಳಾಸ",
     primarySport: "ಮುಖ್ಯ ಕ್ರೀಡೆ",
+    sportCategory: "ವರ್ಗ",
     skillLevel: "ಕೌಶಲ್ಯ ಮಟ್ಟ",
     competitionLevel: "ಸ್ಪರ್ಧಾ ಮಟ್ಟ",
     parallelTrack: "ಟ್ರ್ಯಾಕ್",
@@ -522,6 +559,306 @@ const kn: Dictionary = {
       other: "ಇತರೆ",
     },
     scholarship: { yes: "ಹೌದು", no: "ಇಲ್ಲ" },
+  },
+  registerHub: {
+    pageTitle: "SportFo ನೊಂದಿಗೆ ನೋಂದಣಿ ಮಾಡಿ",
+    pageSubtitle: "ನಿಮ್ಮ ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    chooseCategory: "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    alreadyRegistered: {
+      title: "ನೀವು ಈಗಾಗಲೇ {role} ಆಗಿ ನೋಂದಾಯಿಸಿಕೊಂಡಿದ್ದೀರಿ",
+      description: "ನೀವು ಕೆಳಗೆ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ನವೀಕರಿಸಬಹುದು.",
+    },
+    formDetailsTitle: "ನಿಮ್ಮ ವಿವರಗಳು",
+    actions: {
+      registerNow: "ಈಗ ನೋಂದಣಿ ಮಾಡಿ",
+      registering: "ನೋಂದಣಿ ಮಾಡಲಾಗುತ್ತಿದೆ...",
+      viewRegistration: "ನೋಂದಣಿಯನ್ನು ವೀಕ್ಷಿಸಿ",
+    },
+    upload: {
+      helper: "PDF, JPG, ಅಥವಾ PNG. ಗರಿಷ್ಠ {size}.",
+      currentFile: "ಪ್ರಸ್ತುತ ಫೈಲ್: {name}",
+    },
+    validation: {
+      required: "ಈ ಕ್ಷೇತ್ರ ಅಗತ್ಯವಿದೆ.",
+      invalidUrl: "ಮಾನ್ಯವಾದ URL ನಮೂದಿಸಿ (ಉದಾ. https://example.com).",
+      numberRange: "{min} ಮತ್ತು {max} ನಡುವಿನ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.",
+    },
+    errors: {
+      title: "ನೋಂದಣಿ ಪೂರ್ಣಗೊಳಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.",
+      uploadFailed: "ನಿಮ್ಮ ದಾಖಲೆಯನ್ನು ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ನಮಗೆ ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+      saveFailed: "ಉಳಿಸುವಾಗ ಏನೋ ತಪ್ಪಾಗಿದೆ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+    },
+    banners: {
+      draftRestored: "ನೀವು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿದ್ದೀರಿ -- ನಾವು ನಿಮ್ಮ ಫಾರ್ಮ್ ಅನ್ನು ಪುನಃಸ್ಥಾಪಿಸಿದ್ದೇವೆ.",
+      draftRestoredReselectFiles:
+        "ನೀವು ಪರಿಶೀಲಿಸಲ್ಪಟ್ಟಿದ್ದೀರಿ -- ನಾವು ನಿಮ್ಮ ಫಾರ್ಮ್ ಅನ್ನು ಪುನಃಸ್ಥಾಪಿಸಿದ್ದೇವೆ. ದಯವಿಟ್ಟು ನೀವು ಅಪ್‌ಲೋಡ್ ಮಾಡುತ್ತಿದ್ದ ಫೈಲ್‌ಗಳನ್ನು ಮತ್ತೆ ಆಯ್ಕೆಮಾಡಿ.",
+    },
+    success: {
+      title: "ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ",
+      yourSportfoId: "ನಿಮ್ಮ SportFo ID",
+    },
+    notFound: {
+      title: "ವರ್ಗ ಕಂಡುಬಂದಿಲ್ಲ",
+      description: "ಆ ನೋಂದಣಿ ವರ್ಗ ನಮಗೆ ಕಂಡುಬಂದಿಲ್ಲ.",
+      action: "ಒಂದು ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    },
+    categories: {
+      athlete: {
+        formTitle: "ಒಬ್ಬ ಕ್ರೀಡಾಪಟುವಾಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+      },
+      academyCoachParent: {
+        formTitle: "ಅಕಾಡೆಮಿ / ಕೋಚ್ / ಪೋಷಕರಾಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಕೋಚ್/ಅಕಾಡೆಮಿ!",
+        successMessage: "ನಿಮ್ಮ ನೋಂದಣಿ ಪೂರ್ಣಗೊಂಡಿದೆ.",
+        fields: {
+          academyCoachName: { label: "ಅಕಾಡೆಮಿ / ಕೋಚ್ ಹೆಸರು" },
+          sportsOffered: {
+            label: "ನೀಡುವ ಕ್ರೀಡೆಗಳು",
+            placeholder: "ಉದಾ. ಕ್ರಿಕೆಟ್, ಫುಟ್‌ಬಾಲ್, ಬ್ಯಾಡ್ಮಿಂಟನ್",
+          },
+          ageGroupsTrained: {
+            label: "ತರಬೇತಿ ನೀಡುವ ವಯೋಮಾನ ಗುಂಪುಗಳು",
+            placeholder: "ಉದಾ. ಅಂಡರ್-12, ಅಂಡರ್-16, ವಯಸ್ಕರು",
+          },
+          coachCertification: { label: "ಕೋಚ್ ಪ್ರಮಾಣೀಕರಣ" },
+          experienceLevel: {
+            label: "ಅನುಭವ ಮಟ್ಟ",
+            options: {
+              "0-2 years": "0-2 ವರ್ಷಗಳು",
+              "3-5 years": "3-5 ವರ್ಷಗಳು",
+              "6-10 years": "6-10 ವರ್ಷಗಳು",
+              "10+ years": "10+ ವರ್ಷಗಳು",
+            },
+          },
+          location: { label: "ಸ್ಥಳ" },
+          uploadAcademyInfo: { label: "ಅಕಾಡೆಮಿ ಮಾಹಿತಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+          uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಎಕ್ಸ್‌ಪರ್ಟ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಎಕ್ಸ್‌ಪರ್ಟ್!",
+        successMessage: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
+        fields: {
+          fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
+          expertise: {
+            label: "ಪರಿಣತಿ",
+            options: {
+              "Sports Physiotherapist": "ಸ್ಪೋರ್ಟ್ಸ್ ಫಿಸಿಯೋಥೆರಪಿಸ್ಟ್",
+              Nutritionist: "ನ್ಯೂಟ್ರಿಷನಿಸ್ಟ್",
+              "Sports Psychologist": "ಸ್ಪೋರ್ಟ್ಸ್ ಸೈಕಾಲಜಿಸ್ಟ್",
+              "Strength & Conditioning": "ಸ್ಟ್ರೆಂತ್ ಮತ್ತು ಕಂಡಿಷನಿಂಗ್",
+              "Performance Trainer": "ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಟ್ರೈನರ್",
+              "Rehabilitation Specialist": "ರಿಹ್ಯಾಬಿಲಿಟೇಶನ್ ಸ್ಪೆಷಲಿಸ್ಟ್",
+              Other: "ಇತರೆ",
+            },
+          },
+          experienceLevel: {
+            label: "ಅನುಭವ ಮಟ್ಟ",
+            options: {
+              "0-2 years": "0-2 ವರ್ಷಗಳು",
+              "3-5 years": "3-5 ವರ್ಷಗಳು",
+              "6-10 years": "6-10 ವರ್ಷಗಳು",
+              "10+ years": "10+ ವರ್ಷಗಳು",
+            },
+          },
+          servicesOffered: {
+            label: "ನೀಡುವ ಸೇವೆಗಳು",
+            placeholder: "ಉದಾ. ಗಾಯ ಚೇತರಿಕೆ, ಸ್ಟ್ರೆಂತ್ ಪ್ರೋಗ್ರಾಂಗಳು",
+          },
+          certifications: { label: "ಪ್ರಮಾಣಪತ್ರಗಳು" },
+          location: { label: "ಸ್ಥಳ" },
+          uploadCertificate: { label: "ಪ್ರಮಾಣಪತ್ರ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+          uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "ಮೀಡಿಯಾ ಮತ್ತು ಕ್ರಿಯೇಟರ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಕ್ರಿಯೇಟರ್!",
+        successMessage: "ನಿಮ್ಮ ನೋಂದಣಿ ಪೂರ್ಣಗೊಂಡಿದೆ.",
+        fields: {
+          fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
+          portfolioLink: { label: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ ಲಿಂಕ್" },
+          contentType: {
+            label: "ಕಂಟೆಂಟ್ ಪ್ರಕಾರ",
+            options: {
+              Photography: "ಫೋಟೋಗ್ರಫಿ",
+              Videography: "ವೀಡಿಯೋಗ್ರಫಿ",
+              Journalism: "ಪತ್ರಿಕೋದ್ಯಮ",
+              "Sports Writing": "ಸ್ಪೋರ್ಟ್ಸ್ ರೈಟಿಂಗ್",
+              "Social Media": "ಸೋಶಿಯಲ್ ಮೀಡಿಯಾ",
+              Broadcasting: "ಪ್ರಸಾರ",
+              Other: "ಇತರೆ",
+            },
+          },
+          socialMediaHandles: {
+            label: "ಸೋಶಿಯಲ್ ಮೀಡಿಯಾ ಹ್ಯಾಂಡಲ್‌ಗಳು",
+            placeholder: "ಉದಾ. @yourhandle (ಇನ್‌ಸ್ಟಾಗ್ರಾಮ್, ಯೂಟ್ಯೂಬ್, X)",
+          },
+          location: { label: "ಸ್ಥಳ" },
+          uploadPortfolio: { label: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+      },
+      managementLegal: {
+        formTitle: "ಸ್ಪೋರ್ಟ್ಸ್ ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್ ಮತ್ತು ಲೀಗಲ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಸ್ಪೋರ್ಟ್ಸ್ ಮ್ಯಾನೇಜರ್!",
+        successMessage: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ರಚಿಸಲಾಗಿದೆ.",
+        fields: {
+          fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
+          role: {
+            label: "ಪಾತ್ರ",
+            options: { Manager: "ಮ್ಯಾನೇಜರ್", Agent: "ಏಜೆಂಟ್", Lawyer: "ವಕೀಲ", Consultant: "ಸಲಹೆಗಾರ" },
+          },
+          licenseNumber: { label: "ಲೈಸೆನ್ಸ್ ಸಂಖ್ಯೆ" },
+          organization: { label: "ಸಂಸ್ಥೆ" },
+          experienceLevel: {
+            label: "ಅನುಭವ ಮಟ್ಟ",
+            options: {
+              "0-2 years": "0-2 ವರ್ಷಗಳು",
+              "3-5 years": "3-5 ವರ್ಷಗಳು",
+              "6-10 years": "6-10 ವರ್ಷಗಳು",
+              "10+ years": "10+ ವರ್ಷಗಳು",
+            },
+          },
+          location: { label: "ಸ್ಥಳ" },
+          uploadLicense: { label: "ಲೈಸೆನ್ಸ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+          uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+      },
+      eventOperations: {
+        formTitle: "ಈವೆಂಟ್ ಮತ್ತು ಆಪರೇಶನ್ಸ್ ಸಿಬ್ಬಂದಿಯಾಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಈವೆಂಟ್ ಸಿಬ್ಬಂದಿ!",
+        successMessage: "ನೋಂದಣಿ ಯಶಸ್ವಿಯಾಗಿದೆ.",
+        fields: {
+          fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
+          role: {
+            label: "ಪಾತ್ರ",
+            options: {
+              Referee: "ರೆಫರಿ",
+              Umpire: "ಅಂಪೈರ್",
+              Volunteer: "ಸ್ವಯಂಸೇವಕ",
+              Coordinator: "ಸಂಯೋಜಕ",
+            },
+          },
+          certification: { label: "ಪ್ರಮಾಣೀಕರಣ" },
+          experienceYears: { label: "ಅನುಭವದ ವರ್ಷಗಳು" },
+          availability: { label: "ಲಭ್ಯತೆ", placeholder: "ಉದಾ. ವಾರಾಂತ್ಯಗಳು, ಸಂಜೆ" },
+          location: { label: "ಸ್ಥಳ" },
+          uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "ಸ್ಪಾನ್ಸರ್ ಮತ್ತು CSR ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಸ್ಪಾನ್ಸರ್!",
+        successMessage: "ನಿಮ್ಮ ಪಾಲುದಾರಿಕೆ ಪ್ರೊಫೈಲ್ ಯಶಸ್ವಿಯಾಗಿ ರಚಿಸಲಾಗಿದೆ.",
+        fields: {
+          organizationName: { label: "ಸಂಸ್ಥೆಯ ಹೆಸರು" },
+          contactPerson: { label: "ಸಂಪರ್ಕ ವ್ಯಕ್ತಿ" },
+          sponsorshipInterest: {
+            label: "ಸ್ಪಾನ್ಸರ್‌ಶಿಪ್ ಆಸಕ್ತಿ",
+            options: {
+              Youth: "ಯುವಜನರು",
+              Women: "ಮಹಿಳೆಯರು",
+              Grassroots: "ಗ್ರಾಸ್‌ರೂಟ್ಸ್",
+              "Para Sports": "ಪ್ಯಾರಾ ಕ್ರೀಡೆಗಳು",
+              Academies: "ಅಕಾಡೆಮಿಗಳು",
+              Events: "ಈವೆಂಟ್‌ಗಳು",
+              "Talent Development": "ಪ್ರತಿಭಾ ಅಭಿವೃದ್ಧಿ",
+              Other: "ಇತರೆ",
+            },
+          },
+          budgetRange: {
+            label: "ಬಜೆಟ್ ವ್ಯಾಪ್ತಿ",
+            options: {
+              "Under ₹1L": "₹1L ಗಿಂತ ಕಡಿಮೆ",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "ಕ್ರೀಡಾ ಗಮನ",
+            placeholder: "ಉದಾ. ಕ್ರಿಕೆಟ್, ಅಥ್ಲೆಟಿಕ್ಸ್, ಪ್ಯಾರಾ ಕ್ರೀಡೆಗಳು",
+          },
+          location: { label: "ಸ್ಥಳ" },
+          uploadProposal: { label: "ಪ್ರಸ್ತಾವನೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+          uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "ಟ್ಯಾಲೆಂಟ್ ಡಿಸ್ಕವರಿ ಮತ್ತು ಅನಾಲಿಟಿಕ್ಸ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
+        successWelcome: "SportFo ಗೆ ಸುಸ್ವಾಗತ, ಅನಾಲಿಸ್ಟ್!",
+        successMessage: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ರಚಿಸಲಾಗಿದೆ.",
+        fields: {
+          fullName: { label: "ಪೂರ್ಣ ಹೆಸರು" },
+          role: {
+            label: "ಪಾತ್ರ",
+            options: { Scout: "ಸ್ಕೌಟ್", Analyst: "ಅನಾಲಿಸ್ಟ್", "Data Expert": "ಡೇಟಾ ಎಕ್ಸ್‌ಪರ್ಟ್" },
+          },
+          toolsUsed: { label: "ಬಳಸಿದ ಸಾಧನಗಳು", placeholder: "ಉದಾ. Hudl, Dartfish" },
+          experienceYears: { label: "ಅನುಭವದ ವರ್ಷಗಳು" },
+          sportsSpecialization: { label: "ಕ್ರೀಡಾ ವಿಶೇಷತೆ", placeholder: "ಉದಾ. ಫುಟ್‌ಬಾಲ್, ಅಥ್ಲೆಟಿಕ್ಸ್" },
+          location: { label: "ಸ್ಥಳ" },
+          uploadPortfolioReport: { label: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ / ವರದಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+      },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "ನೋಂದಣಿ ಅನಾಲಿಟಿಕ್ಸ್",
+    pageSubtitle: "ಅಡ್ಮಿನ್ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ -- ಎಲ್ಲಾ SportFo ವರ್ಗಗಳಾದ್ಯಂತ ನೋಂದಣಿ ಚಟುವಟಿಕೆ.",
+    kpi: {
+      today: "ಇಂದು",
+      week: "ಈ ವಾರ",
+      month: "ಈ ತಿಂಗಳು",
+      year: "ಈ ವರ್ಷ",
+    },
+    filters: {
+      timeRange: "ಸಮಯ ವ್ಯಾಪ್ತಿ",
+      today: "ಇಂದು",
+      last7Days: "ಕಳೆದ 7 ದಿನಗಳು",
+      thisMonth: "ಈ ತಿಂಗಳು",
+      thisYear: "ಈ ವರ್ಷ",
+      customRange: "ಕಸ್ಟಮ್ ವ್ಯಾಪ್ತಿ",
+      from: "ಇಂದ",
+      to: "ವರೆಗೆ",
+      category: "ವರ್ಗ",
+      allCategories: "ಎಲ್ಲಾ ವರ್ಗಗಳು",
+      status: "ಸ್ಥಿತಿ",
+      allStatuses: "ಎಲ್ಲಾ",
+      apply: "ಅನ್ವಯಿಸಿ",
+    },
+    status: {
+      draft: "ಡ್ರಾಫ್ಟ್",
+      submitted: "ಸಲ್ಲಿಸಲಾಗಿದೆ",
+      verified: "ಪರಿಶೀಲಿಸಲಾಗಿದೆ",
+      rejected: "ತಿರಸ್ಕರಿಸಲಾಗಿದೆ",
+    },
+    trend: {
+      title: "ನೋಂದಣಿ ಟ್ರೆಂಡ್",
+      empty: "ಈ ಅವಧಿಯಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ನೋಂದಣಿಗಳಿಲ್ಲ.",
+    },
+    breakdown: {
+      title: "ವರ್ಗ ವಿಭಜನೆ",
+      empty: "ಈ ಅವಧಿಯಲ್ಲಿ ಇನ್ನೂ ಯಾವುದೇ ನೋಂದಣಿಗಳಿಲ್ಲ.",
+    },
+    table: {
+      title: "ಇತ್ತೀಚಿನ ನೋಂದಣಿಗಳು",
+      sportfoId: "SportFo ID",
+      name: "ಹೆಸರು",
+      category: "ವರ್ಗ",
+      registeredDate: "ನೋಂದಣಿ ದಿನಾಂಕ",
+      status: "ಸ್ಥಿತಿ",
+      empty: "ಈ ಫಿಲ್ಟರ್‌ಗಳಿಗೆ ಯಾವುದೇ ನೋಂದಣಿ ಹೊಂದಿಕೆಯಾಗುವುದಿಲ್ಲ.",
+      pageInfo: "ಪುಟ {page} / {totalPages} (ಒಟ್ಟು {total})",
+      previous: "ಹಿಂದಿನ",
+      next: "ಮುಂದಿನ",
+    },
+    accessDenied: {
+      title: "ಪ್ರವೇಶ ನಿರಾಕರಿಸಲಾಗಿದೆ",
+      description: "ಈ ಪುಟವನ್ನು ವೀಕ್ಷಿಸಲು ನಿಮಗೆ ಅನುಮತಿ ಇಲ್ಲ.",
+      action: "ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ",
+    },
   },
 };
 

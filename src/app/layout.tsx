@@ -9,6 +9,7 @@ import {
 } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { WelcomeToast } from "@/components/layout/WelcomeToast";
 import { LocaleProvider } from "@/i18n/LocaleProvider";
 import { getServerLocale } from "@/i18n/server";
 import "./globals.css";
@@ -76,6 +77,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="flex min-h-full flex-col bg-surface-muted text-ink-900">
         <LocaleProvider initialLocale={locale}>
+          <WelcomeToast />
           <Header locale={locale} />
           <main className="flex flex-1 flex-col">{children}</main>
           <Footer locale={locale} />

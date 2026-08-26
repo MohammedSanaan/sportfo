@@ -3,10 +3,11 @@ import type { Dictionary } from "./en";
 const ml: Dictionary = {
   common: {
     pleasePrefix: "ദയവായി",
+    dismiss: "അടയ്ക്കുക",
   },
   nav: {
     discoverAthletes: "അത്‌ലറ്റുകളെ കണ്ടെത്തുക",
-    signIn: "സൈൻ ഇൻ ചെയ്യുക",
+    signIn: "ലോഗിൻ",
     joinSportfo: "SportFo ൽ ചേരുക",
     athleteRegistration: "അത്‌ലറ്റ് രജിസ്ട്രേഷൻ",
     logout: "ലോഗൗട്ട്",
@@ -56,9 +57,23 @@ const ml: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "സജീവം ഇപ്പോൾ",
-    activeAccount: "സജീവ അക്കൗണ്ട്",
-    roleAthlete: "അത്‌ലറ്റ്",
+    sportfoUser: "SportFo അംഗം",
+    viewProfile: "പ്രൊഫൈൽ കാണുക",
+    viewDashboard: "ഡാഷ്ബോർഡ് കാണുക",
+    signOut: "സൈൻ ഔട്ട്",
+    welcome: "സ്വാഗതം, {name}",
+    welcomeBack: "വീണ്ടും സ്വാഗതം, {name}",
+    signedInAs: "ഇങ്ങനെ സൈൻ ഇൻ ചെയ്തിരിക്കുന്നു:",
+    roles: {
+      athlete: "അത്‌ലറ്റ്",
+      academyCoachParent: "അക്കാദമി / കോച്ച് / രക്ഷിതാവ്",
+      performanceExpert: "പെർഫോമൻസ് എക്സ്പേർട്ട്",
+      mediaCreator: "മീഡിയ ക്രിയേറ്റർ",
+      managementLegal: "സ്പോർട്സ് മാനേജ്‌മെന്റ് & ലീഗൽ",
+      eventOperations: "ഇവന്റ് & ഓപ്പറേഷൻസ് സ്റ്റാഫ്",
+      sponsorCsr: "സ്പോൺസർ & CSR",
+      talentAnalytics: "ടാലന്റ് ഡിസ്കവറി & അനലിറ്റിക്സ്",
+    },
   },
   home: {
     hero: {
@@ -249,7 +264,11 @@ const ml: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo ൽ ചേരുക അല്ലെങ്കിൽ സൈൻ ഇൻ ചെയ്യുക",
+    pageTitle: "വീണ്ടും സ്വാഗതം",
+    pageSubtitle: "SportFo ലേക്ക് ലോഗിൻ ചെയ്യുക",
+    registerPageTitle: "നിങ്ങളുടെ SportFo അക്കൗണ്ട് സൃഷ്ടിക്കുക",
+    registerPageSubtitle: "രജിസ്ട്രേഷൻ തുടരാൻ നിങ്ങളുടെ മൊബൈൽ നമ്പർ പരിശോധിക്കുക",
+    continueRegistration: "രജിസ്ട്രേഷൻ തുടരുക",
     descriptionDemo: "നിങ്ങളുടെ അത്‌ലറ്റ് പ്രൊഫൈലിലേക്ക് തുടരാൻ നിങ്ങളുടെ മൊബൈൽ നമ്പർ നൽകുക.",
     descriptionOtp: "നിങ്ങളുടെ മൊബൈൽ നമ്പർ നൽകുക, ഞങ്ങൾ നിങ്ങൾക്ക് സുരക്ഷിതമായ വെരിഫിക്കേഷൻ കോഡ് അയയ്ക്കും.",
     panelBadge: "അത്‌ലറ്റുകൾക്കായി നിർമ്മിച്ചത്. അവസരത്തിനായി രൂപകൽപ്പന ചെയ്തത്.",
@@ -277,7 +296,7 @@ const ml: Dictionary = {
     errorOtpWrong: "ആ കോഡ് ശരിയല്ല. പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",
     errorSessionCheckFailed: "ഞങ്ങൾക്ക് നിങ്ങളുടെ സെഷൻ സ്ഥിരീകരിക്കാൻ കഴിഞ്ഞില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
     mobileOrSportfoIdLabel: "മൊബൈൽ നമ്പർ അല്ലെങ്കിൽ SportFo ID",
-    mobileOrSportfoIdPlaceholder: "മൊബൈൽ നമ്പർ അല്ലെങ്കിൽ SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 അല്ലെങ്കിൽ SportFo ID",
     sportfoIdFoundNeedsPhone:
       "ഈ SportFo ID ഞങ്ങൾ കണ്ടെത്തി. ഫോൺ വെരിഫിക്കേഷൻ പൂർണ്ണമായി പ്രവർത്തനക്ഷമമായ ശേഷം SportFo ID ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യാൻ കഴിയും -- ഇപ്പോൾ ദയവായി നിങ്ങളുടെ മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക.",
     sportfoIdNotFound: "ആ SportFo ID ഞങ്ങൾക്ക് കണ്ടെത്താനായില്ല. ദയവായി പരിശോധിക്കുക, അല്ലെങ്കിൽ നിങ്ങളുടെ മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക.",
@@ -289,6 +308,10 @@ const ml: Dictionary = {
     loadFailed: "ഞങ്ങൾക്ക് നിങ്ങളുടെ സേവ് ചെയ്ത വിവരങ്ങൾ ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല.",
     reload: "ഈ പേജ് വീണ്ടും ലോഡ് ചെയ്യാൻ ശ്രമിക്കുക",
     contactSupport: "ഇത് വീണ്ടും വീണ്ടും സംഭവിക്കുകയാണെങ്കിൽ, പിന്തുണയെ ബന്ധപ്പെടുക.",
+    alreadyRegistered: {
+      title: "നിങ്ങൾ ഇതിനകം ഒരു അത്‌ലറ്റായി രജിസ്റ്റർ ചെയ്തിട്ടുണ്ട്",
+      description: "നിങ്ങൾക്ക് ചുവടെ നിങ്ങളുടെ വിവരങ്ങൾ അവലോകനം ചെയ്ത് അപ്ഡേറ്റ് ചെയ്യാം.",
+    },
     stepPersonal: "വ്യക്തിഗതം",
     stepSport: "കായികം",
     stepAchievements: "നേട്ടങ്ങൾ",
@@ -318,6 +341,15 @@ const ml: Dictionary = {
       title: "കായിക വിവരങ്ങൾ",
       description: "നിങ്ങളുടെ പ്രധാന കായിക ഇനവും നിലവിലെ നൈപുണ്യ നിലവാരവും പങ്കിടുക.",
       primarySport: "പ്രധാന കായിക ഇനം",
+      primarySportSearchPlaceholder: "നിങ്ങളുടെ കായിക ഇനം തിരയുക അല്ലെങ്കിൽ തിരഞ്ഞെടുക്കുക...",
+      primarySportNoResults: "കായിക ഇനങ്ങളൊന്നും കണ്ടെത്തിയില്ല",
+      category: "വിഭാഗം",
+      categoryPlaceholder: "വിഭാഗം തിരഞ്ഞെടുക്കുക",
+      categoryAutoHelper: "നിങ്ങളുടെ കായിക ഇനത്തിന്റെ അടിസ്ഥാനത്തിൽ സ്വയമേവ തിരഞ്ഞെടുത്തു.",
+      categoryMultiHelper:
+        "{sport} ഒന്നിലധികം SportFo വിഭാഗങ്ങളിൽ ഉൾപ്പെടുന്നു. നിങ്ങളുടെ പങ്കാളിത്തത്തെ ഏറ്റവും നന്നായി പ്രതിനിധീകരിക്കുന്നത് തിരഞ്ഞെടുക്കുക.",
+      categoryUnmappedHelper:
+        "ഈ കായിക ഇനത്തിന് ഞങ്ങൾക്ക് ഇതുവരെ വിഭാഗ മാപ്പിംഗ് ഇല്ല — ഞങ്ങളുടെ ടീം ഉടൻ ഒന്ന് ചേർക്കും.",
       discipline: "കായിക വിഭാഗം / ഉപവിഭാഗം",
       disciplinePlaceholder: "ഉദാ. ഫ്രീസ്റ്റൈൽ, സ്പ്രിന്റ്, സ്ട്രൈക്കർ",
       position: "സ്ഥാനം / റോൾ",
@@ -364,12 +396,13 @@ const ml: Dictionary = {
     },
     success: {
       title: "നിങ്ങൾ തയ്യാറാണ്",
-      message: "നിങ്ങളുടെ അത്‌ലറ്റ് പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
-      welcome: "SportFo ലേക്ക് സ്വാഗതം",
+      message: "നിങ്ങളുടെ പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
+      welcome: "SportFo ലേക്ക് സ്വാഗതം, അത്‌ലറ്റ്!",
       yourSportfoId: "നിങ്ങളുടെ SportFo ID",
       sportfoIdHelper: "ഈ ID സൂക്ഷിച്ചു വയ്ക്കുക. നിങ്ങളുടെ SportFo അക്കൗണ്ട് തിരിച്ചറിയാൻ ഇത് ഉപയോഗിക്കാം.",
-      backHome: "ഹോമിലേക്ക് മടങ്ങുക",
-      viewProfile: "എന്റെ പ്രൊഫൈൽ കാണുക",
+      viewDashboard: "ഡാഷ്ബോർഡ് കാണുക",
+      completeProfile: "പ്രൊഫൈൽ പൂർത്തിയാക്കുക",
+      exploreCommunity: "കമ്മ്യൂണിറ്റി പര്യവേക്ഷണം ചെയ്യുക",
     },
     banners: {
       draftSaved: "ഡ്രാഫ്റ്റ് സേവ് ചെയ്തു.",
@@ -377,6 +410,9 @@ const ml: Dictionary = {
         "ഡ്രാഫ്റ്റ് സേവ് ചെയ്തു, പക്ഷേ {n} രേഖ{plural} അപ്‌ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ഫയൽ വീണ്ടും തിരഞ്ഞെടുക്കുക അല്ലെങ്കിൽ വീണ്ടും സേവ് ചെയ്യുക.",
       createdWithFailures:
         "നിങ്ങളുടെ പ്രൊഫൈൽ സൃഷ്ടിച്ചു, പക്ഷേ {n} രേഖ{plural} അപ്‌ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ഫയൽ വീണ്ടും തിരഞ്ഞെടുക്കുക അല്ലെങ്കിൽ വീണ്ടും സമർപ്പിക്കുക.",
+      draftRestored: "നിങ്ങൾ പരിശോധിച്ചുറപ്പിച്ചു -- ഞങ്ങൾ നിങ്ങളുടെ ഫോം പുനഃസ്ഥാപിച്ചു.",
+      draftRestoredReselectFiles:
+        "നിങ്ങൾ പരിശോധിച്ചുറപ്പിച്ചു -- ഞങ്ങൾ നിങ്ങളുടെ ഫോം പുനഃസ്ഥാപിച്ചു. നിങ്ങൾ അപ്‌ലോഡ് ചെയ്തുകൊണ്ടിരുന്ന ഫയലുകൾ ദയവായി വീണ്ടും തിരഞ്ഞെടുക്കുക.",
     },
   },
   profile: {
@@ -479,6 +515,7 @@ const ml: Dictionary = {
     mobileNumber: "മൊബൈൽ നമ്പർ",
     email: "ഇമെയിൽ വിലാസം",
     primarySport: "പ്രധാന കായിക ഇനം",
+    sportCategory: "വിഭാഗം",
     skillLevel: "നൈപുണ്യ നിലവാരം",
     competitionLevel: "മത്സര നിലവാരം",
     parallelTrack: "ട്രാക്ക്",
@@ -519,6 +556,301 @@ const ml: Dictionary = {
       other: "മറ്റുള്ളവ",
     },
     scholarship: { yes: "അതെ", no: "ഇല്ല" },
+  },
+  registerHub: {
+    pageTitle: "SportFo യുമായി രജിസ്റ്റർ ചെയ്യുക",
+    pageSubtitle: "നിങ്ങളുടെ വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    chooseCategory: "വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    alreadyRegistered: {
+      title: "നിങ്ങൾ ഇതിനകം {role} ആയി രജിസ്റ്റർ ചെയ്തിട്ടുണ്ട്",
+      description: "നിങ്ങൾക്ക് ചുവടെ നിങ്ങളുടെ വിവരങ്ങൾ അവലോകനം ചെയ്ത് അപ്ഡേറ്റ് ചെയ്യാം.",
+    },
+    formDetailsTitle: "നിങ്ങളുടെ വിവരങ്ങൾ",
+    actions: {
+      registerNow: "ഇപ്പോൾ രജിസ്റ്റർ ചെയ്യുക",
+      registering: "രജിസ്റ്റർ ചെയ്യുന്നു...",
+      viewRegistration: "രജിസ്ട്രേഷൻ കാണുക",
+    },
+    upload: {
+      helper: "PDF, JPG, അല്ലെങ്കിൽ PNG. പരമാവധി {size}.",
+      currentFile: "നിലവിലെ ഫയൽ: {name}",
+    },
+    validation: {
+      required: "ഈ ഫീൽഡ് ആവശ്യമാണ്.",
+      invalidUrl: "സാധുവായ URL നൽകുക (ഉദാ. https://example.com).",
+      numberRange: "{min} നും {max} നും ഇടയിലുള്ള ഒരു സംഖ്യ നൽകുക.",
+    },
+    errors: {
+      title: "രജിസ്ട്രേഷൻ പൂർത്തിയാക്കാൻ കഴിഞ്ഞില്ല.",
+      uploadFailed: "നിങ്ങളുടെ ഡോക്യുമെന്റ് അപ്‌ലോഡ് ചെയ്യാൻ ഞങ്ങൾക്ക് കഴിഞ്ഞില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+      saveFailed: "സേവ് ചെയ്യുന്നതിനിടെ എന്തോ പിശക് സംഭവിച്ചു. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
+    },
+    banners: {
+      draftRestored: "നിങ്ങൾ പരിശോധിച്ചുറപ്പിച്ചു -- ഞങ്ങൾ നിങ്ങളുടെ ഫോം പുനഃസ്ഥാപിച്ചു.",
+      draftRestoredReselectFiles:
+        "നിങ്ങൾ പരിശോധിച്ചുറപ്പിച്ചു -- ഞങ്ങൾ നിങ്ങളുടെ ഫോം പുനഃസ്ഥാപിച്ചു. നിങ്ങൾ അപ്‌ലോഡ് ചെയ്തുകൊണ്ടിരുന്ന ഫയലുകൾ ദയവായി വീണ്ടും തിരഞ്ഞെടുക്കുക.",
+    },
+    success: {
+      title: "രജിസ്ട്രേഷൻ വിജയകരം",
+      yourSportfoId: "നിങ്ങളുടെ SportFo ID",
+    },
+    notFound: {
+      title: "വിഭാഗം കണ്ടെത്തിയില്ല",
+      description: "ആ രജിസ്ട്രേഷൻ വിഭാഗം ഞങ്ങൾക്ക് കണ്ടെത്താനായില്ല.",
+      action: "ഒരു വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    },
+    categories: {
+      athlete: {
+        formTitle: "ഒരു അത്‌ലറ്റ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+      },
+      academyCoachParent: {
+        formTitle: "അക്കാദമി / കോച്ച് / രക്ഷിതാവ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, കോച്ച്/അക്കാദമി!",
+        successMessage: "നിങ്ങളുടെ രജിസ്ട്രേഷൻ പൂർത്തിയായി.",
+        fields: {
+          academyCoachName: { label: "അക്കാദമി / കോച്ച് പേര്" },
+          sportsOffered: {
+            label: "നൽകുന്ന കായിക ഇനങ്ങൾ",
+            placeholder: "ഉദാ. ക്രിക്കറ്റ്, ഫുട്ബോൾ, ബാഡ്മിന്റൺ",
+          },
+          ageGroupsTrained: {
+            label: "പരിശീലനം നൽകുന്ന പ്രായ ഗ്രൂപ്പുകൾ",
+            placeholder: "ഉദാ. അണ്ടർ-12, അണ്ടർ-16, മുതിർന്നവർ",
+          },
+          coachCertification: { label: "കോച്ച് സർട്ടിഫിക്കേഷൻ" },
+          experienceLevel: {
+            label: "അനുഭവ നിലവാരം",
+            options: {
+              "0-2 years": "0-2 വർഷം",
+              "3-5 years": "3-5 വർഷം",
+              "6-10 years": "6-10 വർഷം",
+              "10+ years": "10+ വർഷം",
+            },
+          },
+          location: { label: "സ്ഥലം" },
+          uploadAcademyInfo: { label: "അക്കാദമി വിവരങ്ങൾ അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      performanceExpert: {
+        formTitle: "പെർഫോമൻസ് എക്സ്പേർട്ട് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, പെർഫോമൻസ് എക്സ്പേർട്ട്!",
+        successMessage: "നിങ്ങളുടെ പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          expertise: {
+            label: "വൈദഗ്ധ്യം",
+            options: {
+              "Sports Physiotherapist": "സ്പോർട്സ് ഫിസിയോതെറാപ്പിസ്റ്റ്",
+              Nutritionist: "ന്യൂട്രീഷനിസ്റ്റ്",
+              "Sports Psychologist": "സ്പോർട്സ് സൈക്കോളജിസ്റ്റ്",
+              "Strength & Conditioning": "സ്ട്രെങ്ത് & കണ്ടീഷനിംഗ്",
+              "Performance Trainer": "പെർഫോമൻസ് ട്രെയിനർ",
+              "Rehabilitation Specialist": "റീഹാബിലിറ്റേഷൻ സ്പെഷ്യലിസ്റ്റ്",
+              Other: "മറ്റുള്ളവ",
+            },
+          },
+          experienceLevel: {
+            label: "അനുഭവ നിലവാരം",
+            options: {
+              "0-2 years": "0-2 വർഷം",
+              "3-5 years": "3-5 വർഷം",
+              "6-10 years": "6-10 വർഷം",
+              "10+ years": "10+ വർഷം",
+            },
+          },
+          servicesOffered: {
+            label: "നൽകുന്ന സേവനങ്ങൾ",
+            placeholder: "ഉദാ. പരിക്ക് വീണ്ടെടുക്കൽ, സ്ട്രെങ്ത് പ്രോഗ്രാമുകൾ",
+          },
+          certifications: { label: "സർട്ടിഫിക്കേഷനുകൾ" },
+          location: { label: "സ്ഥലം" },
+          uploadCertificate: { label: "സർട്ടിഫിക്കറ്റ് അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      mediaCreator: {
+        formTitle: "മീഡിയ & ക്രിയേറ്റർ ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, ക്രിയേറ്റർ!",
+        successMessage: "നിങ്ങളുടെ രജിസ്ട്രേഷൻ പൂർത്തിയായി.",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          portfolioLink: { label: "പോർട്ട്‌ഫോളിയോ ലിങ്ക്" },
+          contentType: {
+            label: "ഉള്ളടക്ക തരം",
+            options: {
+              Photography: "ഫോട്ടോഗ്രഫി",
+              Videography: "വീഡിയോഗ്രഫി",
+              Journalism: "ജേണലിസം",
+              "Sports Writing": "സ്പോർട്സ് റൈറ്റിംഗ്",
+              "Social Media": "സോഷ്യൽ മീഡിയ",
+              Broadcasting: "ബ്രോഡ്കാസ്റ്റിംഗ്",
+              Other: "മറ്റുള്ളവ",
+            },
+          },
+          socialMediaHandles: {
+            label: "സോഷ്യൽ മീഡിയ ഹാൻഡിലുകൾ",
+            placeholder: "ഉദാ. @yourhandle (ഇൻസ്റ്റാഗ്രാം, യൂട്യൂബ്, X)",
+          },
+          location: { label: "സ്ഥലം" },
+          uploadPortfolio: { label: "പോർട്ട്‌ഫോളിയോ അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      managementLegal: {
+        formTitle: "സ്പോർട്സ് മാനേജ്‌മെന്റ് & ലീഗൽ ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, സ്പോർട്സ് മാനേജർ!",
+        successMessage: "നിങ്ങളുടെ പ്രൊഫൈൽ സൃഷ്ടിച്ചു.",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          role: {
+            label: "റോൾ",
+            options: { Manager: "മാനേജർ", Agent: "ഏജന്റ്", Lawyer: "അഭിഭാഷകൻ", Consultant: "കൺസൾട്ടന്റ്" },
+          },
+          licenseNumber: { label: "ലൈസൻസ് നമ്പർ" },
+          organization: { label: "സ്ഥാപനം" },
+          experienceLevel: {
+            label: "അനുഭവ നിലവാരം",
+            options: {
+              "0-2 years": "0-2 വർഷം",
+              "3-5 years": "3-5 വർഷം",
+              "6-10 years": "6-10 വർഷം",
+              "10+ years": "10+ വർഷം",
+            },
+          },
+          location: { label: "സ്ഥലം" },
+          uploadLicense: { label: "ലൈസൻസ് അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      eventOperations: {
+        formTitle: "ഇവന്റ് & ഓപ്പറേഷൻസ് സ്റ്റാഫ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, ഇവന്റ് സ്റ്റാഫ്!",
+        successMessage: "രജിസ്ട്രേഷൻ വിജയകരം.",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          role: {
+            label: "റോൾ",
+            options: { Referee: "റഫറി", Umpire: "അമ്പയർ", Volunteer: "വളണ്ടിയർ", Coordinator: "കോർഡിനേറ്റർ" },
+          },
+          certification: { label: "സർട്ടിഫിക്കേഷൻ" },
+          experienceYears: { label: "അനുഭവ വർഷങ്ങൾ" },
+          availability: { label: "ലഭ്യത", placeholder: "ഉദാ. വാരാന്ത്യങ്ങൾ, വൈകുന്നേരങ്ങൾ" },
+          location: { label: "സ്ഥലം" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      sponsorCsr: {
+        formTitle: "സ്പോൺസർ & CSR ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, സ്പോൺസർ!",
+        successMessage: "നിങ്ങളുടെ പങ്കാളിത്ത പ്രൊഫൈൽ വിജയകരമായി സൃഷ്ടിച്ചു.",
+        fields: {
+          organizationName: { label: "സ്ഥാപനത്തിന്റെ പേര്" },
+          contactPerson: { label: "ബന്ധപ്പെടേണ്ട വ്യക്തി" },
+          sponsorshipInterest: {
+            label: "സ്പോൺസർഷിപ്പ് താൽപ്പര്യം",
+            options: {
+              Youth: "യുവാക്കൾ",
+              Women: "സ്ത്രീകൾ",
+              Grassroots: "ഗ്രാസ്റൂട്ട്സ്",
+              "Para Sports": "പാരാ സ്പോർട്സ്",
+              Academies: "അക്കാദമികൾ",
+              Events: "ഇവന്റുകൾ",
+              "Talent Development": "ടാലന്റ് ഡെവലപ്മെന്റ്",
+              Other: "മറ്റുള്ളവ",
+            },
+          },
+          budgetRange: {
+            label: "ബജറ്റ് പരിധി",
+            options: {
+              "Under ₹1L": "₹1L ൽ താഴെ",
+              "₹1L–5L": "₹1L–5L",
+              "₹5L–25L": "₹5L–25L",
+              "₹25L+": "₹25L+",
+            },
+          },
+          sportsFocus: {
+            label: "കായിക ഫോക്കസ്",
+            placeholder: "ഉദാ. ക്രിക്കറ്റ്, അത്‌ലറ്റിക്സ്, പാരാ സ്പോർട്സ്",
+          },
+          location: { label: "സ്ഥലം" },
+          uploadProposal: { label: "പ്രൊപ്പോസൽ അപ്‌ലോഡ് ചെയ്യുക" },
+          uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+      talentAnalytics: {
+        formTitle: "ടാലന്റ് ഡിസ്കവറി & അനലിറ്റിക്സ് ആയി രജിസ്റ്റർ ചെയ്യുക",
+        successWelcome: "SportFo ലേക്ക് സ്വാഗതം, അനലിസ്റ്റ്!",
+        successMessage: "നിങ്ങളുടെ പ്രൊഫൈൽ സൃഷ്ടിച്ചു.",
+        fields: {
+          fullName: { label: "മുഴുവൻ പേര്" },
+          role: {
+            label: "റോൾ",
+            options: { Scout: "സ്കൗട്ട്", Analyst: "അനലിസ്റ്റ്", "Data Expert": "ഡാറ്റ എക്സ്പേർട്ട്" },
+          },
+          toolsUsed: { label: "ഉപയോഗിച്ച ടൂളുകൾ", placeholder: "ഉദാ. Hudl, Dartfish" },
+          experienceYears: { label: "അനുഭവ വർഷങ്ങൾ" },
+          sportsSpecialization: { label: "കായിക സ്പെഷ്യലൈസേഷൻ", placeholder: "ഉദാ. ഫുട്ബോൾ, അത്‌ലറ്റിക്സ്" },
+          location: { label: "സ്ഥലം" },
+          uploadPortfolioReport: { label: "പോർട്ട്‌ഫോളിയോ / റിപ്പോർട്ട് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+      },
+    },
+  },
+  adminDashboard: {
+    pageTitle: "രജിസ്ട്രേഷൻ അനലിറ്റിക്സ്",
+    pageSubtitle: "അഡ്മിൻ ഡാഷ്ബോർഡ് -- എല്ലാ SportFo വിഭാഗങ്ങളിലുമുള്ള രജിസ്ട്രേഷൻ പ്രവർത്തനം.",
+    kpi: {
+      today: "ഇന്ന്",
+      week: "ഈ ആഴ്ച",
+      month: "ഈ മാസം",
+      year: "ഈ വർഷം",
+    },
+    filters: {
+      timeRange: "സമയ പരിധി",
+      today: "ഇന്ന്",
+      last7Days: "കഴിഞ്ഞ 7 ദിവസം",
+      thisMonth: "ഈ മാസം",
+      thisYear: "ഈ വർഷം",
+      customRange: "ഇഷ്ടാനുസൃത പരിധി",
+      from: "മുതൽ",
+      to: "വരെ",
+      category: "വിഭാഗം",
+      allCategories: "എല്ലാ വിഭാഗങ്ങളും",
+      status: "നില",
+      allStatuses: "എല്ലാം",
+      apply: "പ്രയോഗിക്കുക",
+    },
+    status: {
+      draft: "ഡ്രാഫ്റ്റ്",
+      submitted: "സമർപ്പിച്ചു",
+      verified: "പരിശോധിച്ചു",
+      rejected: "നിരസിച്ചു",
+    },
+    trend: {
+      title: "രജിസ്ട്രേഷൻ ട്രെൻഡ്",
+      empty: "ഈ കാലയളവിൽ ഇതുവരെ രജിസ്ട്രേഷനുകൾ ഇല്ല.",
+    },
+    breakdown: {
+      title: "വിഭാഗം തിരിച്ചുള്ള വിഭജനം",
+      empty: "ഈ കാലയളവിൽ ഇതുവരെ രജിസ്ട്രേഷനുകൾ ഇല്ല.",
+    },
+    table: {
+      title: "സമീപകാല രജിസ്ട്രേഷനുകൾ",
+      sportfoId: "SportFo ID",
+      name: "പേര്",
+      category: "വിഭാഗം",
+      registeredDate: "രജിസ്റ്റർ ചെയ്ത തീയതി",
+      status: "നില",
+      empty: "ഈ ഫിൽട്ടറുകൾക്ക് ചേരുന്ന രജിസ്ട്രേഷനുകൾ ഇല്ല.",
+      pageInfo: "പേജ് {page} / {totalPages} (ആകെ {total})",
+      previous: "മുമ്പത്തേത്",
+      next: "അടുത്തത്",
+    },
+    accessDenied: {
+      title: "ആക്‌സസ് നിഷേധിച്ചു",
+      description: "ഈ പേജ് കാണാൻ നിങ്ങൾക്ക് അനുമതിയില്ല.",
+      action: "ഹോമിലേക്ക് മടങ്ങുക",
+    },
   },
 };
 
