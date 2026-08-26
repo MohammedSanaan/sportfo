@@ -4,10 +4,11 @@ const te: Dictionary = {
   common: {
     loading: "లోడ్ అవుతోంది...",
     pleasePrefix: "దయచేసి",
+    dismiss: "మూసివేయండి",
   },
   nav: {
     discoverAthletes: "అథ్లెట్లను కనుగొనండి",
-    signIn: "సైన్ ఇన్ చేయండి",
+    signIn: "లాగిన్",
     joinSportfo: "SportFo లో చేరండి",
     athleteRegistration: "అథ్లెట్ నమోదు",
     myProfile: "నా ప్రొఫైల్",
@@ -39,6 +40,9 @@ const te: Dictionary = {
     viewProfile: "ప్రొఫైల్‌ను వీక్షించండి",
     viewDashboard: "డాష్‌బోర్డ్‌ను వీక్షించండి",
     signOut: "సైన్ అవుట్",
+    welcome: "స్వాగతం, {name}",
+    welcomeBack: "తిరిగి స్వాగతం, {name}",
+    signedInAs: "ఇలా సైన్ ఇన్ అయ్యారు:",
     roles: {
       athlete: "అథ్లెట్",
       academyCoachParent: "అకాడమీ / కోచ్ / తల్లిదండ్రులు",
@@ -237,7 +241,8 @@ const te: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo లో చేరండి లేదా సైన్ ఇన్ చేయండి",
+    pageTitle: "తిరిగి స్వాగతం",
+    pageSubtitle: "SportFo కి లాగిన్ అవ్వండి",
     descriptionDemo: "మీ అథ్లెట్ ప్రొఫైల్‌కు కొనసాగించడానికి మీ మొబైల్ నంబర్‌ను నమోదు చేయండి.",
     descriptionOtp: "మీ మొబైల్ నంబర్‌ను నమోదు చేయండి, మేము మీకు సురక్షితమైన ధృవీకరణ కోడ్‌ను పంపుతాము.",
     panelBadge: "అథ్లెట్ల కోసం నిర్మించబడింది. అవకాశం కోసం రూపొందించబడింది.",
@@ -267,7 +272,7 @@ const te: Dictionary = {
     errorOtpWrong: "ఆ కోడ్ సరైనది కాదు. తనిఖీ చేసి మళ్లీ ప్రయత్నించండి.",
     errorSessionCheckFailed: "మేము మీ సెషన్‌ను నిర్ధారించలేకపోయాము. దయచేసి మళ్లీ ప్రయత్నించండి.",
     mobileOrSportfoIdLabel: "మొబైల్ నంబర్ లేదా SportFo ID",
-    mobileOrSportfoIdPlaceholder: "మొబైల్ నంబర్ లేదా SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 లేదా SportFo ID",
     sportfoIdFoundNeedsPhone:
       "ఈ SportFo ID మాకు కనుగొనబడింది. ఫోన్ ధృవీకరణ పూర్తిగా ప్రారంభించబడిన తర్వాత SportFo ID తో సైన్ ఇన్ అందుబాటులో ఉంటుంది -- ప్రస్తుతానికి దయచేసి మీ మొబైల్ నంబర్‌తో సైన్ ఇన్ చేయండి.",
     sportfoIdNotFound: "ఆ SportFo ID మాకు కనుగొనబడలేదు. దయచేసి తనిఖీ చేయండి, లేదా మీ మొబైల్ నంబర్‌తో సైన్ ఇన్ చేయండి.",
@@ -279,6 +284,10 @@ const te: Dictionary = {
     loadFailed: "మేము మీ సేవ్ చేసిన సమాచారాన్ని లోడ్ చేయలేకపోయాము.",
     reload: "ఈ పేజీని మళ్లీ లోడ్ చేయడానికి ప్రయత్నించండి",
     contactSupport: "ఇది పదేపదే జరిగితే, మద్దతును సంప్రదించండి.",
+    alreadyRegistered: {
+      title: "మీరు ఇప్పటికే అథ్లెట్‌గా నమోదు చేసుకున్నారు",
+      description: "మీరు క్రింద మీ వివరాలను సమీక్షించి నవీకరించవచ్చు.",
+    },
     stepPersonal: "వ్యక్తిగత",
     stepSport: "క్రీడ",
     stepAchievements: "విజయాలు",
@@ -500,6 +509,10 @@ const te: Dictionary = {
     pageTitle: "SportFo తో నమోదు చేసుకోండి",
     pageSubtitle: "మీ వర్గాన్ని ఎంచుకోండి",
     chooseCategory: "వర్గాన్ని ఎంచుకోండి",
+    alreadyRegistered: {
+      title: "మీరు ఇప్పటికే {role} గా నమోదు చేసుకున్నారు",
+      description: "మీరు క్రింద మీ వివరాలను సమీక్షించి నవీకరించవచ్చు.",
+    },
     formDetailsTitle: "మీ వివరాలు",
     actions: {
       registerNow: "ఇప్పుడు నమోదు చేసుకోండి",

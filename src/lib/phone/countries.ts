@@ -6,16 +6,17 @@ export interface Country {
 }
 
 // Deliberately not exhaustive of every ITU-assigned code -- a curated list
-// covering the MVP's priority markets (Qatar, India) plus the rest of the
+// covering the MVP's priority markets (India, Qatar) plus the rest of the
 // Gulf, South/Southeast Asia, and other major regions. Ordered with the
-// priority countries first, then alphabetically by name. Sourced from
-// public ITU-T E.164 country calling codes; no third-party dependency
-// needed for a static list like this.
-export const PRIORITY_COUNTRY_CODES = ["QA", "IN"];
+// priority countries first (India leads -- SportFo's primary market and
+// the default selection on /auth), then alphabetically by name. Sourced
+// from public ITU-T E.164 country calling codes; no third-party
+// dependency needed for a static list like this.
+export const PRIORITY_COUNTRY_CODES = ["IN", "QA"];
 
 export const COUNTRIES: Country[] = [
-  { iso2: "QA", name: "Qatar", dialCode: "+974", flag: "🇶🇦" },
   { iso2: "IN", name: "India", dialCode: "+91", flag: "🇮🇳" },
+  { iso2: "QA", name: "Qatar", dialCode: "+974", flag: "🇶🇦" },
   { iso2: "AE", name: "United Arab Emirates", dialCode: "+971", flag: "🇦🇪" },
   { iso2: "AU", name: "Australia", dialCode: "+61", flag: "🇦🇺" },
   { iso2: "BH", name: "Bahrain", dialCode: "+973", flag: "🇧🇭" },

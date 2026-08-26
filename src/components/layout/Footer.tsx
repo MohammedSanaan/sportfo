@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { translate } from "@/i18n/dictionary";
+import { getAuthUser } from "@/lib/supabase/auth-user";
 import type { Locale } from "@/i18n/config";
 
 // Deliberately minimal: only real, working destinations. No Privacy/
@@ -8,8 +9,12 @@ import type { Locale } from "@/i18n/config";
 // Sponsors/Events links here either -- the landing page's "Future
 // Ecosystem" section covers that ground as clearly-labeled, non-interactive
 // preview tiles, not live footer navigation.
-export function Footer({ locale }: { locale: Locale }) {
+export async function Footer({ locale }: { locale: Locale }) {
   const t = (key: string) => translate(locale, key);
+  // Discover Athletes is authenticated-only (same rule as the header --
+  // see AuthNav): a guest here would just get bounced straight to /auth,
+  // so the link is hidden rather than shown-then-redirected.
+  const user = await getAuthUser();
 
   return (
     <footer className="border-t border-border-default bg-navy-950">
@@ -28,9 +33,11 @@ export function Footer({ locale }: { locale: Locale }) {
           <span className="text-xs font-semibold uppercase tracking-wide text-white/40">
             {t("footer.platform")}
           </span>
-          <Link href="/athletes" className="text-sm text-white/70 transition-colors hover:text-white">
-            {t("footer.discoverAthletes")}
-          </Link>
+          {user && (
+            <Link href="/athletes" className="text-sm text-white/70 transition-colors hover:text-white">
+              {t("footer.discoverAthletes")}
+            </Link>
+          )}
           <Link href="/auth" className="text-sm text-white/70 transition-colors hover:text-white">
             {t("footer.createProfile")}
           </Link>

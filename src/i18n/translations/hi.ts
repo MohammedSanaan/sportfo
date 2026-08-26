@@ -4,10 +4,11 @@ const hi: Dictionary = {
   common: {
     loading: "लोड हो रहा है...",
     pleasePrefix: "कृपया",
+    dismiss: "बंद करें",
   },
   nav: {
     discoverAthletes: "एथलीट खोजें",
-    signIn: "साइन इन करें",
+    signIn: "लॉग इन",
     joinSportfo: "SportFo से जुड़ें",
     athleteRegistration: "एथलीट पंजीकरण",
     myProfile: "मेरी प्रोफ़ाइल",
@@ -39,6 +40,9 @@ const hi: Dictionary = {
     viewProfile: "प्रोफ़ाइल देखें",
     viewDashboard: "डैशबोर्ड देखें",
     signOut: "साइन आउट करें",
+    welcome: "स्वागत है, {name}",
+    welcomeBack: "वापसी पर स्वागत है, {name}",
+    signedInAs: "इस रूप में साइन इन:",
     roles: {
       athlete: "एथलीट",
       academyCoachParent: "अकादमी / कोच / अभिभावक",
@@ -235,7 +239,8 @@ const hi: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo से जुड़ें या साइन इन करें",
+    pageTitle: "वापसी पर स्वागत है",
+    pageSubtitle: "SportFo में लॉग इन करें",
     descriptionDemo: "अपनी एथलीट प्रोफ़ाइल पर जाने के लिए अपना मोबाइल नंबर दर्ज करें।",
     descriptionOtp: "अपना मोबाइल नंबर दर्ज करें और हम आपको एक सुरक्षित सत्यापन कोड भेजेंगे।",
     panelBadge: "एथलीटों के लिए बनाया गया। अवसर के लिए डिज़ाइन किया गया।",
@@ -265,7 +270,7 @@ const hi: Dictionary = {
     errorOtpWrong: "यह कोड सही नहीं है। दोबारा जाँचें और फिर से प्रयास करें।",
     errorSessionCheckFailed: "हम आपके सत्र की पुष्टि नहीं कर पाए। कृपया फिर से प्रयास करें।",
     mobileOrSportfoIdLabel: "मोबाइल नंबर या SportFo ID",
-    mobileOrSportfoIdPlaceholder: "मोबाइल नंबर या SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 या SportFo ID",
     sportfoIdFoundNeedsPhone:
       "हमें यह SportFo ID मिली। SportFo ID से साइन इन तभी उपलब्ध होगा जब फ़ोन सत्यापन पूरी तरह सक्षम हो जाए — अभी के लिए कृपया अपने मोबाइल नंबर से साइन इन करें।",
     sportfoIdNotFound: "हमें वह SportFo ID नहीं मिली। कृपया जाँच लें, या अपने मोबाइल नंबर से साइन इन करें।",
@@ -277,6 +282,10 @@ const hi: Dictionary = {
     loadFailed: "हम आपकी सहेजी हुई जानकारी लोड नहीं कर पाए।",
     reload: "इस पेज को फिर से लोड करने का प्रयास करें",
     contactSupport: "अगर यह बार-बार हो रहा है, तो सहायता से संपर्क करें।",
+    alreadyRegistered: {
+      title: "आप पहले से ही एथलीट के रूप में पंजीकृत हैं",
+      description: "आप नीचे अपना विवरण देख और अपडेट कर सकते हैं।",
+    },
     stepPersonal: "व्यक्तिगत",
     stepSport: "खेल",
     stepAchievements: "उपलब्धियाँ",
@@ -498,6 +507,10 @@ const hi: Dictionary = {
     pageTitle: "SportFo के साथ पंजीकरण करें",
     pageSubtitle: "अपनी श्रेणी चुनें",
     chooseCategory: "श्रेणी चुनें",
+    alreadyRegistered: {
+      title: "आप पहले से ही {role} के रूप में पंजीकृत हैं",
+      description: "आप नीचे अपना विवरण देख और अपडेट कर सकते हैं।",
+    },
     formDetailsTitle: "आपका विवरण",
     actions: {
       registerNow: "अभी पंजीकरण करें",

@@ -1,6 +1,10 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/supabase";
-import { getRegistrationCategoryByType, type RegistrationCategoryConfig } from "@/lib/registration/categories";
+import {
+  getProfileHrefForCategory,
+  getRegistrationCategoryByType,
+  type RegistrationCategoryConfig,
+} from "@/lib/registration/categories";
 
 export interface AccountIdentity {
   // Never the internal auth.users UUID -- always the account's permanent
@@ -70,10 +74,6 @@ export async function getOwnAccountIdentity(
     isAdmin: sportfoUserResult.data?.is_admin ?? false,
     displayName: registration?.display_name ?? null,
     category,
-    profileHref: category
-      ? category.id === "athlete"
-        ? "/athlete/profile"
-        : `/register/${category.slug}`
-      : null,
+    profileHref: category ? getProfileHrefForCategory(category) : null,
   };
 }

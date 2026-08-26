@@ -4,10 +4,11 @@ const ta: Dictionary = {
   common: {
     loading: "ஏற்றுகிறது...",
     pleasePrefix: "தயவுசெய்து",
+    dismiss: "மூடு",
   },
   nav: {
     discoverAthletes: "விளையாட்டு வீரர்களைக் கண்டறியவும்",
-    signIn: "உள்நுழையவும்",
+    signIn: "உள்நுழைவு",
     joinSportfo: "SportFo இல் இணையுங்கள்",
     athleteRegistration: "விளையாட்டு வீரர் பதிவு",
     myProfile: "எனது சுயவிவரம்",
@@ -39,6 +40,9 @@ const ta: Dictionary = {
     viewProfile: "சுயவிவரத்தைப் பார்க்கவும்",
     viewDashboard: "டாஷ்போர்டைப் பார்க்கவும்",
     signOut: "வெளியேறு",
+    welcome: "வரவேற்கிறோம், {name}",
+    welcomeBack: "மீண்டும் வரவேற்கிறோம், {name}",
+    signedInAs: "இதுவாக உள்நுழைந்துள்ளீர்கள்:",
     roles: {
       athlete: "விளையாட்டு வீரர்",
       academyCoachParent: "அகாடமி / பயிற்சியாளர் / பெற்றோர்",
@@ -239,7 +243,8 @@ const ta: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo இல் சேரவும் அல்லது உள்நுழையவும்",
+    pageTitle: "மீண்டும் வரவேற்கிறோம்",
+    pageSubtitle: "SportFo இல் உள்நுழையவும்",
     descriptionDemo: "உங்கள் விளையாட்டு வீரர் சுயவிவரத்திற்குத் தொடர உங்கள் மொபைல் எண்ணை உள்ளிடவும்.",
     descriptionOtp: "உங்கள் மொபைல் எண்ணை உள்ளிடவும், நாங்கள் உங்களுக்கு பாதுகாப்பான சரிபார்ப்புக் குறியீட்டை அனுப்புவோம்.",
     panelBadge: "விளையாட்டு வீரர்களுக்காக உருவாக்கப்பட்டது. வாய்ப்புக்காக வடிவமைக்கப்பட்டது.",
@@ -269,7 +274,7 @@ const ta: Dictionary = {
     errorOtpWrong: "அந்த குறியீடு சரியில்லை. சரிபார்த்து மீண்டும் முயற்சிக்கவும்.",
     errorSessionCheckFailed: "உங்கள் அமர்வை உறுதிப்படுத்த முடியவில்லை. மீண்டும் முயற்சிக்கவும்.",
     mobileOrSportfoIdLabel: "மொபைல் எண் அல்லது SportFo ID",
-    mobileOrSportfoIdPlaceholder: "மொபைல் எண் அல்லது SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 அல்லது SportFo ID",
     sportfoIdFoundNeedsPhone:
       "இந்த SportFo ID எங்களுக்குக் கிடைத்தது. தொலைபேசி சரிபார்ப்பு முழுமையாக இயக்கப்பட்டதும் SportFo ID மூலம் உள்நுழைவது கிடைக்கும் -- தற்போதைக்கு உங்கள் மொபைல் எண்ணுடன் உள்நுழையவும்.",
     sportfoIdNotFound: "அந்த SportFo ID எங்களுக்குக் கிடைக்கவில்லை. சரிபார்க்கவும், அல்லது உங்கள் மொபைல் எண்ணுடன் உள்நுழையவும்.",
@@ -281,6 +286,10 @@ const ta: Dictionary = {
     loadFailed: "உங்கள் சேமிக்கப்பட்ட தகவலை ஏற்ற முடியவில்லை.",
     reload: "இந்தப் பக்கத்தை மீண்டும் ஏற்ற முயற்சிக்கவும்",
     contactSupport: "இது தொடர்ந்து நடந்தால், ஆதரவைத் தொடர்பு கொள்ளவும்.",
+    alreadyRegistered: {
+      title: "நீங்கள் ஏற்கனவே ஒரு விளையாட்டு வீரராக பதிவு செய்யப்பட்டுள்ளீர்கள்",
+      description: "கீழே உங்கள் விவரங்களை மதிப்பாய்வு செய்து புதுப்பிக்கலாம்.",
+    },
     stepPersonal: "தனிப்பட்ட",
     stepSport: "விளையாட்டு",
     stepAchievements: "சாதனைகள்",
@@ -502,6 +511,10 @@ const ta: Dictionary = {
     pageTitle: "SportFo உடன் பதிவு செய்யுங்கள்",
     pageSubtitle: "உங்கள் வகையைத் தேர்ந்தெடுக்கவும்",
     chooseCategory: "வகையைத் தேர்ந்தெடுக்கவும்",
+    alreadyRegistered: {
+      title: "நீங்கள் ஏற்கனவே {role} ஆக பதிவு செய்யப்பட்டுள்ளீர்கள்",
+      description: "கீழே உங்கள் விவரங்களை மதிப்பாய்வு செய்து புதுப்பிக்கலாம்.",
+    },
     formDetailsTitle: "உங்கள் விவரங்கள்",
     actions: {
       registerNow: "இப்போது பதிவு செய்யவும்",

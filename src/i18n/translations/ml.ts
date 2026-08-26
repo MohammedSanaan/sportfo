@@ -4,10 +4,11 @@ const ml: Dictionary = {
   common: {
     loading: "ലോഡ് ചെയ്യുന്നു...",
     pleasePrefix: "ദയവായി",
+    dismiss: "അടയ്ക്കുക",
   },
   nav: {
     discoverAthletes: "അത്‌ലറ്റുകളെ കണ്ടെത്തുക",
-    signIn: "സൈൻ ഇൻ ചെയ്യുക",
+    signIn: "ലോഗിൻ",
     joinSportfo: "SportFo ൽ ചേരുക",
     athleteRegistration: "അത്‌ലറ്റ് രജിസ്ട്രേഷൻ",
     myProfile: "എന്റെ പ്രൊഫൈൽ",
@@ -39,6 +40,9 @@ const ml: Dictionary = {
     viewProfile: "പ്രൊഫൈൽ കാണുക",
     viewDashboard: "ഡാഷ്ബോർഡ് കാണുക",
     signOut: "സൈൻ ഔട്ട്",
+    welcome: "സ്വാഗതം, {name}",
+    welcomeBack: "വീണ്ടും സ്വാഗതം, {name}",
+    signedInAs: "ഇങ്ങനെ സൈൻ ഇൻ ചെയ്തിരിക്കുന്നു:",
     roles: {
       athlete: "അത്‌ലറ്റ്",
       academyCoachParent: "അക്കാദമി / കോച്ച് / രക്ഷിതാവ്",
@@ -237,7 +241,8 @@ const ml: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo ൽ ചേരുക അല്ലെങ്കിൽ സൈൻ ഇൻ ചെയ്യുക",
+    pageTitle: "വീണ്ടും സ്വാഗതം",
+    pageSubtitle: "SportFo ലേക്ക് ലോഗിൻ ചെയ്യുക",
     descriptionDemo: "നിങ്ങളുടെ അത്‌ലറ്റ് പ്രൊഫൈലിലേക്ക് തുടരാൻ നിങ്ങളുടെ മൊബൈൽ നമ്പർ നൽകുക.",
     descriptionOtp: "നിങ്ങളുടെ മൊബൈൽ നമ്പർ നൽകുക, ഞങ്ങൾ നിങ്ങൾക്ക് സുരക്ഷിതമായ വെരിഫിക്കേഷൻ കോഡ് അയയ്ക്കും.",
     panelBadge: "അത്‌ലറ്റുകൾക്കായി നിർമ്മിച്ചത്. അവസരത്തിനായി രൂപകൽപ്പന ചെയ്തത്.",
@@ -267,7 +272,7 @@ const ml: Dictionary = {
     errorOtpWrong: "ആ കോഡ് ശരിയല്ല. പരിശോധിച്ച് വീണ്ടും ശ്രമിക്കുക.",
     errorSessionCheckFailed: "ഞങ്ങൾക്ക് നിങ്ങളുടെ സെഷൻ സ്ഥിരീകരിക്കാൻ കഴിഞ്ഞില്ല. ദയവായി വീണ്ടും ശ്രമിക്കുക.",
     mobileOrSportfoIdLabel: "മൊബൈൽ നമ്പർ അല്ലെങ്കിൽ SportFo ID",
-    mobileOrSportfoIdPlaceholder: "മൊബൈൽ നമ്പർ അല്ലെങ്കിൽ SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 അല്ലെങ്കിൽ SportFo ID",
     sportfoIdFoundNeedsPhone:
       "ഈ SportFo ID ഞങ്ങൾ കണ്ടെത്തി. ഫോൺ വെരിഫിക്കേഷൻ പൂർണ്ണമായി പ്രവർത്തനക്ഷമമായ ശേഷം SportFo ID ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യാൻ കഴിയും -- ഇപ്പോൾ ദയവായി നിങ്ങളുടെ മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക.",
     sportfoIdNotFound: "ആ SportFo ID ഞങ്ങൾക്ക് കണ്ടെത്താനായില്ല. ദയവായി പരിശോധിക്കുക, അല്ലെങ്കിൽ നിങ്ങളുടെ മൊബൈൽ നമ്പർ ഉപയോഗിച്ച് സൈൻ ഇൻ ചെയ്യുക.",
@@ -279,6 +284,10 @@ const ml: Dictionary = {
     loadFailed: "ഞങ്ങൾക്ക് നിങ്ങളുടെ സേവ് ചെയ്ത വിവരങ്ങൾ ലോഡ് ചെയ്യാൻ കഴിഞ്ഞില്ല.",
     reload: "ഈ പേജ് വീണ്ടും ലോഡ് ചെയ്യാൻ ശ്രമിക്കുക",
     contactSupport: "ഇത് വീണ്ടും വീണ്ടും സംഭവിക്കുകയാണെങ്കിൽ, പിന്തുണയെ ബന്ധപ്പെടുക.",
+    alreadyRegistered: {
+      title: "നിങ്ങൾ ഇതിനകം ഒരു അത്‌ലറ്റായി രജിസ്റ്റർ ചെയ്തിട്ടുണ്ട്",
+      description: "നിങ്ങൾക്ക് ചുവടെ നിങ്ങളുടെ വിവരങ്ങൾ അവലോകനം ചെയ്ത് അപ്ഡേറ്റ് ചെയ്യാം.",
+    },
     stepPersonal: "വ്യക്തിഗതം",
     stepSport: "കായികം",
     stepAchievements: "നേട്ടങ്ങൾ",
@@ -500,6 +509,10 @@ const ml: Dictionary = {
     pageTitle: "SportFo യുമായി രജിസ്റ്റർ ചെയ്യുക",
     pageSubtitle: "നിങ്ങളുടെ വിഭാഗം തിരഞ്ഞെടുക്കുക",
     chooseCategory: "വിഭാഗം തിരഞ്ഞെടുക്കുക",
+    alreadyRegistered: {
+      title: "നിങ്ങൾ ഇതിനകം {role} ആയി രജിസ്റ്റർ ചെയ്തിട്ടുണ്ട്",
+      description: "നിങ്ങൾക്ക് ചുവടെ നിങ്ങളുടെ വിവരങ്ങൾ അവലോകനം ചെയ്ത് അപ്ഡേറ്റ് ചെയ്യാം.",
+    },
     formDetailsTitle: "നിങ്ങളുടെ വിവരങ്ങൾ",
     actions: {
       registerNow: "ഇപ്പോൾ രജിസ്റ്റർ ചെയ്യുക",

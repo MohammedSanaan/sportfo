@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { AthleteRegistrationForm } from "./AthleteRegistrationForm";
 import { RegistrationStepNav } from "./RegistrationStepNav";
+import { AlreadyRegisteredNotice } from "@/components/ui/AlreadyRegisteredNotice";
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
 import { loadAthleteDraft, mapDraftToFormValues } from "@/lib/athlete/registration-draft";
@@ -72,10 +73,20 @@ export async function AthleteRegistrationScreen({
           </p>
         </div>
       ) : (
-        <AthleteRegistrationForm
-          authPhone={authPhone}
-          initialValues={draft ? mapDraftToFormValues(draft, authPhone) : undefined}
-        />
+        <>
+          {draft?.profile.profile_status === "submitted" && (
+            <AlreadyRegisteredNotice
+              title={t("register.alreadyRegistered.title")}
+              description={t("register.alreadyRegistered.description")}
+              profileHref="/athlete/profile"
+              profileLabel={t("account.viewProfile")}
+            />
+          )}
+          <AthleteRegistrationForm
+            authPhone={authPhone}
+            initialValues={draft ? mapDraftToFormValues(draft, authPhone) : undefined}
+          />
+        </>
       )}
     </div>
   );

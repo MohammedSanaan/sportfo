@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { LogoutButton } from "@/features/auth/components/LogoutButton";
 import { getOwnAccountIdentity } from "@/lib/account/identity";
 import { AccountMenu } from "./AccountMenu";
+import { JoinCommunityLink } from "./JoinCommunityLink";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
 
@@ -14,10 +15,11 @@ const navLinkClassName =
 // directly in Header) so it can be wrapped in <Suspense> -- the session
 // check shouldn't delay the rest of the shared layout from streaming.
 //
-// "Discover Athletes" used to be its own standalone link in the main
-// header nav; now that the main nav is the Home/About/Community/... set,
-// it's preserved here instead (in the account area for signed-in users,
-// alongside Sign In/Join SportFo for guests) rather than being deleted.
+// "Discover Athletes" lives in the account area (not the main Home/About/
+// Community/... nav) for authenticated users only -- it's an
+// authenticated-only feature (see /athletes' own server-side auth check
+// and its entry in src/proxy.ts's PROTECTED_ROUTES), so a guest never
+// sees the link at all, not just a version that would redirect them.
 export async function AuthNav({
   locale,
   variant = "desktop",
@@ -78,20 +80,18 @@ export async function AuthNav({
     );
   }
 
+  // Guest: no Discover Athletes (authenticated-only), just Login and the
+  // Join SportFo CTA -- which scrolls to Community/"Who We Serve" (the
+  // real category-selection gateway) rather than jumping straight to
+  // /auth or assuming Athlete.
   return (
     <>
-      <Link href="/athletes" className={navLinkClassName}>
-        {t("nav.discoverAthletes")}
-      </Link>
       <Link href="/auth" className={navLinkClassName}>
         {t("nav.signIn")}
       </Link>
-      <Link
-        href="/auth"
-        className="ml-0 inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition-all hover:bg-brand-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2 sm:ml-1"
-      >
+      <JoinCommunityLink className="ml-0 inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-4 text-sm font-semibold text-white transition-all hover:bg-brand-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2 sm:ml-1">
         {t("nav.joinSportfo")}
-      </Link>
+      </JoinCommunityLink>
     </>
   );
 }

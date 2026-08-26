@@ -282,4 +282,24 @@ export function getRegistrationCategoryByType(
   return REGISTRATION_CATEGORIES.find((category) => category.registrationType === registrationType);
 }
 
+// Lookup by the camelCase `id` -- e.g. resolving a stored WelcomePayload's
+// roleId (see src/lib/account/welcome-storage.ts) back to a full category
+// for its i18n role label.
+export function getRegistrationCategoryById(
+  id: string,
+): RegistrationCategoryConfig | undefined {
+  return REGISTRATION_CATEGORIES.find((category) => category.id === id);
+}
+
 export const DEFAULT_REGISTRATION_CATEGORY_SLUG = "athlete";
+
+// Where "View Profile" / a post-login landing should point for a category
+// that already has a submitted registration. Athlete has a real dedicated
+// profile route; the other 7 categories don't have one yet, so their own
+// (pre-filled, see /register/[category]/page.tsx) registration form is the
+// closest thing to a profile view -- a safe, real route, never a broken
+// or invented one. Single source of truth so this mapping is never
+// duplicated between the account menu and post-login routing.
+export function getProfileHrefForCategory(category: RegistrationCategoryConfig): string {
+  return category.id === "athlete" ? "/athlete/profile" : `/register/${category.slug}`;
+}

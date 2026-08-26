@@ -48,6 +48,7 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
   // AthleteRegistrationScreen); the other 7 categories share this one gate
   // since they have no independent auth-checking entry point of their own.
   let initialFields: Record<string, unknown> | undefined;
+  let initialStatus: string | undefined;
   if (category.id !== "athlete") {
     const user = await getAuthUser();
     if (!user) {
@@ -57,12 +58,20 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
     // Pre-fill with whatever this account already submitted for this
     // category, same idea as loadAthleteDraft for the Athlete flow. A
     // missing/failed lookup just renders a blank form -- never blocks it.
+    // `status` (draft vs. submitted) also drives the "you're already
+    // registered" notice below -- a duplicate submission is already
+    // impossible at the database level (save_role_registration upserts on
+    // the (user_id, registration_type) unique constraint), this is purely
+    // about not presenting an already-registered visitor with what looks
+    // like a first-time blank form.
     const supabase = await createClient();
     const { data } = await supabase.rpc("get_own_role_registration", {
       p_registration_type: category.registrationType,
     });
-    if (data && typeof data === "object" && "fields" in data) {
-      initialFields = (data as { fields?: Record<string, unknown> }).fields;
+    if (data && typeof data === "object") {
+      const result = data as { fields?: Record<string, unknown>; status?: string };
+      initialFields = result.fields;
+      initialStatus = result.status;
     }
   }
 
@@ -83,7 +92,11 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
           {category.id === "athlete" ? (
             <AthleteRegistrationScreen reloadHref="/register/athlete" showHeading={false} />
           ) : (
-            <GenericCategoryForm category={category} initialFields={initialFields} />
+            <GenericCategoryForm
+              category={category}
+              initialFields={initialFields}
+              initialStatus={initialStatus}
+            />
           )}
         </div>
       </div>

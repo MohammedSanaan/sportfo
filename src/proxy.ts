@@ -6,7 +6,7 @@ import { updateSupabaseSession } from "@/lib/supabase/proxy-session";
 // the real, secure check lives in the route's own Server Component
 // (src/app/athlete/register/page.tsx), which re-verifies the session with
 // Supabase directly rather than trusting Proxy alone.
-const PROTECTED_ROUTES = ["/athlete/register", "/athlete/profile", "/register", "/admin"];
+const PROTECTED_ROUTES = ["/athlete/register", "/athlete/profile", "/register", "/admin", "/athletes"];
 
 export async function proxy(request: NextRequest) {
   const { response, user } = await updateSupabaseSession(request);

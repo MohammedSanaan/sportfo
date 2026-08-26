@@ -7,6 +7,7 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { FieldShell } from "@/components/ui/FieldShell";
+import { AlreadyRegisteredNotice } from "@/components/ui/AlreadyRegisteredNotice";
 import { cn } from "@/lib/cn";
 import { validateAchievementDocument, MAX_DOCUMENT_SIZE_LABEL } from "@/lib/file-validation";
 import { displayFilenameFromPath } from "@/lib/storage/achievement-documents";
@@ -26,6 +27,9 @@ interface GenericCategoryFormProps {
    * exactly like `fields` -- lets a visitor come back and see/edit what
    * they already submitted, same idea as Athlete's draft reload. */
   initialFields?: Record<string, unknown>;
+  /** "draft" | "submitted" | undefined (no registration at all yet) -- only
+   * "submitted" shows the AlreadyRegisteredNotice above the form. */
+  initialStatus?: string;
 }
 
 // A file field's value is a File (freshly picked, not yet uploaded), a
@@ -54,7 +58,11 @@ function buildDefaultValues(
   );
 }
 
-export function GenericCategoryForm({ category, initialFields }: GenericCategoryFormProps) {
+export function GenericCategoryForm({
+  category,
+  initialFields,
+  initialStatus,
+}: GenericCategoryFormProps) {
   const { t } = useTranslation();
   const fields = category.fields ?? [];
   const [supabase] = useState(() => createClient());
@@ -334,22 +342,32 @@ export function GenericCategoryForm({ category, initialFields }: GenericCategory
   }
 
   return (
-    <SectionCard title={t("registerHub.formDetailsTitle")}>
-      {submitError && (
-        <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-          <p className="font-medium">{t("registerHub.errors.title")}</p>
-          <p className="mt-1">{submitError}</p>
-        </div>
+    <div className="flex flex-col gap-6">
+      {initialStatus === "submitted" && (
+        <AlreadyRegisteredNotice
+          title={t("registerHub.alreadyRegistered.title", {
+            role: t(`account.roles.${category.id}`),
+          })}
+          description={t("registerHub.alreadyRegistered.description")}
+        />
       )}
+      <SectionCard title={t("registerHub.formDetailsTitle")}>
+        {submitError && (
+          <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+            <p className="font-medium">{t("registerHub.errors.title")}</p>
+            <p className="mt-1">{submitError}</p>
+          </div>
+        )}
 
-      <form noValidate onSubmit={onSubmit} className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
-        {fields.map((field) => renderField(field))}
-        <div className="sm:col-span-2">
-          <Button type="submit" variant="primary" disabled={isSaving}>
-            {isSaving ? t("registerHub.actions.registering") : t("registerHub.actions.registerNow")}
-          </Button>
-        </div>
-      </form>
-    </SectionCard>
+        <form noValidate onSubmit={onSubmit} className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
+          {fields.map((field) => renderField(field))}
+          <div className="sm:col-span-2">
+            <Button type="submit" variant="primary" disabled={isSaving}>
+              {isSaving ? t("registerHub.actions.registering") : t("registerHub.actions.registerNow")}
+            </Button>
+          </div>
+        </form>
+      </SectionCard>
+    </div>
   );
 }

@@ -5,10 +5,11 @@ const en = {
   common: {
     loading: "Loading...",
     pleasePrefix: "Please",
+    dismiss: "Dismiss",
   },
   nav: {
     discoverAthletes: "Discover Athletes",
-    signIn: "Sign In",
+    signIn: "Login",
     joinSportfo: "Join SportFo",
     athleteRegistration: "Athlete Registration",
     myProfile: "My Profile",
@@ -40,6 +41,9 @@ const en = {
     viewProfile: "View Profile",
     viewDashboard: "View Dashboard",
     signOut: "Sign Out",
+    welcome: "Welcome, {name}",
+    welcomeBack: "Welcome back, {name}",
+    signedInAs: "Signed in as:",
     roles: {
       athlete: "Athlete",
       academyCoachParent: "Academy / Coach / Parent",
@@ -238,7 +242,8 @@ const en = {
     },
   },
   auth: {
-    pageTitle: "Join or sign in to SportFo",
+    pageTitle: "Welcome back",
+    pageSubtitle: "Login to SportFo",
     descriptionDemo: "Enter your mobile number to continue to your athlete profile.",
     descriptionOtp: "Enter your mobile number and we'll send you a secure verification code.",
     panelBadge: "Built for athletes. Designed for opportunity.",
@@ -268,7 +273,7 @@ const en = {
     errorOtpWrong: "That code isn't right. Double-check it and try again.",
     errorSessionCheckFailed: "We couldn't confirm your session. Please try again.",
     mobileOrSportfoIdLabel: "Mobile number or SportFo ID",
-    mobileOrSportfoIdPlaceholder: "Mobile number or SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 or SportFo ID",
     sportfoIdFoundNeedsPhone:
       "We found this SportFo ID. Signing in with a SportFo ID will be available once phone verification is fully enabled -- please sign in with your mobile number for now.",
     sportfoIdNotFound: "We couldn't find that SportFo ID. Please check it, or sign in with your mobile number.",
@@ -280,6 +285,10 @@ const en = {
     loadFailed: "We couldn't load your saved information.",
     reload: "try reloading this page",
     contactSupport: "If this keeps happening, contact support.",
+    alreadyRegistered: {
+      title: "You're already registered as an Athlete",
+      description: "You can review and update your details below.",
+    },
     stepPersonal: "Personal",
     stepSport: "Sport",
     stepAchievements: "Achievements",
@@ -502,6 +511,10 @@ const en = {
     pageSubtitle: "Select Your Category",
     chooseCategory: "Choose Category",
     formDetailsTitle: "Your Details",
+    alreadyRegistered: {
+      title: "You're already registered as {role}",
+      description: "You can review and update your details below.",
+    },
     actions: {
       registerNow: "Register Now",
       registering: "Registering...",

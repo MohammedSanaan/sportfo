@@ -4,8 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getAuthUser } from "@/lib/supabase/auth-user";
-import { lookupOwnAthleteProfile } from "@/lib/athlete/lookup-profile";
-import { resolveAthleteDestination } from "@/lib/athlete/resolve-destination";
+import { getPostLoginDestination } from "@/lib/auth/post-login-destination";
 import { Badge } from "@/components/ui/Badge";
 import { AuthFlow } from "@/features/auth/components/AuthFlow";
 import { getAuthMode } from "@/lib/auth-mode";
@@ -34,12 +33,14 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
   const user = await getAuthUser();
 
   if (user) {
-    if (safeNext) {
-      redirect(safeNext);
-    }
+    // Same centralized routing decision a fresh sign-in uses (see
+    // AuthFlow) -- an already-authenticated visitor who lands back on
+    // /auth (e.g. a stale bookmark, or the browser back button after
+    // signing in) gets sent to the exact same place a brand-new login
+    // would send them, never re-derived with different logic here.
     const supabase = await createClient();
-    const { data: profile } = await lookupOwnAthleteProfile(supabase, user.id);
-    redirect(resolveAthleteDestination(profile));
+    const { destination } = await getPostLoginDestination(supabase, user.id, next);
+    redirect(destination);
   }
 
   const { t } = await getServerTranslations();
@@ -88,6 +89,7 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
         <div className="flex flex-col justify-center gap-6 p-6 sm:p-10 lg:p-12">
           <div className="flex flex-col gap-1.5 border-b border-border-default pb-5">
             <h1 className="text-lg font-semibold text-ink-900">{t("auth.pageTitle")}</h1>
+            <p className="text-sm font-medium text-ink-700">{t("auth.pageSubtitle")}</p>
             <p className="text-sm text-ink-500">{description}</p>
           </div>
           <AuthFlow safeNext={safeNext} />

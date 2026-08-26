@@ -4,10 +4,11 @@ const kn: Dictionary = {
   common: {
     loading: "ಲೋಡ್ ಆಗುತ್ತಿದೆ...",
     pleasePrefix: "ದಯವಿಟ್ಟು",
+    dismiss: "ಮುಚ್ಚಿ",
   },
   nav: {
     discoverAthletes: "ಕ್ರೀಡಾಪಟುಗಳನ್ನು ಹುಡುಕಿ",
-    signIn: "ಸೈನ್ ಇನ್",
+    signIn: "ಲಾಗಿನ್",
     joinSportfo: "SportFo ಗೆ ಸೇರಿ",
     athleteRegistration: "ಕ್ರೀಡಾಪಟು ನೋಂದಣಿ",
     myProfile: "ನನ್ನ ಪ್ರೊಫೈಲ್",
@@ -39,6 +40,9 @@ const kn: Dictionary = {
     viewProfile: "ಪ್ರೊಫೈಲ್ ವೀಕ್ಷಿಸಿ",
     viewDashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ವೀಕ್ಷಿಸಿ",
     signOut: "ಸೈನ್ ಔಟ್",
+    welcome: "ಸ್ವಾಗತ, {name}",
+    welcomeBack: "ಮತ್ತೆ ಸ್ವಾಗತ, {name}",
+    signedInAs: "ಹೀಗೆ ಸೈನ್ ಇನ್ ಆಗಿದ್ದೀರಿ:",
     roles: {
       athlete: "ಕ್ರೀಡಾಪಟು",
       academyCoachParent: "ಅಕಾಡೆಮಿ / ಕೋಚ್ / ಪೋಷಕ",
@@ -240,7 +244,8 @@ const kn: Dictionary = {
     },
   },
   auth: {
-    pageTitle: "SportFo ಗೆ ಸೇರಿ ಅಥವಾ ಸೈನ್ ಇನ್ ಮಾಡಿ",
+    pageTitle: "ಮತ್ತೆ ಸ್ವಾಗತ",
+    pageSubtitle: "SportFo ಗೆ ಲಾಗಿನ್ ಮಾಡಿ",
     descriptionDemo: "ನಿಮ್ಮ ಕ್ರೀಡಾಪಟು ಪ್ರೊಫೈಲ್‌ಗೆ ಮುಂದುವರಿಯಲು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ.",
     descriptionOtp: "ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ ಮತ್ತು ನಾವು ನಿಮಗೆ ಸುರಕ್ಷಿತ ಪರಿಶೀಲನಾ ಕೋಡ್ ಕಳುಹಿಸುತ್ತೇವೆ.",
     panelBadge: "ಕ್ರೀಡಾಪಟುಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಲಾಗಿದೆ. ಅವಕಾಶಕ್ಕಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.",
@@ -270,7 +275,7 @@ const kn: Dictionary = {
     errorOtpWrong: "ಆ ಕೋಡ್ ಸರಿಯಾಗಿಲ್ಲ. ಪರಿಶೀಲಿಸಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     errorSessionCheckFailed: "ನಿಮ್ಮ ಸೆಷನ್ ಅನ್ನು ಖಚಿತಪಡಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
     mobileOrSportfoIdLabel: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅಥವಾ SportFo ID",
-    mobileOrSportfoIdPlaceholder: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಅಥವಾ SportFo ID",
+    mobileOrSportfoIdPlaceholder: "98765 43210 ಅಥವಾ SportFo ID",
     sportfoIdFoundNeedsPhone:
       "ಈ SportFo ID ನಮಗೆ ಸಿಕ್ಕಿದೆ. ಫೋನ್ ಪರಿಶೀಲನೆ ಸಂಪೂರ್ಣವಾಗಿ ಸಕ್ರಿಯಗೊಂಡ ನಂತರ SportFo ID ಮೂಲಕ ಸೈನ್ ಇನ್ ಲಭ್ಯವಿರುತ್ತದೆ -- ಸದ್ಯಕ್ಕೆ ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯಿಂದ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
     sportfoIdNotFound: "ಆ SportFo ID ನಮಗೆ ಸಿಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ, ಅಥವಾ ನಿಮ್ಮ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯಿಂದ ಸೈನ್ ಇನ್ ಮಾಡಿ.",
@@ -282,6 +287,10 @@ const kn: Dictionary = {
     loadFailed: "ನಿಮ್ಮ ಉಳಿಸಿದ ಮಾಹಿತಿಯನ್ನು ಲೋಡ್ ಮಾಡಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ.",
     reload: "ಈ ಪುಟವನ್ನು ಮರುಲೋಡ್ ಮಾಡಲು ಪ್ರಯತ್ನಿಸಿ",
     contactSupport: "ಇದು ಮತ್ತೆ ಮತ್ತೆ ಸಂಭವಿಸಿದರೆ, ಬೆಂಬಲವನ್ನು ಸಂಪರ್ಕಿಸಿ.",
+    alreadyRegistered: {
+      title: "ನೀವು ಈಗಾಗಲೇ ಕ್ರೀಡಾಪಟುವಾಗಿ ನೋಂದಾಯಿಸಿಕೊಂಡಿದ್ದೀರಿ",
+      description: "ನೀವು ಕೆಳಗೆ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ನವೀಕರಿಸಬಹುದು.",
+    },
     stepPersonal: "ವೈಯಕ್ತಿಕ",
     stepSport: "ಕ್ರೀಡೆ",
     stepAchievements: "ಸಾಧನೆಗಳು",
@@ -503,6 +512,10 @@ const kn: Dictionary = {
     pageTitle: "SportFo ನೊಂದಿಗೆ ನೋಂದಣಿ ಮಾಡಿ",
     pageSubtitle: "ನಿಮ್ಮ ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     chooseCategory: "ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+    alreadyRegistered: {
+      title: "ನೀವು ಈಗಾಗಲೇ {role} ಆಗಿ ನೋಂದಾಯಿಸಿಕೊಂಡಿದ್ದೀರಿ",
+      description: "ನೀವು ಕೆಳಗೆ ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ನವೀಕರಿಸಬಹುದು.",
+    },
     formDetailsTitle: "ನಿಮ್ಮ ವಿವರಗಳು",
     actions: {
       registerNow: "ಈಗ ನೋಂದಣಿ ಮಾಡಿ",
