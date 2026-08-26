@@ -67,7 +67,7 @@ export function AthleteExpandedPanel({
         </div>
       </div>
 
-      <dl className="mt-6 grid grid-cols-2 gap-x-4 gap-y-4 border-y border-border-default py-5">
+      <dl className="mt-6 grid grid-cols-1 gap-x-4 gap-y-4 border-y border-border-default py-5 sm:grid-cols-2">
         {sportLine && <Field label={t("detailFields.primarySport")} value={sportLine} />}
         {competitionLevelLabel && (
           <Field label={t("detailFields.competitionLevel")} value={competitionLevelLabel} />
