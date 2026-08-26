@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { FormProvider, useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import type { Achievement, AthleteRegistrationFormValues } from "@/types/athlete";
 import { buildEmptyFormValues } from "@/lib/athlete/registration-draft";
@@ -11,6 +12,11 @@ import {
   deleteAchievementDocumentObject,
   uploadAchievementDocument,
 } from "@/lib/storage/achievement-documents";
+import {
+  clearRegistrationDraft,
+  consumeRegistrationDraft,
+  saveRegistrationDraft,
+} from "@/lib/registration/draft-storage";
 import type { DocumentOperationsByField } from "../document-operations";
 import {
   createAthleteProfile,
@@ -31,15 +37,54 @@ import { useTranslation } from "@/i18n/LocaleProvider";
 interface AthleteRegistrationFormProps {
   authPhone: string;
   initialValues?: AthleteRegistrationFormValues;
+  /** Where a signed-out visitor is sent to verify (and back to afterward)
+   * when they hit Save Draft/Create Profile without a session -- either
+   * /athlete/register or /register/athlete, matching whichever URL they're
+   * actually on (see AthleteRegistrationScreen). */
+  reloadHref?: string;
 }
 
 type Banner = { kind: "success" | "warning" | "error"; message: string };
 
+// The "athlete" registration draft's own storage key -- always this one
+// value regardless of which URL (/athlete/register or /register/athlete)
+// rendered the form, so a draft saved from either round-trips back
+// correctly through whichever one the visitor returns to.
+const DRAFT_KEY = "athlete";
+
+interface StoredDraft {
+  values: AthleteRegistrationFormValues;
+  /** True if any achievement had a picked-but-not-yet-uploaded File at the
+   * moment this draft was saved -- Files aren't JSON-serializable, and the
+   * task explicitly forbids persisting uploads client-side even
+   * transiently, so they're stripped below. Drives the "please reselect
+   * your file(s)" notice after restoring, instead of silently losing them. */
+  hadPendingFiles: boolean;
+}
+
+// Achievement rows can't survive a sessionStorage round-trip with their
+// picked-but-not-yet-uploaded File intact -- strip it out, same as the RPC
+// payload already does, and record whether any were dropped.
+function buildStoredDraft(values: AthleteRegistrationFormValues): StoredDraft {
+  return {
+    values: {
+      ...values,
+      achievements: values.achievements.map((achievement) => ({
+        ...achievement,
+        document: null,
+      })),
+    },
+    hadPendingFiles: values.achievements.some((achievement) => achievement.document instanceof File),
+  };
+}
+
 export function AthleteRegistrationForm({
   authPhone,
   initialValues,
+  reloadHref = "/athlete/register",
 }: AthleteRegistrationFormProps) {
   const { t } = useTranslation();
+  const router = useRouter();
   const [supabase] = useState(() => createClient());
 
   const methods = useForm<AthleteRegistrationFormValues>({
@@ -52,6 +97,7 @@ export function AthleteRegistrationForm({
     handleSubmit,
     getValues,
     setValue,
+    reset,
     control,
     formState: { isSubmitting },
   } = methods;
@@ -69,6 +115,41 @@ export function AthleteRegistrationForm({
   const [banner, setBanner] = useState<Banner | null>(null);
   const [isRegistered, setIsRegistered] = useState(false);
   const [sportfoId, setSportfoId] = useState<string | null>(null);
+
+  // Restores a draft left by the auth checkpoint below (guest filled the
+  // form, hit Save Draft/Create Profile, got sent to verify, and is now
+  // back on this same page) -- consumed once, so it never resurfaces on a
+  // later, unrelated visit. Wrapped in a callback (not called synchronously
+  // in the effect body) to keep the setState calls inside a callback, same
+  // shape as WelcomeToast's sessionStorage read.
+  useEffect(() => {
+    const restoreTimer = window.setTimeout(() => {
+      const draft = consumeRegistrationDraft<StoredDraft>(DRAFT_KEY);
+      if (!draft) return;
+      // Mobile Number is excluded from the restore -- it's readonly and
+      // always mirrors the session's verified/demo phone (see
+      // PersonalDetailsSection); a guest's draft necessarily saved it
+      // blank (there was no session yet), and now that they've just
+      // authenticated, this mount's own defaultValues already has the
+      // real, correct number. Restoring the rest of the draft must not
+      // stomp that back to blank.
+      reset({
+        ...draft.values,
+        personalDetails: {
+          ...draft.values.personalDetails,
+          mobileNumber: getValues("personalDetails.mobileNumber"),
+        },
+      });
+      setBanner({
+        kind: draft.hadPendingFiles ? "warning" : "success",
+        message: draft.hadPendingFiles
+          ? t("register.banners.draftRestoredReselectFiles")
+          : t("register.banners.draftRestored"),
+      });
+    }, 0);
+    return () => window.clearTimeout(restoreTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- runs once on mount only
+  }, []);
 
   function setDocOp(fieldId: string, state: DocumentOperationsByField[string] | undefined) {
     setDocOpsByField((prev) => {
@@ -283,11 +364,33 @@ export function AthleteRegistrationForm({
     return { ok: true, uploadFailures };
   }
 
+  // The one auth checkpoint for this whole form -- called at the top of
+  // both Save Draft and Create Profile (Registration pages are public to
+  // view; auth is only required at the save/submit step). A guest (or a
+  // session that expired mid-form) never sees a generic error here: their
+  // in-progress form (minus any picked-but-not-yet-uploaded files, which
+  // can't survive the round-trip -- see buildStoredDraft) is preserved in
+  // sessionStorage, and they're sent to verify with registration-intent
+  // copy, returning to this exact page afterward.
+  async function requireAuthOrRedirect(): Promise<boolean> {
+    const { data: userData } = await supabase.auth.getUser();
+    if (userData.user) return true;
+
+    saveRegistrationDraft(DRAFT_KEY, buildStoredDraft(getValues()));
+    router.push(`/auth?mode=register&next=${encodeURIComponent(reloadHref)}`);
+    return false;
+  }
+
   async function handleSaveDraft() {
     if (isSavingDraft || isSubmitting) return;
 
     setIsSavingDraft(true);
     setBanner(null);
+
+    if (!(await requireAuthOrRedirect())) {
+      setIsSavingDraft(false);
+      return;
+    }
 
     const { ok, uploadFailures } = await persistAndSync(saveAthleteDraft, setDraftPhaseLabel);
     setIsSavingDraft(false);
@@ -315,6 +418,8 @@ export function AthleteRegistrationForm({
       setSubmitPhaseLabel,
     );
     if (!ok) return;
+
+    clearRegistrationDraft(DRAFT_KEY);
 
     if (uploadFailures > 0) {
       // The registration itself is saved and submitted -- only the optional
@@ -345,13 +450,22 @@ export function AthleteRegistrationForm({
     return <RegistrationSuccess sportfoId={sportfoId} />;
   }
 
+  // The auth checkpoint runs *before* react-hook-form's own field
+  // validation, not after -- a guest's Mobile Number field is readonly and
+  // genuinely empty (it always mirrors the verified/demo phone from their
+  // session, which doesn't exist yet), so it can never satisfy that
+  // field's required rule. Gating this at handleCreateProfile itself (past
+  // handleSubmit's validation) would leave a guest stuck on a "Mobile
+  // number is required" error they have no way to clear.
+  async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!(await requireAuthOrRedirect())) return;
+    await handleSubmit(handleCreateProfile)(event);
+  }
+
   return (
     <FormProvider {...methods}>
-      <form
-        noValidate
-        onSubmit={handleSubmit(handleCreateProfile)}
-        className="flex flex-col gap-6"
-      >
+      <form noValidate onSubmit={onFormSubmit} className="flex flex-col gap-6">
         {banner && (
           <div
             role={banner.kind === "error" ? "alert" : "status"}

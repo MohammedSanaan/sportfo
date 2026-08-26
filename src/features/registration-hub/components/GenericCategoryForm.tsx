@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
@@ -14,6 +15,11 @@ import { displayFilenameFromPath } from "@/lib/storage/achievement-documents";
 import { uploadRoleRegistrationDocument } from "@/lib/storage/role-registration-documents";
 import { createClient } from "@/lib/supabase/client";
 import { getOwnSportfoId } from "@/lib/sportfo-id/server";
+import {
+  clearRegistrationDraft,
+  consumeRegistrationDraft,
+  saveRegistrationDraft,
+} from "@/lib/registration/draft-storage";
 import type { Json } from "@/types/supabase";
 import type { RegistrationCategoryConfig, RegistrationField } from "@/lib/registration/categories";
 import { useTranslation } from "@/i18n/LocaleProvider";
@@ -37,6 +43,16 @@ interface GenericCategoryFormProps {
 // (nothing). Every other field is a string, string[] (multiselect), or "".
 type FormValues = Record<string, string | string[] | File | null>;
 
+interface StoredDraft {
+  values: FormValues;
+  /** True if any field held a picked-but-not-yet-uploaded File when this
+   * draft was saved -- Files aren't JSON-serializable, and the task
+   * explicitly forbids persisting uploads client-side even transiently, so
+   * they're stripped below. Drives the "please reselect your file(s)"
+   * notice after restoring, instead of silently losing them. */
+  hadPendingFiles: boolean;
+}
+
 function buildDefaultValues(
   fields: RegistrationField[],
   initialFields: Record<string, unknown> | undefined,
@@ -58,26 +74,67 @@ function buildDefaultValues(
   );
 }
 
+function buildStoredDraft(values: FormValues): StoredDraft {
+  const stripped: FormValues = {};
+  let hadPendingFiles = false;
+  for (const [key, value] of Object.entries(values)) {
+    if (value instanceof File) {
+      hadPendingFiles = true;
+      stripped[key] = null;
+    } else {
+      stripped[key] = value;
+    }
+  }
+  return { values: stripped, hadPendingFiles };
+}
+
 export function GenericCategoryForm({
   category,
   initialFields,
   initialStatus,
 }: GenericCategoryFormProps) {
   const { t } = useTranslation();
+  const router = useRouter();
   const fields = category.fields ?? [];
   const [supabase] = useState(() => createClient());
   const [isSaving, setIsSaving] = useState(false);
   const [submitError, setSubmitError] = useState<string>();
+  const [restoreNotice, setRestoreNotice] = useState<{ warning: boolean; message: string } | null>(
+    null,
+  );
   const [success, setSuccess] = useState<{ sportfoId: string | null } | null>(null);
 
   const {
     register,
     control,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormValues>({
     defaultValues: buildDefaultValues(fields, initialFields),
   });
+
+  // Restores a draft left by the auth checkpoint in onSubmit below (guest
+  // filled the form, hit Register Now, got sent to verify, and is now back
+  // on this same category page) -- consumed once. Wrapped in a callback
+  // (not called synchronously in the effect body) to keep the setState
+  // calls inside a callback, same shape as WelcomeToast's sessionStorage
+  // read.
+  useEffect(() => {
+    const restoreTimer = window.setTimeout(() => {
+      const draft = consumeRegistrationDraft<StoredDraft>(category.slug);
+      if (!draft) return;
+      reset(draft.values);
+      setRestoreNotice({
+        warning: draft.hadPendingFiles,
+        message: draft.hadPendingFiles
+          ? t("registerHub.banners.draftRestoredReselectFiles")
+          : t("registerHub.banners.draftRestored"),
+      });
+    }, 0);
+    return () => window.clearTimeout(restoreTimer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- runs once on mount only
+  }, []);
 
   function keyBase(fieldId: string) {
     return `registerHub.categories.${category.id}.fields.${fieldId}`;
@@ -92,10 +149,17 @@ export function GenericCategoryForm({
     setSubmitError(undefined);
     setIsSaving(true);
 
+    // Registration pages are public to view; auth is only required here,
+    // at the save/submit step. A guest (or a session that expired mid-
+    // form) never sees a generic error: their in-progress form (minus any
+    // picked-but-not-yet-uploaded files) is preserved in sessionStorage,
+    // and they're sent to verify with registration-intent copy, returning
+    // to this exact category page afterward.
     const { data: userData, error: userError } = await supabase.auth.getUser();
     if (userError || !userData.user) {
       setIsSaving(false);
-      setSubmitError(t("registerHub.errors.sessionExpired"));
+      saveRegistrationDraft(category.slug, buildStoredDraft(values));
+      router.push(`/auth?mode=register&next=${encodeURIComponent(`/register/${category.slug}`)}`);
       return;
     }
     const userId = userData.user.id;
@@ -151,6 +215,7 @@ export function GenericCategoryForm({
     // read of the one permanent id already assigned to this account.
     const sportfoId = await getOwnSportfoId(supabase, userId);
     setIsSaving(false);
+    clearRegistrationDraft(category.slug);
     setSuccess({ sportfoId });
   });
 
@@ -349,9 +414,23 @@ export function GenericCategoryForm({
             role: t(`account.roles.${category.id}`),
           })}
           description={t("registerHub.alreadyRegistered.description")}
+          exploreCommunityLabel={t("register.success.exploreCommunity")}
         />
       )}
       <SectionCard title={t("registerHub.formDetailsTitle")}>
+        {restoreNotice && (
+          <div
+            role="status"
+            className={cn(
+              "rounded-xl border p-4 text-sm",
+              restoreNotice.warning
+                ? "border-amber-200 bg-amber-50 text-amber-800"
+                : "border-green-200 bg-green-50 text-green-700",
+            )}
+          >
+            {restoreNotice.message}
+          </div>
+        )}
         {submitError && (
           <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
             <p className="font-medium">{t("registerHub.errors.title")}</p>

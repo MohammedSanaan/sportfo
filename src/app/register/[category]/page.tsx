@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { RegistrationCategoryNav } from "@/features/registration-hub/components/RegistrationCategoryNav";
 import { GenericCategoryForm } from "@/features/registration-hub/components/GenericCategoryForm";
@@ -44,34 +44,38 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
   const { t, locale } = await getServerTranslations();
   const formTitle = t(`registerHub.categories.${category.id}.formTitle`);
 
-  // Athlete's own screen re-verifies auth itself (see
-  // AthleteRegistrationScreen); the other 7 categories share this one gate
-  // since they have no independent auth-checking entry point of their own.
+  // Registration pages are public-to-view, auth-required-only-at-submit
+  // (see GenericCategoryForm/AthleteRegistrationScreen, which check auth
+  // themselves at Save/Submit and redirect to /auth?mode=register&next=
+  // with the in-progress form preserved) -- so a guest here just gets a
+  // blank form, never bounced to /auth for merely opening the page.
+  // Athlete's own screen re-verifies/loads its own draft (see
+  // AthleteRegistrationScreen); the other 7 categories share this one
+  // authenticated-only prefill lookup since they have no independent entry
+  // point of their own.
   let initialFields: Record<string, unknown> | undefined;
   let initialStatus: string | undefined;
   if (category.id !== "athlete") {
     const user = await getAuthUser();
-    if (!user) {
-      redirect(`/auth?next=${encodeURIComponent(`/register/${category.slug}`)}`);
-    }
-
-    // Pre-fill with whatever this account already submitted for this
-    // category, same idea as loadAthleteDraft for the Athlete flow. A
-    // missing/failed lookup just renders a blank form -- never blocks it.
-    // `status` (draft vs. submitted) also drives the "you're already
-    // registered" notice below -- a duplicate submission is already
-    // impossible at the database level (save_role_registration upserts on
-    // the (user_id, registration_type) unique constraint), this is purely
-    // about not presenting an already-registered visitor with what looks
-    // like a first-time blank form.
-    const supabase = await createClient();
-    const { data } = await supabase.rpc("get_own_role_registration", {
-      p_registration_type: category.registrationType,
-    });
-    if (data && typeof data === "object") {
-      const result = data as { fields?: Record<string, unknown>; status?: string };
-      initialFields = result.fields;
-      initialStatus = result.status;
+    if (user) {
+      // Pre-fill with whatever this account already submitted for this
+      // category, same idea as loadAthleteDraft for the Athlete flow. A
+      // missing/failed lookup just renders a blank form -- never blocks it.
+      // `status` (draft vs. submitted) also drives the "you're already
+      // registered" notice below -- a duplicate submission is already
+      // impossible at the database level (save_role_registration upserts
+      // on the (user_id, registration_type) unique constraint), this is
+      // purely about not presenting an already-registered visitor with
+      // what looks like a first-time blank form.
+      const supabase = await createClient();
+      const { data } = await supabase.rpc("get_own_role_registration", {
+        p_registration_type: category.registrationType,
+      });
+      if (data && typeof data === "object") {
+        const result = data as { fields?: Record<string, unknown>; status?: string };
+        initialFields = result.fields;
+        initialStatus = result.status;
+      }
     }
   }
 

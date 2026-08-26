@@ -244,6 +244,9 @@ const en = {
   auth: {
     pageTitle: "Welcome back",
     pageSubtitle: "Login to SportFo",
+    registerPageTitle: "Create your SportFo account",
+    registerPageSubtitle: "Verify your mobile number to continue registration",
+    continueRegistration: "Continue registration",
     descriptionDemo: "Enter your mobile number to continue to your athlete profile.",
     descriptionOtp: "Enter your mobile number and we'll send you a secure verification code.",
     panelBadge: "Built for athletes. Designed for opportunity.",
@@ -388,6 +391,9 @@ const en = {
         "Draft saved, but {n} document{plural} failed to upload. Select the file again or save once more to retry.",
       createdWithFailures:
         "Your profile was created, but {n} document{plural} failed to upload. Select the file again or submit once more to retry.",
+      draftRestored: "You're verified -- we restored your form.",
+      draftRestoredReselectFiles:
+        "You're verified -- we restored your form. Please reselect any files you were uploading.",
     },
   },
   profile: {
@@ -531,9 +537,13 @@ const en = {
     },
     errors: {
       title: "Registration could not be completed.",
-      sessionExpired: "Your session has expired. Please sign in again.",
       uploadFailed: "We couldn't upload your document. Please try again.",
       saveFailed: "Something went wrong while saving. Please try again.",
+    },
+    banners: {
+      draftRestored: "You're verified -- we restored your form.",
+      draftRestoredReselectFiles:
+        "You're verified -- we restored your form. Please reselect any files you were uploading.",
     },
     success: {
       title: "Registration Successful",

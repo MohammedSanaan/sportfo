@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import { AthleteRegistrationForm } from "./AthleteRegistrationForm";
 import { RegistrationStepNav } from "./RegistrationStepNav";
 import { AlreadyRegisteredNotice } from "@/components/ui/AlreadyRegisteredNotice";
@@ -11,10 +10,11 @@ import { getServerTranslations } from "@/i18n/server";
 
 interface AthleteRegistrationScreenProps {
   /** This screen's own canonical URL -- used both as the draft-load-failure
-   * "reload" link and as the `next` target an unauthenticated visitor is
-   * returned to after signing in. /athlete/register by default; the
-   * /register hub passes /register/athlete so either path round-trips back
-   * to itself instead of silently switching URLs on the visitor. */
+   * "reload" link and as the `next` target a signed-out visitor is returned
+   * to after verifying at Save Draft/Create Profile time (see
+   * AthleteRegistrationForm). /athlete/register by default; the /register
+   * hub passes /register/athlete so either path round-trips back to itself
+   * instead of silently switching URLs on the visitor. */
   reloadHref?: string;
   /** Heading + intro copy are the caller's job on the hub route (it has
    * its own "Register with SportFo" / "Select Your Category" header) --
@@ -24,24 +24,26 @@ interface AthleteRegistrationScreenProps {
 
 // The one real, Supabase-backed Athlete registration flow -- reused as-is
 // by both /athlete/register (its original, permanent URL) and
-// /register/athlete (the new category hub). All auth-gating, draft
-// loading, and form logic lives here exactly once; neither caller
-// duplicates any of it.
+// /register/athlete (the new category hub). Draft loading and form logic
+// live here exactly once; neither caller duplicates any of it. Public to
+// view (no auth gate here) -- auth is only required at Save Draft/Create
+// Profile, enforced by AthleteRegistrationForm itself.
 export async function AthleteRegistrationScreen({
   reloadHref = "/athlete/register",
   showHeading = true,
 }: AthleteRegistrationScreenProps) {
-  // Proxy (src/proxy.ts) already redirects unauthenticated requests
-  // optimistically; this re-verifies the session directly with Supabase
-  // rather than relying on Proxy alone.
+  // Public-to-view, auth-required-only-at-submit (see task spec) -- a
+  // guest gets the real, blank Athlete form here, with no draft to load
+  // (there's no account yet to load one for). AthleteRegistrationForm
+  // itself checks auth at Save Draft/Create Profile time and redirects to
+  // /auth?mode=register&next={reloadHref}, preserving the in-progress
+  // form -- this screen no longer gates on auth just to render.
   const user = await getAuthUser();
-  if (!user) {
-    redirect(`/auth?next=${encodeURIComponent(reloadHref)}`);
-  }
-
-  const authPhone = resolveAthleteMobileNumber(user);
+  const authPhone = user ? resolveAthleteMobileNumber(user) : "";
   const supabase = await createClient();
-  const { draft, error: draftLoadFailed } = await loadAthleteDraft(supabase, user.id);
+  const { draft, error: draftLoadFailed } = user
+    ? await loadAthleteDraft(supabase, user.id)
+    : { draft: null, error: false };
   const { locale, t } = await getServerTranslations();
 
   return (
@@ -80,11 +82,13 @@ export async function AthleteRegistrationScreen({
               description={t("register.alreadyRegistered.description")}
               profileHref="/athlete/profile"
               profileLabel={t("account.viewProfile")}
+              exploreCommunityLabel={t("register.success.exploreCommunity")}
             />
           )}
           <AthleteRegistrationForm
             authPhone={authPhone}
             initialValues={draft ? mapDraftToFormValues(draft, authPhone) : undefined}
+            reloadHref={reloadHref}
           />
         </>
       )}

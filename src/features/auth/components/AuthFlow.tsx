@@ -24,9 +24,14 @@ interface AuthFlowProps {
   // -- null means absent/invalid, so getPostLoginDestination falls back to
   // its own registration-based routing.
   safeNext?: string | null;
+  // Pure UI signal (mirrors the /auth page's own `mode=register` copy
+  // switch) -- "register" swaps the phone step's call-to-action to
+  // registration-flavored copy. Never affects routing/auth logic itself,
+  // which is identical either way.
+  intent?: "login" | "register";
 }
 
-export function AuthFlow({ safeNext = null }: AuthFlowProps) {
+export function AuthFlow({ safeNext = null, intent = "login" }: AuthFlowProps) {
   const router = useRouter();
   const { t } = useTranslation();
   const [supabase] = useState(() => createClient());
@@ -270,7 +275,7 @@ export function AuthFlow({ safeNext = null }: AuthFlowProps) {
         isSubmitting={isSendingCode}
         error={phoneError}
         fieldHelperText={t("auth.mobileHelperDemo")}
-        submitLabel={t("auth.continueLabel")}
+        submitLabel={intent === "register" ? t("auth.continueRegistration") : t("auth.continueLabel")}
         submitBusyLabel={t("auth.continuing")}
         note={t("auth.demoNote")}
       />
@@ -286,6 +291,7 @@ export function AuthFlow({ safeNext = null }: AuthFlowProps) {
       onSubmit={sendCode}
       isSubmitting={isSendingCode}
       error={phoneError}
+      submitLabel={intent === "register" ? t("auth.continueRegistration") : undefined}
     />
   );
 }

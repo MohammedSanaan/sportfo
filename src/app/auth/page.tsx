@@ -23,12 +23,21 @@ interface AuthPageProps {
   // Untrusted input (a query param anyone can edit), so it's validated by
   // resolveSafeNextPath before ever being used for a redirect, both below
   // and in AuthFlow after login.
-  searchParams: Promise<{ next?: string }>;
+  //
+  // `mode` is a pure UI signal, never a security/routing decision: exactly
+  // "register" switches the copy from "Welcome back / Login to SportFo" to
+  // "Create your SportFo account / Verify your mobile number to continue
+  // registration" -- set when a guest hit the auth checkpoint mid-
+  // registration (see GenericCategoryForm/AthleteRegistrationForm), so
+  // they're never told "Welcome back" before they've ever had an account.
+  // Anything else (absent, typo'd) falls back to the normal login copy.
+  searchParams: Promise<{ next?: string; mode?: string }>;
 }
 
 export default async function AuthPage({ searchParams }: AuthPageProps) {
-  const { next } = await searchParams;
+  const { next, mode } = await searchParams;
   const safeNext = resolveSafeNextPath(next);
+  const isRegisterIntent = mode === "register";
 
   const user = await getAuthUser();
 
@@ -46,6 +55,8 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
   const { t } = await getServerTranslations();
   const description =
     getAuthMode() === "demo" ? t("auth.descriptionDemo") : t("auth.descriptionOtp");
+  const pageTitle = isRegisterIntent ? t("auth.registerPageTitle") : t("auth.pageTitle");
+  const pageSubtitle = isRegisterIntent ? t("auth.registerPageSubtitle") : t("auth.pageSubtitle");
 
   return (
     <div className="mx-auto flex w-full max-w-5xl flex-1 items-center px-4 py-10 sm:px-6 sm:py-14">
@@ -88,11 +99,11 @@ export default async function AuthPage({ searchParams }: AuthPageProps) {
             whole rounded-3xl shell reads as a single clean card. */}
         <div className="flex flex-col justify-center gap-6 p-6 sm:p-10 lg:p-12">
           <div className="flex flex-col gap-1.5 border-b border-border-default pb-5">
-            <h1 className="text-lg font-semibold text-ink-900">{t("auth.pageTitle")}</h1>
-            <p className="text-sm font-medium text-ink-700">{t("auth.pageSubtitle")}</p>
+            <h1 className="text-lg font-semibold text-ink-900">{pageTitle}</h1>
+            <p className="text-sm font-medium text-ink-700">{pageSubtitle}</p>
             <p className="text-sm text-ink-500">{description}</p>
           </div>
-          <AuthFlow safeNext={safeNext} />
+          <AuthFlow safeNext={safeNext} intent={isRegisterIntent ? "register" : "login"} />
         </div>
       </div>
     </div>
