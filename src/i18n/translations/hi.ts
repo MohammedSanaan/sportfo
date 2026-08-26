@@ -35,10 +35,20 @@ const hi: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "इस रूप में सक्रिय",
-    myAccount: "मेरा खाता",
-    activeAccount: "सक्रिय खाता",
-    roleAthlete: "एथलीट",
+    sportfoUser: "SportFo सदस्य",
+    viewProfile: "प्रोफ़ाइल देखें",
+    viewDashboard: "डैशबोर्ड देखें",
+    signOut: "साइन आउट करें",
+    roles: {
+      athlete: "एथलीट",
+      academyCoachParent: "अकादमी / कोच / अभिभावक",
+      performanceExpert: "परफॉर्मेंस एक्सपर्ट",
+      mediaCreator: "मीडिया क्रिएटर",
+      managementLegal: "स्पोर्ट्स मैनेजमेंट और लीगल",
+      eventOperations: "इवेंट और ऑपरेशंस स्टाफ",
+      sponsorCsr: "स्पॉन्सर और CSR",
+      talentAnalytics: "टैलेंट डिस्कवरी और एनालिटिक्स",
+    },
   },
   home: {
     hero: {

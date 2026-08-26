@@ -36,10 +36,20 @@ const en = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "Active as",
-    myAccount: "My account",
-    activeAccount: "Active account",
-    roleAthlete: "Athlete",
+    sportfoUser: "SportFo User",
+    viewProfile: "View Profile",
+    viewDashboard: "View Dashboard",
+    signOut: "Sign Out",
+    roles: {
+      athlete: "Athlete",
+      academyCoachParent: "Academy / Coach / Parent",
+      performanceExpert: "Performance Expert",
+      mediaCreator: "Media Creator",
+      managementLegal: "Sports Management & Legal",
+      eventOperations: "Event & Operations Staff",
+      sponsorCsr: "Sponsor & CSR",
+      talentAnalytics: "Talent Discovery & Analytics",
+    },
   },
   home: {
     hero: {

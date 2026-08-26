@@ -35,10 +35,20 @@ const ta: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "இவராக செயலில்",
-    myAccount: "எனது கணக்கு",
-    activeAccount: "செயலில் உள்ள கணக்கு",
-    roleAthlete: "விளையாட்டு வீரர்",
+    sportfoUser: "SportFo உறுப்பினர்",
+    viewProfile: "சுயவிவரத்தைப் பார்க்கவும்",
+    viewDashboard: "டாஷ்போர்டைப் பார்க்கவும்",
+    signOut: "வெளியேறு",
+    roles: {
+      athlete: "விளையாட்டு வீரர்",
+      academyCoachParent: "அகாடமி / பயிற்சியாளர் / பெற்றோர்",
+      performanceExpert: "செயல்திறன் நிபுணர்",
+      mediaCreator: "மீடியா கிரியேட்டர்",
+      managementLegal: "ஸ்போர்ட்ஸ் மேனேஜ்மென்ட் & லீகல்",
+      eventOperations: "ஈவென்ட் & ஆபரேஷன்ஸ் பணியாளர்",
+      sponsorCsr: "ஸ்பான்சர் & CSR",
+      talentAnalytics: "டேலன்ட் டிஸ்கவரி & அனலிடிக்ஸ்",
+    },
   },
   home: {
     hero: {

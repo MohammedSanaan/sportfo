@@ -23,8 +23,12 @@ export async function proxy(request: NextRequest) {
     // /auth itself re-validates this (see resolveSafeNextPath) rather than
     // trusting it just because Proxy generated it -- the query param is
     // still attacker-visible/editable in the browser.
+    // Bare /admin immediately redirects to /admin/dashboard once reached
+    // (see src/app/admin/page.tsx) -- send the "next" straight there so
+    // login round-trips to the real destination in one hop.
+    const nextPath = pathname === "/admin" ? "/admin/dashboard" : pathname;
     const authUrl = new URL("/auth", request.url);
-    authUrl.searchParams.set("next", pathname);
+    authUrl.searchParams.set("next", nextPath);
     const redirectResponse = NextResponse.redirect(authUrl);
     // Carry over any cookie changes updateSupabaseSession already queued
     // (e.g. clearing an invalid/expired session) instead of discarding them.

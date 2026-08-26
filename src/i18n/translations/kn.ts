@@ -35,10 +35,20 @@ const kn: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "ಈ ರೂಪದಲ್ಲಿ ಸಕ್ರಿಯ",
-    myAccount: "ನನ್ನ ಖಾತೆ",
-    activeAccount: "ಸಕ್ರಿಯ ಖಾತೆ",
-    roleAthlete: "ಕ್ರೀಡಾಪಟು",
+    sportfoUser: "SportFo ಸದಸ್ಯ",
+    viewProfile: "ಪ್ರೊಫೈಲ್ ವೀಕ್ಷಿಸಿ",
+    viewDashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್ ವೀಕ್ಷಿಸಿ",
+    signOut: "ಸೈನ್ ಔಟ್",
+    roles: {
+      athlete: "ಕ್ರೀಡಾಪಟು",
+      academyCoachParent: "ಅಕಾಡೆಮಿ / ಕೋಚ್ / ಪೋಷಕ",
+      performanceExpert: "ಪರ್ಫಾರ್ಮೆನ್ಸ್ ಎಕ್ಸ್‌ಪರ್ಟ್",
+      mediaCreator: "ಮೀಡಿಯಾ ಕ್ರಿಯೇಟರ್",
+      managementLegal: "ಸ್ಪೋರ್ಟ್ಸ್ ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್ ಮತ್ತು ಲೀಗಲ್",
+      eventOperations: "ಈವೆಂಟ್ ಮತ್ತು ಆಪರೇಶನ್ಸ್ ಸಿಬ್ಬಂದಿ",
+      sponsorCsr: "ಸ್ಪಾನ್ಸರ್ ಮತ್ತು CSR",
+      talentAnalytics: "ಟ್ಯಾಲೆಂಟ್ ಡಿಸ್ಕವರಿ ಮತ್ತು ಅನಾಲಿಟಿಕ್ಸ್",
+    },
   },
   home: {
     hero: {

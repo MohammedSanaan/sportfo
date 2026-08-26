@@ -35,10 +35,20 @@ const ml: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "സജീവം ഇപ്പോൾ",
-    myAccount: "എന്റെ അക്കൗണ്ട്",
-    activeAccount: "സജീവ അക്കൗണ്ട്",
-    roleAthlete: "അത്‌ലറ്റ്",
+    sportfoUser: "SportFo അംഗം",
+    viewProfile: "പ്രൊഫൈൽ കാണുക",
+    viewDashboard: "ഡാഷ്ബോർഡ് കാണുക",
+    signOut: "സൈൻ ഔട്ട്",
+    roles: {
+      athlete: "അത്‌ലറ്റ്",
+      academyCoachParent: "അക്കാദമി / കോച്ച് / രക്ഷിതാവ്",
+      performanceExpert: "പെർഫോമൻസ് എക്സ്പേർട്ട്",
+      mediaCreator: "മീഡിയ ക്രിയേറ്റർ",
+      managementLegal: "സ്പോർട്സ് മാനേജ്‌മെന്റ് & ലീഗൽ",
+      eventOperations: "ഇവന്റ് & ഓപ്പറേഷൻസ് സ്റ്റാഫ്",
+      sponsorCsr: "സ്പോൺസർ & CSR",
+      talentAnalytics: "ടാലന്റ് ഡിസ്കവറി & അനലിറ്റിക്സ്",
+    },
   },
   home: {
     hero: {

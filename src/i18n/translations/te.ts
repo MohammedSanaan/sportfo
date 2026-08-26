@@ -35,10 +35,20 @@ const te: Dictionary = {
   },
   account: {
     sportfoId: "SportFo ID",
-    activeAs: "గా క్రియాశీలం",
-    myAccount: "నా ఖాతా",
-    activeAccount: "క్రియాశీల ఖాతా",
-    roleAthlete: "అథ్లెట్",
+    sportfoUser: "SportFo సభ్యుడు",
+    viewProfile: "ప్రొఫైల్‌ను వీక్షించండి",
+    viewDashboard: "డాష్‌బోర్డ్‌ను వీక్షించండి",
+    signOut: "సైన్ అవుట్",
+    roles: {
+      athlete: "అథ్లెట్",
+      academyCoachParent: "అకాడమీ / కోచ్ / తల్లిదండ్రులు",
+      performanceExpert: "పెర్ఫార్మెన్స్ ఎక్స్‌పర్ట్",
+      mediaCreator: "మీడియా క్రియేటర్",
+      managementLegal: "స్పోర్ట్స్ మేనేజ్‌మెంట్ & లీగల్",
+      eventOperations: "ఈవెంట్ & ఆపరేషన్స్ స్టాఫ్",
+      sponsorCsr: "స్పాన్సర్ & CSR",
+      talentAnalytics: "టాలెంట్ డిస్కవరీ & అనలిటిక్స్",
+    },
   },
   home: {
     hero: {

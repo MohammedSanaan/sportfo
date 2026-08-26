@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
-import { lookupOwnAthleteProfile } from "@/lib/athlete/lookup-profile";
 import { LogoutButton } from "@/features/auth/components/LogoutButton";
-import { getOwnSportfoId } from "@/lib/sportfo-id/server";
+import { getOwnAccountIdentity } from "@/lib/account/identity";
 import { AccountMenu } from "./AccountMenu";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
@@ -31,30 +30,35 @@ export async function AuthNav({
 
   if (user) {
     const supabase = await createClient();
-    // Both are RLS-scoped to this user's own rows -- neither can ever
-    // return another account's SportFo ID or profile. A missing
-    // sportfo_users row (should be rare: ensure_sportfo_id() runs at every
-    // login, see AuthFlow) never blocks rendering the rest of the header.
-    const [sportfoId, { data: profile }] = await Promise.all([
-      getOwnSportfoId(supabase, user.id),
-      lookupOwnAthleteProfile(supabase, user.id),
-    ]);
+    // RLS-scoped to this user's own rows throughout -- can never resolve
+    // another account's name, SportFo ID, admin status, or registrations.
+    const identity = await getOwnAccountIdentity(supabase, user.id);
 
-    if (sportfoId) {
+    if (identity.sportfoId) {
+      const roleLabel = identity.category ? t(`account.roles.${identity.category.id}`) : null;
+
       return (
-        <AccountMenu
-          sportfoId={sportfoId}
-          roleLabel={profile?.profile_status === "submitted" ? t("account.roleAthlete") : null}
-          myProfileHref="/athlete/register"
-          myProfileLabel={t("nav.athleteRegistration")}
-          discoverAthletesHref="/athletes"
-          discoverAthletesLabel={t("nav.discoverAthletes")}
-          activeAsLabel={t("account.activeAs")}
-          sportfoIdLabel={t("account.sportfoId")}
-          activeAccountLabel={t("account.activeAccount")}
-          locale={locale}
-          variant={variant}
-        />
+        <>
+          <Link href="/athletes" className={navLinkClassName}>
+            {t("nav.discoverAthletes")}
+          </Link>
+          <AccountMenu
+            displayName={identity.displayName}
+            sportfoId={identity.sportfoId}
+            roleLabel={roleLabel}
+            profileHref={identity.profileHref}
+            isAdmin={identity.isAdmin}
+            dashboardHref="/admin/dashboard"
+            sportfoIdLabel={t("account.sportfoId")}
+            sportfoUserLabel={t("account.sportfoUser")}
+            viewProfileLabel={t("account.viewProfile")}
+            viewDashboardLabel={t("account.viewDashboard")}
+            signOutLabel={t("account.signOut")}
+            signingOutLabel={t("nav.loggingOut")}
+            locale={locale}
+            variant={variant}
+          />
+        </>
       );
     }
 
