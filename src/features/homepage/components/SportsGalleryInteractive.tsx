@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Carousel3D } from "@/components/ui/3d-carousel";
@@ -39,12 +40,41 @@ export function SportsGalleryInteractive({
 
   return (
     <div>
-      <div className="h-[300px] sm:h-[340px] lg:h-[380px]">
+      {/* The 3D fan reads well once the container is wide enough to space
+          its rotated cards apart (tablet/desktop). Below `sm` the same
+          card count crammed into a ~350px container foreshortens into a
+          wall of overlapping slivers -- a flat, swipeable strip of flush
+          (non-rotated) cards is the legible mobile equivalent instead. */}
+      <div className="hidden sm:block sm:h-[340px] lg:h-[380px]">
         <Carousel3D
           items={carouselItems}
           onSelect={(item) => setSelectedKey(item.key)}
           className="h-full"
         />
+      </div>
+
+      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 sm:hidden">
+        {items.map((item) => (
+          <button
+            key={item.key}
+            type="button"
+            onClick={() => setSelectedKey(item.key)}
+            className="stitch-card-lift group flex h-40 w-28 shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)]"
+          >
+            <div className="relative min-h-0 flex-1 overflow-hidden">
+              <Image
+                src={item.image}
+                alt={item.name}
+                fill
+                sizes="112px"
+                className="stitch-card-image object-cover"
+              />
+            </div>
+            <p className="shrink-0 px-1.5 py-1.5 text-center text-[9px] leading-tight font-bold tracking-wide text-stitch-navy uppercase">
+              {item.name}
+            </p>
+          </button>
+        ))}
       </div>
 
       <p className="mt-4 text-center text-xs text-gray-500">{dragHintLabel}</p>

@@ -34,6 +34,16 @@ const MIN_INERTIA_VELOCITY = 2; // deg/sec -- inertia loop stops below this
 // fade out entirely, so you only ever see a semicircle-ish arc facing you
 // -- never the far side of the ring, never a hard "where does this end"
 // edge, and never a wall of full-brightness cards behind the front ones.
+//
+// These are caps, not fixed values -- a ring with few items (wide angleStep)
+// still uses them as-is, but a ring with many items (e.g. the 16-sport
+// gallery) would otherwise keep ~13 of 16 cards "visible" at once, which a
+// wide desktop container has room to spread out but a narrow mobile
+// container does not: card width has a 108px floor (see the clamp() below)
+// that doesn't shrink with a smaller radius, so a crowded ring on a narrow
+// container reads as a wall of overlapping slivers instead of a fan. Capping
+// how many cards-deep are shown on each side (see CARDS_VISIBLE_EACH_SIDE in
+// Carousel3D) keeps the fan legible at any item count or container width.
 const VISIBLE_HALF_ARC = 150;
 const FADE_START = 90; // degrees off-center where opacity/scale start easing down
 // Radius as a fraction of the carousel's own rendered width -- NOT derived
@@ -58,6 +68,8 @@ function Carousel3DCard({
   baseAngle,
   radius,
   rotateY,
+  visibleHalfArc,
+  fadeStart,
   onPointerDown,
   onPointerMove,
   onPointerUp,
@@ -67,6 +79,8 @@ function Carousel3DCard({
   baseAngle: number;
   radius: number;
   rotateY: MotionValue<number>;
+  visibleHalfArc: number;
+  fadeStart: number;
   onPointerDown: (e: ReactPointerEvent<HTMLDivElement>) => void;
   onPointerMove: (e: ReactPointerEvent<HTMLDivElement>) => void;
   onPointerUp: (e: ReactPointerEvent<HTMLDivElement>) => void;
@@ -87,17 +101,17 @@ function Carousel3DCard({
   // framer silently discard the manual string and use its own instead.
   const angleFromFront = useTransform(rotateY, (r) => Math.abs(normalizeAngle(baseAngle + r)));
   const opacity = useTransform(angleFromFront, (a) => {
-    if (a >= VISIBLE_HALF_ARC) return 0;
-    if (a <= FADE_START) return 1;
-    const t = (a - FADE_START) / (VISIBLE_HALF_ARC - FADE_START);
+    if (a >= visibleHalfArc) return 0;
+    if (a <= fadeStart) return 1;
+    const t = (a - fadeStart) / (visibleHalfArc - fadeStart);
     return 1 - t * 0.85;
   });
   const transform = useTransform(angleFromFront, (a) => {
-    const t = Math.min(1, Math.max(0, (a - FADE_START) / (VISIBLE_HALF_ARC - FADE_START)));
+    const t = Math.min(1, Math.max(0, (a - fadeStart) / (visibleHalfArc - fadeStart)));
     const scale = 1 - t * 0.22;
     return `translate(-50%, -50%) rotateY(${baseAngle}deg) translateZ(${radius}px) scale(${scale})`;
   });
-  const pointerEvents = useTransform(angleFromFront, (a) => (a >= VISIBLE_HALF_ARC ? "none" : "auto"));
+  const pointerEvents = useTransform(angleFromFront, (a) => (a >= visibleHalfArc ? "none" : "auto"));
 
   return (
     <motion.div
@@ -149,11 +163,20 @@ function Carousel3DCard({
 // sized off the carousel's own rendered width (measured via
 // ResizeObserver), not card size, so the visible arc spreads across the
 // available space instead of clustering near the front.
+// How many cards deep (on each side of dead-center) stay visible at once,
+// regardless of the ring's total item count -- see the VISIBLE_HALF_ARC
+// comment above for why a fixed arc breaks down on rings with many items.
+const CARDS_VISIBLE_EACH_SIDE = 3;
+
 export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const rotateY = useMotionValue(0);
   const [radius, setRadius] = useState(0);
   const angleStep = items.length > 0 ? 360 / items.length : 0;
+  // Caps, not floors/replacements: a ring with few items (wide angleStep)
+  // still lands on the original 150/90 constants via the Math.min.
+  const visibleHalfArc = Math.min(VISIBLE_HALF_ARC, angleStep * (CARDS_VISIBLE_EACH_SIDE + 0.5));
+  const fadeStart = Math.min(FADE_START, angleStep * (CARDS_VISIBLE_EACH_SIDE - 0.5));
 
   const pausedRef = useRef(false);
   const dragRef = useRef<{
@@ -321,6 +344,8 @@ export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
             baseAngle={i * angleStep}
             radius={radius}
             rotateY={rotateY}
+            visibleHalfArc={visibleHalfArc}
+            fadeStart={fadeStart}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={(e) => handlePointerUp(e, item)}
