@@ -77,7 +77,14 @@ export function ProfileHero({
         }
       >
         {bannerImage ? (
-          <Image src={bannerImage} alt="" fill priority sizes="100vw" className="object-cover" />
+          <Image
+            src={bannerImage}
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 896px) 896px, 100vw"
+            className="object-cover"
+          />
         ) : null}
         <div className="absolute inset-0 bg-navy-950/78" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(47,102,240,0.4),_transparent_60%)]" />

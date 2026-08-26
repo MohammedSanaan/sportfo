@@ -73,6 +73,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={locale}
+      data-scroll-behavior="smooth"
       className={`${inter.variable} ${notoDevanagari.variable} ${notoKannada.variable} ${notoTamil.variable} ${notoTelugu.variable} ${notoMalayalam.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-surface-muted text-ink-900">
