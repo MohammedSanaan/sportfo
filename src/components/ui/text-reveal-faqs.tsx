@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { Minus, Plus } from "lucide-react";
 
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+const Accordion = AccordionPrimitive.Root;
 
 type Faq = {
   question: string;
@@ -89,113 +86,63 @@ function BlurredStagger({ text, active }: { text: string; active: boolean }) {
   );
 }
 
-// White-background FAQ section, stacked vertically: a centered "FAQs"
-// heading/description on top, followed by a single centered column of
-// card-style accordion items below. Premium touches: soft elevated cards
-// that lift in on scroll, a numbered index that fills solid when open, an
-// accessible focus ring, ambient background glows, and a closing CTA for
-// anything the list didn't answer.
+// White-background FAQ section, single centered column (Mobbin: Paraform
+// FAQ pattern) -- centered heading, a flush divider-based accordion below
+// it, and a plus/minus indicator that swaps per item instead of a rotating
+// chevron.
 export function TextRevealFaqs() {
   const [openValue, setOpenValue] = useState<string | undefined>(undefined);
-  const prefersReducedMotion = useReducedMotion();
 
   return (
-    <section
-      id="faq"
-      className="scroll-mt-16 relative overflow-hidden bg-white px-4 py-20 sm:py-24 lg:py-28"
-    >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute top-0 left-1/2 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-stitch-blue/[0.07] blur-[110px]"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -bottom-24 left-1/2 h-[300px] w-[560px] -translate-x-1/2 rounded-full bg-stitch-orange/[0.05] blur-[100px]"
-      />
-
-      <div className="relative mx-auto flex max-w-[760px] flex-col items-center text-center">
-        <span className="inline-flex items-center gap-2 rounded-full border border-stitch-blue/20 bg-stitch-blue/[0.05] px-4 py-1.5 text-xs font-semibold tracking-[0.2em] text-stitch-blue uppercase">
-          <span className="h-1.5 w-1.5 rounded-full bg-stitch-blue" aria-hidden="true" />
-          FAQ
-        </span>
-        <h2 className="mt-5 text-3xl font-semibold tracking-tight text-[#111111] sm:text-4xl lg:text-[46px]">
+    <section id="faq" className="scroll-mt-16 bg-white px-4 py-20 sm:py-24 lg:py-28">
+      <div className="mx-auto max-w-[720px]">
+        <h2 className="text-center text-3xl font-semibold tracking-tight text-[#111111] sm:text-4xl lg:text-[46px]">
           Frequently asked questions
         </h2>
-        <p className="mt-4 max-w-[480px] text-base leading-[1.75] text-gray-500 sm:text-[17px]">
-          Answers to common questions about profiles, discovery, opportunities, and the
-          SportFo network.
-        </p>
 
         <Accordion
           type="single"
           collapsible
           value={openValue}
           onValueChange={setOpenValue}
-          className="mt-12 flex w-full flex-col gap-3"
+          className="mt-12 divide-y divide-gray-200 border-t border-b border-gray-200"
         >
           {FAQS.map((faq, i) => {
             const value = `faq-${i}`;
             const active = openValue === value;
 
             return (
-              <motion.div
-                key={value}
-                initial={prefersReducedMotion ? undefined : { opacity: 0, y: 16 }}
-                whileInView={prefersReducedMotion ? undefined : { opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ duration: 0.45, delay: Math.min(i, 6) * 0.05, ease: "easeOut" }}
-              >
-                <AccordionItem
-                  value={value}
-                  className={`overflow-hidden rounded-2xl border bg-white text-left shadow-sm transition-all duration-300 ${
-                    active
-                      ? "border-stitch-blue/30 shadow-md shadow-stitch-blue/[0.08]"
-                      : "border-gray-200 hover:border-stitch-blue/20 hover:shadow-md"
-                  }`}
-                >
-                  <AccordionTrigger className="gap-4 rounded-2xl px-5 py-4 text-base font-semibold text-[#111111] transition-colors hover:text-stitch-blue focus-visible:ring-2 focus-visible:ring-stitch-blue/40 focus-visible:ring-offset-2 sm:px-6 sm:py-5 sm:text-lg [&>svg]:text-gray-400 hover:[&>svg]:text-stitch-blue">
-                    <span className="flex items-center gap-4">
-                      <span
-                        className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors duration-300 ${
-                          active
-                            ? "bg-stitch-blue text-white"
-                            : "bg-stitch-blue/10 text-stitch-blue"
-                        }`}
-                      >
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      {faq.question}
+              <AccordionPrimitive.Item key={value} value={value}>
+                <AccordionPrimitive.Header>
+                  <AccordionPrimitive.Trigger className="group flex w-full items-center justify-between gap-4 py-6 text-left text-base font-semibold text-[#111111] transition-colors hover:text-stitch-blue focus-visible:outline-none sm:text-lg">
+                    {faq.question}
+                    <span className="relative flex h-5 w-5 shrink-0 items-center justify-center text-gray-400 transition-colors group-hover:text-stitch-blue">
+                      <Plus
+                        className={`absolute h-5 w-5 transition-opacity duration-200 ${active ? "opacity-0" : "opacity-100"}`}
+                        aria-hidden="true"
+                      />
+                      <Minus
+                        className={`absolute h-5 w-5 text-stitch-blue transition-opacity duration-200 ${active ? "opacity-100" : "opacity-0"}`}
+                        aria-hidden="true"
+                      />
                     </span>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <div className="px-5 pb-4 pl-[68px] sm:px-6 sm:pl-[76px]">
-                      <AnimatePresence mode="wait">
-                        {active ? (
-                          <BlurredStagger key={value} text={faq.answer} active={active} />
-                        ) : (
-                          <p className="text-[15px] leading-relaxed text-gray-500">{faq.answer}</p>
-                        )}
-                      </AnimatePresence>
-                    </div>
-                  </AccordionContent>
-                </AccordionItem>
-              </motion.div>
+                  </AccordionPrimitive.Trigger>
+                </AccordionPrimitive.Header>
+                <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                  <div className="pr-8 pb-6">
+                    <AnimatePresence mode="wait">
+                      {active ? (
+                        <BlurredStagger key={value} text={faq.answer} active={active} />
+                      ) : (
+                        <p className="text-[15px] leading-relaxed text-gray-500">{faq.answer}</p>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </AccordionPrimitive.Content>
+              </AccordionPrimitive.Item>
             );
           })}
         </Accordion>
-
-        <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-gray-200 bg-gray-50/70 px-6 py-6 sm:flex-row sm:justify-between sm:gap-6 sm:px-8">
-          <p className="text-sm leading-relaxed text-gray-500 sm:text-left">
-            Still have questions?{" "}
-            <span className="font-medium text-[#111111]">We&apos;re happy to help.</span>
-          </p>
-          <a
-            href="mailto:support@sportfo.com"
-            className="inline-flex shrink-0 items-center justify-center rounded-lg bg-stitch-blue px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-stitch-blue/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-blue/40 focus-visible:ring-offset-2"
-          >
-            Contact support
-          </a>
-        </div>
       </div>
     </section>
   );
