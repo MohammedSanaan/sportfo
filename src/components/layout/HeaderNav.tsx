@@ -105,11 +105,11 @@ const desktopBaseClassName =
 const desktopActiveClassName =
   "header-nav-active border-b-brand-500 bg-brand-50 font-semibold hover:!bg-brand-50";
 
-// PillNav-style hover: a circle grows out of the bottom of the pill while
+// Pill-style hover: a circle grows out of the bottom of the pill while
 // the label crossfades into a white copy of itself, instead of the flat
 // background/text-color swap this nav used before. Sizing math (R/D/delta)
-// is copied from PillNav's layout() so the circle always just covers the
-// pill regardless of its (variable, translated) label width.
+// keeps the circle always just covering the pill regardless of its
+// (variable, translated) label width.
 function usePillHoverEffect(count: number, ease = "power3.easeOut") {
   const circleRefs = useRef<Array<HTMLSpanElement | null>>([]);
   const tlRefs = useRef<Array<gsap.core.Timeline | null>>([]);

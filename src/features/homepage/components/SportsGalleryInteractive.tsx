@@ -39,7 +39,7 @@ export function SportsGalleryInteractive({
 
   return (
     <div>
-      <div className="h-[260px] sm:h-[300px] lg:h-[340px]">
+      <div className="h-[300px] sm:h-[340px] lg:h-[380px]">
         <Carousel3D
           items={carouselItems}
           onSelect={(item) => setSelectedKey(item.key)}

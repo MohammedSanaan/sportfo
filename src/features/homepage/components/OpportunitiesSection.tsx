@@ -17,8 +17,7 @@ const CARD_IMAGES = {
 // catalog exists in this app yet (only /, /auth, /athlete/register,
 // /athlete/profile, /athletes, /a/[slug] are real routes). Every button
 // below is deliberately a plain, handler-less <button> -- visually ready,
-// safely inert -- following the same precedent already established for
-// CTAs with no real destination (see the removed EcosystemRoleCard.tsx).
+// safely inert -- for a CTA with no real destination yet.
 function InertButton({
   label,
   variant,

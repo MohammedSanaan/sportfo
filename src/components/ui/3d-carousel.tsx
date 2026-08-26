@@ -46,7 +46,7 @@ const FADE_START = 90; // degrees off-center where opacity/scale start easing do
 // it. sin(VISIBLE_HALF_ARC) puts the fade-out edge close to the container's
 // half-width; overflow-hidden on the container is the backstop for the
 // (already near-invisible) cards just past it.
-const FAN_RADIUS_RATIO = 0.26;
+const FAN_RADIUS_RATIO = 0.42;
 
 function normalizeAngle(deg: number): number {
   const wrapped = ((deg % 360) + 360) % 360;
@@ -101,7 +101,7 @@ function Carousel3DCard({
 
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 h-full w-[clamp(52px,10vw,84px)] cursor-grab touch-pan-y active:cursor-grabbing"
+      className="absolute top-1/2 left-1/2 h-full w-[clamp(108px,15vw,150px)] cursor-grab touch-pan-y active:cursor-grabbing"
       style={{
         transform,
         opacity,
@@ -112,23 +112,28 @@ function Carousel3DCard({
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerCancel}
     >
-      <div className="group relative h-full w-full overflow-hidden rounded-xl border border-white/15 bg-stitch-navy shadow-[0_10px_22px_rgba(3,15,40,0.4)] transition-transform duration-300 will-change-transform hover:-translate-y-1">
-        <Image
-          src={item.image}
-          alt={item.title}
-          fill
-          draggable={false}
-          // Deliberately requested larger than the card ever renders (max
-          // 84px): these cards live inside a 3D rotateY/scale transform, and
-          // over-fetching resolution gives the browser's own downsample
-          // pass more detail to work with than an exact-size fetch would --
-          // exact-size fetches were reading as soft/blurry once transformed.
-          sizes="220px"
-          quality={90}
-          className="object-cover"
-        />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-stitch-navy/90 via-stitch-navy/10 to-transparent" />
-        <p className="pointer-events-none absolute inset-x-0 bottom-0 px-1.5 pb-1.5 text-center text-[8px] leading-tight font-semibold tracking-wide text-white uppercase sm:px-2 sm:pb-2 sm:text-[10px]">
+      {/* Same card language as WhoWeServeSection/GapSection/HowSportFoWorksSection
+          -- white surface, orange top accent, stitch-card-lift hover-raise +
+          stitch-card-image zoom -- rather than a bespoke dark overlay card. */}
+      <div className="stitch-card-lift flex h-full w-full flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] transition-colors duration-300 will-change-transform hover:border-t-stitch-orange-hover">
+        <div className="relative min-h-0 flex-1 overflow-hidden">
+          <Image
+            src={item.image}
+            alt={item.title}
+            fill
+            draggable={false}
+            // Deliberately requested larger than the card ever renders (max
+            // 150px): these cards live inside a 3D rotateY/scale transform,
+            // and over-fetching resolution gives the browser's own
+            // downsample pass more detail to work with than an exact-size
+            // fetch would -- exact-size fetches were reading as soft/blurry
+            // once transformed.
+            sizes="280px"
+            quality={90}
+            className="stitch-card-image object-cover"
+          />
+        </div>
+        <p className="shrink-0 px-1.5 py-1.5 text-center text-[9px] leading-tight font-bold tracking-wide text-stitch-navy uppercase sm:px-2 sm:py-2 sm:text-[11px]">
           {item.title}
         </p>
       </div>
