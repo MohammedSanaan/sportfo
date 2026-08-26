@@ -57,6 +57,30 @@
 
   --font-stitch: var(--font-lexend), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", sans-serif;
+
+  /* Radix Accordion height animation (FAQ section) -- driven by the
+     --radix-accordion-content-height custom property Radix sets on the
+     content element itself. */
+  --animate-accordion-down: accordion-down 400ms ease-out;
+  --animate-accordion-up: accordion-up 350ms ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
 }
 
 body {

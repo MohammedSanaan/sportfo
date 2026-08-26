@@ -6,6 +6,8 @@ export interface PublicAthleteSearchResult {
   full_name: string | null;
   primary_sport: string | null;
   skill_level: string | null;
+  competition_level: string | null;
+  parallel_track: string | null;
   country: string | null;
   city: string | null;
   nationality: string | null;
@@ -43,6 +45,8 @@ export interface DiscoveryFilters {
   country: string | null;
   city: string | null;
   skillLevel: string | null;
+  competitionLevel: string | null;
+  parallelTrack: string | null;
   page: number;
 }
 
@@ -71,6 +75,8 @@ export async function searchPublicAthletes(
     p_country: filters.country ?? undefined,
     p_city: filters.city ?? undefined,
     p_skill_level: filters.skillLevel ?? undefined,
+    p_competition_level: filters.competitionLevel ?? undefined,
+    p_parallel_track: filters.parallelTrack ?? undefined,
     p_page: filters.page,
     p_page_size: DISCOVERY_PAGE_SIZE,
   });
@@ -103,7 +109,9 @@ export async function searchPublicAthletes(
 }
 
 // The country filter's option list -- see get_public_athlete_countries for
-// why this is derived from real data rather than a hardcoded dataset.
+// why this is derived from real data rather than a hardcoded dataset. India
+// is SportFo's primary target market, so it's always pinned first when
+// present rather than falling wherever it lands alphabetically.
 export async function loadPublicAthleteCountries(
   supabase: SupabaseClient<Database>,
 ): Promise<string[]> {
@@ -112,9 +120,13 @@ export async function loadPublicAthleteCountries(
     console.error("loadPublicAthleteCountries failed:", error);
     return [];
   }
-  return (data ?? [])
+  const countries = (data ?? [])
     .map((row) => row.country)
     .filter((country): country is string => Boolean(country));
+
+  const india = countries.filter((country) => country === "India");
+  const rest = countries.filter((country) => country !== "India");
+  return [...india, ...rest];
 }
 
 export interface RawDiscoverySearchParams {
@@ -123,6 +135,8 @@ export interface RawDiscoverySearchParams {
   country?: string | string[];
   city?: string | string[];
   skill?: string | string[];
+  competitionLevel?: string | string[];
+  track?: string | string[];
   page?: string | string[];
 }
 
@@ -152,6 +166,8 @@ export function parseDiscoveryFilters(
     country: firstValue(searchParams.country) || null,
     city,
     skillLevel: firstValue(searchParams.skill) || null,
+    competitionLevel: firstValue(searchParams.competitionLevel) || null,
+    parallelTrack: firstValue(searchParams.track) || null,
     page: parsePage(firstValue(searchParams.page)),
   };
 }

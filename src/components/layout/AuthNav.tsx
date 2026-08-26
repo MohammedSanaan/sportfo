@@ -15,11 +15,13 @@ const navLinkClassName =
 // directly in Header) so it can be wrapped in <Suspense> -- the session
 // check shouldn't delay the rest of the shared layout from streaming.
 //
-// "Discover Athletes" lives in the account area (not the main Home/About/
-// Community/... nav) for authenticated users only -- it's an
-// authenticated-only feature (see /athletes' own server-side auth check
-// and its entry in src/proxy.ts's PROTECTED_ROUTES), so a guest never
-// sees the link at all, not just a version that would redirect them.
+// "Discover Athletes" lives in Header's main left-side nav (always
+// visible, signed in or not -- see Header.tsx's discoverAthletesLink)
+// instead of here, so this component only renders the auth-state-
+// dependent actions themselves (AccountMenu/logout for signed-in users,
+// Sign In/Join SportFo for guests). /athletes still has its own server-
+// side auth check and its entry in src/proxy.ts's PROTECTED_ROUTES, so a
+// guest clicking it there is redirected rather than shown the page.
 export async function AuthNav({
   locale,
   variant = "desktop",
@@ -40,27 +42,22 @@ export async function AuthNav({
       const roleLabel = identity.category ? t(`account.roles.${identity.category.id}`) : null;
 
       return (
-        <>
-          <Link href="/athletes" className={navLinkClassName}>
-            {t("nav.discoverAthletes")}
-          </Link>
-          <AccountMenu
-            displayName={identity.displayName}
-            sportfoId={identity.sportfoId}
-            roleLabel={roleLabel}
-            profileHref={identity.profileHref}
-            isAdmin={identity.isAdmin}
-            dashboardHref="/admin/dashboard"
-            sportfoIdLabel={t("account.sportfoId")}
-            sportfoUserLabel={t("account.sportfoUser")}
-            viewProfileLabel={t("account.viewProfile")}
-            viewDashboardLabel={t("account.viewDashboard")}
-            signOutLabel={t("account.signOut")}
-            signingOutLabel={t("nav.loggingOut")}
-            locale={locale}
-            variant={variant}
-          />
-        </>
+        <AccountMenu
+          displayName={identity.displayName}
+          sportfoId={identity.sportfoId}
+          roleLabel={roleLabel}
+          profileHref={identity.profileHref}
+          isAdmin={identity.isAdmin}
+          dashboardHref="/admin/dashboard"
+          sportfoIdLabel={t("account.sportfoId")}
+          sportfoUserLabel={t("account.sportfoUser")}
+          viewProfileLabel={t("account.viewProfile")}
+          viewDashboardLabel={t("account.viewDashboard")}
+          signOutLabel={t("account.signOut")}
+          signingOutLabel={t("nav.loggingOut")}
+          locale={locale}
+          variant={variant}
+        />
       );
     }
 
@@ -69,9 +66,6 @@ export async function AuthNav({
     // account is still fully authenticated, so navigation must not break.
     return (
       <>
-        <Link href="/athletes" className={navLinkClassName}>
-          {t("nav.discoverAthletes")}
-        </Link>
         <Link href="/athlete/register" className={navLinkClassName}>
           {t("nav.athleteRegistration")}
         </Link>

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Suspense } from "react";
-import { Container } from "@/components/ui/Container";
 import { AuthNav } from "./AuthNav";
 import { MobileMenuToggle } from "./MobileMenuToggle";
 import { HeaderNavDesktop, HeaderNavMobile } from "./HeaderNav";
@@ -37,13 +36,21 @@ export function Header({ locale }: { locale: Locale }) {
     ...item,
     label: translate(locale, `navigation.${item.key}`),
   }));
+  // "Discover Athletes" lives on the left with the main nav (not in the
+  // right-side auth actions) -- it's a real page, not a homepage scroll
+  // section, so it's passed separately as a plain link.
+  const discoverAthletesLink = [{ href: "/athletes", label: translate(locale, "nav.discoverAthletes") }];
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-default bg-white/95 backdrop-blur">
-      <Container className="relative flex h-16 items-center justify-between">
+      {/* Full-width bar (no max-w-6xl Container) so the logo/nav hug the
+          true left edge and Sign In/Join/Language hug the true right edge
+          of the viewport, instead of sitting inside the site's centered
+          content column. */}
+      <div className="relative flex h-16 w-full items-center gap-8 px-4 sm:px-6 lg:px-8">
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-bold tracking-tight text-ink-900"
+          className="flex shrink-0 items-center gap-2 text-lg font-bold tracking-tight text-ink-900"
         >
           <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-sm font-bold text-white">
             SF
@@ -51,9 +58,9 @@ export function Header({ locale }: { locale: Locale }) {
           SportFo
         </Link>
 
-        <HeaderNavDesktop items={navItems} />
+        <HeaderNavDesktop items={navItems} plainLinks={discoverAthletesLink} />
 
-        <div className="flex items-center gap-1">
+        <div className="ml-auto flex items-center gap-1">
           <Suspense fallback={<AuthNavFallback />}>
             <div className="hidden lg:flex lg:items-center lg:gap-1">
               <AuthNav locale={locale} />
@@ -62,7 +69,7 @@ export function Header({ locale }: { locale: Locale }) {
           <LanguageSelector className="hidden lg:flex" />
 
           <MobileMenuToggle>
-            <HeaderNavMobile items={navItems} />
+            <HeaderNavMobile items={navItems} plainLinks={discoverAthletesLink} />
             <div className="mt-2 border-t border-border-default pt-3">
               <Suspense fallback={null}>
                 <AuthNav locale={locale} variant="mobile" />
@@ -75,7 +82,7 @@ export function Header({ locale }: { locale: Locale }) {
             </div>
           </MobileMenuToggle>
         </div>
-      </Container>
+      </div>
     </header>
   );
 }

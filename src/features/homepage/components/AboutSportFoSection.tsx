@@ -1,9 +1,9 @@
-import Image from "next/image";
 import type { TFunc } from "@/i18n/dictionary";
+import { SportsMosaic } from "./SportsMosaic";
 
-// Premium 2-column layout: copy left, a single framed local sports photo
-// right (no hotlinked/external image -- see the integration report for
-// the licensing note on this asset set). Same eyebrow pill, navy/orange
+// Premium 2-column layout: copy left, a photo-wall of the sports SportFo
+// covers right (no hotlinked/external image -- see the integration report
+// for the licensing note on this asset set). Same eyebrow pill, navy/orange
 // tokens, and rounded-lg/shadow card language as the rest of this
 // homepage rather than a new design system.
 export function AboutSportFoSection({ t }: { t: TFunc }) {
@@ -34,15 +34,7 @@ export function AboutSportFoSection({ t }: { t: TFunc }) {
           </div>
         </div>
 
-        <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-2xl border border-gray-200 shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)] lg:max-w-none">
-          <Image
-            src="/images/carousel/basketball.jpg"
-            alt=""
-            fill
-            sizes="(min-width: 1024px) 40vw, (min-width: 640px) 28rem, 100vw"
-            className="object-cover"
-          />
-        </div>
+        <SportsMosaic />
       </div>
     </section>
   );

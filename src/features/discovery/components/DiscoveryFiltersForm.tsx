@@ -1,4 +1,4 @@
-import { PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
+import { PRIMARY_SPORTS, SKILL_LEVELS, COMPETITION_LEVELS, PARALLEL_TRACKS } from "@/lib/athlete-options";
 import { Button } from "@/components/ui/Button";
 import type { DiscoveryFilters } from "@/lib/athlete/discovery";
 import { translate } from "@/i18n/dictionary";
@@ -23,6 +23,8 @@ const controlClassName =
 export function DiscoveryFiltersForm({ filters, countries, locale }: DiscoveryFiltersFormProps) {
   const t = (key: string) => translate(locale, key);
   const skillLevelOptions = translateOptions(t, "options.skillLevel", SKILL_LEVELS);
+  const competitionLevelOptions = translateOptions(t, "options.competitionLevel", COMPETITION_LEVELS);
+  const parallelTrackOptions = translateOptions(t, "options.parallelTrack", PARALLEL_TRACKS);
 
   return (
     <form
@@ -85,6 +87,34 @@ export function DiscoveryFiltersForm({ filters, countries, locale }: DiscoveryFi
         >
           <option value="">{t("athletes.allSkillLevels")}</option>
           {skillLevelOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          name="competitionLevel"
+          defaultValue={filters.competitionLevel ?? ""}
+          aria-label={t("athletes.filterByCompetitionLevel")}
+          className={`${controlClassName} sm:w-auto`}
+        >
+          <option value="">{t("athletes.allCompetitionLevels")}</option>
+          {competitionLevelOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
+          ))}
+        </select>
+
+        <select
+          name="track"
+          defaultValue={filters.parallelTrack ?? ""}
+          aria-label={t("athletes.filterByParallelTrack")}
+          className={`${controlClassName} sm:w-auto`}
+        >
+          <option value="">{t("athletes.allParallelTracks")}</option>
+          {parallelTrackOptions.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>

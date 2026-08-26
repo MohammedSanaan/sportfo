@@ -1,5 +1,10 @@
-import Link from "next/link";
-import { getOptionLabel, PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
+import {
+  getOptionLabel,
+  PRIMARY_SPORTS,
+  SKILL_LEVELS,
+  COMPETITION_LEVELS,
+  PARALLEL_TRACKS,
+} from "@/lib/athlete-options";
 import { Badge } from "@/components/ui/Badge";
 import { AthleteAvatar } from "@/components/ui/AthleteAvatar";
 import type { PublicAthleteSearchResult } from "@/lib/athlete/discovery";
@@ -11,9 +16,10 @@ interface AthleteCardProps {
   locale: Locale;
 }
 
-// The whole card is a single <Link> -- no nested buttons/links inside --
-// so it stays a single focusable, single accessible-name control ("View
-// Profile" is just its visual CTA text, not a second interactive element).
+// Presentational only -- this is the collapsed face of an ExpandableCard
+// (see /athletes/page.tsx), which already wraps it in the single focusable,
+// clickable <button> that opens the full-detail modal. No Link/button of
+// its own, so there's no nested-interactive-control issue.
 export function AthleteCard({ athlete, locale }: AthleteCardProps) {
   const t = (key: string) => translate(locale, key);
   const location = [athlete.city, athlete.country].filter(Boolean).join(", ");
@@ -23,16 +29,18 @@ export function AthleteCard({ athlete, locale }: AthleteCardProps) {
   ]
     .filter(Boolean)
     .join(" • ");
+  const competitionLevelLabel = getOptionLabel(COMPETITION_LEVELS, athlete.competition_level);
+  const parallelTrackLabel = getOptionLabel(PARALLEL_TRACKS, athlete.parallel_track);
 
   return (
-    <Link
-      href={`/a/${athlete.public_slug}`}
-      className="group flex flex-col gap-5 rounded-2xl border border-border-default bg-surface p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2"
-    >
+    <div className="group flex h-full flex-col gap-5 rounded-2xl border border-border-default bg-surface p-6 shadow-sm transition-all duration-150 hover:border-brand-200 hover:shadow-lg">
       <div className="flex items-center gap-4">
         <AthleteAvatar fullName={athlete.full_name} size="md" />
         <div className="flex flex-col gap-1.5">
-          <Badge>{t("athletes.sportfoAthleteBadge")}</Badge>
+          <div className="flex flex-wrap gap-1.5">
+            <Badge>{t("athletes.sportfoAthleteBadge")}</Badge>
+            {competitionLevelLabel && <Badge variant="success">{competitionLevelLabel}</Badge>}
+          </div>
           <h3 className="text-lg font-semibold leading-tight text-ink-900">
             {athlete.full_name || t("athletes.athleteFallback")}
           </h3>
@@ -41,6 +49,7 @@ export function AthleteCard({ athlete, locale }: AthleteCardProps) {
 
       <div className="flex flex-col gap-1 text-sm">
         {sportLine && <p className="font-medium text-ink-700">{sportLine}</p>}
+        {parallelTrackLabel && <p className="text-ink-500">{parallelTrackLabel}</p>}
         {location && <p className="text-ink-500">{location}</p>}
         {athlete.nationality && <p className="text-ink-400">{athlete.nationality}</p>}
       </div>
@@ -56,6 +65,6 @@ export function AthleteCard({ athlete, locale }: AthleteCardProps) {
           {t("athletes.viewProfile")} →
         </span>
       </div>
-    </Link>
+    </div>
   );
 }

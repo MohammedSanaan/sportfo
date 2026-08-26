@@ -10,7 +10,7 @@ import {
   type RawDiscoverySearchParams,
 } from "@/lib/athlete/discovery";
 import { Container } from "@/components/ui/Container";
-import { AthleteCard } from "@/features/discovery/components/AthleteCard";
+import { AthleteDiscoveryGrid } from "@/features/discovery/components/AthleteDiscoveryGrid";
 import { DiscoveryFiltersForm } from "@/features/discovery/components/DiscoveryFiltersForm";
 import { DiscoveryPagination } from "@/features/discovery/components/DiscoveryPagination";
 import { DiscoveryStatus } from "@/features/discovery/components/DiscoveryStatus";
@@ -41,7 +41,13 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
   const rawParams = await searchParams;
   const filters = parseDiscoveryFilters(rawParams);
   const hasActiveFilters = Boolean(
-    filters.query || filters.sport || filters.country || filters.city || filters.skillLevel,
+    filters.query ||
+      filters.sport ||
+      filters.country ||
+      filters.city ||
+      filters.skillLevel ||
+      filters.competitionLevel ||
+      filters.parallelTrack,
   );
 
   const supabase = await createClient();
@@ -50,6 +56,11 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
     loadPublicAthleteCountries(supabase),
     getServerTranslations(),
   ]);
+  // The redirect above already guarantees a signed-in user by this point --
+  // isLoggedIn is always true here, but AthleteDiscoveryGrid/
+  // AthleteExpandedPanel keep the prop rather than assuming their caller's
+  // auth state, in case a future public-preview mode reuses them.
+  const isLoggedIn = Boolean(user);
 
   return (
     <Container className="flex flex-col gap-8 py-10 sm:py-14">
@@ -85,11 +96,7 @@ export default async function AthletesPage({ searchParams }: AthletesPageProps) 
             )}
           </div>
 
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {result.athletes.map((athlete) => (
-              <AthleteCard key={athlete.public_slug} athlete={athlete} locale={locale} />
-            ))}
-          </div>
+          <AthleteDiscoveryGrid athletes={result.athletes} locale={locale} isLoggedIn={isLoggedIn} />
 
           <DiscoveryPagination
             page={result.page}

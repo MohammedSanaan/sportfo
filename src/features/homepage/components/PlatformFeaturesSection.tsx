@@ -4,18 +4,12 @@ const FEATURE_KEYS = [
   "verifiedIdentity",
   "discovery",
   "academyCollege",
-  "eventsTrials",
-  "jobsMarketplace",
-  "sponsorshipCsr",
 ] as const;
 
 const FEATURE_ICONS = [
   "badge",
   "search",
   "graduation",
-  "calendar",
-  "briefcase",
-  "partnership",
 ] as const;
 
 function FeatureIcon({ icon }: { icon: (typeof FEATURE_ICONS)[number] }) {
@@ -43,40 +37,16 @@ function FeatureIcon({ icon }: { icon: (typeof FEATURE_ICONS)[number] }) {
       </svg>
     );
   }
-  if (icon === "graduation") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <path d="M12 3L2 8l10 5 10-5-10-5z" strokeLinejoin="round" strokeWidth="2" />
-        <path
-          d="M6 10.5V16c0 1.5 2.5 3 6 3s6-1.5 6-3v-5.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-        />
-        <path d="M22 8v6" strokeLinecap="round" strokeWidth="2" />
-      </svg>
-    );
-  }
-  if (icon === "calendar") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="4" y="5" width="16" height="16" rx="2" strokeWidth="2" />
-        <path d="M8 3v4M16 3v4M4 10h16" strokeLinecap="round" strokeWidth="2" />
-      </svg>
-    );
-  }
-  if (icon === "briefcase") {
-    return (
-      <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-        <rect x="3" y="8" width="18" height="12" rx="2" strokeWidth="2" />
-        <path d="M8 8V6a2 2 0 012-2h4a2 2 0 012 2v2M3 13h18" strokeWidth="2" strokeLinecap="round" />
-      </svg>
-    );
-  }
   return (
     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <circle cx="8" cy="12" r="5" strokeWidth="2" />
-      <circle cx="16" cy="12" r="5" strokeWidth="2" />
+      <path d="M12 3L2 8l10 5 10-5-10-5z" strokeLinejoin="round" strokeWidth="2" />
+      <path
+        d="M6 10.5V16c0 1.5 2.5 3 6 3s6-1.5 6-3v-5.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+      />
+      <path d="M22 8v6" strokeLinecap="round" strokeWidth="2" />
     </svg>
   );
 }
