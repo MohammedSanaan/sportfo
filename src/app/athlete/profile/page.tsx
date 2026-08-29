@@ -7,6 +7,7 @@ import { loadAthleteDraft } from "@/lib/athlete/registration-draft";
 import { calculateProfileStrength } from "@/lib/athlete/profile-strength";
 import { getOptionLabel, PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
 import { ProfileHero } from "@/components/ui/ProfileHero";
+import { buildProfilePhotoUrl } from "@/lib/storage/profile-photo";
 import { SportsIconPattern } from "@/components/ui/SportsIconPattern";
 import { AthletePersonalInfo } from "@/features/athlete-profile/components/AthletePersonalInfo";
 import { AthleteSportsSection } from "@/features/athlete-profile/components/AthleteSportsSection";
@@ -85,6 +86,7 @@ export default async function AthleteProfilePage() {
             country={profile.country}
             actions={<ProfileActions locale={locale} />}
             sportfoId={sportfoId}
+            photoUrl={buildProfilePhotoUrl(profile.profile_photo_path)}
             locale={locale}
           />
 

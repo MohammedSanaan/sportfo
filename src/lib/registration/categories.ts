@@ -18,7 +18,14 @@ export type RegistrationCategoryId =
   | "sponsorCsr"
   | "talentAnalytics";
 
-export type RegistrationFieldType = "text" | "url" | "number" | "select" | "multiselect" | "file";
+export type RegistrationFieldType =
+  | "text"
+  | "url"
+  | "number"
+  | "select"
+  | "multiselect"
+  | "file"
+  | "photo";
 
 interface RegistrationFieldBase {
   /** camelCase; also the react-hook-form field name and the i18n key
@@ -49,11 +56,22 @@ export interface RegistrationFileField extends RegistrationFieldBase {
   type: "file";
 }
 
+// Uploads to the shared public profile-photos bucket (see
+// src/lib/storage/profile-photo.ts) -- never the private
+// role-registration-uploads bucket a plain "file" field uses. Individual
+// categories show this as "Profile Photo"; organization-oriented ones as
+// "Profile Photo / Organization Logo" -- both are just this same field
+// type, the wording difference lives entirely in i18n.
+export interface RegistrationPhotoField extends RegistrationFieldBase {
+  type: "photo";
+}
+
 export type RegistrationField =
   | RegistrationTextField
   | RegistrationNumberField
   | RegistrationSelectField
-  | RegistrationFileField;
+  | RegistrationFileField
+  | RegistrationPhotoField;
 
 export interface RegistrationCategoryConfig {
   id: RegistrationCategoryId;
@@ -99,6 +117,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     persistence: "live",
     registrationType: "academy_coach_parent",
     fields: [
+      { id: "profilePhoto", type: "photo", required: false },
       { id: "academyCoachName", type: "text", required: true },
       { id: "sportsOffered", type: "text", required: true, hasPlaceholder: true },
       { id: "ageGroupsTrained", type: "text", required: true, hasPlaceholder: true },
@@ -116,6 +135,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     persistence: "live",
     registrationType: "performance_expert",
     fields: [
+      { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
       {
         id: "expertise",
@@ -146,6 +166,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     persistence: "live",
     registrationType: "media_creator",
     fields: [
+      { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
       { id: "portfolioLink", type: "url", required: false },
       {
@@ -174,6 +195,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     persistence: "live",
     registrationType: "management_legal",
     fields: [
+      { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
       {
         id: "role",
@@ -196,6 +218,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     persistence: "live",
     registrationType: "event_operations",
     fields: [
+      { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
       {
         id: "role",
@@ -217,6 +240,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     persistence: "live",
     registrationType: "sponsor_csr",
     fields: [
+      { id: "profilePhoto", type: "photo", required: false },
       { id: "organizationName", type: "text", required: true },
       { id: "contactPerson", type: "text", required: true },
       {
@@ -253,6 +277,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     persistence: "live",
     registrationType: "talent_analytics",
     fields: [
+      { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
       {
         id: "role",

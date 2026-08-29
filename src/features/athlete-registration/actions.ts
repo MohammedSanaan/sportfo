@@ -5,7 +5,7 @@ import { getAuthUser } from "@/lib/supabase/auth-user";
 import { resolveAthleteMobileNumber } from "@/lib/phone/resolve-athlete-phone";
 import { buildSaveRegistrationArgs } from "@/lib/athlete/registration-payload";
 import { friendlySaveError } from "@/lib/athlete/registration-errors";
-import type { Achievement, AthleteRegistrationFormValues } from "@/types/athlete";
+import type { Achievement, AthleteRegistrationFormValues, VerificationStatus } from "@/types/athlete";
 
 export type SaveRegistrationResult =
   | { ok: true; achievements: Achievement[]; profileStatus: "draft" | "submitted" }
@@ -19,6 +19,10 @@ interface RpcAchievement {
   achievement_date: string | null;
   description: string | null;
   document_path: string | null;
+  certificate_level: string | null;
+  // Always populated by the database default ('pending') once a row
+  // exists -- string | null only to stay defensive about the jsonb round-trip.
+  verification_status: string | null;
 }
 
 interface RpcResult {
@@ -78,6 +82,11 @@ async function persistRegistration(
     organization: row.issuing_organization ?? "",
     date: row.achievement_date ?? "",
     description: row.description ?? "",
+    certificateLevel: (row.certificate_level as Achievement["certificateLevel"]) ?? "",
+    // Read-only on the client -- this is the one place it's ever set from
+    // the server response; nothing in the outgoing payload
+    // (buildSaveRegistrationArgs) ever sends it back.
+    verificationStatus: (row.verification_status as VerificationStatus | null) ?? undefined,
     document: null,
     documentPath: row.document_path ?? null,
   }));

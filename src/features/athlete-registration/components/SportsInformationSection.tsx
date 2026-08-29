@@ -3,10 +3,12 @@
 import { useEffect } from "react";
 import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
-import { RadioGroup } from "@/components/ui/RadioGroup";
+import { Select } from "@/components/ui/Select";
+import { FieldShell } from "@/components/ui/FieldShell";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { cn } from "@/lib/cn";
 import { getCategoriesForSport } from "@/lib/sports/catalog";
-import { SKILL_LEVELS } from "@/lib/athlete-options";
+import { SKILL_LEVELS, COMPETITION_LEVELS, SUPPORT_NEEDED } from "@/lib/athlete-options";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
 import { useTranslation } from "@/i18n/LocaleProvider";
 import { translateOptions } from "@/lib/i18n-options";
@@ -18,6 +20,15 @@ export function SportsInformationSection() {
   const { register, control, setValue } = useFormContext<AthleteRegistrationFormValues>();
 
   const skillLevelOptions = translateOptions(t, "options.skillLevel", SKILL_LEVELS);
+  const competitionLevelOptions = translateOptions(
+    t,
+    "options.competitionLevel",
+    COMPETITION_LEVELS,
+  );
+  const supportNeededOptions = translateOptions(t, "options.supportNeeded", SUPPORT_NEEDED);
+
+  const supportNeeded = useWatch({ control, name: "sportsInformation.supportNeeded" }) ?? [];
+  const supportNeededIncludesOther = supportNeeded.includes("Other");
 
   const primarySport = useWatch({ control, name: "sportsInformation.primarySport" });
   const sportCategory = useWatch({ control, name: "sportsInformation.sportCategory" });
@@ -131,9 +142,9 @@ export function SportsInformationSection() {
           control={control}
           rules={{ required: "Select your skill level." }}
           render={({ field, fieldState }) => (
-            <RadioGroup
+            <Select
+              id="skillLevel"
               label={t("register.sports.skillLevel")}
-              name={field.name}
               options={skillLevelOptions}
               value={field.value}
               onChange={field.onChange}
@@ -143,6 +154,83 @@ export function SportsInformationSection() {
             />
           )}
         />
+        <Controller
+          name="sportsInformation.competitionLevel"
+          control={control}
+          rules={{ required: "Select your highest competition level." }}
+          render={({ field, fieldState }) => (
+            <Select
+              id="competitionLevel"
+              label={t("register.sports.competitionLevel")}
+              helperText={t("register.sports.competitionLevelHelper")}
+              options={competitionLevelOptions}
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              ref={field.ref}
+              error={fieldState.error?.message}
+            />
+          )}
+        />
+      </div>
+
+      <div className="mt-6 flex flex-col gap-6">
+        <Controller
+          name="sportsInformation.supportNeeded"
+          control={control}
+          render={({ field }) => {
+            const selectedValues = Array.isArray(field.value) ? field.value : [];
+            return (
+              <FieldShell
+                label={t("register.sports.supportNeeded")}
+                htmlFor="supportNeeded"
+                optional
+                helperText={t("register.sports.supportNeededHelper")}
+              >
+                <div id="supportNeeded" className="flex flex-wrap gap-2">
+                  {supportNeededOptions.map((option) => {
+                    const selected = selectedValues.includes(option.value);
+                    return (
+                      <button
+                        key={option.value}
+                        type="button"
+                        aria-pressed={selected}
+                        onClick={() => {
+                          const next = selected
+                            ? selectedValues.filter((value) => value !== option.value)
+                            : [...selectedValues, option.value];
+                          field.onChange(next);
+                          if (option.value === "Other" && selected) {
+                            setValue("sportsInformation.supportNeededOther", "", {
+                              shouldDirty: true,
+                            });
+                          }
+                        }}
+                        className={cn(
+                          "rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors duration-150",
+                          selected
+                            ? "border-brand-600 bg-brand-600 text-white"
+                            : "border-border-default bg-surface text-ink-700 hover:border-brand-200 hover:bg-brand-50",
+                        )}
+                      >
+                        {option.label}
+                      </button>
+                    );
+                  })}
+                </div>
+              </FieldShell>
+            );
+          }}
+        />
+        {supportNeededIncludesOther && (
+          <Input
+            id="supportNeededOther"
+            label={t("register.sports.supportNeededOther")}
+            optional
+            placeholder={t("register.sports.supportNeededOtherPlaceholder")}
+            {...register("sportsInformation.supportNeededOther")}
+          />
+        )}
       </div>
     </SectionCard>
   );

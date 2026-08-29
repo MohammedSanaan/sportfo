@@ -11,7 +11,10 @@ export function RegistrationStepNav({ locale }: { locale: Locale }) {
     { href: "#section-personal", label: translate(locale, "register.stepPersonal") },
     { href: "#section-sport", label: translate(locale, "register.stepSport") },
     { href: "#section-achievements", label: translate(locale, "register.stepAchievements") },
-    { href: "#section-review", label: translate(locale, "register.stepReview") },
+    { href: "#section-employment", label: translate(locale, "register.stepEmployment") },
+    { href: "#section-apparel", label: translate(locale, "register.stepApparel") },
+    { href: "#section-profile", label: translate(locale, "register.stepProfile") },
+    { href: "#section-verify", label: translate(locale, "register.stepVerify") },
   ];
 
   return (

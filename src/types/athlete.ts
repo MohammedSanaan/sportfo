@@ -41,6 +41,28 @@ export interface PersonalDetails {
   aadhaarOrGovtId: string;
 }
 
+export type CompetitionLevel = "taluk" | "district" | "division" | "state" | "national";
+
+// Canonical English values stored as-is (matches the athlete_sports.
+// support_needed text[] CHECK-free column) -- a multi-select, so kept as a
+// plain string[] rather than a closed union.
+export const SUPPORT_NEEDED_VALUES = [
+  "Coaching & Training",
+  "Nutrition Guidance",
+  "Physiotherapy / Sports Medicine",
+  "Strength & Conditioning",
+  "Mental Wellness / Sports Psychology",
+  "Competition Entry Support",
+  "Travel & Accommodation Support",
+  "Sponsorship / Financial Assistance",
+  "Equipment & Gear Support",
+  "Exposure / Media Coverage",
+  "Career Guidance",
+  "Scholarship Support",
+  "Internship / Job Opportunities",
+  "Other",
+] as const;
+
 export interface SportsInformation {
   primarySport: string;
   // Kept as a separate canonical value, never combined into primarySport
@@ -50,7 +72,26 @@ export interface SportsInformation {
   discipline: string;
   position: string;
   skillLevel: SkillLevel | "";
+  // Highest competition tier the athlete has achieved/participated at.
+  competitionLevel: CompetitionLevel | "";
+  // Multi-select -- the kinds of support the athlete is looking for.
+  supportNeeded: string[];
+  // Free-text detail, shown only when supportNeeded includes "Other".
+  supportNeededOther: string;
 }
+
+export type CertificateLevel =
+  | "taluk"
+  | "district"
+  | "division"
+  | "state"
+  | "national"
+  | "international";
+
+// Admin-controlled only -- the athlete has read-only visibility (see
+// AchievementsSection). "pending" is always the value for a brand-new
+// achievement; only an admin RPC can move it to verified/rejected.
+export type VerificationStatus = "pending" | "verified" | "rejected";
 
 export interface Achievement {
   // Present once the achievement has been persisted -- absent for rows the
@@ -63,6 +104,13 @@ export interface Achievement {
   organization: string;
   date: string;
   description: string;
+  // The competition tier this specific achievement was earned at.
+  certificateLevel: CertificateLevel | "";
+  // Read-only -- absent for a row that hasn't been saved yet (nothing to
+  // verify), "pending" the moment it's first persisted. Never sent back to
+  // the server; see registration-payload.ts, which drops it from the RPC
+  // payload entirely, matching the RPC's own refusal to accept it.
+  verificationStatus?: VerificationStatus;
   // A freshly picked, not-yet-uploaded file. Cleared back to null once it's
   // been uploaded and documentPath is set -- never sent to the server or
   // persisted anywhere itself.
@@ -77,9 +125,56 @@ export interface AdditionalRecognition {
   scholarshipRecipient: ScholarshipStatus | "";
 }
 
+export type EmploymentType =
+  | "full-time"
+  | "part-time"
+  | "freelance"
+  | "internship"
+  | "self-employed"
+  | "student"
+  | "unemployed";
+
+export type YearsExperience = "0-1" | "2-3" | "4-6" | "7-10" | "10+";
+
+export interface Employment {
+  employmentType: EmploymentType | "";
+  organization: string;
+  jobTitle: string;
+  yearsExperience: YearsExperience | "";
+}
+
+export type ApparelSize = "XS" | "S" | "M" | "L" | "XL" | "XXL" | "XXXL";
+export type ShortsSize = "XS" | "S" | "M" | "L" | "XL" | "XXL";
+// India/UK numeric shoe sizing -- stored as text (matches the dropdown
+// values exactly), never cast to a number.
+export type ShoeSize = "4" | "5" | "6" | "7" | "8" | "9" | "10" | "11" | "12" | "13";
+
+export interface ApparelLogistics {
+  trackSuitSize: ApparelSize | "";
+  tshirtSize: ApparelSize | "";
+  shortsSize: ShortsSize | "";
+  shoeSize: ShoeSize | "";
+}
+
+export interface ProfileSetup {
+  // A freshly picked, not-yet-uploaded photo. Cleared back to null once
+  // it's been uploaded and photoPath is set -- never sent to the server or
+  // persisted anywhere itself (same document/documentPath split as an
+  // Achievement's file).
+  photo: File | null;
+  photoPath?: string | null;
+  shortBio: string;
+  instagramUrl: string;
+  facebookUrl: string;
+  otherUrl: string;
+}
+
 export interface AthleteRegistrationFormValues {
   personalDetails: PersonalDetails;
   sportsInformation: SportsInformation;
   achievements: Achievement[];
   additionalRecognition: AdditionalRecognition;
+  employment: Employment;
+  apparelLogistics: ApparelLogistics;
+  profileSetup: ProfileSetup;
 }

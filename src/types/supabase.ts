@@ -25,6 +25,7 @@ export type Database = {
           id: string
           id_proof_path: string | null
           location: string | null
+          profile_photo_path: string | null
           registration_id: string | null
           sports_offered: string | null
           updated_at: string
@@ -40,6 +41,7 @@ export type Database = {
           id?: string
           id_proof_path?: string | null
           location?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           sports_offered?: string | null
           updated_at?: string
@@ -55,6 +57,7 @@ export type Database = {
           id?: string
           id_proof_path?: string | null
           location?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           sports_offered?: string | null
           updated_at?: string
@@ -75,6 +78,7 @@ export type Database = {
           achievement_date: string | null
           achievement_type: string | null
           athlete_profile_id: string
+          certificate_level: string | null
           created_at: string
           description: string | null
           document_path: string | null
@@ -82,11 +86,13 @@ export type Database = {
           issuing_organization: string | null
           title: string | null
           updated_at: string
+          verification_status: string
         }
         Insert: {
           achievement_date?: string | null
           achievement_type?: string | null
           athlete_profile_id: string
+          certificate_level?: string | null
           created_at?: string
           description?: string | null
           document_path?: string | null
@@ -94,11 +100,13 @@ export type Database = {
           issuing_organization?: string | null
           title?: string | null
           updated_at?: string
+          verification_status?: string
         }
         Update: {
           achievement_date?: string | null
           achievement_type?: string | null
           athlete_profile_id?: string
+          certificate_level?: string | null
           created_at?: string
           description?: string | null
           document_path?: string | null
@@ -106,6 +114,7 @@ export type Database = {
           issuing_organization?: string | null
           title?: string | null
           updated_at?: string
+          verification_status?: string
         }
         Relationships: [
           {
@@ -129,19 +138,32 @@ export type Database = {
           date_of_birth: string | null
           email: string | null
           emergency_contact: string | null
+          employment_type: string | null
+          facebook_url: string | null
           full_name: string | null
           gender: string | null
           id: string
+          instagram_url: string | null
           is_public: boolean
+          job_title: string | null
           mobile_number: string | null
           nationality: string | null
+          organization: string | null
+          other_url: string | null
           preferred_language: string | null
+          profile_photo_path: string | null
           profile_status: string
           public_slug: string | null
           scholarship_recipient: boolean | null
           school_college: string | null
+          shoe_size: string | null
+          short_bio: string | null
+          shorts_size: string | null
+          track_suit_size: string | null
+          tshirt_size: string | null
           updated_at: string
           user_id: string
+          years_experience: string | null
         }
         Insert: {
           aadhaar_or_govt_id?: string | null
@@ -154,19 +176,32 @@ export type Database = {
           date_of_birth?: string | null
           email?: string | null
           emergency_contact?: string | null
+          employment_type?: string | null
+          facebook_url?: string | null
           full_name?: string | null
           gender?: string | null
           id?: string
+          instagram_url?: string | null
           is_public?: boolean
+          job_title?: string | null
           mobile_number?: string | null
           nationality?: string | null
+          organization?: string | null
+          other_url?: string | null
           preferred_language?: string | null
+          profile_photo_path?: string | null
           profile_status?: string
           public_slug?: string | null
           scholarship_recipient?: boolean | null
           school_college?: string | null
+          shoe_size?: string | null
+          short_bio?: string | null
+          shorts_size?: string | null
+          track_suit_size?: string | null
+          tshirt_size?: string | null
           updated_at?: string
           user_id: string
+          years_experience?: string | null
         }
         Update: {
           aadhaar_or_govt_id?: string | null
@@ -179,25 +214,39 @@ export type Database = {
           date_of_birth?: string | null
           email?: string | null
           emergency_contact?: string | null
+          employment_type?: string | null
+          facebook_url?: string | null
           full_name?: string | null
           gender?: string | null
           id?: string
+          instagram_url?: string | null
           is_public?: boolean
+          job_title?: string | null
           mobile_number?: string | null
           nationality?: string | null
+          organization?: string | null
+          other_url?: string | null
           preferred_language?: string | null
+          profile_photo_path?: string | null
           profile_status?: string
           public_slug?: string | null
           scholarship_recipient?: boolean | null
           school_college?: string | null
+          shoe_size?: string | null
+          short_bio?: string | null
+          shorts_size?: string | null
+          track_suit_size?: string | null
+          tshirt_size?: string | null
           updated_at?: string
           user_id?: string
+          years_experience?: string | null
         }
         Relationships: []
       }
       athlete_sports: {
         Row: {
           athlete_profile_id: string
+          competition_level: string | null
           created_at: string
           id: string
           position_role: string | null
@@ -205,10 +254,13 @@ export type Database = {
           skill_level: string | null
           sport_category: string | null
           sport_discipline: string | null
+          support_needed: string[] | null
+          support_needed_other: string | null
           updated_at: string
         }
         Insert: {
           athlete_profile_id: string
+          competition_level?: string | null
           created_at?: string
           id?: string
           position_role?: string | null
@@ -216,10 +268,13 @@ export type Database = {
           skill_level?: string | null
           sport_category?: string | null
           sport_discipline?: string | null
+          support_needed?: string[] | null
+          support_needed_other?: string | null
           updated_at?: string
         }
         Update: {
           athlete_profile_id?: string
+          competition_level?: string | null
           created_at?: string
           id?: string
           position_role?: string | null
@@ -227,6 +282,8 @@ export type Database = {
           skill_level?: string | null
           sport_category?: string | null
           sport_discipline?: string | null
+          support_needed?: string[] | null
+          support_needed_other?: string | null
           updated_at?: string
         }
         Relationships: [
@@ -248,6 +305,7 @@ export type Database = {
           location: string | null
           portfolio_link: string | null
           portfolio_path: string | null
+          profile_photo_path: string | null
           registration_id: string | null
           social_media_handles: string | null
           updated_at: string
@@ -261,6 +319,7 @@ export type Database = {
           location?: string | null
           portfolio_link?: string | null
           portfolio_path?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           social_media_handles?: string | null
           updated_at?: string
@@ -274,6 +333,7 @@ export type Database = {
           location?: string | null
           portfolio_link?: string | null
           portfolio_path?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           social_media_handles?: string | null
           updated_at?: string
@@ -299,6 +359,7 @@ export type Database = {
           id: string
           id_proof_path: string | null
           location: string | null
+          profile_photo_path: string | null
           registration_id: string | null
           role: string | null
           updated_at: string
@@ -313,6 +374,7 @@ export type Database = {
           id?: string
           id_proof_path?: string | null
           location?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           role?: string | null
           updated_at?: string
@@ -327,6 +389,7 @@ export type Database = {
           id?: string
           id_proof_path?: string | null
           location?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           role?: string | null
           updated_at?: string
@@ -353,6 +416,7 @@ export type Database = {
           license_path: string | null
           location: string | null
           organization: string | null
+          profile_photo_path: string | null
           registration_id: string | null
           role: string | null
           updated_at: string
@@ -368,6 +432,7 @@ export type Database = {
           license_path?: string | null
           location?: string | null
           organization?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           role?: string | null
           updated_at?: string
@@ -383,6 +448,7 @@ export type Database = {
           license_path?: string | null
           location?: string | null
           organization?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           role?: string | null
           updated_at?: string
@@ -409,6 +475,7 @@ export type Database = {
           id: string
           id_proof_path: string | null
           location: string | null
+          profile_photo_path: string | null
           registration_id: string | null
           services_offered: string | null
           updated_at: string
@@ -424,6 +491,7 @@ export type Database = {
           id?: string
           id_proof_path?: string | null
           location?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           services_offered?: string | null
           updated_at?: string
@@ -439,6 +507,7 @@ export type Database = {
           id?: string
           id_proof_path?: string | null
           location?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           services_offered?: string | null
           updated_at?: string
@@ -510,6 +579,7 @@ export type Database = {
           id_proof_path: string | null
           location: string | null
           organization_name: string | null
+          profile_photo_path: string | null
           proposal_path: string | null
           registration_id: string | null
           sponsorship_interest: string[] | null
@@ -525,6 +595,7 @@ export type Database = {
           id_proof_path?: string | null
           location?: string | null
           organization_name?: string | null
+          profile_photo_path?: string | null
           proposal_path?: string | null
           registration_id?: string | null
           sponsorship_interest?: string[] | null
@@ -540,6 +611,7 @@ export type Database = {
           id_proof_path?: string | null
           location?: string | null
           organization_name?: string | null
+          profile_photo_path?: string | null
           proposal_path?: string | null
           registration_id?: string | null
           sponsorship_interest?: string[] | null
@@ -592,6 +664,7 @@ export type Database = {
           id: string
           location: string | null
           portfolio_report_path: string | null
+          profile_photo_path: string | null
           registration_id: string | null
           role: string | null
           sports_specialization: string | null
@@ -606,6 +679,7 @@ export type Database = {
           id?: string
           location?: string | null
           portfolio_report_path?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           role?: string | null
           sports_specialization?: string | null
@@ -620,6 +694,7 @@ export type Database = {
           id?: string
           location?: string | null
           portfolio_report_path?: string | null
+          profile_photo_path?: string | null
           registration_id?: string | null
           role?: string | null
           sports_specialization?: string | null
@@ -668,6 +743,23 @@ export type Database = {
           registrations: number
         }[]
       }
+      admin_set_achievement_verification_status: {
+        Args: { p_achievement_id: string; p_status: string }
+        Returns: {
+          achievement_date: string | null
+          achievement_type: string | null
+          athlete_profile_id: string
+          certificate_level: string | null
+          created_at: string
+          description: string | null
+          document_path: string | null
+          id: string
+          issuing_organization: string | null
+          title: string | null
+          updated_at: string
+          verification_status: string
+        }
+      }
       ensure_sportfo_id: { Args: never; Returns: string }
       generate_athlete_public_slug: {
         Args: { p_full_name: string }
@@ -682,10 +774,12 @@ export type Database = {
         Returns: {
           achievement_date: string
           achievement_type: string
+          certificate_level: string
           description: string
           has_document: boolean
           issuing_organization: string
           title: string
+          verification_status: string
         }[]
       }
       get_public_athlete_countries: {
@@ -700,12 +794,18 @@ export type Database = {
           city: string
           club_academy: string
           coach_mentor: string
+          competition_level: string
           country: string
+          facebook_url: string
           full_name: string
+          instagram_url: string
           nationality: string
+          other_url: string
           position_role: string
           primary_sport: string
+          profile_photo_path: string
           school_college: string
+          short_bio: string
           skill_level: string
           sport_category: string
           sport_discipline: string
@@ -722,23 +822,39 @@ export type Database = {
           p_city: string
           p_club_academy: string
           p_coach_mentor: string
+          p_competition_level?: string
           p_country: string
           p_date_of_birth: string
           p_email: string
           p_emergency_contact?: string
+          p_employment_type?: string
+          p_facebook_url?: string
           p_full_name: string
           p_gender: string
+          p_instagram_url?: string
+          p_job_title?: string
           p_mobile_number: string
           p_nationality: string
+          p_organization?: string
+          p_other_url?: string
           p_position_role: string
           p_preferred_language?: string
           p_primary_sport: string
+          p_profile_photo_path?: string
           p_profile_status: string
           p_scholarship_recipient: boolean
           p_school_college: string
+          p_shoe_size?: string
+          p_short_bio?: string
+          p_shorts_size?: string
           p_skill_level: string
           p_sport_category: string
           p_sport_discipline: string
+          p_support_needed?: string[]
+          p_support_needed_other?: string
+          p_track_suit_size?: string
+          p_tshirt_size?: string
+          p_years_experience?: string
         }
         Returns: Json
       }
@@ -749,6 +865,7 @@ export type Database = {
       search_public_athletes: {
         Args: {
           p_city?: string
+          p_competition_level?: string
           p_country?: string
           p_page?: number
           p_page_size?: number

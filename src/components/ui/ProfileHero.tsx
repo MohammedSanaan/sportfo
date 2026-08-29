@@ -27,6 +27,9 @@ interface ProfileHeroProps {
   // entirely (not just blank) when not provided, e.g. before the public
   // profile RPC is extended to return it.
   sportfoId?: string | null;
+  // A ready-to-render public Storage URL (see buildProfilePhotoUrl) -- falls
+  // back to initials in AthleteAvatar when not provided.
+  photoUrl?: string | null;
   locale: Locale;
 }
 
@@ -60,6 +63,7 @@ export function ProfileHero({
   headingLevel = "h1",
   bannerImage,
   sportfoId,
+  photoUrl,
   locale,
 }: ProfileHeroProps) {
   const t = (key: string) => translate(locale, key);
@@ -96,6 +100,7 @@ export function ProfileHero({
             <AthleteAvatar
               fullName={fullName}
               size="xl"
+              photoUrl={photoUrl}
               className={
                 bannerImage
                   ? "-mt-16 ring-4 ring-surface sm:-mt-20"

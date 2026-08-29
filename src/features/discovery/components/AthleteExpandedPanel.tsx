@@ -8,6 +8,7 @@ import {
 } from "@/lib/athlete-options";
 import { Badge } from "@/components/ui/Badge";
 import { AthleteAvatar } from "@/components/ui/AthleteAvatar";
+import { buildProfilePhotoUrl } from "@/lib/storage/profile-photo";
 import type { PublicAthleteSearchResult } from "@/lib/athlete/discovery";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
@@ -42,6 +43,7 @@ export function AthleteExpandedPanel({
     .join(" • ");
   const competitionLevelLabel = getOptionLabel(COMPETITION_LEVELS, athlete.competition_level);
   const parallelTrackLabel = getOptionLabel(PARALLEL_TRACKS, athlete.parallel_track);
+  const photoUrl = buildProfilePhotoUrl(athlete.profile_photo_path);
 
   return (
     <div className="flex flex-1 flex-col p-6 sm:p-8">
@@ -55,7 +57,7 @@ export function AthleteExpandedPanel({
       </button>
 
       <div className="flex items-center gap-4">
-        <AthleteAvatar fullName={athlete.full_name} size="lg" />
+        <AthleteAvatar fullName={athlete.full_name} size="lg" photoUrl={photoUrl} />
         <div className="flex flex-col gap-1.5">
           <div className="flex flex-wrap gap-1.5">
             <Badge>{t("athletes.sportfoAthleteBadge")}</Badge>

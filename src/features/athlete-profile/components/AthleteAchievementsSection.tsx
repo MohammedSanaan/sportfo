@@ -35,6 +35,9 @@ export function AthleteAchievementsSection({
               issuingOrganization={achievement.issuing_organization}
               achievementDate={achievement.achievement_date}
               description={achievement.description}
+              certificateLevel={achievement.certificate_level}
+              verificationStatus={achievement.verification_status}
+              showAllVerificationStatuses
               locale={locale}
               documentAction={
                 achievement.document_path ? (

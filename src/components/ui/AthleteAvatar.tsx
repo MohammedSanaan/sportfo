@@ -7,11 +7,12 @@ interface AthleteAvatarProps {
   fullName: string | null;
   size?: AthleteAvatarSize;
   className?: string;
+  // A ready-to-render public Storage URL (see getProfilePhotoUrl) -- never
+  // a placeholder/stock/AI face standing in for a real athlete; falls back
+  // to initials whenever no real photo exists.
+  photoUrl?: string | null;
 }
 
-// No profile-photo uploads exist anywhere in this codebase -- this is
-// intentionally initials-only, never a placeholder/stock/AI face standing
-// in for a real athlete.
 const sizeStyles: Record<AthleteAvatarSize, string> = {
   sm: "h-10 w-10 text-sm",
   md: "h-14 w-14 text-lg",
@@ -19,7 +20,19 @@ const sizeStyles: Record<AthleteAvatarSize, string> = {
   xl: "h-24 w-24 text-3xl sm:h-28 sm:w-28 sm:text-4xl",
 };
 
-export function AthleteAvatar({ fullName, size = "md", className }: AthleteAvatarProps) {
+export function AthleteAvatar({ fullName, size = "md", className, photoUrl }: AthleteAvatarProps) {
+  if (photoUrl) {
+    return (
+      /* An external Supabase Storage public URL, not a static/known-remote-pattern asset next/image can optimize. */
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={photoUrl}
+        alt=""
+        className={cn("shrink-0 rounded-full object-cover", sizeStyles[size], className)}
+      />
+    );
+  }
+
   return (
     <div
       aria-hidden

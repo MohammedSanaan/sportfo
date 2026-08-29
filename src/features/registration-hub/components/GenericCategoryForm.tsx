@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
@@ -8,11 +8,17 @@ import { Select } from "@/components/ui/Select";
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { FieldShell } from "@/components/ui/FieldShell";
+import { ProfilePhotoField } from "@/components/ui/ProfilePhotoField";
 import { AlreadyRegisteredNotice } from "@/components/ui/AlreadyRegisteredNotice";
 import { cn } from "@/lib/cn";
-import { validateAchievementDocument, MAX_DOCUMENT_SIZE_LABEL } from "@/lib/file-validation";
+import {
+  validateAchievementDocument,
+  validateProfilePhoto,
+  MAX_DOCUMENT_SIZE_LABEL,
+} from "@/lib/file-validation";
 import { displayFilenameFromPath } from "@/lib/storage/achievement-documents";
 import { uploadRoleRegistrationDocument } from "@/lib/storage/role-registration-documents";
+import { uploadProfilePhoto, buildProfilePhotoUrl } from "@/lib/storage/profile-photo";
 import { createClient } from "@/lib/supabase/client";
 import { getOwnSportfoId } from "@/lib/sportfo-id/server";
 import {
@@ -63,7 +69,7 @@ function buildDefaultValues(
       if (field.type === "multiselect") {
         return [field.id, Array.isArray(existing) ? existing.map(String) : []];
       }
-      if (field.type === "file") {
+      if (field.type === "file" || field.type === "photo") {
         return [field.id, typeof existing === "string" && existing ? existing : null];
       }
       if (existing === null || existing === undefined) {
@@ -172,14 +178,22 @@ export function GenericCategoryForm({
     const payload: Record<string, Json> = {};
     for (const field of fields) {
       const value = values[field.id];
-      if (field.type === "file") {
+      if (field.type === "file" || field.type === "photo") {
         if (value instanceof File) {
-          const uploadResult = await uploadRoleRegistrationDocument(supabase, {
-            userId,
-            registrationType: category.registrationType,
-            fieldId: field.id,
-            file: value,
-          });
+          // A "photo" field goes to the shared public profile-photos
+          // bucket (same one used by Athlete Profile Setup); every other
+          // "file" field keeps going to the private role-registration
+          // bucket -- never mixed, since only the former is ever meant to
+          // be publicly viewable.
+          const uploadResult =
+            field.type === "photo"
+              ? await uploadProfilePhoto(supabase, { userId, file: value })
+              : await uploadRoleRegistrationDocument(supabase, {
+                  userId,
+                  registrationType: category.registrationType,
+                  fieldId: field.id,
+                  file: value,
+                });
           if (!uploadResult.ok) {
             setIsSaving(false);
             setSubmitError(uploadResult.error ?? t("registerHub.errors.uploadFailed"));
@@ -281,6 +295,37 @@ export function GenericCategoryForm({
               message: t("registerHub.validation.numberRange", { min: field.min, max: field.max }),
             },
           })}
+        />
+      );
+    }
+
+    if (field.type === "photo") {
+      return (
+        <Controller
+          key={field.id}
+          name={field.id}
+          control={control}
+          rules={{
+            validate: (value) => {
+              if (field.required && !value) return t("registerHub.validation.required");
+              if (value instanceof File) {
+                const result = validateProfilePhoto(value);
+                return result === true ? true : result;
+              }
+              return true;
+            },
+          }}
+          render={({ field: rhfField, fieldState }) => (
+            <PhotoFieldPreview
+              id={field.id}
+              label={label}
+              optional={!field.required}
+              error={fieldState.error?.message}
+              value={rhfField.value instanceof File || typeof rhfField.value === "string" ? rhfField.value : null}
+              onFileSelected={(file) => rhfField.onChange(file)}
+              onRemoveExisting={() => rhfField.onChange(null)}
+            />
+          )}
         />
       );
     }
@@ -448,5 +493,62 @@ export function GenericCategoryForm({
         </form>
       </SectionCard>
     </div>
+  );
+}
+
+interface PhotoFieldPreviewProps {
+  id: string;
+  label: string;
+  optional: boolean;
+  error?: string;
+  /** A freshly picked File, an already-uploaded Storage path, or null. */
+  value: File | string | null;
+  onFileSelected: (file: File | null) => void;
+  onRemoveExisting: () => void;
+}
+
+// Resolves a react-hook-form "photo" field's raw File|string|null value
+// into a ready-to-render preview URL for ProfilePhotoField -- a fresh File
+// gets a local object URL (created/revoked here, never leaked across
+// renders); an already-uploaded path gets the shared public bucket's URL
+// via buildProfilePhotoUrl. Isolated into its own component (rather than
+// inline in renderField) so this object-URL lifecycle has a stable place
+// to hook into useEffect's cleanup.
+function PhotoFieldPreview({
+  id,
+  label,
+  optional,
+  error,
+  value,
+  onFileSelected,
+  onRemoveExisting,
+}: PhotoFieldPreviewProps) {
+  // Derived during render (not via setState-in-effect) -- a plain function
+  // of `value`, so useMemo is the right tool; a separate effect below only
+  // ever runs for its cleanup (revoking the previous object URL), never to
+  // set state itself.
+  const objectUrl = useMemo(
+    () => (value instanceof File ? URL.createObjectURL(value) : null),
+    [value],
+  );
+
+  useEffect(() => {
+    return () => {
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [objectUrl]);
+
+  const previewUrl = value instanceof File ? objectUrl : buildProfilePhotoUrl(value);
+
+  return (
+    <ProfilePhotoField
+      id={id}
+      label={label}
+      optional={optional}
+      error={error}
+      previewUrl={previewUrl}
+      onFileSelected={onFileSelected}
+      onRemoveExisting={typeof value === "string" ? onRemoveExisting : undefined}
+    />
   );
 }

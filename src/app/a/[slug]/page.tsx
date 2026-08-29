@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { loadPublicAthleteProfile } from "@/lib/athlete/public-profile";
 import { getOptionLabel, PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
 import { ProfileHero } from "@/components/ui/ProfileHero";
+import { buildProfilePhotoUrl } from "@/lib/storage/profile-photo";
 import { PublicProfileSummary } from "@/features/public-profile/components/PublicProfileSummary";
 import { PublicSportsSection } from "@/features/public-profile/components/PublicSportsSection";
 import { PublicAchievementsSection } from "@/features/public-profile/components/PublicAchievementsSection";
@@ -73,6 +74,7 @@ export default async function PublicAthleteProfilePage({
           actions={<ShareProfileButton />}
           bannerImage="/images/profile-banner-track.jpg"
           sportfoId={profile.sportfo_id}
+          photoUrl={buildProfilePhotoUrl(profile.profile_photo_path)}
           locale={locale}
         />
 

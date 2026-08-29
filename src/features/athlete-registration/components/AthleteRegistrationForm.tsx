@@ -12,6 +12,7 @@ import {
   deleteAchievementDocumentObject,
   uploadAchievementDocument,
 } from "@/lib/storage/achievement-documents";
+import { deleteProfilePhotoObject, uploadProfilePhoto } from "@/lib/storage/profile-photo";
 import {
   clearRegistrationDraft,
   consumeRegistrationDraft,
@@ -27,6 +28,11 @@ import {
 } from "../actions";
 import { AchievementsSection } from "./AchievementsSection";
 import { AdditionalRecognitionSection } from "./AdditionalRecognitionSection";
+import { EmploymentSection } from "./EmploymentSection";
+import { ApparelLogisticsSection } from "./ApparelLogisticsSection";
+import { ProfileSetupSection } from "./ProfileSetupSection";
+import { VerifyActivateSection } from "./VerifyActivateSection";
+import { RegistrationProgressBar } from "./RegistrationProgressBar";
 import { FormActions } from "./FormActions";
 import { PersonalDetailsSection } from "./PersonalDetailsSection";
 import { RegistrationSuccess } from "./RegistrationSuccess";
@@ -62,9 +68,10 @@ interface StoredDraft {
   hadPendingFiles: boolean;
 }
 
-// Achievement rows can't survive a sessionStorage round-trip with their
-// picked-but-not-yet-uploaded File intact -- strip it out, same as the RPC
-// payload already does, and record whether any were dropped.
+// Achievement rows (and the profile photo) can't survive a sessionStorage
+// round-trip with their picked-but-not-yet-uploaded File intact -- strip
+// them out, same as the RPC payload already does, and record whether any
+// were dropped.
 function buildStoredDraft(values: AthleteRegistrationFormValues): StoredDraft {
   return {
     values: {
@@ -73,8 +80,11 @@ function buildStoredDraft(values: AthleteRegistrationFormValues): StoredDraft {
         ...achievement,
         document: null,
       })),
+      profileSetup: { ...values.profileSetup, photo: null },
     },
-    hadPendingFiles: values.achievements.some((achievement) => achievement.document instanceof File),
+    hadPendingFiles:
+      values.achievements.some((achievement) => achievement.document instanceof File) ||
+      values.profileSetup.photo instanceof File,
   };
 }
 
@@ -307,10 +317,49 @@ export function AthleteRegistrationForm({
       })),
     };
 
+    // Profile photo goes to the public profile-photos bucket keyed only by
+    // the athlete's own user id (no dependent-row id needed first, unlike
+    // an achievement document) -- so unlike uploadAndPersist above, this
+    // can always upload immediately, right before the save RPC call, never
+    // deferred to "after this row gets a real id".
+    let photoUploadFailed = false;
+    if (values.profileSetup.photo instanceof File) {
+      const { data: userData, error: userError } = await supabase.auth.getUser();
+      if (userError || !userData.user) {
+        setBanner({ kind: "error", message: "Your session has expired. Please sign in again." });
+        return { ok: false, uploadFailures: 0 };
+      }
+
+      const uploadResult = await uploadProfilePhoto(supabase, {
+        userId: userData.user.id,
+        file: values.profileSetup.photo,
+      });
+
+      if (uploadResult.ok && uploadResult.path) {
+        const previousPath = values.profileSetup.photoPath;
+        payload.profileSetup = {
+          ...payload.profileSetup,
+          photo: null,
+          photoPath: uploadResult.path,
+        };
+        if (previousPath && previousPath !== uploadResult.path) {
+          await deleteProfilePhotoObject(supabase, previousPath);
+        }
+        setValue("profileSetup.photo", null);
+        setValue("profileSetup.photoPath", uploadResult.path);
+      } else {
+        // The rest of the registration still saves -- a failed photo
+        // upload is reported as a soft failure (same treatment as a failed
+        // achievement document upload), never a reason to block the whole
+        // save.
+        photoUploadFailed = true;
+      }
+    }
+
     const result = await action(payload);
     if (!result.ok) {
       setBanner({ kind: "error", message: result.error });
-      return { ok: false, uploadFailures: 0 };
+      return { ok: false, uploadFailures: photoUploadFailed ? 1 : 0 };
     }
 
     const merged = [...beforeAchievements];
@@ -321,6 +370,11 @@ export function AthleteRegistrationForm({
         ...merged[originalIndex],
         id: serverRow.id,
         documentPath: serverRow.documentPath ?? merged[originalIndex].documentPath ?? null,
+        // A brand-new achievement has no verificationStatus locally (there
+        // was nothing to verify yet) -- pick up the database default
+        // ('pending') from the server's echo immediately, rather than
+        // leaving the badge missing until the next full page load.
+        verificationStatus: serverRow.verificationStatus ?? merged[originalIndex].verificationStatus,
       };
     });
 
@@ -361,7 +415,7 @@ export function AthleteRegistrationForm({
       setPhaseLabel(undefined);
     }
 
-    return { ok: true, uploadFailures };
+    return { ok: true, uploadFailures: uploadFailures + (photoUploadFailed ? 1 : 0) };
   }
 
   // The one auth checkpoint for this whole form -- called at the top of
@@ -466,6 +520,7 @@ export function AthleteRegistrationForm({
   return (
     <FormProvider {...methods}>
       <form noValidate onSubmit={onFormSubmit} className="flex flex-col gap-6">
+        <RegistrationProgressBar />
         {banner && (
           <div
             role={banner.kind === "error" ? "alert" : "status"}
@@ -496,6 +551,18 @@ export function AthleteRegistrationForm({
           />
         </div>
         <AdditionalRecognitionSection />
+        <div id="section-employment" className="scroll-mt-24">
+          <EmploymentSection />
+        </div>
+        <div id="section-apparel" className="scroll-mt-24">
+          <ApparelLogisticsSection />
+        </div>
+        <div id="section-profile" className="scroll-mt-24">
+          <ProfileSetupSection />
+        </div>
+        <div id="section-verify" className="scroll-mt-24">
+          <VerifyActivateSection />
+        </div>
         <div id="section-review" className="scroll-mt-24">
           <FormActions
             onSaveDraft={handleSaveDraft}

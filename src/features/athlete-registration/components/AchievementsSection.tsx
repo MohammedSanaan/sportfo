@@ -15,6 +15,7 @@ function createEmptyAchievement(): Achievement {
     organization: "",
     date: "",
     description: "",
+    certificateLevel: "",
     document: null,
     documentPath: null,
   };

@@ -7,11 +7,18 @@ export interface PublicAthleteSearchResult {
   primary_sport: string | null;
   skill_level: string | null;
   competition_level: string | null;
-  parallel_track: string | null;
+  // Not currently returned by search_public_athletes (see the migration
+  // that added competition_level -- parallel_track was a separate,
+  // never-applied concept from an orphaned migration file and is out of
+  // this task's scope) -- optional so this type doesn't claim a field the
+  // RPC doesn't actually send. getOptionLabel already treats a missing
+  // value the same as an empty one.
+  parallel_track?: string | null;
   country: string | null;
   city: string | null;
   nationality: string | null;
   achievement_count: number;
+  profile_photo_path: string | null;
 }
 
 interface SearchPublicAthletesRpcResult {

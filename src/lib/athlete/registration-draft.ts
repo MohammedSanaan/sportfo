@@ -1,7 +1,17 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/supabase";
 import type { DbGender, DbSkillLevel } from "@/types/database";
-import type { AthleteRegistrationFormValues } from "@/types/athlete";
+import type {
+  AthleteRegistrationFormValues,
+  CertificateLevel,
+  CompetitionLevel,
+  EmploymentType,
+  VerificationStatus,
+  YearsExperience,
+  ApparelSize,
+  ShortsSize,
+  ShoeSize,
+} from "@/types/athlete";
 import { isLocale, type Locale } from "@/i18n/config";
 
 type ProfileRow = Database["public"]["Tables"]["athlete_profiles"]["Row"];
@@ -106,6 +116,9 @@ export function mapDraftToFormValues(
       discipline: sport?.sport_discipline ?? "",
       position: sport?.position_role ?? "",
       skillLevel: (sport?.skill_level as DbSkillLevel | null) ?? "",
+      competitionLevel: (sport?.competition_level as CompetitionLevel | null) ?? "",
+      supportNeeded: sport?.support_needed ?? [],
+      supportNeededOther: sport?.support_needed_other ?? "",
     },
     achievements: achievements.map((row) => ({
       id: row.id,
@@ -114,6 +127,8 @@ export function mapDraftToFormValues(
       organization: row.issuing_organization ?? "",
       date: row.achievement_date ?? "",
       description: row.description ?? "",
+      certificateLevel: (row.certificate_level as CertificateLevel | null) ?? "",
+      verificationStatus: (row.verification_status as VerificationStatus | null) ?? undefined,
       document: null,
       documentPath: row.document_path ?? null,
     })),
@@ -125,6 +140,26 @@ export function mapDraftToFormValues(
           : profile.scholarship_recipient
             ? "yes"
             : "no",
+    },
+    employment: {
+      employmentType: (profile.employment_type as EmploymentType | null) ?? "",
+      organization: profile.organization ?? "",
+      jobTitle: profile.job_title ?? "",
+      yearsExperience: (profile.years_experience as YearsExperience | null) ?? "",
+    },
+    apparelLogistics: {
+      trackSuitSize: (profile.track_suit_size as ApparelSize | null) ?? "",
+      tshirtSize: (profile.tshirt_size as ApparelSize | null) ?? "",
+      shortsSize: (profile.shorts_size as ShortsSize | null) ?? "",
+      shoeSize: (profile.shoe_size as ShoeSize | null) ?? "",
+    },
+    profileSetup: {
+      photo: null,
+      photoPath: profile.profile_photo_path ?? null,
+      shortBio: profile.short_bio ?? "",
+      instagramUrl: profile.instagram_url ?? "",
+      facebookUrl: profile.facebook_url ?? "",
+      otherUrl: profile.other_url ?? "",
     },
   };
 }
@@ -162,11 +197,34 @@ export function buildEmptyFormValues(
       discipline: "",
       position: "",
       skillLevel: "",
+      competitionLevel: "",
+      supportNeeded: [],
+      supportNeededOther: "",
     },
     achievements: [],
     additionalRecognition: {
       awards: "",
       scholarshipRecipient: "",
+    },
+    employment: {
+      employmentType: "",
+      organization: "",
+      jobTitle: "",
+      yearsExperience: "",
+    },
+    apparelLogistics: {
+      trackSuitSize: "",
+      tshirtSize: "",
+      shortsSize: "",
+      shoeSize: "",
+    },
+    profileSetup: {
+      photo: null,
+      photoPath: null,
+      shortBio: "",
+      instagramUrl: "",
+      facebookUrl: "",
+      otherUrl: "",
     },
   };
 }

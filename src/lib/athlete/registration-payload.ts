@@ -23,6 +23,11 @@ function mapAchievement(achievement: Achievement) {
     issuing_organization: emptyToNull(achievement.organization),
     achievement_date: emptyToNull(achievement.date),
     description: emptyToNull(achievement.description),
+    certificate_level: emptyToNull(achievement.certificateLevel),
+    // verification_status is deliberately never sent -- it's read-only for
+    // the athlete (see AchievementForm's badge) and the RPC itself never
+    // reads this key from the input jsonb, only writes it (default
+    // 'pending' on insert, otherwise untouched on update).
   };
   // Only include `id` for achievements that already exist in the database --
   // its presence is how the RPC tells an update from an insert.
@@ -43,8 +48,24 @@ export function buildSaveRegistrationArgs(
   status: ProfileStatus,
   authenticatedPhone: string,
 ): RpcArgs {
-  const { personalDetails, sportsInformation, achievements, additionalRecognition } =
-    values;
+  const {
+    personalDetails,
+    sportsInformation,
+    achievements,
+    additionalRecognition,
+    employment,
+    apparelLogistics,
+    profileSetup,
+  } = values;
+
+  // "Other" is only ever a real selection alongside the rest of the array
+  // -- an empty array is sent as null (matching every other empty-field
+  // convention in this payload), never `[]`, to keep "no support needed
+  // selected" and "field intentionally cleared" indistinguishable from
+  // every other optional field here.
+  const supportNeeded = sportsInformation.supportNeeded.length > 0
+    ? sportsInformation.supportNeeded
+    : null;
 
   return {
     p_profile_status: status,
@@ -74,6 +95,29 @@ export function buildSaveRegistrationArgs(
     p_sport_discipline: emptyToNull(sportsInformation.discipline),
     p_position_role: emptyToNull(sportsInformation.position),
     p_skill_level: emptyToNull(sportsInformation.skillLevel),
+    p_competition_level: emptyToNull(sportsInformation.competitionLevel),
+    p_support_needed: supportNeeded,
+    p_support_needed_other: emptyToNull(sportsInformation.supportNeededOther),
+    p_employment_type: emptyToNull(employment.employmentType),
+    p_organization: emptyToNull(employment.organization),
+    p_job_title: emptyToNull(employment.jobTitle),
+    p_years_experience: emptyToNull(employment.yearsExperience),
+    p_track_suit_size: emptyToNull(apparelLogistics.trackSuitSize),
+    p_tshirt_size: emptyToNull(apparelLogistics.tshirtSize),
+    p_shorts_size: emptyToNull(apparelLogistics.shortsSize),
+    p_shoe_size: emptyToNull(apparelLogistics.shoeSize),
+    p_short_bio: emptyToNull(profileSetup.shortBio),
+    p_instagram_url: emptyToNull(profileSetup.instagramUrl),
+    p_facebook_url: emptyToNull(profileSetup.facebookUrl),
+    p_other_url: emptyToNull(profileSetup.otherUrl),
+    // Never the raw File -- persistAndSync (AthleteRegistrationForm.tsx)
+    // uploads it and writes the resulting Storage path into
+    // profileSetup.photoPath *before* this function is called, so by the
+    // time buildSaveRegistrationArgs runs there's only ever a path (or
+    // null) left to send. Uses coalesce(new, existing) at the database
+    // layer, so omitting a re-upload here never erases a previously
+    // uploaded photo.
+    p_profile_photo_path: emptyToNull(profileSetup.photoPath),
     p_achievements: achievements.map(mapAchievement),
   } as RpcArgs;
 }

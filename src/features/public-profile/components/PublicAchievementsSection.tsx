@@ -37,6 +37,8 @@ export function PublicAchievementsSection({ achievements, locale }: PublicAchiev
               issuingOrganization={achievement.issuing_organization}
               achievementDate={achievement.achievement_date}
               description={achievement.description}
+              certificateLevel={achievement.certificate_level}
+              verificationStatus={achievement.verification_status}
               locale={locale}
               documentAction={
                 achievement.has_document ? (
