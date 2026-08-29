@@ -6,6 +6,7 @@ const ta: Dictionary = {
     dismiss: "மூடு",
   },
   nav: {
+    dashboard: "டாஷ்போர்டு",
     discoverAthletes: "விளையாட்டு வீரர்களைக் கண்டறியவும்",
     signIn: "உள்நுழைவு",
     joinSportfo: "SportFo இல் இணையுங்கள்",
@@ -1151,7 +1152,12 @@ const ta: Dictionary = {
       academies: "அகாடமிகள்",
       sponsors: "நிதியுதவியாளர்கள்",
     },
-    myStats: { title: "எனது புள்ளிவிவரங்கள்" },
+    myStats: {
+      title: "எனது புள்ளிவிவரங்கள்",
+      followers: "பின்தொடர்பவர்கள்",
+      rank: "மாநில தரவரிசை",
+      medals: "பதக்கங்கள்",
+    },
     stats: {
       profile: "சுயவிவரம்",
       achievements: "சாதனைகள்",
@@ -1160,10 +1166,15 @@ const ta: Dictionary = {
     topCoaches: {
       title: "சிறந்த பயிற்சியாளர்கள்",
       comingSoon: "பயிற்சியாளர் கண்டறிதல் விரைவில் வரும்.",
+      follow: "பின்தொடரவும்",
     },
     recommendedAcademies: {
       title: "பரிந்துரைக்கப்பட்ட அகாடமிகள்",
       comingSoon: "SportFo உங்கள் விளையாட்டு மற்றும் இருப்பிடத்தை அறிந்துகொள்ளும்போது, பரிந்துரைகள் இங்கே தோன்றும்.",
+    },
+    demo: {
+      badge: "டெமோ தரவு",
+      onlyLabel: "டெமோ மட்டும்",
     },
     footer: {
       copyright: "SPORTFO © 2026",

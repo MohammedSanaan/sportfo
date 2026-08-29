@@ -6,6 +6,7 @@ const ml: Dictionary = {
     dismiss: "അടയ്ക്കുക",
   },
   nav: {
+    dashboard: "ഡാഷ്ബോർഡ്",
     discoverAthletes: "അത്‌ലറ്റുകളെ കണ്ടെത്തുക",
     signIn: "ലോഗിൻ",
     joinSportfo: "SportFo ൽ ചേരുക",
@@ -1149,7 +1150,12 @@ const ml: Dictionary = {
       academies: "അക്കാദമികൾ",
       sponsors: "സ്പോൺസർമാർ",
     },
-    myStats: { title: "എന്റെ സ്ഥിതിവിവരക്കണക്കുകൾ" },
+    myStats: {
+      title: "എന്റെ സ്ഥിതിവിവരക്കണക്കുകൾ",
+      followers: "ഫോളോവേഴ്‌സ്",
+      rank: "സംസ്ഥാന റാങ്ക്",
+      medals: "മെഡലുകൾ",
+    },
     stats: {
       profile: "പ്രൊഫൈൽ",
       achievements: "നേട്ടങ്ങൾ",
@@ -1158,10 +1164,15 @@ const ml: Dictionary = {
     topCoaches: {
       title: "മികച്ച കോച്ചുകൾ",
       comingSoon: "കോച്ച് കണ്ടെത്തൽ ഉടൻ വരുന്നു.",
+      follow: "ഫോളോ ചെയ്യുക",
     },
     recommendedAcademies: {
       title: "ശുപാർശ ചെയ്ത അക്കാദമികൾ",
       comingSoon: "SportFo നിങ്ങളുടെ കായിക ഇനവും സ്ഥലവും മനസ്സിലാക്കുന്നതനുസരിച്ച്, ശുപാർശകൾ ഇവിടെ ദൃശ്യമാകും.",
+    },
+    demo: {
+      badge: "ഡെമോ ഡാറ്റ",
+      onlyLabel: "ഡെമോ മാത്രം",
     },
     footer: {
       copyright: "SPORTFO © 2026",

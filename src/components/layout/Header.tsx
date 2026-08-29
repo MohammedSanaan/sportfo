@@ -2,9 +2,10 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { AuthNav } from "./AuthNav";
 import { MobileMenuToggle } from "./MobileMenuToggle";
-import { HeaderNavDesktop, HeaderNavMobile } from "./HeaderNav";
+import { HeaderNavDesktop, HeaderNavMobile, type PlainLink } from "./HeaderNav";
 import { LanguageSelector } from "./LanguageSelector";
 import { translate } from "@/i18n/dictionary";
+import { getAuthUser } from "@/lib/supabase/auth-user";
 import type { Locale } from "@/i18n/config";
 
 function AuthNavFallback() {
@@ -31,15 +32,33 @@ const NAV_ITEMS = [
   { key: "contact", href: "#contact" },
 ] as const;
 
-export function Header({ locale }: { locale: Locale }) {
+export async function Header({ locale }: { locale: Locale }) {
   const navItems = NAV_ITEMS.map((item) => ({
     ...item,
     label: translate(locale, `navigation.${item.key}`),
   }));
+
+  // getAuthUser() is React `cache()`-wrapped (see src/lib/supabase/auth-
+  // user.ts), so this and AuthNav's own call below resolve to a single
+  // deduped Supabase request per page render -- adding this check does not
+  // double the auth work Header was already paying for downstream via
+  // <AuthNav>, it only moves the (already-cached) boolean up a level so
+  // the nav pill row can use it too.
+  const user = await getAuthUser();
+
   // "Discover Athletes" lives on the left with the main nav (not in the
   // right-side auth actions) -- it's a real page, not a homepage scroll
-  // section, so it's passed separately as a plain link.
-  const discoverAthletesLink = [{ href: "/athletes", label: translate(locale, "nav.discoverAthletes") }];
+  // section, so it's passed separately as a plain link. "Dashboard" joins
+  // it here (also a real route, not a scroll section) but only once
+  // authenticated -- a guest opening /dashboard directly is still redirected
+  // to /auth by src/proxy.ts regardless of whether this link is shown, so
+  // this check is a navigation nicety, never the actual security boundary.
+  const plainLinks: PlainLink[] = user
+    ? [
+        { href: "/dashboard", label: translate(locale, "nav.dashboard") },
+        { href: "/athletes", label: translate(locale, "nav.discoverAthletes") },
+      ]
+    : [{ href: "/athletes", label: translate(locale, "nav.discoverAthletes") }];
 
   return (
     <header className="sticky top-0 z-40 border-b border-border-default bg-white/95 backdrop-blur">
@@ -58,7 +77,7 @@ export function Header({ locale }: { locale: Locale }) {
           SportFo
         </Link>
 
-        <HeaderNavDesktop items={navItems} plainLinks={discoverAthletesLink} />
+        <HeaderNavDesktop items={navItems} plainLinks={plainLinks} />
 
         <div className="ml-auto flex items-center gap-1">
           <Suspense fallback={<AuthNavFallback />}>
@@ -69,7 +88,7 @@ export function Header({ locale }: { locale: Locale }) {
           <LanguageSelector className="hidden lg:flex" />
 
           <MobileMenuToggle>
-            <HeaderNavMobile items={navItems} plainLinks={discoverAthletesLink} />
+            <HeaderNavMobile items={navItems} plainLinks={plainLinks} />
             <div className="mt-2 border-t border-border-default pt-3">
               <Suspense fallback={null}>
                 <AuthNav locale={locale} variant="mobile" />

@@ -6,6 +6,7 @@ const te: Dictionary = {
     dismiss: "మూసివేయండి",
   },
   nav: {
+    dashboard: "డాష్‌బోర్డ్",
     discoverAthletes: "అథ్లెట్లను కనుగొనండి",
     signIn: "లాగిన్",
     joinSportfo: "SportFo లో చేరండి",
@@ -1148,7 +1149,12 @@ const te: Dictionary = {
       academies: "అకాడమీలు",
       sponsors: "స్పాన్సర్లు",
     },
-    myStats: { title: "నా గణాంకాలు" },
+    myStats: {
+      title: "నా గణాంకాలు",
+      followers: "ఫాలోవర్లు",
+      rank: "రాష్ట్ర ర్యాంక్",
+      medals: "పతకాలు",
+    },
     stats: {
       profile: "ప్రొఫైల్",
       achievements: "విజయాలు",
@@ -1157,10 +1163,15 @@ const te: Dictionary = {
     topCoaches: {
       title: "టాప్ కోచ్‌లు",
       comingSoon: "కోచ్ డిస్కవరీ త్వరలో వస్తుంది.",
+      follow: "ఫాలో అవ్వండి",
     },
     recommendedAcademies: {
       title: "సిఫార్సు చేయబడిన అకాడమీలు",
       comingSoon: "SportFo మీ క్రీడ మరియు ప్రాంతాన్ని తెలుసుకున్న కొద్దీ, సిఫార్సులు ఇక్కడ కనిపిస్తాయి.",
+    },
+    demo: {
+      badge: "డెమో డేటా",
+      onlyLabel: "డెమో మాత్రమే",
     },
     footer: {
       copyright: "SPORTFO © 2026",

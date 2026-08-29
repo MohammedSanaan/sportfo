@@ -7,6 +7,10 @@ const en = {
     dismiss: "Dismiss",
   },
   nav: {
+    // The public header's authenticated-only link to /dashboard -- distinct
+    // from dashboard.nav.dashboard, which labels that same destination
+    // inside the dashboard's own internal sidebar/mobile drawer.
+    dashboard: "Dashboard",
     discoverAthletes: "Discover Athletes",
     signIn: "Login",
     joinSportfo: "Join SportFo",
@@ -1176,7 +1180,15 @@ const en = {
       academies: "Academies",
       sponsors: "Sponsors",
     },
-    myStats: { title: "My Stats" },
+    myStats: {
+      title: "My Stats",
+      // Demo-mode-only labels (see demo-dashboard.ts) -- shown instead of
+      // the real profile/achievements/verified stats when a dev/demo
+      // fixture is supplied.
+      followers: "Followers",
+      rank: "State rank",
+      medals: "Medals",
+    },
     stats: {
       profile: "Profile",
       achievements: "Achievements",
@@ -1185,10 +1197,18 @@ const en = {
     topCoaches: {
       title: "Top Coaches",
       comingSoon: "Coach discovery is coming soon.",
+      follow: "Follow",
     },
     recommendedAcademies: {
       title: "Recommended Academies",
       comingSoon: "Recommendations will appear as SportFo learns your sport and location.",
+    },
+    // Development/demo-only "chrome" strings (see
+    // src/lib/dashboard-demo-mode.ts and demo-dashboard.ts) -- never shown
+    // unless NEXT_PUBLIC_DASHBOARD_DEMO_DATA=true.
+    demo: {
+      badge: "Demo Data",
+      onlyLabel: "Demo only",
     },
     footer: {
       copyright: "SPORTFO © 2026",

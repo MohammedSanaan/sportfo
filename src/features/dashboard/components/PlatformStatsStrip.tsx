@@ -1,15 +1,22 @@
-import type { DashboardPlatformCounts } from "../types";
+interface PlatformStatsStripCounts {
+  athletes: number | string;
+  academies: number | string;
+  sponsors: number | string;
+}
 
 interface PlatformStatsStripProps {
-  counts: DashboardPlatformCounts;
+  counts: PlatformStatsStripCounts;
   t: (key: string) => string;
 }
 
 // Real submitted-registration counts (see get_public_registration_counts,
 // a count-only SECURITY DEFINER RPC -- no per-row data is ever exposed),
 // replacing the reference design's hardcoded "5,000+ / 120+ / 150+".
-// Hidden entirely by the caller when the count RPC fails, rather than
-// ever showing a fabricated fallback number.
+// Hidden entirely by the caller when the count RPC fails, rather than ever
+// showing a fabricated fallback number -- UNLESS dev/demo mode is on, in
+// which case the caller (AthleteDashboard) passes the fixed demo strings
+// from demo-dashboard.ts instead of the real numeric counts, which is the
+// only reason `counts` accepts strings here at all.
 export function PlatformStatsStrip({ counts, t }: PlatformStatsStripProps) {
   const items = [
     { value: counts.athletes, label: t("dashboard.platformStats.athletes") },

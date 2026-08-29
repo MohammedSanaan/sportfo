@@ -6,6 +6,7 @@ const kn: Dictionary = {
     dismiss: "ಮುಚ್ಚಿ",
   },
   nav: {
+    dashboard: "ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",
     discoverAthletes: "ಕ್ರೀಡಾಪಟುಗಳನ್ನು ಹುಡುಕಿ",
     signIn: "ಲಾಗಿನ್",
     joinSportfo: "SportFo ಗೆ ಸೇರಿ",
@@ -1157,7 +1158,12 @@ const kn: Dictionary = {
       academies: "ಅಕಾಡೆಮಿಗಳು",
       sponsors: "ಪ್ರಾಯೋಜಕರು",
     },
-    myStats: { title: "ನನ್ನ ಅಂಕಿಅಂಶಗಳು" },
+    myStats: {
+      title: "ನನ್ನ ಅಂಕಿಅಂಶಗಳು",
+      followers: "ಫಾಲೋವರ್‌ಗಳು",
+      rank: "ರಾಜ್ಯ ಶ್ರೇಣಿ",
+      medals: "ಪದಕಗಳು",
+    },
     stats: {
       profile: "ಪ್ರೊಫೈಲ್",
       achievements: "ಸಾಧನೆಗಳು",
@@ -1166,10 +1172,15 @@ const kn: Dictionary = {
     topCoaches: {
       title: "ಟಾಪ್ ಕೋಚ್‌ಗಳು",
       comingSoon: "ಕೋಚ್ ಅನ್ವೇಷಣೆ ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ.",
+      follow: "ಫಾಲೋ ಮಾಡಿ",
     },
     recommendedAcademies: {
       title: "ಶಿಫಾರಸು ಮಾಡಿದ ಅಕಾಡೆಮಿಗಳು",
       comingSoon: "SportFo ನಿಮ್ಮ ಕ್ರೀಡೆ ಮತ್ತು ಸ್ಥಳವನ್ನು ಅರ್ಥಮಾಡಿಕೊಂಡಂತೆ, ಶಿಫಾರಸುಗಳು ಇಲ್ಲಿ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ.",
+    },
+    demo: {
+      badge: "ಡೆಮೊ ಡೇಟಾ",
+      onlyLabel: "ಡೆಮೊ ಮಾತ್ರ",
     },
     footer: {
       copyright: "SPORTFO © 2026",

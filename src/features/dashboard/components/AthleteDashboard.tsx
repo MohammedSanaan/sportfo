@@ -9,12 +9,20 @@ import { TopCoachesCard } from "./TopCoachesCard";
 import { RecommendedAcademiesCard } from "./RecommendedAcademiesCard";
 import { SKILL_LEVELS, getOptionLabel } from "@/lib/athlete-options";
 import type { AthleteDashboardData } from "../types";
+import type { DashboardDemoData } from "../data/demo-dashboard";
 import type { Locale } from "@/i18n/config";
 
 interface AthleteDashboardProps {
   data: AthleteDashboardData;
   t: (key: string, vars?: Record<string, string | number>) => string;
   locale: Locale;
+  // DEV/DEMO ONLY -- populated exclusively by isDashboardDemoModeEnabled()
+  // in src/app/dashboard/page.tsx (see demo-dashboard.ts). Null/undefined
+  // in every real deployment, in which case every section below renders
+  // its normal honest real/empty state exactly as before this feature
+  // existed. Never merged into `data` itself -- real identity, SportFo ID,
+  // and profile strength always come from `data`, never from here.
+  demo?: DashboardDemoData | null;
 }
 
 // The full authenticated Athlete Dashboard -- composes every section from
@@ -23,7 +31,7 @@ interface AthleteDashboardProps {
 // main / info rail) at xl+, collapsing to nav+main with the info rail
 // moved below at lg, and a single stacked column (nav replaced by the
 // mobile drawer in DashboardHeader) below that.
-export function AthleteDashboard({ data, t, locale }: AthleteDashboardProps) {
+export function AthleteDashboard({ data, t, locale, demo }: AthleteDashboardProps) {
   const skillLevelLabel = data.identity.skillLevel
     ? getOptionLabel(SKILL_LEVELS, data.identity.skillLevel)
     : null;
@@ -42,15 +50,26 @@ export function AthleteDashboard({ data, t, locale }: AthleteDashboardProps) {
         <DashboardSidebar profileStrength={data.profileStrength} t={t} />
 
         <main className="flex min-w-0 flex-col gap-[22px]">
+          {demo && (
+            <div className="flex justify-end">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-white/20 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-[#8b96b8] uppercase">
+                {t("dashboard.demo.badge")}
+              </span>
+            </div>
+          )}
           <DashboardWelcome
             fullName={data.identity.fullName}
             profile={data.profile}
             profileStrength={data.profileStrength}
             t={t}
           />
-          <MetricCardsRow t={t} />
-          <OpportunitiesSection t={t} />
-          {data.platformCounts && <PlatformStatsStrip counts={data.platformCounts} t={t} />}
+          <MetricCardsRow t={t} demo={demo?.metrics} />
+          <OpportunitiesSection t={t} demo={demo?.opportunities} />
+          {demo ? (
+            <PlatformStatsStrip counts={demo.platformCounts} t={t} />
+          ) : (
+            data.platformCounts && <PlatformStatsStrip counts={data.platformCounts} t={t} />
+          )}
         </main>
 
         <aside className="flex flex-col gap-[18px] lg:col-span-2 xl:col-span-1 xl:sticky xl:top-24">
@@ -59,9 +78,10 @@ export function AthleteDashboard({ data, t, locale }: AthleteDashboardProps) {
             achievementsCount={data.stats.achievementsCount}
             verifiedCount={data.stats.verifiedCount}
             t={t}
+            demo={demo?.myStats}
           />
-          <TopCoachesCard t={t} />
-          <RecommendedAcademiesCard t={t} />
+          <TopCoachesCard t={t} demo={demo?.topCoaches} />
+          <RecommendedAcademiesCard t={t} demo={demo?.recommendedAcademies} demoCtaLabel={demo?.recommendedAcademiesCtaLabel} />
         </aside>
       </div>
 

@@ -6,6 +6,7 @@ const hi: Dictionary = {
     dismiss: "बंद करें",
   },
   nav: {
+    dashboard: "डैशबोर्ड",
     discoverAthletes: "एथलीट खोजें",
     signIn: "लॉग इन",
     joinSportfo: "SportFo से जुड़ें",
@@ -1145,7 +1146,12 @@ const hi: Dictionary = {
       academies: "अकादमियां",
       sponsors: "प्रायोजक",
     },
-    myStats: { title: "मेरे आंकड़े" },
+    myStats: {
+      title: "मेरे आंकड़े",
+      followers: "फॉलोअर्स",
+      rank: "राज्य रैंक",
+      medals: "पदक",
+    },
     stats: {
       profile: "प्रोफ़ाइल",
       achievements: "उपलब्धियाँ",
@@ -1154,10 +1160,15 @@ const hi: Dictionary = {
     topCoaches: {
       title: "शीर्ष कोच",
       comingSoon: "कोच खोज जल्द आ रही है।",
+      follow: "फ़ॉलो करें",
     },
     recommendedAcademies: {
       title: "अनुशंसित अकादमियां",
       comingSoon: "जैसे-जैसे SportFo आपके खेल और स्थान को समझेगा, सुझाव यहां दिखाई देंगे।",
+    },
+    demo: {
+      badge: "डेमो डेटा",
+      onlyLabel: "केवल डेमो",
     },
     footer: {
       copyright: "SPORTFO © 2026",

@@ -7,6 +7,9 @@ interface DashboardMetricCardProps {
   helperText: string;
   actionLabel?: string;
   actionHref?: string;
+  /** Demo-mode-only CTA (a DemoOnlyButton) rendered instead of the real
+   *  actionLabel/actionHref Link. See MetricCardsRow. */
+  footer?: ReactNode;
   accent: "blue" | "orange" | "pink";
   icon: ReactNode;
 }
@@ -39,6 +42,7 @@ export function DashboardMetricCard({
   helperText,
   actionLabel,
   actionHref,
+  footer,
   accent,
   icon,
 }: DashboardMetricCardProps) {
@@ -56,7 +60,8 @@ export function DashboardMetricCard({
         {value}
       </div>
       <p className="mt-1.5 text-sm text-[#96a2c4]">{helperText}</p>
-      {actionLabel && actionHref && (
+      {footer}
+      {!footer && actionLabel && actionHref && (
         <Link
           href={actionHref}
           className={`mt-4 inline-block text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] ${styles.link}`}

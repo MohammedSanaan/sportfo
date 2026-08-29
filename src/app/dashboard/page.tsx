@@ -6,6 +6,8 @@ import { getAthleteDashboardData } from "@/features/dashboard/data/get-athlete-d
 import { AthleteDashboard } from "@/features/dashboard/components/AthleteDashboard";
 import { getPostLoginDestination } from "@/lib/auth/post-login-destination";
 import { getServerTranslations } from "@/i18n/server";
+import { isDashboardDemoModeEnabled } from "@/lib/dashboard-demo-mode";
+import { DASHBOARD_DEMO_DATA } from "@/features/dashboard/data/demo-dashboard";
 
 export const metadata: Metadata = {
   title: "Dashboard | SportFo",
@@ -44,5 +46,13 @@ export default async function DashboardPage() {
 
   const { t, locale } = await getServerTranslations();
 
-  return <AthleteDashboard data={data} t={t} locale={locale} />;
+  // DEV/DEMO ONLY -- see src/lib/dashboard-demo-mode.ts. `data` itself is
+  // never mutated; the fixed demo-dashboard.ts fixture is passed alongside
+  // it as a separate prop, so AthleteDashboard can keep real identity/
+  // SportFo ID/profile strength while only the still-backendless sections
+  // (opportunities, top coaches, recommended academies, sponsorship/trial/
+  // invite metrics, platform stats) show demo content.
+  const demo = isDashboardDemoModeEnabled() ? DASHBOARD_DEMO_DATA : null;
+
+  return <AthleteDashboard data={data} t={t} locale={locale} demo={demo} />;
 }
