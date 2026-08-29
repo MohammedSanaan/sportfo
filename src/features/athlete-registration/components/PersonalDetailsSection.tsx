@@ -3,6 +3,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { RadioGroup } from "@/components/ui/RadioGroup";
+import { Select } from "@/components/ui/Select";
 import { SectionCard } from "@/components/ui/SectionCard";
 import { GENDER_OPTIONS } from "@/lib/athlete-options";
 import {
@@ -13,9 +14,20 @@ import {
   today,
 } from "@/lib/athlete-validation";
 import { getAuthMode } from "@/lib/auth-mode";
+import { isValidE164 } from "@/lib/phone/e164";
+import { LOCALES, LOCALE_LABELS } from "@/i18n/config";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
 import { useTranslation } from "@/i18n/LocaleProvider";
 import { translateOptions } from "@/lib/i18n-options";
+import { EmergencyContactField } from "./EmergencyContactField";
+
+// Reuses the exact native-script names the language selector elsewhere in
+// the app already shows (see i18n/config.ts) -- these are proper nouns,
+// not re-translated per active UI locale.
+const PREFERRED_LANGUAGE_OPTIONS = LOCALES.map((code) => ({
+  value: code,
+  label: LOCALE_LABELS[code],
+}));
 
 export function PersonalDetailsSection() {
   const { t } = useTranslation();
@@ -105,6 +117,35 @@ export function PersonalDetailsSection() {
           error={errors.personalDetails?.email?.message}
           {...register("personalDetails.email", emailRule)}
         />
+        <Select
+          id="preferredLanguage"
+          label={t("register.personal.preferredLanguage")}
+          options={PREFERRED_LANGUAGE_OPTIONS}
+          error={errors.personalDetails?.preferredLanguage?.message}
+          {...register("personalDetails.preferredLanguage", {
+            required: t("register.personal.preferredLanguageRequired"),
+          })}
+        />
+        <Controller
+          name="personalDetails.emergencyContact"
+          control={control}
+          rules={{
+            // Optional -- blank is always valid. Only a non-blank value
+            // gets shape-checked, and only as "is this a plausible E.164
+            // number" (see isValidE164), never pinned to one country's
+            // digit-count format.
+            validate: (value) =>
+              !value || isValidE164(value) || t("register.personal.emergencyContactInvalid"),
+          }}
+          render={({ field, fieldState }) => (
+            <EmergencyContactField
+              value={field.value}
+              onChange={field.onChange}
+              onBlur={field.onBlur}
+              error={fieldState.error?.message}
+            />
+          )}
+        />
         <Input
           id="school"
           label={t("register.personal.school")}
@@ -123,6 +164,19 @@ export function PersonalDetailsSection() {
           optional
           {...register("personalDetails.coachName")}
         />
+        {/* sm:col-span-2 on the wrapper (not Input's own className, which
+            only reaches the inner <input>) -- keeps Aadhaar/Govt ID as its
+            own full-width row, visually the final, distinct field rather
+            than incidentally pairing with Coach/Mentor Name. */}
+        <div className="sm:col-span-2">
+          <Input
+            id="aadhaarOrGovtId"
+            label={t("register.personal.aadhaarGovtId")}
+            optional
+            placeholder={t("register.personal.aadhaarGovtIdPlaceholder")}
+            {...register("personalDetails.aadhaarOrGovtId")}
+          />
+        </div>
       </div>
     </SectionCard>
   );

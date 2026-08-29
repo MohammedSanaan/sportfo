@@ -2,6 +2,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/supabase";
 import type { DbGender, DbSkillLevel } from "@/types/database";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
+import { isLocale, type Locale } from "@/i18n/config";
 
 type ProfileRow = Database["public"]["Tables"]["athlete_profiles"]["Row"];
 type SportRow = Database["public"]["Tables"]["athlete_sports"]["Row"];
@@ -69,10 +70,14 @@ export async function loadAthleteDraft(
 
 // authPhone always wins over whatever is stored on the profile row -- the
 // mobile number field displays the live, verified session identity, not a
-// potentially-stale database copy of it.
+// potentially-stale database copy of it. currentLocale is the visitor's
+// live UI locale, used only as the Preferred Language fallback for a
+// profile saved before this field existed (preferred_language null) --
+// never overwrites a value the athlete already chose.
 export function mapDraftToFormValues(
   draft: AthleteDraft,
   authPhone: string,
+  currentLocale: Locale,
 ): AthleteRegistrationFormValues {
   const { profile, sport, achievements } = draft;
 
@@ -86,9 +91,14 @@ export function mapDraftToFormValues(
       city: profile.city ?? "",
       mobileNumber: authPhone,
       email: profile.email ?? "",
+      preferredLanguage: isLocale(profile.preferred_language)
+        ? profile.preferred_language
+        : currentLocale,
+      emergencyContact: profile.emergency_contact ?? "",
       school: profile.school_college ?? "",
       club: profile.club_academy ?? "",
       coachName: profile.coach_mentor ?? "",
+      aadhaarOrGovtId: profile.aadhaar_or_govt_id ?? "",
     },
     sportsInformation: {
       primarySport: sport?.primary_sport ?? "",
@@ -121,8 +131,14 @@ export function mapDraftToFormValues(
 
 // India is SportFo's primary target market -- nationality/country default
 // to it so most athletes never have to type it, while staying plain,
-// editable text fields for anyone else.
-export function buildEmptyFormValues(authPhone: string): AthleteRegistrationFormValues {
+// editable text fields for anyone else. Preferred Language defaults to the
+// visitor's current SportFo UI language (see task spec) -- a pure starting
+// value for this independent preference field, never a live link back to
+// the site's UI locale.
+export function buildEmptyFormValues(
+  authPhone: string,
+  currentLocale: Locale,
+): AthleteRegistrationFormValues {
   return {
     personalDetails: {
       fullName: "",
@@ -133,9 +149,12 @@ export function buildEmptyFormValues(authPhone: string): AthleteRegistrationForm
       city: "",
       mobileNumber: authPhone,
       email: "",
+      preferredLanguage: currentLocale,
+      emergencyContact: "",
       school: "",
       club: "",
       coachName: "",
+      aadhaarOrGovtId: "",
     },
     sportsInformation: {
       primarySport: "",

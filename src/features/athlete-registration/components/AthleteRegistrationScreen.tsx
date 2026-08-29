@@ -87,7 +87,7 @@ export async function AthleteRegistrationScreen({
           )}
           <AthleteRegistrationForm
             authPhone={authPhone}
-            initialValues={draft ? mapDraftToFormValues(draft, authPhone) : undefined}
+            initialValues={draft ? mapDraftToFormValues(draft, authPhone, locale) : undefined}
             reloadHref={reloadHref}
           />
         </>

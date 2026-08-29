@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n/config";
+
 export type Gender = "male" | "female" | "other";
 
 export type SkillLevel =
@@ -22,9 +24,21 @@ export interface PersonalDetails {
   city: string;
   mobileNumber: string;
   email: string;
+  // Communication-preference locale -- independent of the site's active UI
+  // locale (see i18n/LocaleProvider); changing this never switches the app
+  // language. "" only ever appears transiently before a default is applied
+  // (see buildEmptyFormValues) -- the field is required on submit.
+  preferredLanguage: Locale | "";
+  // E.164 phone, or "" if left blank -- optional, never a login credential.
+  emergencyContact: string;
   school: string;
   club: string;
   coachName: string;
+  // Optional government ID (Aadhaar or equivalent). Sensitive -- never
+  // rendered on any public profile/discovery surface; see
+  // PersonalDetailsSection and the athlete_profiles RLS/RPC comments in
+  // supabase/migrations/20260829122700_athlete_personal_details_extra_fields.sql.
+  aadhaarOrGovtId: string;
 }
 
 export interface SportsInformation {

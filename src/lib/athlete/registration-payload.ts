@@ -62,6 +62,9 @@ export function buildSaveRegistrationArgs(
     p_school_college: emptyToNull(personalDetails.school),
     p_club_academy: emptyToNull(personalDetails.club),
     p_coach_mentor: emptyToNull(personalDetails.coachName),
+    p_preferred_language: emptyToNull(personalDetails.preferredLanguage),
+    p_emergency_contact: emptyToNull(personalDetails.emergencyContact),
+    p_aadhaar_or_govt_id: emptyToNull(personalDetails.aadhaarOrGovtId),
     p_awards_recognition: emptyToNull(additionalRecognition.awards),
     p_scholarship_recipient: scholarshipToBoolean(
       additionalRecognition.scholarshipRecipient,

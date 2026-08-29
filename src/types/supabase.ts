@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.17"
+    PostgrestVersion: "14.5"
   }
   public: {
     Tables: {
@@ -119,6 +119,7 @@ export type Database = {
       }
       athlete_profiles: {
         Row: {
+          aadhaar_or_govt_id: string | null
           awards_recognition: string | null
           city: string | null
           club_academy: string | null
@@ -127,12 +128,14 @@ export type Database = {
           created_at: string
           date_of_birth: string | null
           email: string | null
+          emergency_contact: string | null
           full_name: string | null
           gender: string | null
           id: string
           is_public: boolean
           mobile_number: string | null
           nationality: string | null
+          preferred_language: string | null
           profile_status: string
           public_slug: string | null
           scholarship_recipient: boolean | null
@@ -141,6 +144,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          aadhaar_or_govt_id?: string | null
           awards_recognition?: string | null
           city?: string | null
           club_academy?: string | null
@@ -149,12 +153,14 @@ export type Database = {
           created_at?: string
           date_of_birth?: string | null
           email?: string | null
+          emergency_contact?: string | null
           full_name?: string | null
           gender?: string | null
           id?: string
           is_public?: boolean
           mobile_number?: string | null
           nationality?: string | null
+          preferred_language?: string | null
           profile_status?: string
           public_slug?: string | null
           scholarship_recipient?: boolean | null
@@ -163,6 +169,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          aadhaar_or_govt_id?: string | null
           awards_recognition?: string | null
           city?: string | null
           club_academy?: string | null
@@ -171,12 +178,14 @@ export type Database = {
           created_at?: string
           date_of_birth?: string | null
           email?: string | null
+          emergency_contact?: string | null
           full_name?: string | null
           gender?: string | null
           id?: string
           is_public?: boolean
           mobile_number?: string | null
           nationality?: string | null
+          preferred_language?: string | null
           profile_status?: string
           public_slug?: string | null
           scholarship_recipient?: boolean | null
@@ -189,10 +198,8 @@ export type Database = {
       athlete_sports: {
         Row: {
           athlete_profile_id: string
-          competition_level: string | null
           created_at: string
           id: string
-          parallel_track: string | null
           position_role: string | null
           primary_sport: string | null
           skill_level: string | null
@@ -202,10 +209,8 @@ export type Database = {
         }
         Insert: {
           athlete_profile_id: string
-          competition_level?: string | null
           created_at?: string
           id?: string
-          parallel_track?: string | null
           position_role?: string | null
           primary_sport?: string | null
           skill_level?: string | null
@@ -215,10 +220,8 @@ export type Database = {
         }
         Update: {
           athlete_profile_id?: string
-          competition_level?: string | null
           created_at?: string
           id?: string
-          parallel_track?: string | null
           position_role?: string | null
           primary_sport?: string | null
           skill_level?: string | null
@@ -697,11 +700,9 @@ export type Database = {
           city: string
           club_academy: string
           coach_mentor: string
-          competition_level: string
           country: string
           full_name: string
           nationality: string
-          parallel_track: string
           position_role: string
           primary_sport: string
           school_college: string
@@ -715,6 +716,7 @@ export type Database = {
       owns_athlete_profile: { Args: { profile_id: string }; Returns: boolean }
       save_athlete_registration: {
         Args: {
+          p_aadhaar_or_govt_id?: string
           p_achievements?: Json
           p_awards_recognition: string
           p_city: string
@@ -723,11 +725,13 @@ export type Database = {
           p_country: string
           p_date_of_birth: string
           p_email: string
+          p_emergency_contact?: string
           p_full_name: string
           p_gender: string
           p_mobile_number: string
           p_nationality: string
           p_position_role: string
+          p_preferred_language?: string
           p_primary_sport: string
           p_profile_status: string
           p_scholarship_recipient: boolean
@@ -745,11 +749,9 @@ export type Database = {
       search_public_athletes: {
         Args: {
           p_city?: string
-          p_competition_level?: string
           p_country?: string
           p_page?: number
           p_page_size?: number
-          p_parallel_track?: string
           p_query?: string
           p_skill_level?: string
           p_sport?: string

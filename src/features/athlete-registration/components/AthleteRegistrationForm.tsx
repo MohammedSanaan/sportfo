@@ -83,12 +83,12 @@ export function AthleteRegistrationForm({
   initialValues,
   reloadHref = "/athlete/register",
 }: AthleteRegistrationFormProps) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const router = useRouter();
   const [supabase] = useState(() => createClient());
 
   const methods = useForm<AthleteRegistrationFormValues>({
-    defaultValues: initialValues ?? buildEmptyFormValues(authPhone),
+    defaultValues: initialValues ?? buildEmptyFormValues(authPhone, locale),
     mode: "onSubmit",
     reValidateMode: "onChange",
   });

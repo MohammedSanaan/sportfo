@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test src/lib/sports/catalog.test.ts src/lib/registration/categories.test.ts src/lib/auth/safe-redirect.test.ts src/lib/admin/dashboard-range.test.ts src/lib/account/initials.test.ts"
+    "test": "node --test src/lib/sports/catalog.test.ts src/lib/registration/categories.test.ts src/lib/auth/safe-redirect.test.ts src/lib/admin/dashboard-range.test.ts src/lib/account/initials.test.ts src/lib/phone/e164.test.ts src/lib/athlete/registration-payload.test.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.20",
