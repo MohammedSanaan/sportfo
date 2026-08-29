@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { translate } from "@/i18n/dictionary";
 import { DashboardAccountMenu } from "./DashboardAccountMenu";
 import { DashboardMobileNav } from "./DashboardMobileNav";
 import type { DashboardIdentity } from "../types";
@@ -7,7 +8,6 @@ import type { Locale } from "@/i18n/config";
 interface DashboardHeaderProps {
   identity: DashboardIdentity;
   roleLine: string;
-  t: (key: string) => string;
   locale: Locale;
 }
 
@@ -39,12 +39,18 @@ function BellIcon() {
 // from a multi-entity search backend that doesn't exist), a decorative
 // notifications bell (no notifications backend exists yet, so no badge
 // count -- see AthleteDashboardData.notifications), and the account
-// menu. Server-rendered except for the two small islands that genuinely
-// need interactivity (account dropdown, mobile nav drawer).
-export function DashboardHeader({ identity, roleLine, t, locale }: DashboardHeaderProps) {
+// menu. A Server Component itself (it does no client-side data fetching
+// or interaction of its own), so it resolves its own strings via the
+// server-side translate() helper -- never receives the `t` function as a
+// prop, which would crash the moment it got forwarded into an actual
+// Client Component further down (see DashboardMobileNav/
+// DashboardAccountMenu, the two genuinely interactive islands here).
+export function DashboardHeader({ identity, roleLine, locale }: DashboardHeaderProps) {
+  const t = (key: string) => translate(locale, key);
+
   return (
     <header className="sticky top-0 z-20 flex items-center gap-4 border-b border-white/[0.07] bg-[#090e22]/80 px-4 py-3 backdrop-blur-lg sm:gap-7 sm:px-8">
-      <DashboardMobileNav t={t} />
+      <DashboardMobileNav />
 
       <Link href="/" className="flex shrink-0 items-center gap-2.5">
         <span className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-[#4d7cff] bg-gradient-to-br from-[#16255e] to-[#0b1130]">

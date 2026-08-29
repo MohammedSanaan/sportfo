@@ -36,7 +36,7 @@ export function AthleteDashboard({ data, t, locale }: AthleteDashboardProps) {
       backgroundImage:
         "radial-gradient(1200px 600px at 12% -5%, #16215a 0%, rgba(6,10,24,0) 60%), radial-gradient(900px 500px at 95% 8%, #2a1146 0%, rgba(6,10,24,0) 55%)",
     }}>
-      <DashboardHeader identity={data.identity} roleLine={roleLine} t={t} locale={locale} />
+      <DashboardHeader identity={data.identity} roleLine={roleLine} locale={locale} />
 
       <div className="grid grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[248px_minmax(0,1fr)] lg:gap-6 lg:px-8 xl:grid-cols-[248px_minmax(0,1fr)_336px]">
         <DashboardSidebar profileStrength={data.profileStrength} t={t} />

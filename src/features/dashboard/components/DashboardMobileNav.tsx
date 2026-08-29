@@ -4,17 +4,21 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { DASHBOARD_NAV_ITEMS } from "../nav-items";
-
-interface DashboardMobileNavProps {
-  t: (key: string) => string;
-}
+import { useTranslation } from "@/i18n/LocaleProvider";
 
 // The mobile/tablet equivalent of DashboardSidebar -- a hamburger toggle
 // (visible below lg) that opens a full-screen drawer over the same
 // DASHBOARD_NAV_ITEMS list, never a squeezed-down copy of the desktop
 // sidebar. Not sticky on mobile (the task spec is explicit about this) --
 // it's a dismissible overlay, not a persistent rail.
-export function DashboardMobileNav({ t }: DashboardMobileNavProps) {
+//
+// A Client Component, so it resolves its own strings via the client
+// useTranslation() hook rather than receiving the server `t` function as
+// a prop -- a function isn't a serializable value that can cross the
+// Server/Client Component boundary (see DashboardHeader, which used to
+// pass `t` in here and crashed with exactly that React error).
+export function DashboardMobileNav() {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
