@@ -21,11 +21,11 @@ export function FieldShell({
     <div className="flex flex-col gap-1.5">
       <label
         htmlFor={htmlFor}
-        className="flex items-baseline justify-between text-sm font-medium text-ink-800"
+        className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5 text-sm font-medium text-ink-800"
       >
-        <span>{label}</span>
+        <span className="min-w-0 break-words">{label}</span>
         {optional && (
-          <span className="text-xs font-normal text-ink-400">Optional</span>
+          <span className="shrink-0 text-xs font-normal text-ink-400">Optional</span>
         )}
       </label>
       {children}

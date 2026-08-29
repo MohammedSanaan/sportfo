@@ -108,12 +108,3 @@ test("every fieldGroup has a title (and description where present) in en.ts", ()
     }
   }
 });
-
-test("every non-athlete category has a sidebar note in en.ts", () => {
-  for (const category of REGISTRATION_CATEGORIES) {
-    if (category.id === "athlete") continue;
-    const base = `registerHub.categories.${category.id}.sidebar.note`;
-    assert.equal(typeof getAtPath(en, `${base}.title`), "string", `missing ${base}.title`);
-    assert.equal(typeof getAtPath(en, `${base}.description`), "string", `missing ${base}.description`);
-  }
-});

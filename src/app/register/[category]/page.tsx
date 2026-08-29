@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { Container } from "@/components/ui/Container";
 import { RegistrationHero } from "@/components/ui/RegistrationHero";
 import { RegistrationShell } from "@/components/ui/RegistrationShell";
 import { RegistrationCategoryNav } from "@/features/registration-hub/components/RegistrationCategoryNav";
-import { RegistrationSidebar } from "@/features/registration-hub/components/RegistrationSidebar";
 import { GenericCategoryForm } from "@/features/registration-hub/components/GenericCategoryForm";
 import { AthleteRegistrationScreen } from "@/features/athlete-registration/components/AthleteRegistrationScreen";
 import {
@@ -83,39 +81,37 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
   }
 
   return (
-    <Container className="py-10 sm:py-14">
-      <div className="flex flex-col gap-6 sm:gap-8">
-        <RegistrationHero
-          title={formTitle}
-          subtitle={t("registerHub.pageSubtitle")}
-          imageSrc={category.heroImage}
-        />
-
-        <div className="flex flex-col gap-8 lg:flex-row lg:items-start lg:gap-8">
+    <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+      <RegistrationShell
+        hero={
+          <RegistrationHero
+            title={formTitle}
+            subtitle={t("registerHub.pageSubtitle")}
+            imageSrc={category.heroImage}
+          />
+        }
+      >
+        {/* Two columns only: category nav (~280px, sticky on desktop) and
+            the form at the remaining width -- no third info-sidebar
+            column, so the form never gets squeezed. Falls back to a
+            single stacked column (nav's own horizontal-scroll switcher on
+            top, full-width form below) under the lg breakpoint. */}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:items-start">
           <RegistrationCategoryNav activeCategoryId={category.id} locale={locale} />
 
-          <div className="min-w-0 flex-1">
-            <RegistrationShell
-              sidebar={
-                <RegistrationSidebar
-                  noteTitle={t(`registerHub.categories.${category.id}.sidebar.note.title`)}
-                  noteDescription={t(`registerHub.categories.${category.id}.sidebar.note.description`)}
-                />
-              }
-            >
-              {category.id === "athlete" ? (
-                <AthleteRegistrationScreen reloadHref="/register/athlete" showHeading={false} />
-              ) : (
-                <GenericCategoryForm
-                  category={category}
-                  initialFields={initialFields}
-                  initialStatus={initialStatus}
-                />
-              )}
-            </RegistrationShell>
+          <div className="min-w-0">
+            {category.id === "athlete" ? (
+              <AthleteRegistrationScreen reloadHref="/register/athlete" showHeading={false} />
+            ) : (
+              <GenericCategoryForm
+                category={category}
+                initialFields={initialFields}
+                initialStatus={initialStatus}
+              />
+            )}
           </div>
         </div>
-      </div>
-    </Container>
+      </RegistrationShell>
+    </div>
   );
 }

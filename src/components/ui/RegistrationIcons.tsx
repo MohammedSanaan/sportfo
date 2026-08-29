@@ -199,30 +199,6 @@ export function SubmissionIcon() {
   );
 }
 
-export function TipsIcon() {
-  return (
-    <svg {...iconProps()}>
-      <path
-        d="M10 2.5a4.7 4.7 0 0 0-2.7 8.5c.5.4.7.9.7 1.5v.5h4v-.5c0-.6.2-1.1.7-1.5A4.7 4.7 0 0 0 10 2.5Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-        strokeLinejoin="round"
-      />
-      <path d="M8 16h4M8.7 17.5h2.6" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-export function SupportIcon() {
-  return (
-    <svg {...iconProps()}>
-      <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M5 5l2.8 2.8M15 5l-2.8 2.8M5 15l2.8-2.8M15 15l-2.8-2.8" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-    </svg>
-  );
-}
-
 // A larger version used on success screens, distinct sizing from the
 // SectionCard-badge icons above.
 export function CheckCircleIcon({ className }: { className?: string }) {

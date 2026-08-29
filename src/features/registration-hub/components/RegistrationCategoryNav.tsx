@@ -25,8 +25,12 @@ export function RegistrationCategoryNav({ activeCategoryId, locale }: Registrati
 
   return (
     <>
-      {/* Desktop: vertical sidebar, sticky under the page header. */}
-      <nav aria-label={navLabel} className="hidden lg:block lg:w-72 lg:shrink-0">
+      {/* Desktop: vertical sidebar, sticky under the page header. Rendered
+          as a grid item (the page sets the column's width via
+          `grid-cols-[280px_...]`), so this only needs to fill that cell --
+          no separate fixed width/shrink of its own to keep in sync with
+          the grid track. */}
+      <nav aria-label={navLabel} className="hidden lg:block lg:w-full">
         <div className="sticky top-24 flex flex-col gap-2">
           {items.map((item) => {
             const active = item.id === activeCategoryId;

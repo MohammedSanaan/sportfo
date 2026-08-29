@@ -1,29 +1,28 @@
 import type { ReactNode } from "react";
 
 interface RegistrationShellProps {
-  // Optional -- the /register/[category] hub renders its hero once, above
-  // both the category-switcher nav AND this shell, so it passes nothing
-  // here and only uses the two-column body below.
-  hero?: ReactNode;
+  hero: ReactNode;
   children: ReactNode;
-  sidebar: ReactNode;
 }
 
-// The shared page shell for every registration flow (Athlete and all 7
-// generic hub categories): hero banner full-width on top, then a premium
-// two-column layout below (form content left, contextual info sidebar
-// right) that collapses to a single stacked column -- form first, sidebar
-// below it -- on anything narrower than the lg breakpoint. No horizontal
-// scroll/overflow at any width: the grid's main-content track is a plain
-// `1fr`, never a fixed width that could push the sidebar off-screen.
-export function RegistrationShell({ hero, children, sidebar }: RegistrationShellProps) {
+// The shared page chrome for every registration flow (Athlete and all 7
+// generic hub categories): a hero banner full-width on top, then the
+// page's own content (category nav + form, or just the form) below it at
+// full available width. No right-hand info sidebar -- an earlier version
+// of this component had one; it was removed because a 3-column layout
+// (category nav + form + info sidebar) squeezed the actual registration
+// form too narrow, and every "info sidebar" i18n key lived under a path
+// that was never fully populated for every category (the raw
+// `registerHub.categories.athlete.sidebar.note.title` key string used to
+// leak into the UI as literal text for exactly this reason). Kept as its
+// own component (rather than inlining `{hero}{children}` at each call
+// site) so all registration pages share one definition of "the page
+// shell" and never duplicate this layout.
+export function RegistrationShell({ hero, children }: RegistrationShellProps) {
   return (
     <div className="flex flex-col gap-6 sm:gap-8">
       {hero}
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_280px] lg:items-start lg:gap-8">
-        <div className="flex min-w-0 flex-col gap-6">{children}</div>
-        <div className="flex flex-col gap-4 lg:sticky lg:top-24">{sidebar}</div>
-      </div>
+      {children}
     </div>
   );
 }

@@ -339,8 +339,9 @@ const en = {
       email: "Email Address",
       preferredLanguage: "Preferred Language",
       preferredLanguageRequired: "Select your preferred language.",
-      emergencyContact: "Emergency Contact (Parent / Guardian)",
-      emergencyContactHelper: "Used only when an emergency contact is needed for events or trials.",
+      emergencyContact: "Emergency Contact",
+      emergencyContactHelper:
+        "Parent / Guardian -- used only when an emergency contact is needed for events or trials.",
       emergencyContactPlaceholder: "98765 43210",
       emergencyContactInvalid: "Enter a valid mobile number.",
       school: "School / College",
@@ -481,12 +482,6 @@ const en = {
       getStarted: "Let's get started",
       percentComplete: "{percent}% complete",
       label: "Registration progress",
-    },
-    sidebar: {
-      note: {
-        title: "Get discovered",
-        description: "A complete, verified athlete profile appears higher in Discover Athletes searches.",
-      },
     },
     actions: {
       saveDraft: "Save Draft",
@@ -772,20 +767,6 @@ const en = {
       description: "We couldn't find that registration category.",
       action: "Choose a category",
     },
-    sidebar: {
-      whyComplete: {
-        title: "Why complete your profile?",
-        description: "A complete profile is more likely to be discovered and shortlisted across SportFo.",
-      },
-      verificationTrust: {
-        title: "Verification builds trust",
-        description: "Verified details and documents earn a trust badge that stands out to others on SportFo.",
-      },
-      support: {
-        title: "Need help?",
-        description: "If you run into any issues while registering, reach out and our team will help you out.",
-      },
-    },
     categories: {
       athlete: {
         formTitle: "Register as an Athlete",
@@ -826,12 +807,6 @@ const en = {
           locationReach: { title: "Location & Reach" },
           documentsVerification: { title: "Documents / Verification" },
           profileSetup: { title: "Profile Setup" },
-        },
-        sidebar: {
-          note: {
-            title: "Get discovered by athletes",
-            description: "Academies with a complete, verified profile appear higher in athlete searches.",
-          },
         },
       },
       performanceExpert: {
@@ -879,12 +854,6 @@ const en = {
           documents: { title: "Documents" },
           profileSetup: { title: "Profile Setup" },
         },
-        sidebar: {
-          note: {
-            title: "Grow your client base",
-            description: "A complete profile with your certifications helps athletes trust and choose you.",
-          },
-        },
       },
       mediaCreator: {
         formTitle: "Register as Media & Creator",
@@ -920,12 +889,6 @@ const en = {
           location: { title: "Location" },
           uploads: { title: "Uploads" },
           profileSetup: { title: "Profile Setup" },
-        },
-        sidebar: {
-          note: {
-            title: "Get your work seen",
-            description: "A strong portfolio and social presence help you land more sports media assignments.",
-          },
         },
       },
       managementLegal: {
@@ -968,12 +931,6 @@ const en = {
           documents: { title: "Documents" },
           profileSetup: { title: "Profile Setup" },
         },
-        sidebar: {
-          note: {
-            title: "Build a trusted practice",
-            description: "A verified license and experience history help athletes and clubs choose you with confidence.",
-          },
-        },
       },
       eventOperations: {
         formTitle: "Register as Event & Operations Staff",
@@ -1008,12 +965,6 @@ const en = {
           location: { title: "Location" },
           documents: { title: "Documents" },
           profileSetup: { title: "Profile Setup" },
-        },
-        sidebar: {
-          note: {
-            title: "Get matched to events",
-            description: "Event organizers look for verified, available staff first -- complete your profile to get picked.",
-          },
         },
       },
       sponsorCsr: {
@@ -1063,12 +1014,6 @@ const en = {
           proposalDocuments: { title: "Proposal / Documents" },
           profileSetup: { title: "Profile Setup" },
         },
-        sidebar: {
-          note: {
-            title: "Reach the right athletes",
-            description: "Tell us your focus areas so we can connect you with athletes and academies that fit your goals.",
-          },
-        },
       },
       talentAnalytics: {
         formTitle: "Register as Talent Discovery & Analytics",
@@ -1106,12 +1051,6 @@ const en = {
           location: { title: "Location" },
           portfolioReports: { title: "Portfolio / Reports" },
           profileSetup: { title: "Profile Setup" },
-        },
-        sidebar: {
-          note: {
-            title: "Power better decisions",
-            description: "A complete profile with your tools and specialization helps clubs find the right analyst faster.",
-          },
         },
       },
     },
