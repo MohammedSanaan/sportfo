@@ -4,6 +4,7 @@ import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { EmploymentIcon } from "@/components/ui/RegistrationIcons";
 import { EMPLOYMENT_TYPES, YEARS_EXPERIENCE } from "@/lib/athlete-options";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
 import { useTranslation } from "@/i18n/LocaleProvider";
@@ -25,7 +26,11 @@ export function EmploymentSection() {
   );
 
   return (
-    <SectionCard title={t("register.employment.title")} description={t("register.employment.description")}>
+    <SectionCard
+      title={t("register.employment.title")}
+      description={t("register.employment.description")}
+      icon={<EmploymentIcon />}
+    >
       <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
         <Controller
           name="employment.employmentType"

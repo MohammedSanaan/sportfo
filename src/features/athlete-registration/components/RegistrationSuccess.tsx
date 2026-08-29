@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { CheckCircleIcon } from "@/components/ui/RegistrationIcons";
 import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface RegistrationSuccessProps {
@@ -19,6 +20,10 @@ export function RegistrationSuccess({ sportfoId }: RegistrationSuccessProps) {
   return (
     <SectionCard title={t("register.success.title")}>
       <div className="flex flex-col items-start gap-4">
+        <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
+          <CheckCircleIcon className="h-9 w-9" />
+        </span>
+
         {sportfoId && (
           <div className="w-full rounded-xl border border-brand-200 bg-brand-50 p-5">
             <p className="text-base font-semibold text-brand-800">{t("register.success.welcome")}</p>

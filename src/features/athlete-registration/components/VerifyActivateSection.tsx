@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { VerifyIcon } from "@/components/ui/RegistrationIcons";
 import { useTranslation } from "@/i18n/LocaleProvider";
 
 interface PaymentMethod {
@@ -34,6 +35,7 @@ export function VerifyActivateSection() {
     <SectionCard
       title={t("register.verify.title")}
       description={t("register.verify.description")}
+      icon={<VerifyIcon />}
     >
       <div className="flex flex-col gap-6">
         <div className="rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">

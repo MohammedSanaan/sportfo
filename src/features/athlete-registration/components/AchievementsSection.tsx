@@ -3,6 +3,7 @@
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { AchievementIcon } from "@/components/ui/RegistrationIcons";
 import type { Achievement, AthleteRegistrationFormValues } from "@/types/athlete";
 import type { DocumentOperationsByField } from "../document-operations";
 import { AchievementForm } from "./AchievementForm";
@@ -44,7 +45,11 @@ export function AchievementsSection({
   });
 
   return (
-    <SectionCard title={t("register.achievements.title")} description={t("register.achievements.description")}>
+    <SectionCard
+      title={t("register.achievements.title")}
+      description={t("register.achievements.description")}
+      icon={<AchievementIcon />}
+    >
       {fields.length === 0 && (
         <p className="rounded-lg border border-dashed border-border-strong px-4 py-6 text-center text-sm text-ink-400">
           {t("register.achievements.empty")}

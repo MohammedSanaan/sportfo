@@ -73,6 +73,34 @@ export type RegistrationField =
   | RegistrationFileField
   | RegistrationPhotoField;
 
+// Maps to a small icon set in src/components/ui/RegistrationIcons.tsx --
+// kept as a plain string key here (not a JSX/React import) so this stays a
+// pure data file; GenericCategoryForm owns the key->component lookup.
+export type SectionIconKey =
+  | "personal"
+  | "sports"
+  | "organization"
+  | "employment"
+  | "experience"
+  | "location"
+  | "documents"
+  | "portfolio"
+  | "availability"
+  | "budget"
+  | "tools"
+  | "specialization"
+  | "profile";
+
+export interface RegistrationFieldGroup {
+  /** i18n key segment under registerHub.categories.{id}.sections.{key}
+   * (.title required, .description optional). */
+  key: string;
+  /** Must reference field ids present in this category's `fields` array,
+   * in the order they should render within the group. */
+  fieldIds: string[];
+  icon?: SectionIconKey;
+}
+
 export interface RegistrationCategoryConfig {
   id: RegistrationCategoryId;
   /** URL segment under /register/{slug}. */
@@ -98,6 +126,14 @@ export interface RegistrationCategoryConfig {
   registrationType: string;
   /** Absent for athlete (reuses the real AthleteRegistrationForm). */
   fields?: RegistrationField[];
+  /** Groups `fields` into named SectionCards for GenericCategoryForm --
+   * absent for athlete (its sections are its own hand-built components).
+   * Every field id in `fields` must appear in exactly one group. */
+  fieldGroups?: RegistrationFieldGroup[];
+  /** A static photo already shipped in public/images/ for this category's
+   * registration hero banner -- never fabricated. Relative to /public
+   * (e.g. "/images/hero/football.jpg"). */
+  heroImage?: string;
 }
 
 const EXPERIENCE_LEVEL_OPTIONS = ["0-2 years", "3-5 years", "6-10 years", "10+ years"];
@@ -109,6 +145,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "athletes",
     persistence: "live",
     registrationType: "athlete",
+    heroImage: "/images/hero-track.jpg",
   },
   {
     id: "academyCoachParent",
@@ -116,6 +153,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "academiesCoaches",
     persistence: "live",
     registrationType: "academy_coach_parent",
+    heroImage: "/images/hero/basketball.jpg",
     fields: [
       { id: "profilePhoto", type: "photo", required: false },
       { id: "academyCoachName", type: "text", required: true },
@@ -127,6 +165,14 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
       { id: "uploadAcademyInfo", type: "file", required: false },
       { id: "uploadIdProof", type: "file", required: true },
     ],
+    fieldGroups: [
+      { key: "organizationDetails", fieldIds: ["academyCoachName"], icon: "organization" },
+      { key: "sportsTraining", fieldIds: ["sportsOffered", "ageGroupsTrained"], icon: "sports" },
+      { key: "experienceCertification", fieldIds: ["coachCertification", "experienceLevel"], icon: "experience" },
+      { key: "locationReach", fieldIds: ["location"], icon: "location" },
+      { key: "documentsVerification", fieldIds: ["uploadAcademyInfo", "uploadIdProof"], icon: "documents" },
+      { key: "profileSetup", fieldIds: ["profilePhoto"], icon: "profile" },
+    ],
   },
   {
     id: "performanceExpert",
@@ -134,6 +180,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "performanceExperts",
     persistence: "live",
     registrationType: "performance_expert",
+    heroImage: "/images/hero/table-tennis.jpg",
     fields: [
       { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
@@ -158,6 +205,14 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
       { id: "uploadCertificate", type: "file", required: false },
       { id: "uploadIdProof", type: "file", required: true },
     ],
+    fieldGroups: [
+      { key: "personalDetails", fieldIds: ["fullName"], icon: "personal" },
+      { key: "expertiseServices", fieldIds: ["expertise", "servicesOffered"], icon: "sports" },
+      { key: "experienceCertifications", fieldIds: ["experienceLevel", "certifications"], icon: "experience" },
+      { key: "location", fieldIds: ["location"], icon: "location" },
+      { key: "documents", fieldIds: ["uploadCertificate", "uploadIdProof"], icon: "documents" },
+      { key: "profileSetup", fieldIds: ["profilePhoto"], icon: "profile" },
+    ],
   },
   {
     id: "mediaCreator",
@@ -165,6 +220,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "mediaCreators",
     persistence: "live",
     registrationType: "media_creator",
+    heroImage: "/images/hero/football.jpg",
     fields: [
       { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
@@ -187,6 +243,14 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
       { id: "location", type: "text", required: true },
       { id: "uploadPortfolio", type: "file", required: false },
     ],
+    fieldGroups: [
+      { key: "personalDetails", fieldIds: ["fullName"], icon: "personal" },
+      { key: "contentType", fieldIds: ["contentType"], icon: "sports" },
+      { key: "portfolioSocial", fieldIds: ["portfolioLink", "socialMediaHandles"], icon: "portfolio" },
+      { key: "location", fieldIds: ["location"], icon: "location" },
+      { key: "uploads", fieldIds: ["uploadPortfolio"], icon: "documents" },
+      { key: "profileSetup", fieldIds: ["profilePhoto"], icon: "profile" },
+    ],
   },
   {
     id: "managementLegal",
@@ -194,6 +258,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "managementLegal",
     persistence: "live",
     registrationType: "management_legal",
+    heroImage: "/images/hero/hockey.jpg",
     fields: [
       { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
@@ -210,6 +275,15 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
       { id: "uploadLicense", type: "file", required: false },
       { id: "uploadIdProof", type: "file", required: true },
     ],
+    fieldGroups: [
+      { key: "personalDetails", fieldIds: ["fullName"], icon: "personal" },
+      { key: "roleInformation", fieldIds: ["role"], icon: "employment" },
+      { key: "organizationLicense", fieldIds: ["organization", "licenseNumber"], icon: "organization" },
+      { key: "experience", fieldIds: ["experienceLevel"], icon: "experience" },
+      { key: "location", fieldIds: ["location"], icon: "location" },
+      { key: "documents", fieldIds: ["uploadLicense", "uploadIdProof"], icon: "documents" },
+      { key: "profileSetup", fieldIds: ["profilePhoto"], icon: "profile" },
+    ],
   },
   {
     id: "eventOperations",
@@ -217,6 +291,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "eventOperations",
     persistence: "live",
     registrationType: "event_operations",
+    heroImage: "/images/hero/volleyball.jpg",
     fields: [
       { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
@@ -232,6 +307,15 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
       { id: "location", type: "text", required: true },
       { id: "uploadIdProof", type: "file", required: true },
     ],
+    fieldGroups: [
+      { key: "personalDetails", fieldIds: ["fullName"], icon: "personal" },
+      { key: "roleCapabilities", fieldIds: ["role", "certification"], icon: "employment" },
+      { key: "experience", fieldIds: ["experienceYears"], icon: "experience" },
+      { key: "availability", fieldIds: ["availability"], icon: "availability" },
+      { key: "location", fieldIds: ["location"], icon: "location" },
+      { key: "documents", fieldIds: ["uploadIdProof"], icon: "documents" },
+      { key: "profileSetup", fieldIds: ["profilePhoto"], icon: "profile" },
+    ],
   },
   {
     id: "sponsorCsr",
@@ -239,6 +323,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "sponsorsCsr",
     persistence: "live",
     registrationType: "sponsor_csr",
+    heroImage: "/images/sports-collage.jpg",
     fields: [
       { id: "profilePhoto", type: "photo", required: false },
       { id: "organizationName", type: "text", required: true },
@@ -269,6 +354,15 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
       { id: "uploadProposal", type: "file", required: false },
       { id: "uploadIdProof", type: "file", required: true },
     ],
+    fieldGroups: [
+      { key: "organizationDetails", fieldIds: ["organizationName"], icon: "organization" },
+      { key: "contactPerson", fieldIds: ["contactPerson"], icon: "personal" },
+      { key: "sponsorshipInterests", fieldIds: ["sponsorshipInterest"], icon: "sports" },
+      { key: "budgetFocus", fieldIds: ["budgetRange", "sportsFocus"], icon: "budget" },
+      { key: "location", fieldIds: ["location"], icon: "location" },
+      { key: "proposalDocuments", fieldIds: ["uploadProposal", "uploadIdProof"], icon: "documents" },
+      { key: "profileSetup", fieldIds: ["profilePhoto"], icon: "profile" },
+    ],
   },
   {
     id: "talentAnalytics",
@@ -276,6 +370,7 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
     roleKey: "talentAnalytics",
     persistence: "live",
     registrationType: "talent_analytics",
+    heroImage: "/images/carousel/athletics.jpg",
     fields: [
       { id: "profilePhoto", type: "photo", required: false },
       { id: "fullName", type: "text", required: true },
@@ -290,6 +385,16 @@ export const REGISTRATION_CATEGORIES: RegistrationCategoryConfig[] = [
       { id: "sportsSpecialization", type: "text", required: true, hasPlaceholder: true },
       { id: "location", type: "text", required: true },
       { id: "uploadPortfolioReport", type: "file", required: false },
+    ],
+    fieldGroups: [
+      { key: "personalDetails", fieldIds: ["fullName"], icon: "personal" },
+      { key: "roleSpecialization", fieldIds: ["role"], icon: "employment" },
+      { key: "toolsUsed", fieldIds: ["toolsUsed"], icon: "tools" },
+      { key: "experience", fieldIds: ["experienceYears"], icon: "experience" },
+      { key: "sportsFocus", fieldIds: ["sportsSpecialization"], icon: "specialization" },
+      { key: "location", fieldIds: ["location"], icon: "location" },
+      { key: "portfolioReports", fieldIds: ["uploadPortfolioReport"], icon: "portfolio" },
+      { key: "profileSetup", fieldIds: ["profilePhoto"], icon: "profile" },
     ],
   },
 ];

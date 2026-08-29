@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { FieldShell } from "@/components/ui/FieldShell";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { SportsIcon } from "@/components/ui/RegistrationIcons";
 import { cn } from "@/lib/cn";
 import { getCategoriesForSport } from "@/lib/sports/catalog";
 import { SKILL_LEVELS, COMPETITION_LEVELS, SUPPORT_NEEDED } from "@/lib/athlete-options";
@@ -78,7 +79,11 @@ export function SportsInformationSection() {
       : undefined;
 
   return (
-    <SectionCard title={t("register.sports.title")} description={t("register.sports.description")}>
+    <SectionCard
+      title={t("register.sports.title")}
+      description={t("register.sports.description")}
+      icon={<SportsIcon />}
+    >
       <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
         <Controller
           name="sportsInformation.primarySport"

@@ -479,6 +479,12 @@ const hi: Dictionary = {
       percentComplete: "{percent}% पूर्ण",
       label: "पंजीकरण प्रगति",
     },
+    sidebar: {
+      note: {
+        title: "खोजे जाएं",
+        description: "एक पूर्ण, सत्यापित एथलीट प्रोफ़ाइल 'एथलीट खोजें' खोजों में ऊपर दिखाई देती है।",
+      },
+    },
     actions: {
       saveDraft: "ड्राफ़्ट सहेजें",
       savingDraft: "ड्राफ़्ट सहेजा जा रहा है...",
@@ -762,6 +768,21 @@ const hi: Dictionary = {
       description: "हमें वह पंजीकरण श्रेणी नहीं मिली।",
       action: "एक श्रेणी चुनें",
     },
+    sidebar: {
+      whyComplete: {
+        title: "अपनी प्रोफ़ाइल पूरी क्यों करें?",
+        description: "एक पूर्ण प्रोफ़ाइल के SportFo पर खोजे जाने और शॉर्टलिस्ट होने की संभावना अधिक होती है।",
+      },
+      verificationTrust: {
+        title: "सत्यापन भरोसा बनाता है",
+        description:
+          "सत्यापित विवरण और दस्तावेज़ एक ट्रस्ट बैज अर्जित करते हैं जो SportFo पर दूसरों के सामने अलग दिखता है।",
+      },
+      support: {
+        title: "मदद चाहिए?",
+        description: "यदि पंजीकरण के दौरान आपको कोई समस्या आती है, तो संपर्क करें और हमारी टीम आपकी मदद करेगी।",
+      },
+    },
     categories: {
       athlete: {
         formTitle: "एक एथलीट के रूप में पंजीकरण करें",
@@ -791,6 +812,20 @@ const hi: Dictionary = {
           location: { label: "स्थान" },
           uploadAcademyInfo: { label: "अकादमी जानकारी अपलोड करें" },
           uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
+        },
+        sections: {
+          organizationDetails: { title: "संगठन / कोच विवरण" },
+          sportsTraining: { title: "खेल एवं प्रशिक्षण जानकारी" },
+          experienceCertification: { title: "अनुभव / प्रमाणन" },
+          locationReach: { title: "स्थान एवं पहुंच" },
+          documentsVerification: { title: "दस्तावेज़ / सत्यापन" },
+          profileSetup: { title: "प्रोफ़ाइल सेटअप" },
+        },
+        sidebar: {
+          note: {
+            title: "एथलीट्स द्वारा खोजे जाएं",
+            description: "पूर्ण, सत्यापित प्रोफ़ाइल वाली अकादमियां एथलीट खोजों में ऊपर दिखाई देती हैं।",
+          },
         },
       },
       performanceExpert: {
@@ -830,6 +865,20 @@ const hi: Dictionary = {
           uploadCertificate: { label: "प्रमाणपत्र अपलोड करें" },
           uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
         },
+        sections: {
+          personalDetails: { title: "व्यक्तिगत विवरण" },
+          expertiseServices: { title: "विशेषज्ञता एवं सेवाएं" },
+          experienceCertifications: { title: "अनुभव / प्रमाणपत्र" },
+          location: { title: "स्थान" },
+          documents: { title: "दस्तावेज़" },
+          profileSetup: { title: "प्रोफ़ाइल सेटअप" },
+        },
+        sidebar: {
+          note: {
+            title: "अपना क्लाइंट बेस बढ़ाएं",
+            description: "आपके प्रमाणपत्रों के साथ एक पूर्ण प्रोफ़ाइल एथलीट्स को आप पर भरोसा करने और आपको चुनने में मदद करती है।",
+          },
+        },
       },
       mediaCreator: {
         formTitle: "मीडिया और क्रिएटर के रूप में पंजीकरण करें",
@@ -858,6 +907,20 @@ const hi: Dictionary = {
           location: { label: "स्थान" },
           uploadPortfolio: { label: "पोर्टफोलियो अपलोड करें" },
         },
+        sections: {
+          personalDetails: { title: "व्यक्तिगत विवरण" },
+          contentType: { title: "कंटेंट प्रकार / विशेषज्ञता" },
+          portfolioSocial: { title: "पोर्टफोलियो / सोशल लिंक" },
+          location: { title: "स्थान" },
+          uploads: { title: "अपलोड्स" },
+          profileSetup: { title: "प्रोफ़ाइल सेटअप" },
+        },
+        sidebar: {
+          note: {
+            title: "अपने काम को पहचान दिलाएं",
+            description: "एक मजबूत पोर्टफोलियो और सोशल उपस्थिति आपको अधिक स्पोर्ट्स मीडिया असाइनमेंट पाने में मदद करती है।",
+          },
+        },
       },
       managementLegal: {
         formTitle: "स्पोर्ट्स मैनेजमेंट और लीगल के रूप में पंजीकरण करें",
@@ -885,6 +948,21 @@ const hi: Dictionary = {
           uploadLicense: { label: "लाइसेंस अपलोड करें" },
           uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
         },
+        sections: {
+          personalDetails: { title: "व्यक्तिगत विवरण" },
+          roleInformation: { title: "भूमिका जानकारी" },
+          organizationLicense: { title: "संगठन / लाइसेंस" },
+          experience: { title: "अनुभव" },
+          location: { title: "स्थान" },
+          documents: { title: "दस्तावेज़" },
+          profileSetup: { title: "प्रोफ़ाइल सेटअप" },
+        },
+        sidebar: {
+          note: {
+            title: "एक भरोसेमंद प्रैक्टिस बनाएं",
+            description: "एक सत्यापित लाइसेंस और अनुभव इतिहास एथलीट्स और क्लबों को भरोसे के साथ आपको चुनने में मदद करता है।",
+          },
+        },
       },
       eventOperations: {
         formTitle: "इवेंट और ऑपरेशंस स्टाफ के रूप में पंजीकरण करें",
@@ -907,6 +985,21 @@ const hi: Dictionary = {
           availability: { label: "उपलब्धता", placeholder: "जैसे सप्ताहांत, शाम" },
           location: { label: "स्थान" },
           uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
+        },
+        sections: {
+          personalDetails: { title: "व्यक्तिगत विवरण" },
+          roleCapabilities: { title: "भूमिका / इवेंट क्षमताएं" },
+          experience: { title: "अनुभव" },
+          availability: { title: "उपलब्धता" },
+          location: { title: "स्थान" },
+          documents: { title: "दस्तावेज़" },
+          profileSetup: { title: "प्रोफ़ाइल सेटअप" },
+        },
+        sidebar: {
+          note: {
+            title: "इवेंट्स के लिए मैच किए जाएं",
+            description: "इवेंट आयोजक सबसे पहले सत्यापित, उपलब्ध स्टाफ को देखते हैं -- चुने जाने के लिए अपनी प्रोफ़ाइल पूरी करें।",
+          },
         },
       },
       sponsorCsr: {
@@ -944,6 +1037,21 @@ const hi: Dictionary = {
           uploadProposal: { label: "प्रस्ताव अपलोड करें" },
           uploadIdProof: { label: "ID प्रमाण अपलोड करें" },
         },
+        sections: {
+          organizationDetails: { title: "संगठन विवरण" },
+          contactPerson: { title: "संपर्क व्यक्ति" },
+          sponsorshipInterests: { title: "स्पॉन्सरशिप रुचियां" },
+          budgetFocus: { title: "बजट / फोकस क्षेत्र" },
+          location: { title: "स्थान" },
+          proposalDocuments: { title: "प्रस्ताव / दस्तावेज़" },
+          profileSetup: { title: "प्रोफ़ाइल सेटअप" },
+        },
+        sidebar: {
+          note: {
+            title: "सही एथलीट्स तक पहुंचें",
+            description: "हमें अपने फोकस क्षेत्र बताएं ताकि हम आपको ऐसे एथलीट्स और अकादमियों से जोड़ सकें जो आपके लक्ष्यों के अनुरूप हों।",
+          },
+        },
       },
       talentAnalytics: {
         formTitle: "टैलेंट डिस्कवरी और एनालिटिक्स के रूप में पंजीकरण करें",
@@ -961,6 +1069,22 @@ const hi: Dictionary = {
           sportsSpecialization: { label: "खेल विशेषज्ञता", placeholder: "जैसे फुटबॉल, एथलेटिक्स" },
           location: { label: "स्थान" },
           uploadPortfolioReport: { label: "पोर्टफोलियो / रिपोर्ट अपलोड करें" },
+        },
+        sections: {
+          personalDetails: { title: "व्यक्तिगत विवरण" },
+          roleSpecialization: { title: "भूमिका / विशेषज्ञता" },
+          toolsUsed: { title: "उपयोग किए गए टूल्स" },
+          experience: { title: "अनुभव" },
+          sportsFocus: { title: "खेल फोकस" },
+          location: { title: "स्थान" },
+          portfolioReports: { title: "पोर्टफोलियो / रिपोर्ट" },
+          profileSetup: { title: "प्रोफ़ाइल सेटअप" },
+        },
+        sidebar: {
+          note: {
+            title: "बेहतर निर्णय लें",
+            description: "आपके टूल्स और विशेषज्ञता के साथ एक पूर्ण प्रोफ़ाइल क्लबों को सही विश्लेषक तेज़ी से खोजने में मदद करती है।",
+          },
         },
       },
     },

@@ -481,6 +481,12 @@ const ml: Dictionary = {
       percentComplete: "{percent}% പൂർത്തിയായി",
       label: "രജിസ്ട്രേഷൻ പുരോഗതി",
     },
+    sidebar: {
+      note: {
+        title: "കണ്ടെത്തപ്പെടുക",
+        description: "പൂർണ്ണവും പരിശോധിച്ചുറപ്പിച്ചതുമായ അത്‌ലറ്റ് പ്രൊഫൈൽ 'അത്‌ലറ്റുകളെ കണ്ടെത്തുക' തിരയലുകളിൽ ഉയർന്നു കാണപ്പെടും.",
+      },
+    },
     actions: {
       saveDraft: "ഡ്രാഫ്റ്റ് സേവ് ചെയ്യുക",
       savingDraft: "ഡ്രാഫ്റ്റ് സേവ് ചെയ്യുന്നു...",
@@ -765,6 +771,21 @@ const ml: Dictionary = {
       description: "ആ രജിസ്ട്രേഷൻ വിഭാഗം ഞങ്ങൾക്ക് കണ്ടെത്താനായില്ല.",
       action: "ഒരു വിഭാഗം തിരഞ്ഞെടുക്കുക",
     },
+    sidebar: {
+      whyComplete: {
+        title: "എന്തുകൊണ്ട് നിങ്ങളുടെ പ്രൊഫൈൽ പൂർത്തിയാക്കണം?",
+        description: "പൂർണ്ണമായ പ്രൊഫൈൽ SportFo യിലുടനീളം കണ്ടെത്തപ്പെടാനും ഷോർട്ട്‌ലിസ്റ്റ് ചെയ്യപ്പെടാനും കൂടുതൽ സാധ്യതയുണ്ട്.",
+      },
+      verificationTrust: {
+        title: "പരിശോധന വിശ്വാസം വളർത്തുന്നു",
+        description:
+          "പരിശോധിച്ചുറപ്പിച്ച വിവരങ്ങളും രേഖകളും SportFo യിൽ മറ്റുള്ളവർക്കിടയിൽ വേറിട്ടു നിൽക്കുന്ന ഒരു ട്രസ്റ്റ് ബാഡ്ജ് നേടുന്നു.",
+      },
+      support: {
+        title: "സഹായം വേണോ?",
+        description: "രജിസ്റ്റർ ചെയ്യുമ്പോൾ എന്തെങ്കിലും പ്രശ്നം നേരിട്ടാൽ, ബന്ധപ്പെടുക, ഞങ്ങളുടെ ടീം നിങ്ങളെ സഹായിക്കും.",
+      },
+    },
     categories: {
       athlete: {
         formTitle: "ഒരു അത്‌ലറ്റ് ആയി രജിസ്റ്റർ ചെയ്യുക",
@@ -797,6 +818,20 @@ const ml: Dictionary = {
           location: { label: "സ്ഥലം" },
           uploadAcademyInfo: { label: "അക്കാദമി വിവരങ്ങൾ അപ്‌ലോഡ് ചെയ്യുക" },
           uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+        sections: {
+          organizationDetails: { title: "സ്ഥാപനം / കോച്ച് വിവരങ്ങൾ" },
+          sportsTraining: { title: "കായികവും പരിശീലന വിവരങ്ങളും" },
+          experienceCertification: { title: "അനുഭവം / സർട്ടിഫിക്കേഷൻ" },
+          locationReach: { title: "സ്ഥലവും വ്യാപ്തിയും" },
+          documentsVerification: { title: "രേഖകൾ / പരിശോധന" },
+          profileSetup: { title: "പ്രൊഫൈൽ സെറ്റപ്പ്" },
+        },
+        sidebar: {
+          note: {
+            title: "അത്‌ലറ്റുകൾ കണ്ടെത്തട്ടെ",
+            description: "പൂർണ്ണവും പരിശോധിച്ചുറപ്പിച്ചതുമായ പ്രൊഫൈൽ ഉള്ള അക്കാദമികൾ അത്‌ലറ്റ് തിരയലുകളിൽ ഉയർന്നു കാണപ്പെടും.",
+          },
         },
       },
       performanceExpert: {
@@ -836,6 +871,20 @@ const ml: Dictionary = {
           uploadCertificate: { label: "സർട്ടിഫിക്കറ്റ് അപ്‌ലോഡ് ചെയ്യുക" },
           uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
         },
+        sections: {
+          personalDetails: { title: "വ്യക്തിഗത വിവരങ്ങൾ" },
+          expertiseServices: { title: "വൈദഗ്ധ്യവും സേവനങ്ങളും" },
+          experienceCertifications: { title: "അനുഭവം / സർട്ടിഫിക്കേഷനുകൾ" },
+          location: { title: "സ്ഥലം" },
+          documents: { title: "രേഖകൾ" },
+          profileSetup: { title: "പ്രൊഫൈൽ സെറ്റപ്പ്" },
+        },
+        sidebar: {
+          note: {
+            title: "നിങ്ങളുടെ ക്ലയന്റ് ബേസ് വളർത്തുക",
+            description: "നിങ്ങളുടെ സർട്ടിഫിക്കേഷനുകളോടു കൂടിയ പൂർണ്ണമായ പ്രൊഫൈൽ അത്‌ലറ്റുകൾ നിങ്ങളെ വിശ്വസിച്ച് തിരഞ്ഞെടുക്കാൻ സഹായിക്കുന്നു.",
+          },
+        },
       },
       mediaCreator: {
         formTitle: "മീഡിയ & ക്രിയേറ്റർ ആയി രജിസ്റ്റർ ചെയ്യുക",
@@ -864,6 +913,20 @@ const ml: Dictionary = {
           location: { label: "സ്ഥലം" },
           uploadPortfolio: { label: "പോർട്ട്‌ഫോളിയോ അപ്‌ലോഡ് ചെയ്യുക" },
         },
+        sections: {
+          personalDetails: { title: "വ്യക്തിഗത വിവരങ്ങൾ" },
+          contentType: { title: "ഉള്ളടക്ക തരം / സ്പെഷ്യലൈസേഷൻ" },
+          portfolioSocial: { title: "പോർട്ട്‌ഫോളിയോ / സോഷ്യൽ ലിങ്കുകൾ" },
+          location: { title: "സ്ഥലം" },
+          uploads: { title: "അപ്‌ലോഡുകൾ" },
+          profileSetup: { title: "പ്രൊഫൈൽ സെറ്റപ്പ്" },
+        },
+        sidebar: {
+          note: {
+            title: "നിങ്ങളുടെ ജോലി ശ്രദ്ധിക്കപ്പെടട്ടെ",
+            description: "ശക്തമായ പോർട്ട്‌ഫോളിയോയും സോഷ്യൽ സാന്നിധ്യവും കൂടുതൽ സ്പോർട്സ് മീഡിയ അസൈൻമെന്റുകൾ നേടാൻ നിങ്ങളെ സഹായിക്കുന്നു.",
+          },
+        },
       },
       managementLegal: {
         formTitle: "സ്പോർട്സ് മാനേജ്‌മെന്റ് & ലീഗൽ ആയി രജിസ്റ്റർ ചെയ്യുക",
@@ -891,6 +954,21 @@ const ml: Dictionary = {
           uploadLicense: { label: "ലൈസൻസ് അപ്‌ലോഡ് ചെയ്യുക" },
           uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
         },
+        sections: {
+          personalDetails: { title: "വ്യക്തിഗത വിവരങ്ങൾ" },
+          roleInformation: { title: "റോൾ വിവരങ്ങൾ" },
+          organizationLicense: { title: "സ്ഥാപനം / ലൈസൻസ്" },
+          experience: { title: "അനുഭവം" },
+          location: { title: "സ്ഥലം" },
+          documents: { title: "രേഖകൾ" },
+          profileSetup: { title: "പ്രൊഫൈൽ സെറ്റപ്പ്" },
+        },
+        sidebar: {
+          note: {
+            title: "വിശ്വസനീയമായ പ്രാക്ടീസ് കെട്ടിപ്പടുക്കുക",
+            description: "പരിശോധിച്ചുറപ്പിച്ച ലൈസൻസും അനുഭവ ചരിത്രവും അത്‌ലറ്റുകളും ക്ലബ്ബുകളും വിശ്വാസത്തോടെ നിങ്ങളെ തിരഞ്ഞെടുക്കാൻ സഹായിക്കുന്നു.",
+          },
+        },
       },
       eventOperations: {
         formTitle: "ഇവന്റ് & ഓപ്പറേഷൻസ് സ്റ്റാഫ് ആയി രജിസ്റ്റർ ചെയ്യുക",
@@ -908,6 +986,21 @@ const ml: Dictionary = {
           availability: { label: "ലഭ്യത", placeholder: "ഉദാ. വാരാന്ത്യങ്ങൾ, വൈകുന്നേരങ്ങൾ" },
           location: { label: "സ്ഥലം" },
           uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+        sections: {
+          personalDetails: { title: "വ്യക്തിഗത വിവരങ്ങൾ" },
+          roleCapabilities: { title: "റോൾ / ഇവന്റ് ശേഷികൾ" },
+          experience: { title: "അനുഭവം" },
+          availability: { title: "ലഭ്യത" },
+          location: { title: "സ്ഥലം" },
+          documents: { title: "രേഖകൾ" },
+          profileSetup: { title: "പ്രൊഫൈൽ സെറ്റപ്പ്" },
+        },
+        sidebar: {
+          note: {
+            title: "ഇവന്റുകൾക്ക് പൊരുത്തപ്പെടുത്തപ്പെടുക",
+            description: "ഇവന്റ് സംഘാടകർ ആദ്യം പരിശോധിച്ചുറപ്പിച്ചതും ലഭ്യവുമായ സ്റ്റാഫിനെയാണ് നോക്കുന്നത് -- തിരഞ്ഞെടുക്കപ്പെടാൻ നിങ്ങളുടെ പ്രൊഫൈൽ പൂർത്തിയാക്കുക.",
+          },
         },
       },
       sponsorCsr: {
@@ -948,6 +1041,22 @@ const ml: Dictionary = {
           uploadProposal: { label: "പ്രൊപ്പോസൽ അപ്‌ലോഡ് ചെയ്യുക" },
           uploadIdProof: { label: "ID തെളിവ് അപ്‌ലോഡ് ചെയ്യുക" },
         },
+        sections: {
+          organizationDetails: { title: "സ്ഥാപന വിവരങ്ങൾ" },
+          contactPerson: { title: "ബന്ധപ്പെടേണ്ട വ്യക്തി" },
+          sponsorshipInterests: { title: "സ്പോൺസർഷിപ്പ് താൽപ്പര്യങ്ങൾ" },
+          budgetFocus: { title: "ബജറ്റ് / ഫോക്കസ് മേഖലകൾ" },
+          location: { title: "സ്ഥലം" },
+          proposalDocuments: { title: "പ്രൊപ്പോസൽ / രേഖകൾ" },
+          profileSetup: { title: "പ്രൊഫൈൽ സെറ്റപ്പ്" },
+        },
+        sidebar: {
+          note: {
+            title: "ശരിയായ അത്‌ലറ്റുകളിലേക്ക് എത്തുക",
+            description:
+              "നിങ്ങളുടെ ഫോക്കസ് മേഖലകൾ ഞങ്ങളോട് പറയുക, അതുവഴി നിങ്ങളുടെ ലക്ഷ്യങ്ങൾക്ക് അനുയോജ്യമായ അത്‌ലറ്റുകളുമായും അക്കാദമികളുമായും ഞങ്ങൾക്ക് നിങ്ങളെ ബന്ധിപ്പിക്കാൻ കഴിയും.",
+          },
+        },
       },
       talentAnalytics: {
         formTitle: "ടാലന്റ് ഡിസ്കവറി & അനലിറ്റിക്സ് ആയി രജിസ്റ്റർ ചെയ്യുക",
@@ -965,6 +1074,22 @@ const ml: Dictionary = {
           sportsSpecialization: { label: "കായിക സ്പെഷ്യലൈസേഷൻ", placeholder: "ഉദാ. ഫുട്ബോൾ, അത്‌ലറ്റിക്സ്" },
           location: { label: "സ്ഥലം" },
           uploadPortfolioReport: { label: "പോർട്ട്‌ഫോളിയോ / റിപ്പോർട്ട് അപ്‌ലോഡ് ചെയ്യുക" },
+        },
+        sections: {
+          personalDetails: { title: "വ്യക്തിഗത വിവരങ്ങൾ" },
+          roleSpecialization: { title: "റോൾ / സ്പെഷ്യലൈസേഷൻ" },
+          toolsUsed: { title: "ഉപയോഗിച്ച ടൂളുകൾ" },
+          experience: { title: "അനുഭവം" },
+          sportsFocus: { title: "കായിക ഫോക്കസ്" },
+          location: { title: "സ്ഥലം" },
+          portfolioReports: { title: "പോർട്ട്‌ഫോളിയോ / റിപ്പോർട്ടുകൾ" },
+          profileSetup: { title: "പ്രൊഫൈൽ സെറ്റപ്പ്" },
+        },
+        sidebar: {
+          note: {
+            title: "മികച്ച തീരുമാനങ്ങൾ എടുക്കാൻ ശക്തി പകരുക",
+            description: "നിങ്ങളുടെ ടൂളുകളും സ്പെഷ്യലൈസേഷനും ഉള്ള പൂർണ്ണമായ പ്രൊഫൈൽ ക്ലബ്ബുകൾക്ക് ശരിയായ അനലിസ്റ്റിനെ വേഗത്തിൽ കണ്ടെത്താൻ സഹായിക്കുന്നു.",
+          },
         },
       },
     },

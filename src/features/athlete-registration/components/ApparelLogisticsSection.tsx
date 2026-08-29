@@ -3,6 +3,7 @@
 import { Controller, useFormContext } from "react-hook-form";
 import { Select } from "@/components/ui/Select";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { ApparelIcon } from "@/components/ui/RegistrationIcons";
 import { APPAREL_SIZES, SHORTS_SIZES, SHOE_SIZES } from "@/lib/athlete-options";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
 import { useTranslation } from "@/i18n/LocaleProvider";
@@ -20,7 +21,11 @@ export function ApparelLogisticsSection() {
   const shoeSizeOptions = translateOptions(t, "options.shoeSize", SHOE_SIZES);
 
   return (
-    <SectionCard title={t("register.apparel.title")} description={t("register.apparel.description")}>
+    <SectionCard
+      title={t("register.apparel.title")}
+      description={t("register.apparel.description")}
+      icon={<ApparelIcon />}
+    >
       <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
         <Controller
           name="apparelLogistics.trackSuitSize"

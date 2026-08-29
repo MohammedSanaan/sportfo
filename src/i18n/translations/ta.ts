@@ -483,6 +483,13 @@ const ta: Dictionary = {
       percentComplete: "{percent}% முடிந்தது",
       label: "பதிவு முன்னேற்றம்",
     },
+    sidebar: {
+      note: {
+        title: "கண்டறியப்படுங்கள்",
+        description:
+          "முழுமையான, சரிபார்க்கப்பட்ட விளையாட்டு வீரர் சுயவிவரம் 'விளையாட்டு வீரர்களைக் கண்டறியவும்' தேடல்களில் மேலே தோன்றும்.",
+      },
+    },
     actions: {
       saveDraft: "வரைவைச் சேமிக்கவும்",
       savingDraft: "வரைவு சேமிக்கப்படுகிறது...",
@@ -767,6 +774,21 @@ const ta: Dictionary = {
       description: "அந்த பதிவு வகையை எங்களால் கண்டுபிடிக்க முடியவில்லை.",
       action: "ஒரு வகையைத் தேர்ந்தெடுக்கவும்",
     },
+    sidebar: {
+      whyComplete: {
+        title: "உங்கள் சுயவிவரத்தை ஏன் முழுமையாக்க வேண்டும்?",
+        description: "முழுமையான சுயவிவரம் SportFo முழுவதும் கண்டறியப்பட்டு பட்டியலிடப்படுவதற்கான வாய்ப்பு அதிகம்.",
+      },
+      verificationTrust: {
+        title: "சரிபார்ப்பு நம்பிக்கையை உருவாக்குகிறது",
+        description:
+          "சரிபார்க்கப்பட்ட விவரங்களும் ஆவணங்களும் ஒரு நம்பிக்கை பேட்ஜைப் பெறுகின்றன, இது SportFo-வில் மற்றவர்களிடையே தனித்து நிற்கிறது.",
+      },
+      support: {
+        title: "உதவி தேவையா?",
+        description: "பதிவு செய்யும்போது ஏதேனும் சிக்கல் ஏற்பட்டால், தொடர்பு கொள்ளுங்கள், எங்கள் குழு உங்களுக்கு உதவும்.",
+      },
+    },
     categories: {
       athlete: {
         formTitle: "ஒரு விளையாட்டு வீரராக பதிவு செய்யவும்",
@@ -799,6 +821,20 @@ const ta: Dictionary = {
           location: { label: "இடம்" },
           uploadAcademyInfo: { label: "அகாடமி தகவலைப் பதிவேற்றவும்" },
           uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+        sections: {
+          organizationDetails: { title: "நிறுவனம் / பயிற்சியாளர் விவரங்கள்" },
+          sportsTraining: { title: "விளையாட்டு & பயிற்சி தகவல்" },
+          experienceCertification: { title: "அனுபவம் / சான்றிதழ்" },
+          locationReach: { title: "இடம் & சென்றடையும் தன்மை" },
+          documentsVerification: { title: "ஆவணங்கள் / சரிபார்ப்பு" },
+          profileSetup: { title: "சுயவிவர அமைப்பு" },
+        },
+        sidebar: {
+          note: {
+            title: "விளையாட்டு வீரர்களால் கண்டறியப்படுங்கள்",
+            description: "முழுமையான, சரிபார்க்கப்பட்ட சுயவிவரம் கொண்ட அகாடமிகள் விளையாட்டு வீரர் தேடல்களில் மேலே தோன்றும்.",
+          },
         },
       },
       performanceExpert: {
@@ -838,6 +874,20 @@ const ta: Dictionary = {
           uploadCertificate: { label: "சான்றிதழைப் பதிவேற்றவும்" },
           uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
         },
+        sections: {
+          personalDetails: { title: "தனிப்பட்ட விவரங்கள்" },
+          expertiseServices: { title: "நிபுணத்துவம் & சேவைகள்" },
+          experienceCertifications: { title: "அனுபவம் / சான்றிதழ்கள்" },
+          location: { title: "இடம்" },
+          documents: { title: "ஆவணங்கள்" },
+          profileSetup: { title: "சுயவிவர அமைப்பு" },
+        },
+        sidebar: {
+          note: {
+            title: "உங்கள் வாடிக்கையாளர் தளத்தை வளர்க்கவும்",
+            description: "உங்கள் சான்றிதழ்களுடன் கூடிய முழுமையான சுயவிவரம் விளையாட்டு வீரர்கள் உங்களை நம்பி தேர்ந்தெடுக்க உதவுகிறது.",
+          },
+        },
       },
       mediaCreator: {
         formTitle: "மீடியா & கிரியேட்டராக பதிவு செய்யவும்",
@@ -866,6 +916,20 @@ const ta: Dictionary = {
           location: { label: "இடம்" },
           uploadPortfolio: { label: "போர்ட்ஃபோலியோவைப் பதிவேற்றவும்" },
         },
+        sections: {
+          personalDetails: { title: "தனிப்பட்ட விவரங்கள்" },
+          contentType: { title: "உள்ளடக்க வகை / நிபுணத்துவம்" },
+          portfolioSocial: { title: "போர்ட்ஃபோலியோ / சமூக ஊடக இணைப்புகள்" },
+          location: { title: "இடம்" },
+          uploads: { title: "பதிவேற்றங்கள்" },
+          profileSetup: { title: "சுயவிவர அமைப்பு" },
+        },
+        sidebar: {
+          note: {
+            title: "உங்கள் படைப்பை கவனிக்கச் செய்யுங்கள்",
+            description: "வலுவான போர்ட்ஃபோலியோவும் சமூக ஊடக இருப்பும் அதிக ஸ்போர்ட்ஸ் மீடியா பணிகளைப் பெற உதவும்.",
+          },
+        },
       },
       managementLegal: {
         formTitle: "ஸ்போர்ட்ஸ் மேனேஜ்மென்ட் & லீகல் ஆக பதிவு செய்யவும்",
@@ -893,6 +957,21 @@ const ta: Dictionary = {
           uploadLicense: { label: "உரிமத்தைப் பதிவேற்றவும்" },
           uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
         },
+        sections: {
+          personalDetails: { title: "தனிப்பட்ட விவரங்கள்" },
+          roleInformation: { title: "பங்கு தகவல்" },
+          organizationLicense: { title: "நிறுவனம் / உரிமம்" },
+          experience: { title: "அனுபவம்" },
+          location: { title: "இடம்" },
+          documents: { title: "ஆவணங்கள்" },
+          profileSetup: { title: "சுயவிவர அமைப்பு" },
+        },
+        sidebar: {
+          note: {
+            title: "நம்பகமான நடைமுறையை உருவாக்குங்கள்",
+            description: "சரிபார்க்கப்பட்ட உரிமமும் அனுபவ வரலாறும் விளையாட்டு வீரர்களும் கிளப்களும் நம்பிக்கையுடன் உங்களைத் தேர்ந்தெடுக்க உதவுகிறது.",
+          },
+        },
       },
       eventOperations: {
         formTitle: "ஈவென்ட் & ஆபரேஷன்ஸ் பணியாளராக பதிவு செய்யவும்",
@@ -910,6 +989,21 @@ const ta: Dictionary = {
           availability: { label: "கிடைக்கும் நேரம்", placeholder: "எ.கா. வார இறுதி நாட்கள், மாலை நேரங்கள்" },
           location: { label: "இடம்" },
           uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
+        },
+        sections: {
+          personalDetails: { title: "தனிப்பட்ட விவரங்கள்" },
+          roleCapabilities: { title: "பங்கு / நிகழ்வு திறன்கள்" },
+          experience: { title: "அனுபவம்" },
+          availability: { title: "கிடைக்கும் நேரம்" },
+          location: { title: "இடம்" },
+          documents: { title: "ஆவணங்கள்" },
+          profileSetup: { title: "சுயவிவர அமைப்பு" },
+        },
+        sidebar: {
+          note: {
+            title: "நிகழ்வுகளுக்குப் பொருத்தப்படுங்கள்",
+            description: "நிகழ்வு அமைப்பாளர்கள் முதலில் சரிபார்க்கப்பட்ட, கிடைக்கக்கூடிய பணியாளர்களைத் தேடுகிறார்கள் -- தேர்ந்தெடுக்கப்பட உங்கள் சுயவிவரத்தை முழுமையாக்குங்கள்.",
+          },
         },
       },
       sponsorCsr: {
@@ -950,6 +1044,22 @@ const ta: Dictionary = {
           uploadProposal: { label: "முன்மொழிவைப் பதிவேற்றவும்" },
           uploadIdProof: { label: "அடையாள சான்றைப் பதிவேற்றவும்" },
         },
+        sections: {
+          organizationDetails: { title: "நிறுவன விவரங்கள்" },
+          contactPerson: { title: "தொடர்பு நபர்" },
+          sponsorshipInterests: { title: "ஸ்பான்சர்ஷிப் ஆர்வங்கள்" },
+          budgetFocus: { title: "பட்ஜெட் / கவனம் செலுத்தும் பகுதிகள்" },
+          location: { title: "இடம்" },
+          proposalDocuments: { title: "முன்மொழிவு / ஆவணங்கள்" },
+          profileSetup: { title: "சுயவிவர அமைப்பு" },
+        },
+        sidebar: {
+          note: {
+            title: "சரியான விளையாட்டு வீரர்களை அடையுங்கள்",
+            description:
+              "உங்கள் கவனம் செலுத்தும் பகுதிகளை எங்களிடம் தெரிவிக்கவும், அதனால் உங்கள் இலக்குகளுக்குப் பொருந்தும் விளையாட்டு வீரர்கள் மற்றும் அகாடமிகளுடன் உங்களை இணைக்க முடியும்.",
+          },
+        },
       },
       talentAnalytics: {
         formTitle: "டேலன்ட் டிஸ்கவரி & அனலிடிக்ஸ் ஆக பதிவு செய்யவும்",
@@ -967,6 +1077,22 @@ const ta: Dictionary = {
           sportsSpecialization: { label: "விளையாட்டு நிபுணத்துவம்", placeholder: "எ.கா. கால்பந்து, தடகளம்" },
           location: { label: "இடம்" },
           uploadPortfolioReport: { label: "போர்ட்ஃபோலியோ / அறிக்கையைப் பதிவேற்றவும்" },
+        },
+        sections: {
+          personalDetails: { title: "தனிப்பட்ட விவரங்கள்" },
+          roleSpecialization: { title: "பங்கு / நிபுணத்துவம்" },
+          toolsUsed: { title: "பயன்படுத்தப்பட்ட கருவிகள்" },
+          experience: { title: "அனுபவம்" },
+          sportsFocus: { title: "விளையாட்டு கவனம்" },
+          location: { title: "இடம்" },
+          portfolioReports: { title: "போர்ட்ஃபோலியோ / அறிக்கைகள்" },
+          profileSetup: { title: "சுயவிவர அமைப்பு" },
+        },
+        sidebar: {
+          note: {
+            title: "சிறந்த முடிவுகளை எடுக்க உதவுங்கள்",
+            description: "உங்கள் கருவிகளும் நிபுணத்துவமும் கொண்ட முழுமையான சுயவிவரம் கிளப்களுக்கு சரியான ஆய்வாளரை வேகமாகக் கண்டறிய உதவுகிறது.",
+          },
         },
       },
     },

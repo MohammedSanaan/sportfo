@@ -3,6 +3,7 @@
 import { useFormContext, useWatch } from "react-hook-form";
 import type { AthleteRegistrationFormValues } from "@/types/athlete";
 import { useTranslation } from "@/i18n/LocaleProvider";
+import { RegistrationProgressMeter } from "@/components/ui/RegistrationProgressMeter";
 
 // The same fields each section already enforces via `required`/`rules`
 // (see PersonalDetailsSection and SportsInformationSection) -- Achievements,
@@ -56,24 +57,11 @@ export function RegistrationProgressBar() {
           : t("register.progress.getStarted");
 
   return (
-    <div className="flex flex-col gap-2 rounded-2xl border border-border-default bg-surface px-4 py-3.5 sm:px-5">
-      <div className="flex items-center justify-between gap-3 text-xs font-medium text-ink-500">
-        <span>{message}</span>
-        <span>{t("register.progress.percentComplete", { percent })}</span>
-      </div>
-      <div
-        role="progressbar"
-        aria-valuenow={percent}
-        aria-valuemin={0}
-        aria-valuemax={100}
-        aria-label={t("register.progress.label")}
-        className="h-2 w-full overflow-hidden rounded-full bg-surface-muted"
-      >
-        <div
-          className="h-full rounded-full bg-brand-600 transition-all duration-300"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-    </div>
+    <RegistrationProgressMeter
+      percent={percent}
+      message={message}
+      percentLabel={t("register.progress.percentComplete", { percent })}
+      ariaLabel={t("register.progress.label")}
+    />
   );
 }

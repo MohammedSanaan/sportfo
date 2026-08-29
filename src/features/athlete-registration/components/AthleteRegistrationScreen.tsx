@@ -16,9 +16,12 @@ interface AthleteRegistrationScreenProps {
    * hub passes /register/athlete so either path round-trips back to itself
    * instead of silently switching URLs on the visitor. */
   reloadHref?: string;
-  /** Heading + intro copy are the caller's job on the hub route (it has
-   * its own "Register with SportFo" / "Select Your Category" header) --
-   * only /athlete/register itself wants this screen's own title. */
+  /** Whether to show the step-pill nav (RegistrationStepNav). Both
+   * /athlete/register and the /register/athlete hub route now get their
+   * page title from the shared RegistrationHero (rendered by the caller,
+   * above this whole screen) -- this screen no longer renders its own
+   * duplicate h1. The hub route still opts out of the step nav since it
+   * already has its own category-switching nav alongside the hero. */
   showHeading?: boolean;
 }
 
@@ -48,17 +51,7 @@ export async function AthleteRegistrationScreen({
 
   return (
     <div className="flex flex-col gap-8 sm:gap-10">
-      {showHeading && (
-        <div className="flex flex-col gap-5">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-              {t("register.pageTitle")}
-            </h1>
-            <p className="mt-3 max-w-2xl text-base text-ink-500">{t("register.pageDescription")}</p>
-          </div>
-          {!draftLoadFailed && <RegistrationStepNav locale={locale} />}
-        </div>
-      )}
+      {showHeading && !draftLoadFailed && <RegistrationStepNav locale={locale} />}
 
       {draftLoadFailed ? (
         // Rendering a blank form here would risk Save Draft silently

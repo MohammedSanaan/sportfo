@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { Controller, useForm } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
@@ -27,9 +27,45 @@ import {
   saveRegistrationDraft,
 } from "@/lib/registration/draft-storage";
 import type { Json } from "@/types/supabase";
-import type { RegistrationCategoryConfig, RegistrationField } from "@/lib/registration/categories";
+import type {
+  RegistrationCategoryConfig,
+  RegistrationField,
+  SectionIconKey,
+} from "@/lib/registration/categories";
 import { useTranslation } from "@/i18n/LocaleProvider";
+import {
+  PersonalDetailsIcon,
+  SportsIcon,
+  OrganizationIcon,
+  EmploymentIcon,
+  ExperienceIcon,
+  LocationIcon,
+  DocumentsIcon,
+  PortfolioIcon,
+  AvailabilityIcon,
+  BudgetIcon,
+  ToolsIcon,
+  SpecializationIcon,
+  ProfileSetupIcon,
+} from "@/components/ui/RegistrationIcons";
 import { RegistrationHubSuccess } from "./RegistrationHubSuccess";
+import { GenericRegistrationProgressBar } from "./GenericRegistrationProgressBar";
+
+const SECTION_ICONS: Record<SectionIconKey, ReactNode> = {
+  personal: <PersonalDetailsIcon />,
+  sports: <SportsIcon />,
+  organization: <OrganizationIcon />,
+  employment: <EmploymentIcon />,
+  experience: <ExperienceIcon />,
+  location: <LocationIcon />,
+  documents: <DocumentsIcon />,
+  portfolio: <PortfolioIcon />,
+  availability: <AvailabilityIcon />,
+  budget: <BudgetIcon />,
+  tools: <ToolsIcon />,
+  specialization: <SpecializationIcon />,
+  profile: <ProfileSetupIcon />,
+};
 
 interface GenericCategoryFormProps {
   /** category.fields must be present -- this component only ever renders
@@ -47,7 +83,7 @@ interface GenericCategoryFormProps {
 // A file field's value is a File (freshly picked, not yet uploaded), a
 // string (an already-uploaded Storage path from a previous save), or null
 // (nothing). Every other field is a string, string[] (multiselect), or "".
-type FormValues = Record<string, string | string[] | File | null>;
+export type FormValues = Record<string, string | string[] | File | null>;
 
 interface StoredDraft {
   values: FormValues;
@@ -144,6 +180,10 @@ export function GenericCategoryForm({
 
   function keyBase(fieldId: string) {
     return `registerHub.categories.${category.id}.fields.${fieldId}`;
+  }
+
+  function sectionKeyBase(groupKey: string) {
+    return `registerHub.categories.${category.id}.sections.${groupKey}`;
   }
 
   function fieldError(fieldId: string): string | undefined {
@@ -462,36 +502,64 @@ export function GenericCategoryForm({
           exploreCommunityLabel={t("register.success.exploreCommunity")}
         />
       )}
-      <SectionCard title={t("registerHub.formDetailsTitle")}>
-        {restoreNotice && (
-          <div
-            role="status"
-            className={cn(
-              "rounded-xl border p-4 text-sm",
-              restoreNotice.warning
-                ? "border-amber-200 bg-amber-50 text-amber-800"
-                : "border-green-200 bg-green-50 text-green-700",
-            )}
-          >
-            {restoreNotice.message}
-          </div>
-        )}
-        {submitError && (
-          <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
-            <p className="font-medium">{t("registerHub.errors.title")}</p>
-            <p className="mt-1">{submitError}</p>
-          </div>
+
+      <GenericRegistrationProgressBar control={control} fields={fields} />
+
+      {restoreNotice && (
+        <div
+          role="status"
+          className={cn(
+            "rounded-xl border p-4 text-sm",
+            restoreNotice.warning
+              ? "border-amber-200 bg-amber-50 text-amber-800"
+              : "border-green-200 bg-green-50 text-green-700",
+          )}
+        >
+          {restoreNotice.message}
+        </div>
+      )}
+      {submitError && (
+        <div role="alert" className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+          <p className="font-medium">{t("registerHub.errors.title")}</p>
+          <p className="mt-1">{submitError}</p>
+        </div>
+      )}
+
+      <form noValidate onSubmit={onSubmit} className="flex flex-col gap-6">
+        {category.fieldGroups ? (
+          category.fieldGroups.map((group) => (
+            <SectionCard
+              key={group.key}
+              title={t(`${sectionKeyBase(group.key)}.title`)}
+              description={
+                t(`${sectionKeyBase(group.key)}.description`) === `${sectionKeyBase(group.key)}.description`
+                  ? undefined
+                  : t(`${sectionKeyBase(group.key)}.description`)
+              }
+              icon={group.icon ? SECTION_ICONS[group.icon] : undefined}
+            >
+              <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
+                {group.fieldIds.map((fieldId) => {
+                  const field = fields.find((f) => f.id === fieldId);
+                  return field ? renderField(field) : null;
+                })}
+              </div>
+            </SectionCard>
+          ))
+        ) : (
+          <SectionCard title={t("registerHub.formDetailsTitle")}>
+            <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
+              {fields.map((field) => renderField(field))}
+            </div>
+          </SectionCard>
         )}
 
-        <form noValidate onSubmit={onSubmit} className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
-          {fields.map((field) => renderField(field))}
-          <div className="sm:col-span-2">
-            <Button type="submit" variant="primary" disabled={isSaving}>
-              {isSaving ? t("registerHub.actions.registering") : t("registerHub.actions.registerNow")}
-            </Button>
-          </div>
-        </form>
-      </SectionCard>
+        <div className="flex justify-end">
+          <Button type="submit" variant="primary" disabled={isSaving}>
+            {isSaving ? t("registerHub.actions.registering") : t("registerHub.actions.registerNow")}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }

@@ -482,6 +482,12 @@ const en = {
       percentComplete: "{percent}% complete",
       label: "Registration progress",
     },
+    sidebar: {
+      note: {
+        title: "Get discovered",
+        description: "A complete, verified athlete profile appears higher in Discover Athletes searches.",
+      },
+    },
     actions: {
       saveDraft: "Save Draft",
       savingDraft: "Saving draft...",
@@ -766,6 +772,20 @@ const en = {
       description: "We couldn't find that registration category.",
       action: "Choose a category",
     },
+    sidebar: {
+      whyComplete: {
+        title: "Why complete your profile?",
+        description: "A complete profile is more likely to be discovered and shortlisted across SportFo.",
+      },
+      verificationTrust: {
+        title: "Verification builds trust",
+        description: "Verified details and documents earn a trust badge that stands out to others on SportFo.",
+      },
+      support: {
+        title: "Need help?",
+        description: "If you run into any issues while registering, reach out and our team will help you out.",
+      },
+    },
     categories: {
       athlete: {
         formTitle: "Register as an Athlete",
@@ -798,6 +818,20 @@ const en = {
           location: { label: "Location" },
           uploadAcademyInfo: { label: "Upload Academy Info" },
           uploadIdProof: { label: "Upload ID Proof" },
+        },
+        sections: {
+          organizationDetails: { title: "Organization / Coach Details" },
+          sportsTraining: { title: "Sports & Training Info" },
+          experienceCertification: { title: "Experience / Certification" },
+          locationReach: { title: "Location & Reach" },
+          documentsVerification: { title: "Documents / Verification" },
+          profileSetup: { title: "Profile Setup" },
+        },
+        sidebar: {
+          note: {
+            title: "Get discovered by athletes",
+            description: "Academies with a complete, verified profile appear higher in athlete searches.",
+          },
         },
       },
       performanceExpert: {
@@ -837,6 +871,20 @@ const en = {
           uploadCertificate: { label: "Upload Certificate" },
           uploadIdProof: { label: "Upload ID Proof" },
         },
+        sections: {
+          personalDetails: { title: "Personal Details" },
+          expertiseServices: { title: "Expertise & Services" },
+          experienceCertifications: { title: "Experience / Certifications" },
+          location: { title: "Location" },
+          documents: { title: "Documents" },
+          profileSetup: { title: "Profile Setup" },
+        },
+        sidebar: {
+          note: {
+            title: "Grow your client base",
+            description: "A complete profile with your certifications helps athletes trust and choose you.",
+          },
+        },
       },
       mediaCreator: {
         formTitle: "Register as Media & Creator",
@@ -864,6 +912,20 @@ const en = {
           },
           location: { label: "Location" },
           uploadPortfolio: { label: "Upload Portfolio" },
+        },
+        sections: {
+          personalDetails: { title: "Personal Details" },
+          contentType: { title: "Content Type / Specialization" },
+          portfolioSocial: { title: "Portfolio / Social Links" },
+          location: { title: "Location" },
+          uploads: { title: "Uploads" },
+          profileSetup: { title: "Profile Setup" },
+        },
+        sidebar: {
+          note: {
+            title: "Get your work seen",
+            description: "A strong portfolio and social presence help you land more sports media assignments.",
+          },
         },
       },
       managementLegal: {
@@ -897,6 +959,21 @@ const en = {
           uploadLicense: { label: "Upload License" },
           uploadIdProof: { label: "Upload ID Proof" },
         },
+        sections: {
+          personalDetails: { title: "Personal Details" },
+          roleInformation: { title: "Role Information" },
+          organizationLicense: { title: "Organization / License" },
+          experience: { title: "Experience" },
+          location: { title: "Location" },
+          documents: { title: "Documents" },
+          profileSetup: { title: "Profile Setup" },
+        },
+        sidebar: {
+          note: {
+            title: "Build a trusted practice",
+            description: "A verified license and experience history help athletes and clubs choose you with confidence.",
+          },
+        },
       },
       eventOperations: {
         formTitle: "Register as Event & Operations Staff",
@@ -922,6 +999,21 @@ const en = {
           },
           location: { label: "Location" },
           uploadIdProof: { label: "Upload ID Proof" },
+        },
+        sections: {
+          personalDetails: { title: "Personal Details" },
+          roleCapabilities: { title: "Role / Event Capabilities" },
+          experience: { title: "Experience" },
+          availability: { title: "Availability" },
+          location: { title: "Location" },
+          documents: { title: "Documents" },
+          profileSetup: { title: "Profile Setup" },
+        },
+        sidebar: {
+          note: {
+            title: "Get matched to events",
+            description: "Event organizers look for verified, available staff first -- complete your profile to get picked.",
+          },
         },
       },
       sponsorCsr: {
@@ -962,6 +1054,21 @@ const en = {
           uploadProposal: { label: "Upload Proposal" },
           uploadIdProof: { label: "Upload ID Proof" },
         },
+        sections: {
+          organizationDetails: { title: "Organization Details" },
+          contactPerson: { title: "Contact Person" },
+          sponsorshipInterests: { title: "Sponsorship Interests" },
+          budgetFocus: { title: "Budget / Focus Areas" },
+          location: { title: "Location" },
+          proposalDocuments: { title: "Proposal / Documents" },
+          profileSetup: { title: "Profile Setup" },
+        },
+        sidebar: {
+          note: {
+            title: "Reach the right athletes",
+            description: "Tell us your focus areas so we can connect you with athletes and academies that fit your goals.",
+          },
+        },
       },
       talentAnalytics: {
         formTitle: "Register as Talent Discovery & Analytics",
@@ -989,6 +1096,22 @@ const en = {
           },
           location: { label: "Location" },
           uploadPortfolioReport: { label: "Upload Portfolio / Report" },
+        },
+        sections: {
+          personalDetails: { title: "Personal Details" },
+          roleSpecialization: { title: "Role / Specialization" },
+          toolsUsed: { title: "Tools Used" },
+          experience: { title: "Experience" },
+          sportsFocus: { title: "Sports Focus" },
+          location: { title: "Location" },
+          portfolioReports: { title: "Portfolio / Reports" },
+          profileSetup: { title: "Profile Setup" },
+        },
+        sidebar: {
+          note: {
+            title: "Power better decisions",
+            description: "A complete profile with your tools and specialization helps clubs find the right analyst faster.",
+          },
         },
       },
     },

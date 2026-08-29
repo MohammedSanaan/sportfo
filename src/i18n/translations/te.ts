@@ -481,6 +481,12 @@ const te: Dictionary = {
       percentComplete: "{percent}% పూర్తయింది",
       label: "నమోదు పురోగతి",
     },
+    sidebar: {
+      note: {
+        title: "కనుగొనబడండి",
+        description: "పూర్తి, ధృవీకరించబడిన అథ్లెట్ ప్రొఫైల్ 'అథ్లెట్లను కనుగొనండి' శోధనల్లో పైన కనిపిస్తుంది.",
+      },
+    },
     actions: {
       saveDraft: "డ్రాఫ్ట్‌ను సేవ్ చేయండి",
       savingDraft: "డ్రాఫ్ట్ సేవ్ అవుతోంది...",
@@ -764,6 +770,21 @@ const te: Dictionary = {
       description: "ఆ నమోదు వర్గం మాకు కనుగొనబడలేదు.",
       action: "ఒక వర్గాన్ని ఎంచుకోండి",
     },
+    sidebar: {
+      whyComplete: {
+        title: "మీ ప్రొఫైల్‌ను ఎందుకు పూర్తి చేయాలి?",
+        description: "పూర్తి ప్రొఫైల్ SportFo అంతటా కనుగొనబడటానికి మరియు షార్ట్‌లిస్ట్ కావడానికి ఎక్కువ అవకాశం ఉంటుంది.",
+      },
+      verificationTrust: {
+        title: "ధృవీకరణ నమ్మకాన్ని పెంచుతుంది",
+        description:
+          "ధృవీకరించబడిన వివరాలు మరియు పత్రాలు ట్రస్ట్ బ్యాడ్జ్‌ను సంపాదిస్తాయి, ఇది SportFo లో ఇతరుల మధ్య ప్రత్యేకంగా నిలుస్తుంది.",
+      },
+      support: {
+        title: "సహాయం కావాలా?",
+        description: "నమోదు చేసేటప్పుడు మీకు ఏదైనా సమస్య ఎదురైతే, సంప్రదించండి, మా బృందం మీకు సహాయం చేస్తుంది.",
+      },
+    },
     categories: {
       athlete: {
         formTitle: "అథ్లెట్‌గా నమోదు చేసుకోండి",
@@ -796,6 +817,20 @@ const te: Dictionary = {
           location: { label: "ప్రాంతం" },
           uploadAcademyInfo: { label: "అకాడమీ సమాచారాన్ని అప్‌లోడ్ చేయండి" },
           uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+        sections: {
+          organizationDetails: { title: "సంస్థ / కోచ్ వివరాలు" },
+          sportsTraining: { title: "క్రీడ & శిక్షణ సమాచారం" },
+          experienceCertification: { title: "అనుభవం / సర్టిఫికేషన్" },
+          locationReach: { title: "ప్రాంతం & పరిధి" },
+          documentsVerification: { title: "పత్రాలు / ధృవీకరణ" },
+          profileSetup: { title: "ప్రొఫైల్ సెటప్" },
+        },
+        sidebar: {
+          note: {
+            title: "అథ్లెట్లచే కనుగొనబడండి",
+            description: "పూర్తి, ధృవీకరించబడిన ప్రొఫైల్ ఉన్న అకాడమీలు అథ్లెట్ శోధనల్లో పైన కనిపిస్తాయి.",
+          },
         },
       },
       performanceExpert: {
@@ -835,6 +870,20 @@ const te: Dictionary = {
           uploadCertificate: { label: "సర్టిఫికేట్‌ను అప్‌లోడ్ చేయండి" },
           uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
         },
+        sections: {
+          personalDetails: { title: "వ్యక్తిగత వివరాలు" },
+          expertiseServices: { title: "నైపుణ్యం & సేవలు" },
+          experienceCertifications: { title: "అనుభవం / సర్టిఫికేషన్లు" },
+          location: { title: "ప్రాంతం" },
+          documents: { title: "పత్రాలు" },
+          profileSetup: { title: "ప్రొఫైల్ సెటప్" },
+        },
+        sidebar: {
+          note: {
+            title: "మీ క్లయింట్ బేస్‌ను పెంచుకోండి",
+            description: "మీ సర్టిఫికేషన్లతో కూడిన పూర్తి ప్రొఫైల్ అథ్లెట్లు మిమ్మల్ని నమ్మి ఎంచుకోవడానికి సహాయపడుతుంది.",
+          },
+        },
       },
       mediaCreator: {
         formTitle: "మీడియా & క్రియేటర్‌గా నమోదు చేసుకోండి",
@@ -863,6 +912,20 @@ const te: Dictionary = {
           location: { label: "ప్రాంతం" },
           uploadPortfolio: { label: "పోర్ట్‌ఫోలియోను అప్‌లోడ్ చేయండి" },
         },
+        sections: {
+          personalDetails: { title: "వ్యక్తిగత వివరాలు" },
+          contentType: { title: "కంటెంట్ రకం / ప్రత్యేకత" },
+          portfolioSocial: { title: "పోర్ట్‌ఫోలియో / సోషల్ లింక్‌లు" },
+          location: { title: "ప్రాంతం" },
+          uploads: { title: "అప్‌లోడ్‌లు" },
+          profileSetup: { title: "ప్రొఫైల్ సెటప్" },
+        },
+        sidebar: {
+          note: {
+            title: "మీ పనిని చూపించుకోండి",
+            description: "బలమైన పోర్ట్‌ఫోలియో మరియు సోషల్ ఉనికి మీకు మరిన్ని స్పోర్ట్స్ మీడియా అసైన్‌మెంట్లు పొందడంలో సహాయపడుతుంది.",
+          },
+        },
       },
       managementLegal: {
         formTitle: "స్పోర్ట్స్ మేనేజ్‌మెంట్ & లీగల్‌గా నమోదు చేసుకోండి",
@@ -890,6 +953,21 @@ const te: Dictionary = {
           uploadLicense: { label: "లైసెన్స్‌ను అప్‌లోడ్ చేయండి" },
           uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
         },
+        sections: {
+          personalDetails: { title: "వ్యక్తిగత వివరాలు" },
+          roleInformation: { title: "పాత్ర సమాచారం" },
+          organizationLicense: { title: "సంస్థ / లైసెన్స్" },
+          experience: { title: "అనుభవం" },
+          location: { title: "ప్రాంతం" },
+          documents: { title: "పత్రాలు" },
+          profileSetup: { title: "ప్రొఫైల్ సెటప్" },
+        },
+        sidebar: {
+          note: {
+            title: "నమ్మకమైన ప్రాక్టీస్‌ను నిర్మించండి",
+            description: "ధృవీకరించబడిన లైసెన్స్ మరియు అనుభవ చరిత్ర అథ్లెట్లు మరియు క్లబ్‌లు మిమ్మల్ని నమ్మకంతో ఎంచుకోవడానికి సహాయపడుతుంది.",
+          },
+        },
       },
       eventOperations: {
         formTitle: "ఈవెంట్ & ఆపరేషన్స్ స్టాఫ్‌గా నమోదు చేసుకోండి",
@@ -907,6 +985,21 @@ const te: Dictionary = {
           availability: { label: "అందుబాటు", placeholder: "ఉదా. వారాంతాలు, సాయంత్రాలు" },
           location: { label: "ప్రాంతం" },
           uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
+        },
+        sections: {
+          personalDetails: { title: "వ్యక్తిగత వివరాలు" },
+          roleCapabilities: { title: "పాత్ర / ఈవెంట్ సామర్థ్యాలు" },
+          experience: { title: "అనుభవం" },
+          availability: { title: "అందుబాటు" },
+          location: { title: "ప్రాంతం" },
+          documents: { title: "పత్రాలు" },
+          profileSetup: { title: "ప్రొఫైల్ సెటప్" },
+        },
+        sidebar: {
+          note: {
+            title: "ఈవెంట్లకు మ్యాచ్ చేయబడండి",
+            description: "ఈవెంట్ నిర్వాహకులు ముందుగా ధృవీకరించబడిన, అందుబాటులో ఉన్న సిబ్బందిని చూస్తారు -- ఎంపిక కావడానికి మీ ప్రొఫైల్‌ను పూర్తి చేయండి.",
+          },
         },
       },
       sponsorCsr: {
@@ -947,6 +1040,22 @@ const te: Dictionary = {
           uploadProposal: { label: "ప్రతిపాదనను అప్‌లోడ్ చేయండి" },
           uploadIdProof: { label: "ID రుజువును అప్‌లోడ్ చేయండి" },
         },
+        sections: {
+          organizationDetails: { title: "సంస్థ వివరాలు" },
+          contactPerson: { title: "సంప్రదింపు వ్యక్తి" },
+          sponsorshipInterests: { title: "స్పాన్సర్‌షిప్ ఆసక్తులు" },
+          budgetFocus: { title: "బడ్జెట్ / దృష్టి ప్రాంతాలు" },
+          location: { title: "ప్రాంతం" },
+          proposalDocuments: { title: "ప్రతిపాదన / పత్రాలు" },
+          profileSetup: { title: "ప్రొఫైల్ సెటప్" },
+        },
+        sidebar: {
+          note: {
+            title: "సరైన అథ్లెట్లను చేరుకోండి",
+            description:
+              "మీ దృష్టి ప్రాంతాలను మాకు తెలియజేయండి, తద్వారా మేము మీ లక్ష్యాలకు సరిపోయే అథ్లెట్లు మరియు అకాడమీలతో మిమ్మల్ని కనెక్ట్ చేయగలుగుతాము.",
+          },
+        },
       },
       talentAnalytics: {
         formTitle: "టాలెంట్ డిస్కవరీ & అనలిటిక్స్‌గా నమోదు చేసుకోండి",
@@ -964,6 +1073,22 @@ const te: Dictionary = {
           sportsSpecialization: { label: "క్రీడా ప్రత్యేకత", placeholder: "ఉదా. ఫుట్‌బాల్, అథ్లెటిక్స్" },
           location: { label: "ప్రాంతం" },
           uploadPortfolioReport: { label: "పోర్ట్‌ఫోలియో / నివేదికను అప్‌లోడ్ చేయండి" },
+        },
+        sections: {
+          personalDetails: { title: "వ్యక్తిగత వివరాలు" },
+          roleSpecialization: { title: "పాత్ర / ప్రత్యేకత" },
+          toolsUsed: { title: "ఉపయోగించిన సాధనాలు" },
+          experience: { title: "అనుభవం" },
+          sportsFocus: { title: "క్రీడా దృష్టి" },
+          location: { title: "ప్రాంతం" },
+          portfolioReports: { title: "పోర్ట్‌ఫోలియో / నివేదికలు" },
+          profileSetup: { title: "ప్రొఫైల్ సెటప్" },
+        },
+        sidebar: {
+          note: {
+            title: "మెరుగైన నిర్ణయాలు తీసుకోవడంలో సహాయపడండి",
+            description: "మీ సాధనాలు మరియు ప్రత్యేకతతో కూడిన పూర్తి ప్రొఫైల్ క్లబ్‌లకు సరైన విశ్లేషకుడిని వేగంగా కనుగొనడంలో సహాయపడుతుంది.",
+          },
         },
       },
     },

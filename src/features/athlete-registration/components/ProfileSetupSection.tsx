@@ -5,6 +5,7 @@ import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { Textarea } from "@/components/ui/Textarea";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { ProfileSetupIcon } from "@/components/ui/RegistrationIcons";
 import { ProfilePhotoField } from "@/components/ui/ProfilePhotoField";
 import { validateProfilePhoto } from "@/lib/file-validation";
 import { buildProfilePhotoUrl } from "@/lib/storage/profile-photo";
@@ -32,7 +33,11 @@ export function ProfileSetupSection() {
   const shortBio = useWatch({ control, name: "profileSetup.shortBio" }) ?? "";
 
   return (
-    <SectionCard title={t("register.profile.title")} description={t("register.profile.description")}>
+    <SectionCard
+      title={t("register.profile.title")}
+      description={t("register.profile.description")}
+      icon={<ProfileSetupIcon />}
+    >
       <div className="flex flex-col gap-6">
         <Controller
           name="profileSetup.photo"

@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/Input";
 import { RadioGroup } from "@/components/ui/RadioGroup";
 import { Select } from "@/components/ui/Select";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { PersonalDetailsIcon } from "@/components/ui/RegistrationIcons";
 import { GENDER_OPTIONS } from "@/lib/athlete-options";
 import {
   dateOfBirthRule,
@@ -43,7 +44,11 @@ export function PersonalDetailsSection() {
   const genderOptions = translateOptions(t, "options.gender", GENDER_OPTIONS);
 
   return (
-    <SectionCard title={t("register.personal.title")} description={t("register.personal.description")}>
+    <SectionCard
+      title={t("register.personal.title")}
+      description={t("register.personal.description")}
+      icon={<PersonalDetailsIcon />}
+    >
       <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
         <Input
           id="fullName"

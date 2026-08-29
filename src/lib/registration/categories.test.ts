@@ -62,3 +62,58 @@ test("athlete category has no generic field config (reuses the real form)", () =
   const athlete = getRegistrationCategoryBySlug("athlete");
   assert.equal(athlete?.fields, undefined);
 });
+
+test("every field belongs to exactly one fieldGroup, and every fieldGroup references only real fields", () => {
+  for (const category of REGISTRATION_CATEGORIES) {
+    if (!category.fields) continue;
+    assert.ok(category.fieldGroups, `${category.id} has fields but no fieldGroups`);
+
+    const fieldIds = category.fields.map((f) => f.id);
+    const groupedIds = category.fieldGroups!.flatMap((g) => g.fieldIds);
+
+    for (const id of fieldIds) {
+      const occurrences = groupedIds.filter((g) => g === id).length;
+      assert.equal(occurrences, 1, `${category.id}: field "${id}" appears in ${occurrences} groups (expected 1)`);
+    }
+    for (const id of groupedIds) {
+      assert.ok(fieldIds.includes(id), `${category.id}: fieldGroup references unknown field "${id}"`);
+    }
+  }
+});
+
+test("every category's Profile Setup fieldGroup includes profilePhoto", () => {
+  for (const category of REGISTRATION_CATEGORIES) {
+    if (!category.fieldGroups) continue;
+    const allGroupedIds = category.fieldGroups.flatMap((g) => g.fieldIds);
+    assert.ok(
+      allGroupedIds.includes("profilePhoto"),
+      `${category.id}: no fieldGroup includes profilePhoto`,
+    );
+  }
+});
+
+test("every category has a heroImage", () => {
+  for (const category of REGISTRATION_CATEGORIES) {
+    assert.equal(typeof category.heroImage, "string", `${category.id} is missing heroImage`);
+  }
+});
+
+test("every fieldGroup has a title (and description where present) in en.ts", () => {
+  for (const category of REGISTRATION_CATEGORIES) {
+    if (!category.fieldGroups) continue;
+    for (const group of category.fieldGroups) {
+      const base = `registerHub.categories.${category.id}.sections.${group.key}`;
+      const title = getAtPath(en, `${base}.title`);
+      assert.equal(typeof title, "string", `missing ${base}.title`);
+    }
+  }
+});
+
+test("every non-athlete category has a sidebar note in en.ts", () => {
+  for (const category of REGISTRATION_CATEGORIES) {
+    if (category.id === "athlete") continue;
+    const base = `registerHub.categories.${category.id}.sidebar.note`;
+    assert.equal(typeof getAtPath(en, `${base}.title`), "string", `missing ${base}.title`);
+    assert.equal(typeof getAtPath(en, `${base}.description`), "string", `missing ${base}.description`);
+  }
+});

@@ -484,6 +484,12 @@ const kn: Dictionary = {
       percentComplete: "{percent}% ಪೂರ್ಣಗೊಂಡಿದೆ",
       label: "ನೋಂದಣಿ ಪ್ರಗತಿ",
     },
+    sidebar: {
+      note: {
+        title: "ಗುರುತಿಸಲ್ಪಡಿ",
+        description: "ಸಂಪೂರ್ಣ, ಪರಿಶೀಲಿತ ಕ್ರೀಡಾಪಟು ಪ್ರೊಫೈಲ್ 'ಕ್ರೀಡಾಪಟುಗಳನ್ನು ಹುಡುಕಿ' ಹುಡುಕಾಟಗಳಲ್ಲಿ ಮೇಲೆ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತದೆ.",
+      },
+    },
     actions: {
       saveDraft: "ಡ್ರಾಫ್ಟ್ ಉಳಿಸಿ",
       savingDraft: "ಡ್ರಾಫ್ಟ್ ಉಳಿಸಲಾಗುತ್ತಿದೆ...",
@@ -768,6 +774,21 @@ const kn: Dictionary = {
       description: "ಆ ನೋಂದಣಿ ವರ್ಗ ನಮಗೆ ಕಂಡುಬಂದಿಲ್ಲ.",
       action: "ಒಂದು ವರ್ಗವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
     },
+    sidebar: {
+      whyComplete: {
+        title: "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಅನ್ನು ಏಕೆ ಪೂರ್ಣಗೊಳಿಸಬೇಕು?",
+        description: "ಸಂಪೂರ್ಣ ಪ್ರೊಫೈಲ್ SportFo ಯಾದ್ಯಂತ ಪತ್ತೆಯಾಗುವ ಮತ್ತು ಶಾರ್ಟ್‌ಲಿಸ್ಟ್ ಆಗುವ ಸಾಧ್ಯತೆ ಹೆಚ್ಚು.",
+      },
+      verificationTrust: {
+        title: "ಪರಿಶೀಲನೆ ನಂಬಿಕೆಯನ್ನು ಬೆಳೆಸುತ್ತದೆ",
+        description:
+          "ಪರಿಶೀಲಿತ ವಿವರಗಳು ಮತ್ತು ದಾಖಲೆಗಳು ಟ್ರಸ್ಟ್ ಬ್ಯಾಡ್ಜ್ ಗಳಿಸುತ್ತವೆ, ಇದು SportFo ಯಲ್ಲಿ ಇತರರ ಮುಂದೆ ಎದ್ದು ಕಾಣುತ್ತದೆ.",
+      },
+      support: {
+        title: "ಸಹಾಯ ಬೇಕೇ?",
+        description: "ನೋಂದಣಿ ಸಮಯದಲ್ಲಿ ನಿಮಗೆ ಯಾವುದೇ ಸಮಸ್ಯೆ ಎದುರಾದರೆ, ಸಂಪರ್ಕಿಸಿ ಮತ್ತು ನಮ್ಮ ತಂಡ ನಿಮಗೆ ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
+      },
+    },
     categories: {
       athlete: {
         formTitle: "ಒಬ್ಬ ಕ್ರೀಡಾಪಟುವಾಗಿ ನೋಂದಣಿ ಮಾಡಿ",
@@ -800,6 +821,20 @@ const kn: Dictionary = {
           location: { label: "ಸ್ಥಳ" },
           uploadAcademyInfo: { label: "ಅಕಾಡೆಮಿ ಮಾಹಿತಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
           uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+        sections: {
+          organizationDetails: { title: "ಸಂಸ್ಥೆ / ಕೋಚ್ ವಿವರಗಳು" },
+          sportsTraining: { title: "ಕ್ರೀಡೆ ಮತ್ತು ತರಬೇತಿ ಮಾಹಿತಿ" },
+          experienceCertification: { title: "ಅನುಭವ / ಪ್ರಮಾಣೀಕರಣ" },
+          locationReach: { title: "ಸ್ಥಳ ಮತ್ತು ವ್ಯಾಪ್ತಿ" },
+          documentsVerification: { title: "ದಾಖಲೆಗಳು / ಪರಿಶೀಲನೆ" },
+          profileSetup: { title: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್" },
+        },
+        sidebar: {
+          note: {
+            title: "ಕ್ರೀಡಾಪಟುಗಳಿಂದ ಪತ್ತೆಯಾಗಿ",
+            description: "ಸಂಪೂರ್ಣ, ಪರಿಶೀಲಿತ ಪ್ರೊಫೈಲ್ ಹೊಂದಿರುವ ಅಕಾಡೆಮಿಗಳು ಕ್ರೀಡಾಪಟುಗಳ ಹುಡುಕಾಟಗಳಲ್ಲಿ ಮೇಲೆ ಕಾಣಿಸಿಕೊಳ್ಳುತ್ತವೆ.",
+          },
         },
       },
       performanceExpert: {
@@ -839,6 +874,20 @@ const kn: Dictionary = {
           uploadCertificate: { label: "ಪ್ರಮಾಣಪತ್ರ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
           uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
         },
+        sections: {
+          personalDetails: { title: "ವೈಯಕ್ತಿಕ ವಿವರಗಳು" },
+          expertiseServices: { title: "ಪರಿಣತಿ ಮತ್ತು ಸೇವೆಗಳು" },
+          experienceCertifications: { title: "ಅನುಭವ / ಪ್ರಮಾಣಪತ್ರಗಳು" },
+          location: { title: "ಸ್ಥಳ" },
+          documents: { title: "ದಾಖಲೆಗಳು" },
+          profileSetup: { title: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್" },
+        },
+        sidebar: {
+          note: {
+            title: "ನಿಮ್ಮ ಗ್ರಾಹಕರ ಸಂಖ್ಯೆಯನ್ನು ಹೆಚ್ಚಿಸಿ",
+            description: "ನಿಮ್ಮ ಪ್ರಮಾಣಪತ್ರಗಳೊಂದಿಗಿನ ಸಂಪೂರ್ಣ ಪ್ರೊಫೈಲ್ ಕ್ರೀಡಾಪಟುಗಳು ನಿಮ್ಮನ್ನು ನಂಬಿ ಆಯ್ಕೆಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
+          },
+        },
       },
       mediaCreator: {
         formTitle: "ಮೀಡಿಯಾ ಮತ್ತು ಕ್ರಿಯೇಟರ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
@@ -867,6 +916,20 @@ const kn: Dictionary = {
           location: { label: "ಸ್ಥಳ" },
           uploadPortfolio: { label: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
         },
+        sections: {
+          personalDetails: { title: "ವೈಯಕ್ತಿಕ ವಿವರಗಳು" },
+          contentType: { title: "ಕಂಟೆಂಟ್ ಪ್ರಕಾರ / ವಿಶೇಷತೆ" },
+          portfolioSocial: { title: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ / ಸೋಶಿಯಲ್ ಲಿಂಕ್‌ಗಳು" },
+          location: { title: "ಸ್ಥಳ" },
+          uploads: { title: "ಅಪ್‌ಲೋಡ್‌ಗಳು" },
+          profileSetup: { title: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್" },
+        },
+        sidebar: {
+          note: {
+            title: "ನಿಮ್ಮ ಕೆಲಸ ಕಾಣಿಸಿಕೊಳ್ಳುವಂತೆ ಮಾಡಿ",
+            description: "ಬಲವಾದ ಪೋರ್ಟ್‌ಫೋಲಿಯೋ ಮತ್ತು ಸೋಶಿಯಲ್ ಉಪಸ್ಥಿತಿ ನಿಮಗೆ ಹೆಚ್ಚು ಕ್ರೀಡಾ ಮೀಡಿಯಾ ಅಸೈನ್‌ಮೆಂಟ್‌ಗಳನ್ನು ಗಳಿಸಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
+          },
+        },
       },
       managementLegal: {
         formTitle: "ಸ್ಪೋರ್ಟ್ಸ್ ಮ್ಯಾನೇಜ್‌ಮೆಂಟ್ ಮತ್ತು ಲೀಗಲ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
@@ -894,6 +957,21 @@ const kn: Dictionary = {
           uploadLicense: { label: "ಲೈಸೆನ್ಸ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
           uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
         },
+        sections: {
+          personalDetails: { title: "ವೈಯಕ್ತಿಕ ವಿವರಗಳು" },
+          roleInformation: { title: "ಪಾತ್ರದ ಮಾಹಿತಿ" },
+          organizationLicense: { title: "ಸಂಸ್ಥೆ / ಲೈಸೆನ್ಸ್" },
+          experience: { title: "ಅನುಭವ" },
+          location: { title: "ಸ್ಥಳ" },
+          documents: { title: "ದಾಖಲೆಗಳು" },
+          profileSetup: { title: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್" },
+        },
+        sidebar: {
+          note: {
+            title: "ವಿಶ್ವಾಸಾರ್ಹ ಪ್ರಾಕ್ಟೀಸ್ ಕಟ್ಟಿ",
+            description: "ಪರಿಶೀಲಿತ ಲೈಸೆನ್ಸ್ ಮತ್ತು ಅನುಭವದ ಇತಿಹಾಸ ಕ್ರೀಡಾಪಟುಗಳು ಮತ್ತು ಕ್ಲಬ್‌ಗಳು ನಿಮ್ಮನ್ನು ವಿಶ್ವಾಸದಿಂದ ಆಯ್ಕೆಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
+          },
+        },
       },
       eventOperations: {
         formTitle: "ಈವೆಂಟ್ ಮತ್ತು ಆಪರೇಶನ್ಸ್ ಸಿಬ್ಬಂದಿಯಾಗಿ ನೋಂದಣಿ ಮಾಡಿ",
@@ -916,6 +994,21 @@ const kn: Dictionary = {
           availability: { label: "ಲಭ್ಯತೆ", placeholder: "ಉದಾ. ವಾರಾಂತ್ಯಗಳು, ಸಂಜೆ" },
           location: { label: "ಸ್ಥಳ" },
           uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+        sections: {
+          personalDetails: { title: "ವೈಯಕ್ತಿಕ ವಿವರಗಳು" },
+          roleCapabilities: { title: "ಪಾತ್ರ / ಈವೆಂಟ್ ಸಾಮರ್ಥ್ಯಗಳು" },
+          experience: { title: "ಅನುಭವ" },
+          availability: { title: "ಲಭ್ಯತೆ" },
+          location: { title: "ಸ್ಥಳ" },
+          documents: { title: "ದಾಖಲೆಗಳು" },
+          profileSetup: { title: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್" },
+        },
+        sidebar: {
+          note: {
+            title: "ಈವೆಂಟ್‌ಗಳಿಗೆ ಹೊಂದಿಸಲ್ಪಡಿ",
+            description: "ಈವೆಂಟ್ ಆಯೋಜಕರು ಮೊದಲು ಪರಿಶೀಲಿತ, ಲಭ್ಯವಿರುವ ಸಿಬ್ಬಂದಿಯನ್ನು ಹುಡುಕುತ್ತಾರೆ -- ಆಯ್ಕೆಯಾಗಲು ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ಪೂರ್ಣಗೊಳಿಸಿ.",
+          },
         },
       },
       sponsorCsr: {
@@ -956,6 +1049,21 @@ const kn: Dictionary = {
           uploadProposal: { label: "ಪ್ರಸ್ತಾವನೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
           uploadIdProof: { label: "ID ಪುರಾವೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
         },
+        sections: {
+          organizationDetails: { title: "ಸಂಸ್ಥೆಯ ವಿವರಗಳು" },
+          contactPerson: { title: "ಸಂಪರ್ಕ ವ್ಯಕ್ತಿ" },
+          sponsorshipInterests: { title: "ಸ್ಪಾನ್ಸರ್‌ಶಿಪ್ ಆಸಕ್ತಿಗಳು" },
+          budgetFocus: { title: "ಬಜೆಟ್ / ಗಮನ ಕ್ಷೇತ್ರಗಳು" },
+          location: { title: "ಸ್ಥಳ" },
+          proposalDocuments: { title: "ಪ್ರಸ್ತಾವನೆ / ದಾಖಲೆಗಳು" },
+          profileSetup: { title: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್" },
+        },
+        sidebar: {
+          note: {
+            title: "ಸರಿಯಾದ ಕ್ರೀಡಾಪಟುಗಳನ್ನು ತಲುಪಿ",
+            description: "ನಿಮ್ಮ ಗಮನ ಕ್ಷೇತ್ರಗಳನ್ನು ನಮಗೆ ತಿಳಿಸಿ, ಇದರಿಂದ ನಿಮ್ಮ ಗುರಿಗಳಿಗೆ ಹೊಂದುವ ಕ್ರೀಡಾಪಟುಗಳು ಮತ್ತು ಅಕಾಡೆಮಿಗಳೊಂದಿಗೆ ನಿಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಬಹುದು.",
+          },
+        },
       },
       talentAnalytics: {
         formTitle: "ಟ್ಯಾಲೆಂಟ್ ಡಿಸ್ಕವರಿ ಮತ್ತು ಅನಾಲಿಟಿಕ್ಸ್ ಆಗಿ ನೋಂದಣಿ ಮಾಡಿ",
@@ -973,6 +1081,22 @@ const kn: Dictionary = {
           sportsSpecialization: { label: "ಕ್ರೀಡಾ ವಿಶೇಷತೆ", placeholder: "ಉದಾ. ಫುಟ್‌ಬಾಲ್, ಅಥ್ಲೆಟಿಕ್ಸ್" },
           location: { label: "ಸ್ಥಳ" },
           uploadPortfolioReport: { label: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ / ವರದಿ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ" },
+        },
+        sections: {
+          personalDetails: { title: "ವೈಯಕ್ತಿಕ ವಿವರಗಳು" },
+          roleSpecialization: { title: "ಪಾತ್ರ / ವಿಶೇಷತೆ" },
+          toolsUsed: { title: "ಬಳಸಿದ ಸಾಧನಗಳು" },
+          experience: { title: "ಅನುಭವ" },
+          sportsFocus: { title: "ಕ್ರೀಡಾ ಗಮನ" },
+          location: { title: "ಸ್ಥಳ" },
+          portfolioReports: { title: "ಪೋರ್ಟ್‌ಫೋಲಿಯೋ / ವರದಿಗಳು" },
+          profileSetup: { title: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್" },
+        },
+        sidebar: {
+          note: {
+            title: "ಉತ್ತಮ ನಿರ್ಧಾರಗಳಿಗೆ ಶಕ್ತಿ ನೀಡಿ",
+            description: "ನಿಮ್ಮ ಸಾಧನಗಳು ಮತ್ತು ವಿಶೇಷತೆಯೊಂದಿಗಿನ ಸಂಪೂರ್ಣ ಪ್ರೊಫೈಲ್ ಕ್ಲಬ್‌ಗಳಿಗೆ ಸರಿಯಾದ ಅನಾಲಿಸ್ಟ್ ಅನ್ನು ವೇಗವಾಗಿ ಹುಡುಕಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.",
+          },
         },
       },
     },

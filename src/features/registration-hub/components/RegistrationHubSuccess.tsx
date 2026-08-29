@@ -1,26 +1,9 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { SectionCard } from "@/components/ui/SectionCard";
+import { CheckCircleIcon } from "@/components/ui/RegistrationIcons";
 import { useTranslation } from "@/i18n/LocaleProvider";
 import type { RegistrationCategoryConfig } from "@/lib/registration/categories";
-
-function CheckCircleIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.75}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <circle cx="12" cy="12" r="9" />
-      <path d="M8 12.5l2.5 2.5L16 9.5" />
-    </svg>
-  );
-}
 
 interface RegistrationHubSuccessProps {
   category: RegistrationCategoryConfig;
@@ -43,7 +26,9 @@ export function RegistrationHubSuccess({ category, sportfoId }: RegistrationHubS
   return (
     <SectionCard title={t("registerHub.success.title")}>
       <div className="flex flex-col items-start gap-4">
-        <CheckCircleIcon className="h-12 w-12 shrink-0 text-success-500" />
+        <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-success-50 text-success-500">
+          <CheckCircleIcon className="h-9 w-9" />
+        </span>
 
         {sportfoId && (
           <div className="w-full rounded-xl border border-brand-200 bg-brand-50 p-5">
