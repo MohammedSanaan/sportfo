@@ -15,7 +15,7 @@ import { updateSupabaseSession } from "@/lib/supabase/proxy-session";
 // every guest straight to /auth the instant they opened a category card,
 // before they ever saw the form -- exactly the bug this list previously
 // caused.
-const PROTECTED_ROUTES = ["/athlete/profile", "/admin", "/athletes"];
+const PROTECTED_ROUTES = ["/athlete/profile", "/admin", "/athletes", "/dashboard"];
 
 export async function proxy(request: NextRequest) {
   const { response, user } = await updateSupabaseSession(request);

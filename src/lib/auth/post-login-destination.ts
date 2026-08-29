@@ -35,10 +35,13 @@ export interface PostLoginDestination {
 //      is supposed to work.
 //   2. No next, but the account already has a *submitted* registration --
 //      never re-send them to a blank registration form. Athlete gets the
-//      real /athlete/profile route; the other 7 categories don't have a
-//      dedicated profile page yet, so they land back on their own
-//      (pre-filled, see /register/[category]/page.tsx) registration form,
-//      which doubles as their existing-registration summary.
+//      new /dashboard (their real authenticated landing page -- My Profile
+//      inside the dashboard still points at /athlete/profile); the other 7
+//      categories don't have a dedicated dashboard yet, so they land back
+//      on their own (pre-filled, see /register/[category]/page.tsx)
+//      registration form, which doubles as their existing-registration
+//      summary. See getProfileHrefForCategory for the separate "My
+//      Profile" destination, which is intentionally NOT changed by this.
 //   3. No next, and a registration was started but never submitted (a
 //      draft) -- resume it, rather than dropping them on the community
 //      section as if they'd never started.
@@ -101,8 +104,12 @@ export async function getPostLoginDestination(
   }
 
   if (submittedCategory) {
+    const destination =
+      submittedCategory.id === "athlete"
+        ? "/dashboard"
+        : getProfileHrefForCategory(submittedCategory);
     return {
-      destination: getProfileHrefForCategory(submittedCategory),
+      destination,
       hasSubmittedRegistration: true,
       displayName: submitted?.display_name ?? null,
       sportfoId,

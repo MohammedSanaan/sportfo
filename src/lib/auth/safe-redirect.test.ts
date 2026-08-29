@@ -31,6 +31,10 @@ test("accepts the discover-athletes route", () => {
   assert.equal(resolveSafeNextPath("/athletes"), "/athletes");
 });
 
+test("accepts the athlete dashboard route", () => {
+  assert.equal(resolveSafeNextPath("/dashboard"), "/dashboard");
+});
+
 test("rejects an unknown registration category slug", () => {
   assert.equal(resolveSafeNextPath("/register/abcxyz"), null);
 });

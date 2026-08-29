@@ -3,7 +3,6 @@
 import { useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { cn } from "@/lib/cn";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
 
@@ -39,7 +38,14 @@ export function LogoutButton({ locale, label, busyLabel, icon, className }: Logo
       type="button"
       onClick={handleLogout}
       disabled={isLoggingOut}
-      className={cn(DEFAULT_CLASS_NAME, className)}
+      // A caller-supplied className fully REPLACES the default rather than
+      // merging with it -- `cn()` here is a plain string join with no
+      // Tailwind conflict resolution, so merging two different `text-*`/
+      // `rounded-*`/spacing utilities would leave the winner up to
+      // generated-CSS source order, not which one the caller actually
+      // intended. Every caller with its own className is expected to be
+      // complete (see AccountMenu's menuItemClassName usage).
+      className={className ?? DEFAULT_CLASS_NAME}
     >
       {icon}
       {isLoggingOut

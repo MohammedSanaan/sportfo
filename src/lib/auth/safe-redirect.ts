@@ -20,6 +20,7 @@ const ALLOWED_EXACT_PATHS = new Set([
   "/athlete/profile",
   "/admin/dashboard",
   "/athletes",
+  "/dashboard",
 ]);
 
 // Validates a `?next=` post-login redirect target end to end: same-origin,

@@ -828,6 +828,7 @@ export type Database = {
           sportfo_id: string
         }[]
       }
+      get_public_registration_counts: { Args: never; Returns: Json }
       is_current_user_admin: { Args: never; Returns: boolean }
       owns_athlete_profile: { Args: { profile_id: string }; Returns: boolean }
       save_athlete_registration: {

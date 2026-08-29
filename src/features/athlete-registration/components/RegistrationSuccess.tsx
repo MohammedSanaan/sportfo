@@ -37,7 +37,7 @@ export function RegistrationSuccess({ sportfoId }: RegistrationSuccessProps) {
 
         <p className="text-base text-ink-700">{t("register.success.message")}</p>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
-          <Link href="/athlete/profile" className="sm:w-auto">
+          <Link href="/dashboard" className="sm:w-auto">
             <Button type="button" variant="primary">
               {t("register.success.viewDashboard")}
             </Button>

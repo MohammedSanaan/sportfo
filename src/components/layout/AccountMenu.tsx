@@ -190,7 +190,10 @@ export function AccountMenu({
             label={signOutLabel}
             busyLabel={signingOutLabel}
             icon={<LogoutIcon className="h-4 w-4 shrink-0 text-ink-400" />}
-            className={cn(menuItemClassName, "w-full rounded-lg justify-start text-base")}
+            className={cn(
+              menuItemClassName,
+              "w-full rounded-lg justify-start text-base disabled:cursor-not-allowed disabled:opacity-50",
+            )}
           />
         </div>
       </div>
@@ -266,7 +269,10 @@ export function AccountMenu({
             label={signOutLabel}
             busyLabel={signingOutLabel}
             icon={<LogoutIcon className="h-4 w-4 shrink-0 text-ink-400" />}
-            className={cn(menuItemClassName, "w-full justify-start")}
+            className={cn(
+              menuItemClassName,
+              "w-full justify-start disabled:cursor-not-allowed disabled:opacity-50",
+            )}
           />
         </div>
       </div>

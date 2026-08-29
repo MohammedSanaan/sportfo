@@ -60,7 +60,10 @@ const en = {
     sportfoId: "SportFo ID",
     sportfoUser: "SportFo User",
     viewProfile: "View Profile",
-    viewDashboard: "View Dashboard",
+    // Admin-only link in AccountMenu -- explicitly "Admin Dashboard" (not
+    // just "Dashboard") now that /dashboard is every registered Athlete's
+    // own authenticated landing page, so the two are never confused.
+    viewDashboard: "View Admin Dashboard",
     signOut: "Sign Out",
     welcome: "Welcome, {name}",
     welcomeBack: "Welcome back, {name}",
@@ -1109,6 +1112,89 @@ const en = {
       title: "Access Denied",
       description: "You don't have permission to view this page.",
       action: "Back to Home",
+    },
+  },
+  dashboard: {
+    header: {
+      searchPlaceholder: "Search athletes, academies, opportunities...",
+      notificationsComingSoon: "Notifications are coming soon.",
+      roleAthlete: "Athlete",
+    },
+    nav: {
+      ariaLabel: "Dashboard navigation",
+      dashboard: "Dashboard",
+      myProfile: "My Profile",
+      opportunities: "Opportunities",
+      coachesAcademies: "Coaches & Academies",
+      sponsorshipTracker: "Sponsorship Tracker",
+      eventsTrials: "Events & Trials",
+      messages: "Messages",
+      settings: "Settings",
+      comingSoon: "Coming soon",
+      openMenu: "Open navigation menu",
+      closeMenu: "Close navigation menu",
+    },
+    profileStrength: {
+      label: "Profile Strength",
+      complete: "Your profile is complete. Great work!",
+    },
+    welcome: {
+      eyebrow: "Your SportFo Dashboard",
+      title: "Welcome back, {name}.",
+      fallbackName: "Athlete",
+      incomplete: "Complete your SportFo profile to improve your visibility.",
+      public: "Your SportFo profile is live.",
+      readyToDiscover: "Your athlete profile is active and ready to be discovered.",
+      viewProfile: "View Profile",
+      completeProfile: "Complete Profile",
+      exploreAthletes: "Explore Athletes",
+    },
+    metrics: {
+      sponsorships: {
+        label: "Active Sponsorships",
+        empty: "No active sponsorships yet",
+      },
+      trials: {
+        label: "Upcoming Trials",
+        empty: "Explore opportunities",
+        cta: "Explore athletes",
+      },
+      invites: {
+        label: "Academy Invites",
+        empty: "No academy invites yet",
+      },
+    },
+    opportunities: {
+      title: "Opportunities & Updates",
+      filters: { all: "All", trials: "Trials", sponsors: "Sponsors" },
+      emptyTitle: "No opportunities available yet.",
+      emptyDescription: "New trials, sponsorships and camps will appear here.",
+      exploreCta: "Explore SportFo",
+    },
+    platformStats: {
+      athletes: "Athletes",
+      academies: "Academies",
+      sponsors: "Sponsors",
+    },
+    myStats: { title: "My Stats" },
+    stats: {
+      profile: "Profile",
+      achievements: "Achievements",
+      verified: "Verified",
+    },
+    topCoaches: {
+      title: "Top Coaches",
+      comingSoon: "Coach discovery is coming soon.",
+    },
+    recommendedAcademies: {
+      title: "Recommended Academies",
+      comingSoon: "Recommendations will appear as SportFo learns your sport and location.",
+    },
+    footer: {
+      copyright: "SPORTFO © 2026",
+      helpCenter: "Help Center",
+      privacyPolicy: "Privacy Policy",
+      comingSoon: "Coming soon",
     },
   },
 } as const;
