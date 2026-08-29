@@ -15,7 +15,9 @@ interface RpcAchievement {
   id: string;
   title: string | null;
   achievement_type: string | null;
+  achievement_type_other: string | null;
   issuing_organization: string | null;
+  issuing_organization_other: string | null;
   achievement_date: string | null;
   description: string | null;
   document_path: string | null;
@@ -79,7 +81,9 @@ async function persistRegistration(
     id: row.id,
     title: row.title ?? "",
     type: row.achievement_type ?? "",
+    typeOther: row.achievement_type_other ?? "",
     organization: row.issuing_organization ?? "",
+    organizationOther: row.issuing_organization_other ?? "",
     date: row.achievement_date ?? "",
     description: row.description ?? "",
     certificateLevel: (row.certificate_level as Achievement["certificateLevel"]) ?? "",

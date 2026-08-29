@@ -34,7 +34,9 @@ export function PublicAchievementsSection({ achievements, locale }: PublicAchiev
               key={`${achievement.title ?? "achievement"}-${index}`}
               title={achievement.title}
               achievementType={achievement.achievement_type}
+              achievementTypeOther={achievement.achievement_type_other}
               issuingOrganization={achievement.issuing_organization}
+              issuingOrganizationOther={achievement.issuing_organization_other}
               achievementDate={achievement.achievement_date}
               description={achievement.description}
               certificateLevel={achievement.certificate_level}

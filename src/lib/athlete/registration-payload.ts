@@ -20,7 +20,15 @@ function mapAchievement(achievement: Achievement) {
   const payload: Record<string, unknown> = {
     title: emptyToNull(achievement.title),
     achievement_type: emptyToNull(achievement.type),
+    // Only kept when type is actually "other" -- a stale specify value left
+    // over from a since-changed selection must never persist once the
+    // dropdown has moved on to a real option (the RPC's UPDATE always
+    // overwrites this column outright, never coalesces, so this is the one
+    // place that has to actively clear it).
+    achievement_type_other: achievement.type === "other" ? emptyToNull(achievement.typeOther) : null,
     issuing_organization: emptyToNull(achievement.organization),
+    issuing_organization_other:
+      achievement.organization === "other" ? emptyToNull(achievement.organizationOther) : null,
     achievement_date: emptyToNull(achievement.date),
     description: emptyToNull(achievement.description),
     certificate_level: emptyToNull(achievement.certificateLevel),

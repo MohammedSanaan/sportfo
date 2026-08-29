@@ -77,6 +77,7 @@ export type Database = {
         Row: {
           achievement_date: string | null
           achievement_type: string | null
+          achievement_type_other: string | null
           athlete_profile_id: string
           certificate_level: string | null
           created_at: string
@@ -84,6 +85,7 @@ export type Database = {
           document_path: string | null
           id: string
           issuing_organization: string | null
+          issuing_organization_other: string | null
           title: string | null
           updated_at: string
           verification_status: string
@@ -91,6 +93,7 @@ export type Database = {
         Insert: {
           achievement_date?: string | null
           achievement_type?: string | null
+          achievement_type_other?: string | null
           athlete_profile_id: string
           certificate_level?: string | null
           created_at?: string
@@ -98,6 +101,7 @@ export type Database = {
           document_path?: string | null
           id?: string
           issuing_organization?: string | null
+          issuing_organization_other?: string | null
           title?: string | null
           updated_at?: string
           verification_status?: string
@@ -105,6 +109,7 @@ export type Database = {
         Update: {
           achievement_date?: string | null
           achievement_type?: string | null
+          achievement_type_other?: string | null
           athlete_profile_id?: string
           certificate_level?: string | null
           created_at?: string
@@ -112,6 +117,7 @@ export type Database = {
           document_path?: string | null
           id?: string
           issuing_organization?: string | null
+          issuing_organization_other?: string | null
           title?: string | null
           updated_at?: string
           verification_status?: string
@@ -748,6 +754,7 @@ export type Database = {
         Returns: {
           achievement_date: string | null
           achievement_type: string | null
+          achievement_type_other: string | null
           athlete_profile_id: string
           certificate_level: string | null
           created_at: string
@@ -755,9 +762,16 @@ export type Database = {
           document_path: string | null
           id: string
           issuing_organization: string | null
+          issuing_organization_other: string | null
           title: string | null
           updated_at: string
           verification_status: string
+        }
+        SetofOptions: {
+          from: "*"
+          to: "athlete_achievements"
+          isOneToOne: true
+          isSetofReturn: false
         }
       }
       ensure_sportfo_id: { Args: never; Returns: string }
@@ -774,10 +788,12 @@ export type Database = {
         Returns: {
           achievement_date: string
           achievement_type: string
+          achievement_type_other: string
           certificate_level: string
           description: string
           has_document: boolean
           issuing_organization: string
+          issuing_organization_other: string
           title: string
           verification_status: string
         }[]

@@ -88,6 +88,22 @@ export type CertificateLevel =
   | "national"
   | "international";
 
+// The body that issued/certified a specific achievement -- a separate
+// concept from CertificateLevel (the tier) and from personalDetails.school/
+// club (the athlete's own affiliation). Canonical values only enforced at
+// the application layer (see athlete-options.ts) -- the database column has
+// no CHECK constraint, matching achievement_type/certificate_level.
+export type IssuingOrganization =
+  | "taluk-sports-authority"
+  | "district-sports-authority"
+  | "division-zonal-sports-authority"
+  | "state-sports-authority"
+  | "national-sports-federation-sai"
+  | "international-federation-olympic-committee"
+  | "school-college-university"
+  | "private-academy-club"
+  | "other";
+
 // Admin-controlled only -- the athlete has read-only visibility (see
 // AchievementsSection). "pending" is always the value for a brand-new
 // achievement; only an admin RPC can move it to verified/rejected.
@@ -100,8 +116,21 @@ export interface Achievement {
   // of duplicating them.
   id?: string;
   title: string;
+  // Canonical Achievement Type value (see ACHIEVEMENT_TYPES) -- kept as a
+  // plain string, not the narrower union, since an achievement saved before
+  // this vocabulary existed may hold an older/unrecognized value and must
+  // still round-trip without being coerced or dropped.
   type: string;
+  // Free-text detail, shown only when type === "other". Never conflated
+  // with `description` -- a dedicated field, matching organizationOther.
+  typeOther: string;
+  // Canonical Issuing Organization value (see ISSUING_ORGANIZATIONS) -- see
+  // `type` above for why this stays a plain string rather than
+  // IssuingOrganization | "".
   organization: string;
+  // Free-text detail, shown only when organization === "other". The actual
+  // organization name is never lost by only storing the literal "Other".
+  organizationOther: string;
   date: string;
   description: string;
   // The competition tier this specific achievement was earned at.

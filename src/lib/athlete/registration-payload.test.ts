@@ -132,14 +132,16 @@ test("empty support needed selection maps to null, not an empty array", () => {
   assert.equal(args.p_support_needed, null);
 });
 
-test("achievement certificate level is mapped, verification status is never sent", () => {
+test("achievement certificate level and issuing organization are mapped, verification status is never sent", () => {
   const values = baseValues();
   values.achievements = [
     {
       id: "achv-1",
       title: "State Champion",
       type: "medal",
-      organization: "State Athletics Body",
+      typeOther: "",
+      organization: "state-sports-authority",
+      organizationOther: "",
       date: "2024-01-01",
       description: "",
       certificateLevel: "state",
@@ -153,5 +155,54 @@ test("achievement certificate level is mapped, verification status is never sent
 
   const achievement = (args.p_achievements as Record<string, unknown>[] | undefined)?.[0] ?? {};
   assert.equal(achievement.certificate_level, "state");
+  assert.equal(achievement.issuing_organization, "state-sports-authority");
   assert.equal("verification_status" in achievement, false);
+});
+
+test("Other issuing organization/achievement type specify text is sent only when the dropdown is actually 'other'", () => {
+  const values = baseValues();
+  values.achievements = [
+    {
+      title: "Community Sports Award",
+      type: "other",
+      typeOther: "Community Spirit Award",
+      organization: "other",
+      organizationOther: "Local Panchayat Sports Committee",
+      date: "",
+      description: "",
+      certificateLevel: "",
+      document: null,
+      documentPath: null,
+    },
+  ];
+
+  const args = buildSaveRegistrationArgs(values, "draft", "+919876543210");
+  const achievement = (args.p_achievements as Record<string, unknown>[] | undefined)?.[0] ?? {};
+  assert.equal(achievement.achievement_type_other, "Community Spirit Award");
+  assert.equal(achievement.issuing_organization_other, "Local Panchayat Sports Committee");
+});
+
+test("a stale Other specify value is cleared once the dropdown moves off 'other'", () => {
+  const values = baseValues();
+  values.achievements = [
+    {
+      title: "State Championship",
+      type: "medal",
+      // Left over from when this row previously had type = "other" -- must
+      // never be persisted once the athlete picked a real option instead.
+      typeOther: "stale leftover text",
+      organization: "state-sports-authority",
+      organizationOther: "stale leftover org text",
+      date: "",
+      description: "",
+      certificateLevel: "",
+      document: null,
+      documentPath: null,
+    },
+  ];
+
+  const args = buildSaveRegistrationArgs(values, "draft", "+919876543210");
+  const achievement = (args.p_achievements as Record<string, unknown>[] | undefined)?.[0] ?? {};
+  assert.equal(achievement.achievement_type_other, null);
+  assert.equal(achievement.issuing_organization_other, null);
 });

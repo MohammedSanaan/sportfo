@@ -4,7 +4,7 @@ import { useWatch, useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
-import { ACHIEVEMENT_TYPES, CERTIFICATE_LEVELS } from "@/lib/athlete-options";
+import { ACHIEVEMENT_TYPES, CERTIFICATE_LEVELS, ISSUING_ORGANIZATIONS } from "@/lib/athlete-options";
 import { cn } from "@/lib/cn";
 import {
   ACCEPTED_DOCUMENT_EXTENSIONS,
@@ -39,8 +39,10 @@ export function AchievementForm({
   const documentPath = useWatch({ control, name: `achievements.${index}.documentPath` });
   const pendingFile = useWatch({ control, name: `achievements.${index}.document` });
   const achievementType = useWatch({ control, name: `achievements.${index}.type` });
+  const issuingOrganization = useWatch({ control, name: `achievements.${index}.organization` });
   const verificationStatus = useWatch({ control, name: `achievements.${index}.verificationStatus` });
   const isOtherType = achievementType === "other";
+  const isOtherOrganization = issuingOrganization === "other";
 
   const idPrefix = `achievement-${index}`;
   const busy = docOp?.kind;
@@ -55,6 +57,11 @@ export function AchievementForm({
             ? t("register.achievements.opening")
             : undefined;
 
+  const issuingOrganizationOptions = translateOptions(
+    t,
+    "options.issuingOrganization",
+    ISSUING_ORGANIZATIONS,
+  );
   const achievementTypeOptions = translateOptions(t, "options.achievementType", ACHIEVEMENT_TYPES);
   const certificateLevelOptions = translateOptions(
     t,
@@ -82,24 +89,9 @@ export function AchievementForm({
   return (
     <div className="rounded-xl border border-border-default bg-surface-muted p-5 transition-colors hover:border-brand-200">
       <div className="mb-4 flex items-center justify-between gap-3">
-        <div className="flex flex-wrap items-center gap-2">
-          <h3 className="text-sm font-semibold text-ink-800">
-            {t("register.achievements.achievementN", { n: index + 1 })}
-          </h3>
-          {/* Read-only -- only an admin RPC can ever change this value, so
-           * the athlete only ever sees a display badge here, never a
-           * dropdown/checkbox for it (see admin_set_achievement_verification_status). */}
-          {verificationBadge && (
-            <span
-              className={cn(
-                "rounded-full border px-2.5 py-0.5 text-xs font-medium",
-                verificationBadge.className,
-              )}
-            >
-              {verificationBadge.label}
-            </span>
-          )}
-        </div>
+        <h3 className="text-sm font-semibold text-ink-800">
+          {t("register.achievements.achievementN", { n: index + 1 })}
+        </h3>
         <button
           type="button"
           onClick={onRemove}
@@ -116,22 +108,47 @@ export function AchievementForm({
           {...register(`achievements.${index}.title`)}
         />
         <Select
+          id={`${idPrefix}-organization`}
+          label={t("register.achievements.organization")}
+          options={issuingOrganizationOptions}
+          {...register(`achievements.${index}.organization`)}
+        />
+        {isOtherOrganization && (
+          <div className="sm:col-span-2">
+            <Input
+              id={`${idPrefix}-organizationOther`}
+              label={t("register.achievements.organizationOther")}
+              placeholder={t("register.achievements.organizationOtherPlaceholder")}
+              {...register(`achievements.${index}.organizationOther`, {
+                required: t("register.achievements.organizationOtherRequired"),
+              })}
+            />
+          </div>
+        )}
+        <Select
           id={`${idPrefix}-type`}
           label={t("register.achievements.achievementType")}
           options={achievementTypeOptions}
           {...register(`achievements.${index}.type`)}
         />
+        {isOtherType && (
+          <div className="sm:col-span-2">
+            <Input
+              id={`${idPrefix}-typeOther`}
+              label={t("register.achievements.typeOther")}
+              placeholder={t("register.achievements.typeOtherPlaceholder")}
+              {...register(`achievements.${index}.typeOther`, {
+                required: t("register.achievements.typeOtherRequired"),
+              })}
+            />
+          </div>
+        )}
         <Select
           id={`${idPrefix}-certificateLevel`}
           label={t("register.achievements.certificateLevel")}
           optional
           options={certificateLevelOptions}
           {...register(`achievements.${index}.certificateLevel`)}
-        />
-        <Input
-          id={`${idPrefix}-organization`}
-          label={t("register.achievements.organization")}
-          {...register(`achievements.${index}.organization`)}
         />
         <Input
           id={`${idPrefix}-date`}
@@ -142,17 +159,10 @@ export function AchievementForm({
         <div className="sm:col-span-2">
           <Textarea
             id={`${idPrefix}-description`}
-            label={
-              isOtherType
-                ? t("register.achievements.otherTypeSpecify")
-                : t("register.achievements.description2")
-            }
-            optional={!isOtherType}
+            label={t("register.achievements.description2")}
+            optional
             rows={3}
-            placeholder={isOtherType ? t("register.achievements.otherTypeSpecifyPlaceholder") : undefined}
-            {...register(`achievements.${index}.description`, {
-              required: isOtherType ? t("register.achievements.otherTypeSpecifyRequired") : false,
-            })}
+            {...register(`achievements.${index}.description`)}
           />
         </div>
 
@@ -250,6 +260,25 @@ export function AchievementForm({
             </p>
           )}
         </div>
+
+        {/* Read-only -- only an admin RPC can ever change this value, so
+         * the athlete only ever sees a display badge here, never a
+         * dropdown/checkbox for it (see admin_set_achievement_verification_status). */}
+        {verificationBadge && (
+          <div className="sm:col-span-2">
+            <span className="mb-1.5 block text-sm font-medium text-ink-800">
+              {t("register.achievements.verificationStatus")}
+            </span>
+            <span
+              className={cn(
+                "inline-flex rounded-full border px-2.5 py-0.5 text-xs font-medium",
+                verificationBadge.className,
+              )}
+            >
+              {verificationBadge.label}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

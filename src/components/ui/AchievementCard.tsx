@@ -1,6 +1,11 @@
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
-import { ACHIEVEMENT_TYPES, CERTIFICATE_LEVELS, getOptionLabel } from "@/lib/athlete-options";
+import {
+  ACHIEVEMENT_TYPES,
+  CERTIFICATE_LEVELS,
+  ISSUING_ORGANIZATIONS,
+  getOptionLabel,
+} from "@/lib/athlete-options";
 import { formatDisplayDate } from "@/lib/format";
 import { translate } from "@/i18n/dictionary";
 import { translateOptions } from "@/lib/i18n-options";
@@ -9,7 +14,12 @@ import type { Locale } from "@/i18n/config";
 interface AchievementCardProps {
   title: string | null;
   achievementType: string | null;
+  // Free-text detail shown instead of the generic "Other" label when
+  // achievementType === "other" -- the real specified type, never lost.
+  achievementTypeOther?: string | null;
   issuingOrganization: string | null;
+  // Same "other" resolution as achievementTypeOther, for issuingOrganization.
+  issuingOrganizationOther?: string | null;
   achievementDate: string | null;
   description: string | null;
   locale: Locale;
@@ -38,7 +48,9 @@ const VERIFICATION_BADGE_STYLES: Record<string, string> = {
 export function AchievementCard({
   title,
   achievementType,
+  achievementTypeOther,
   issuingOrganization,
+  issuingOrganizationOther,
   achievementDate,
   description,
   locale,
@@ -48,11 +60,23 @@ export function AchievementCard({
   documentAction,
 }: AchievementCardProps) {
   const t = (key: string) => translate(locale, key);
+  // "other" resolves to the real specified text rather than the generic
+  // "Other" option label -- falls back to the plain option label if the
+  // specify text is somehow missing, never to a blank display.
   const achievementTypeLabel =
     achievementType &&
-    (translateOptions(t, "options.achievementType", ACHIEVEMENT_TYPES).find(
-      (o) => o.value === achievementType,
-    )?.label ?? getOptionLabel(ACHIEVEMENT_TYPES, achievementType));
+    (achievementType === "other" && achievementTypeOther
+      ? achievementTypeOther
+      : (translateOptions(t, "options.achievementType", ACHIEVEMENT_TYPES).find(
+          (o) => o.value === achievementType,
+        )?.label ?? getOptionLabel(ACHIEVEMENT_TYPES, achievementType)));
+  const issuingOrganizationLabel =
+    issuingOrganization &&
+    (issuingOrganization === "other" && issuingOrganizationOther
+      ? issuingOrganizationOther
+      : (translateOptions(t, "options.issuingOrganization", ISSUING_ORGANIZATIONS).find(
+          (o) => o.value === issuingOrganization,
+        )?.label ?? getOptionLabel(ISSUING_ORGANIZATIONS, issuingOrganization)));
   const certificateLevelLabel = certificateLevel && getOptionLabel(CERTIFICATE_LEVELS, certificateLevel);
 
   const showVerificationBadge =
@@ -85,10 +109,10 @@ export function AchievementCard({
                 <span>{certificateLevelLabel}</span>
               </>
             )}
-            {issuingOrganization && (
+            {issuingOrganizationLabel && (
               <>
                 <span aria-hidden>·</span>
-                <span>{issuingOrganization}</span>
+                <span>{issuingOrganizationLabel}</span>
               </>
             )}
             {achievementDate && (

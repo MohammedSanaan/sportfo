@@ -12,7 +12,9 @@ function createEmptyAchievement(): Achievement {
   return {
     title: "",
     type: "",
+    typeOther: "",
     organization: "",
+    organizationOther: "",
     date: "",
     description: "",
     certificateLevel: "",

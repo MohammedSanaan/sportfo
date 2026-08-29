@@ -32,7 +32,9 @@ export function AthleteAchievementsSection({
               key={achievement.id}
               title={achievement.title}
               achievementType={achievement.achievement_type}
+              achievementTypeOther={achievement.achievement_type_other}
               issuingOrganization={achievement.issuing_organization}
+              issuingOrganizationOther={achievement.issuing_organization_other}
               achievementDate={achievement.achievement_date}
               description={achievement.description}
               certificateLevel={achievement.certificate_level}

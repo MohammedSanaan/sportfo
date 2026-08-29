@@ -45,6 +45,25 @@ export const CERTIFICATE_LEVELS: SelectOption[] = [
   { value: "international", label: "International / Olympics" },
 ];
 
+// The body that issued/certified a single achievement -- matches
+// athlete_achievements.issuing_organization (no CHECK constraint, same as
+// achievement_type). "other" pairs with the achievement's organizationOther
+// free-text field (see AchievementForm) rather than losing the real name.
+export const ISSUING_ORGANIZATIONS: SelectOption[] = [
+  { value: "taluk-sports-authority", label: "Taluk Sports Authority" },
+  { value: "district-sports-authority", label: "District Sports Authority" },
+  { value: "division-zonal-sports-authority", label: "Division / Zonal Sports Authority" },
+  { value: "state-sports-authority", label: "State Sports Authority" },
+  { value: "national-sports-federation-sai", label: "National Sports Federation / SAI" },
+  {
+    value: "international-federation-olympic-committee",
+    label: "International Federation / Olympic Committee",
+  },
+  { value: "school-college-university", label: "School / College / University" },
+  { value: "private-academy-club", label: "Private Academy / Club" },
+  { value: "other", label: "Other" },
+];
+
 // Which institutional pathway the athlete competes through -- independent
 // of competition_level (e.g. a University-track athlete can still compete
 // at National level).
