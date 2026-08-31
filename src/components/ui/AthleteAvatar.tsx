@@ -1,7 +1,7 @@
 import { getInitials } from "@/lib/format";
 import { cn } from "@/lib/cn";
 
-type AthleteAvatarSize = "sm" | "md" | "lg" | "xl";
+type AthleteAvatarSize = "sm" | "md" | "lg" | "xl" | "2xl";
 
 interface AthleteAvatarProps {
   fullName: string | null;
@@ -18,6 +18,10 @@ const sizeStyles: Record<AthleteAvatarSize, string> = {
   md: "h-14 w-14 text-lg",
   lg: "h-20 w-20 text-2xl sm:h-24 sm:w-24 sm:text-3xl",
   xl: "h-24 w-24 text-3xl sm:h-28 sm:w-28 sm:text-4xl",
+  // The dark AthleteProfileHero's photo -- ~96-112px on mobile, growing to
+  // 120-136px on desktop (see task spec), distinct from "xl" (used by the
+  // public/registration ProfileHero, which stays untouched).
+  "2xl": "h-24 w-24 text-3xl sm:h-28 sm:w-28 sm:text-4xl md:h-[120px] md:w-[120px] lg:h-[136px] lg:w-[136px]",
 };
 
 export function AthleteAvatar({ fullName, size = "md", className, photoUrl }: AthleteAvatarProps) {

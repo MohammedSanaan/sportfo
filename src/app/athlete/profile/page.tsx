@@ -6,13 +6,15 @@ import { createClient } from "@/lib/supabase/server";
 import { loadAthleteDraft } from "@/lib/athlete/registration-draft";
 import { calculateProfileStrength } from "@/lib/athlete/profile-strength";
 import { getOptionLabel, PRIMARY_SPORTS, SKILL_LEVELS } from "@/lib/athlete-options";
-import { ProfileHero } from "@/components/ui/ProfileHero";
 import { buildProfilePhotoUrl } from "@/lib/storage/profile-photo";
-import { SportsIconPattern } from "@/components/ui/SportsIconPattern";
+import { isSafeExternalUrl } from "@/lib/url";
+import { AthleteProfileHero } from "@/features/athlete-profile/components/AthleteProfileHero";
 import { AthletePersonalInfo } from "@/features/athlete-profile/components/AthletePersonalInfo";
 import { AthleteSportsSection } from "@/features/athlete-profile/components/AthleteSportsSection";
 import { AthleteAchievementsSection } from "@/features/athlete-profile/components/AthleteAchievementsSection";
-import { ProfileActions } from "@/features/athlete-profile/components/ProfileActions";
+import { AthleteEmploymentSection } from "@/features/athlete-profile/components/AthleteEmploymentSection";
+import { AthleteApparelSection } from "@/features/athlete-profile/components/AthleteApparelSection";
+import { AthleteBioSection } from "@/features/athlete-profile/components/AthleteBioSection";
 import { ProfileVisibilityCard } from "@/features/athlete-profile/components/ProfileVisibilityCard";
 import { ProfileStrengthCard } from "@/features/athlete-profile/components/ProfileStrengthCard";
 import { getServerTranslations } from "@/i18n/server";
@@ -67,24 +69,35 @@ export default async function AthleteProfilePage() {
   const { profile, sport, achievements } = draft;
   const strength = calculateProfileStrength(draft);
 
+  // Additional sections render only when the athlete actually filled them
+  // in -- never an empty card, per the task's "do not blindly dump every
+  // DB field" instruction.
+  const hasEmployment = Boolean(
+    profile.employment_type || profile.organization || profile.job_title || profile.years_experience,
+  );
+  const hasApparel = Boolean(
+    profile.track_suit_size || profile.tshirt_size || profile.shorts_size || profile.shoe_size,
+  );
+  const hasBio =
+    Boolean(profile.short_bio) ||
+    [profile.instagram_url, profile.facebook_url, profile.other_url].some(isSafeExternalUrl);
+
   return (
-    <div className="relative overflow-hidden">
-      <SportsIconPattern className="text-brand-600 opacity-[0.06]" />
-
-      <div className="relative mx-auto w-full max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
+    <div
+      className="min-h-screen bg-[#05080f] text-[#e8ecf8]"
+      style={{
+        backgroundImage:
+          "radial-gradient(1200px 600px at 12% -5%, #16215a 0%, rgba(6,10,24,0) 60%), radial-gradient(900px 500px at 95% 8%, #2a1146 0%, rgba(6,10,24,0) 55%)",
+      }}
+    >
+      <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="flex flex-col gap-6">
-          <h1 className="text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-            {t("profile.pageTitle")}
-          </h1>
-
-          <ProfileHero
-            headingLevel="h2"
+          <AthleteProfileHero
             fullName={profile.full_name}
             primarySport={getOptionLabel(PRIMARY_SPORTS, sport?.primary_sport)}
             skillLevel={getOptionLabel(SKILL_LEVELS, sport?.skill_level)}
             city={profile.city}
             country={profile.country}
-            actions={<ProfileActions locale={locale} />}
             sportfoId={sportfoId}
             photoUrl={buildProfilePhotoUrl(profile.profile_photo_path)}
             locale={locale}
@@ -103,6 +116,18 @@ export default async function AthleteProfilePage() {
           </div>
 
           <AthleteAchievementsSection achievements={achievements} locale={locale} />
+
+          {(hasEmployment || hasApparel || hasBio) && (
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+              {hasEmployment && <AthleteEmploymentSection profile={profile} locale={locale} />}
+              {hasApparel && <AthleteApparelSection profile={profile} locale={locale} />}
+              {hasBio && (
+                <div className={hasEmployment && hasApparel ? "lg:col-span-2" : undefined}>
+                  <AthleteBioSection profile={profile} locale={locale} />
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </div>

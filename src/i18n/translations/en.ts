@@ -543,7 +543,10 @@ const en = {
     strength: {
       title: "Profile Strength",
       complete: "{complete} of {total} complete",
+      completeProfileCta: "Complete Your Profile",
     },
+    about: { title: "About" },
+    privateNote: "Visible only to you",
     visibility: {
       title: "Profile Visibility",
       description: "Control whether your athlete profile can be viewed by anyone with the link.",
@@ -622,9 +625,13 @@ const en = {
     gender: "Gender",
     nationality: "Nationality",
     country: "Country",
-    city: "City",
+    // Matches the registration form's relabel of this same field -- see
+    // register.personal.city.
+    city: "Taluk / City / District",
+    state: "State",
     mobileNumber: "Mobile Number",
     email: "Email Address",
+    preferredLanguage: "Preferred Language",
     primarySport: "Primary Sport",
     sportCategory: "Category",
     skillLevel: "Skill Level",
@@ -632,6 +639,7 @@ const en = {
     parallelTrack: "Track",
     discipline: "Sport Discipline / Sub-category",
     position: "Position / Role",
+    supportNeeded: "Support You Are Looking For",
     schoolCollege: "School / College",
     clubAcademy: "Club / Academy",
     coachMentor: "Coach / Mentor",

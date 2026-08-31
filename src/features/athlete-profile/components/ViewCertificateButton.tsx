@@ -44,7 +44,7 @@ export function ViewCertificateButton({ achievementId }: ViewCertificateButtonPr
         href={state.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="text-sm font-medium text-brand-700 underline hover:text-brand-800"
+        className="text-sm font-medium text-[#7ea3ff] underline hover:text-[#a9c1ff]"
       >
         {t("profile.certificate.openCertificate")}
       </a>
@@ -57,12 +57,12 @@ export function ViewCertificateButton({ achievementId }: ViewCertificateButtonPr
         type="button"
         onClick={handlePrepare}
         disabled={state.status === "loading"}
-        className="text-sm font-medium text-brand-700 hover:text-brand-800 disabled:cursor-not-allowed disabled:opacity-50"
+        className="text-sm font-medium text-[#7ea3ff] hover:text-[#a9c1ff] disabled:cursor-not-allowed disabled:opacity-50"
       >
         {state.status === "loading" ? t("profile.certificate.preparing") : t("profile.certificate.view")}
       </button>
       {state.status === "error" && (
-        <p role="alert" className="mt-1 text-xs text-red-600">
+        <p role="alert" className="mt-1 text-xs text-red-400">
           {state.message}
         </p>
       )}
