@@ -1,10 +1,11 @@
 "use client";
 
-import { useWatch, useFormContext } from "react-hook-form";
+import { Controller, useWatch, useFormContext } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { Select } from "@/components/ui/Select";
 import { Textarea } from "@/components/ui/Textarea";
-import { ACHIEVEMENT_TYPES, CERTIFICATE_LEVELS, ISSUING_ORGANIZATIONS } from "@/lib/athlete-options";
+import { RadioGroup } from "@/components/ui/RadioGroup";
+import { ACHIEVEMENT_TYPES, CERTIFICATE_LEVELS, ISSUING_ORGANIZATIONS, MEDAL_TYPES } from "@/lib/athlete-options";
 import { cn } from "@/lib/cn";
 import {
   ACCEPTED_DOCUMENT_EXTENSIONS,
@@ -43,6 +44,7 @@ export function AchievementForm({
   const verificationStatus = useWatch({ control, name: `achievements.${index}.verificationStatus` });
   const isOtherType = achievementType === "other";
   const isOtherOrganization = issuingOrganization === "other";
+  const isMedalType = achievementType === "medal";
 
   const idPrefix = `achievement-${index}`;
   const busy = docOp?.kind;
@@ -68,6 +70,7 @@ export function AchievementForm({
     "options.certificateLevel",
     CERTIFICATE_LEVELS,
   );
+  const medalTypeOptions = translateOptions(t, "options.medalType", MEDAL_TYPES);
 
   const verificationBadge = verificationStatus
     ? {
@@ -140,6 +143,27 @@ export function AchievementForm({
               {...register(`achievements.${index}.typeOther`, {
                 required: t("register.achievements.typeOtherRequired"),
               })}
+            />
+          </div>
+        )}
+        {isMedalType && (
+          <div className="sm:col-span-2">
+            <Controller
+              name={`achievements.${index}.medalType`}
+              control={control}
+              rules={{ required: t("register.achievements.medalTypeRequired") }}
+              render={({ field, fieldState }) => (
+                <RadioGroup
+                  label={t("register.achievements.medalType")}
+                  name={field.name}
+                  options={medalTypeOptions}
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  ref={field.ref}
+                  error={fieldState.error?.message}
+                />
+              )}
             />
           </div>
         )}

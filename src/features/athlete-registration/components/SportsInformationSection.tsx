@@ -33,6 +33,7 @@ export function SportsInformationSection() {
 
   const primarySport = useWatch({ control, name: "sportsInformation.primarySport" });
   const sportCategory = useWatch({ control, name: "sportsInformation.sportCategory" });
+  const competitionLevel = useWatch({ control, name: "sportsInformation.competitionLevel" });
   const categoriesForSport = getCategoriesForSport(primarySport);
 
   // Keeps Category in lockstep with Sport: auto-fills a single-category
@@ -177,6 +178,18 @@ export function SportsInformationSection() {
             />
           )}
         />
+        {competitionLevel === "other" && (
+          <div className="sm:col-span-2">
+            <Input
+              id="competitionLevelOther"
+              label={t("register.sports.competitionLevelOther")}
+              placeholder={t("register.sports.competitionLevelOtherPlaceholder")}
+              {...register("sportsInformation.competitionLevelOther", {
+                required: t("register.sports.competitionLevelOtherRequired"),
+              })}
+            />
+          </div>
+        )}
       </div>
 
       <div className="mt-6 flex flex-col gap-6">

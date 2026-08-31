@@ -32,6 +32,11 @@ function mapAchievement(achievement: Achievement) {
     achievement_date: emptyToNull(achievement.date),
     description: emptyToNull(achievement.description),
     certificate_level: emptyToNull(achievement.certificateLevel),
+    // Only kept when type is actually "medal" -- same "clear a now-stale
+    // specify value at payload-build time" pattern as achievement_type_other/
+    // issuing_organization_other above, rather than a client-side effect
+    // that clears the form field itself.
+    medal_type: achievement.type === "medal" ? emptyToNull(achievement.medalType) : null,
     // verification_status is deliberately never sent -- it's read-only for
     // the athlete (see AchievementForm's badge) and the RPC itself never
     // reads this key from the input jsonb, only writes it (default
@@ -83,6 +88,7 @@ export function buildSaveRegistrationArgs(
     p_nationality: emptyToNull(personalDetails.nationality),
     p_country: emptyToNull(personalDetails.country),
     p_city: emptyToNull(personalDetails.city),
+    p_state: emptyToNull(personalDetails.state),
     // The mobile number is the athlete's verified login identity, not a
     // browser-editable value -- always the authenticated Supabase session's
     // phone, never whatever the client submitted for this field.
@@ -104,6 +110,10 @@ export function buildSaveRegistrationArgs(
     p_position_role: emptyToNull(sportsInformation.position),
     p_skill_level: emptyToNull(sportsInformation.skillLevel),
     p_competition_level: emptyToNull(sportsInformation.competitionLevel),
+    p_competition_level_other:
+      sportsInformation.competitionLevel === "other"
+        ? emptyToNull(sportsInformation.competitionLevelOther)
+        : null,
     p_support_needed: supportNeeded,
     p_support_needed_other: emptyToNull(sportsInformation.supportNeededOther),
     p_employment_type: emptyToNull(employment.employmentType),

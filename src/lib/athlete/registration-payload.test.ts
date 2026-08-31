@@ -12,8 +12,9 @@ function baseValues(
       dateOfBirth: "2000-01-01",
       gender: "male",
       nationality: "Indian",
-      country: "India",
       city: "Bengaluru",
+      state: "Karnataka",
+      country: "India",
       mobileNumber: "+919876543210",
       email: "athlete@example.com",
       preferredLanguage: "en",
@@ -31,6 +32,7 @@ function baseValues(
       position: "",
       skillLevel: "",
       competitionLevel: "",
+      competitionLevelOther: "",
       supportNeeded: [],
       supportNeededOther: "",
     },
@@ -145,6 +147,7 @@ test("achievement certificate level and issuing organization are mapped, verific
       date: "2024-01-01",
       description: "",
       certificateLevel: "state",
+      medalType: "gold",
       verificationStatus: "verified",
       document: null,
       documentPath: null,
@@ -159,6 +162,81 @@ test("achievement certificate level and issuing organization are mapped, verific
   assert.equal("verification_status" in achievement, false);
 });
 
+test("State/Taluk/City/District/Country and competition level Other map to their RPC parameters", () => {
+  const values = baseValues({ city: "Mysuru Taluk", state: "Karnataka", country: "India" });
+  values.sportsInformation.competitionLevel = "other";
+  values.sportsInformation.competitionLevelOther = "Inter-club invitational";
+
+  const args = buildSaveRegistrationArgs(values, "submitted", "+919876543210");
+
+  assert.equal(args.p_city, "Mysuru Taluk");
+  assert.equal(args.p_state, "Karnataka");
+  assert.equal(args.p_country, "India");
+  assert.equal(args.p_competition_level, "other");
+  assert.equal(args.p_competition_level_other, "Inter-club invitational");
+});
+
+test("blank optional State and non-Other competition level map to null", () => {
+  const values = baseValues({ state: "" });
+  values.sportsInformation.competitionLevel = "national";
+  values.sportsInformation.competitionLevelOther = "";
+
+  const args = buildSaveRegistrationArgs(values, "draft", "+919876543210");
+
+  assert.equal(args.p_state, null);
+  assert.equal(args.p_competition_level_other, null);
+});
+
+test("Gold, Silver, and Bronze medal type each map to the RPC's achievement payload", () => {
+  for (const medal of ["gold", "silver", "bronze"] as const) {
+    const values = baseValues();
+    values.achievements = [
+      {
+        title: "Regional Championship",
+        type: "medal",
+        typeOther: "",
+        organization: "",
+        organizationOther: "",
+        date: "",
+        description: "",
+        certificateLevel: "",
+        medalType: medal,
+        document: null,
+        documentPath: null,
+      },
+    ];
+
+    const args = buildSaveRegistrationArgs(values, "submitted", "+919876543210");
+    const achievement = (args.p_achievements as Record<string, unknown>[] | undefined)?.[0] ?? {};
+    assert.equal(achievement.medal_type, medal);
+  }
+});
+
+test("a stale medal type is cleared once achievement type moves off 'medal'", () => {
+  const values = baseValues();
+  values.achievements = [
+    {
+      title: "Participation Certificate",
+      type: "participation",
+      typeOther: "",
+      organization: "",
+      organizationOther: "",
+      date: "",
+      description: "",
+      certificateLevel: "",
+      // Left over from when this row previously had type = "medal" -- must
+      // never be persisted once the athlete picked a different type.
+      medalType: "gold",
+      document: null,
+      documentPath: null,
+    },
+  ];
+
+  const args = buildSaveRegistrationArgs(values, "draft", "+919876543210");
+  const achievement = (args.p_achievements as Record<string, unknown>[] | undefined)?.[0] ?? {};
+  assert.equal(achievement.medal_type, null);
+});
+
 test("Other issuing organization/achievement type specify text is sent only when the dropdown is actually 'other'", () => {
   const values = baseValues();
   values.achievements = [
@@ -171,6 +249,7 @@ test("Other issuing organization/achievement type specify text is sent only when
       date: "",
       description: "",
       certificateLevel: "",
+      medalType: "",
       document: null,
       documentPath: null,
     },
@@ -196,6 +275,7 @@ test("a stale Other specify value is cleared once the dropdown moves off 'other'
       date: "",
       description: "",
       certificateLevel: "",
+      medalType: "gold",
       document: null,
       documentPath: null,
     },

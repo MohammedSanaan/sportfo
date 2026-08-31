@@ -22,6 +22,7 @@ interface RpcAchievement {
   description: string | null;
   document_path: string | null;
   certificate_level: string | null;
+  medal_type: string | null;
   // Always populated by the database default ('pending') once a row
   // exists -- string | null only to stay defensive about the jsonb round-trip.
   verification_status: string | null;
@@ -87,6 +88,7 @@ async function persistRegistration(
     date: row.achievement_date ?? "",
     description: row.description ?? "",
     certificateLevel: (row.certificate_level as Achievement["certificateLevel"]) ?? "",
+    medalType: (row.medal_type as Achievement["medalType"]) ?? "",
     // Read-only on the client -- this is the one place it's ever set from
     // the server response; nothing in the outgoing payload
     // (buildSaveRegistrationArgs) ever sends it back.

@@ -10,11 +10,16 @@ export function requiredTextRule(fieldLabel: string) {
   };
 }
 
+// Trims before testing the format -- the persisted value is already
+// trimmed (see emptyToNull in registration-payload.ts), so leading/
+// trailing whitespace must not fail validation here only to be accepted on
+// save; that mismatch would be a confusing, purely cosmetic rejection.
 export const emailRule = {
   required: "Email address is required.",
-  pattern: {
-    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-    message: "Enter a valid email address.",
+  validate: (value: string) => {
+    const trimmed = value.trim();
+    if (trimmed.length === 0) return "Email address is required.";
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed) || "Enter a valid email address.";
   },
 };
 

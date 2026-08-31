@@ -88,19 +88,32 @@ export function PersonalDetailsSection() {
           error={errors.personalDetails?.nationality?.message}
           {...register("personalDetails.nationality", requiredTextRule("Nationality"))}
         />
+        {/* Location field order is deliberate: Nationality, Taluk/City/
+            District, State, Country last (see task spec) -- Country moved
+            below State/City in the grid's DOM order to match, rather than
+            reordered via CSS, so the mobile stacked layout matches too. */}
+        <Input
+          id="city"
+          label={t("register.personal.city")}
+          autoComplete="address-level2"
+          placeholder={t("register.personal.cityPlaceholder")}
+          error={errors.personalDetails?.city?.message}
+          {...register("personalDetails.city", requiredTextRule("City"))}
+        />
+        <Input
+          id="state"
+          label={t("register.personal.state")}
+          optional
+          autoComplete="address-level1"
+          placeholder={t("register.personal.statePlaceholder")}
+          {...register("personalDetails.state")}
+        />
         <Input
           id="country"
           label={t("register.personal.country")}
           autoComplete="country-name"
           error={errors.personalDetails?.country?.message}
           {...register("personalDetails.country", requiredTextRule("Country"))}
-        />
-        <Input
-          id="city"
-          label={t("register.personal.city")}
-          autoComplete="address-level2"
-          error={errors.personalDetails?.city?.message}
-          {...register("personalDetails.city", requiredTextRule("City"))}
         />
         <Input
           id="mobileNumber"

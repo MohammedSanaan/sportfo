@@ -20,8 +20,15 @@ export interface PersonalDetails {
   dateOfBirth: string;
   gender: Gender | "";
   nationality: string;
-  country: string;
+  // Rendered/labelled as "Taluk / City / District" in the form (see
+  // PersonalDetailsSection) -- the property/column name stays `city` so
+  // every existing reader (discovery filters, AthleteCard, public/own
+  // profile display, profile-strength calc) keeps working unchanged.
   city: string;
+  // New: rendered between city and country in Personal Details. Optional --
+  // free text for now, no reusable state catalog exists in the project yet.
+  state: string;
+  country: string;
   mobileNumber: string;
   email: string;
   // Communication-preference locale -- independent of the site's active UI
@@ -41,7 +48,14 @@ export interface PersonalDetails {
   aadhaarOrGovtId: string;
 }
 
-export type CompetitionLevel = "taluk" | "district" | "division" | "state" | "national";
+export type CompetitionLevel =
+  | "taluk"
+  | "district"
+  | "division"
+  | "state"
+  | "national"
+  | "international"
+  | "other";
 
 // Canonical English values stored as-is (matches the athlete_sports.
 // support_needed text[] CHECK-free column) -- a multi-select, so kept as a
@@ -74,6 +88,8 @@ export interface SportsInformation {
   skillLevel: SkillLevel | "";
   // Highest competition tier the athlete has achieved/participated at.
   competitionLevel: CompetitionLevel | "";
+  // Free-text detail, shown only when competitionLevel === "other".
+  competitionLevelOther: string;
   // Multi-select -- the kinds of support the athlete is looking for.
   supportNeeded: string[];
   // Free-text detail, shown only when supportNeeded includes "Other".
@@ -109,6 +125,8 @@ export type IssuingOrganization =
 // achievement; only an admin RPC can move it to verified/rejected.
 export type VerificationStatus = "pending" | "verified" | "rejected";
 
+export type MedalType = "gold" | "silver" | "bronze";
+
 export interface Achievement {
   // Present once the achievement has been persisted -- absent for rows the
   // athlete has added locally but not yet saved. Round-tripped through
@@ -135,6 +153,9 @@ export interface Achievement {
   description: string;
   // The competition tier this specific achievement was earned at.
   certificateLevel: CertificateLevel | "";
+  // Set only when type === "medal" -- cleared (never persisted) for any
+  // other achievement type, see buildSaveRegistrationArgs' mapAchievement.
+  medalType: MedalType | "";
   // Read-only -- absent for a row that hasn't been saved yet (nothing to
   // verify), "pending" the moment it's first persisted. Never sent back to
   // the server; see registration-payload.ts, which drops it from the RPC

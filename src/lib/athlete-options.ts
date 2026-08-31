@@ -15,21 +15,22 @@ export const SKILL_LEVELS: SelectOption[] = [
   { value: "professional", label: "Professional" },
 ];
 
-// The grassroots-to-national competition ladder, lowest to highest --
+// The grassroots-to-international competition ladder, lowest to highest --
 // order matters wherever this list drives a <select>, so it always reads
-// top-down as "lowest tier first" rather than alphabetically. Exactly 5
-// values -- matches athlete_sports.competition_level's CHECK constraint
-// (see supabase/migrations/20260829150000_athlete_registration_expansion.sql).
-// Deliberately no "international" tier here (unlike CERTIFICATE_LEVELS
-// below, which does have one) -- an individual achievement can be earned
-// at an international meet even for an athlete whose own highest ongoing
-// competition level is National.
+// top-down as "lowest tier first" rather than alphabetically. "other"
+// always last, paired with sportsInformation.competitionLevelOther (see
+// SportsInformationSection). Matches athlete_sports.competition_level's
+// CHECK constraint (see
+// supabase/migrations/20260830090000_athlete_location_competition_medal_expansion.sql,
+// which widened the constraint from 5 values to include international/other).
 export const COMPETITION_LEVELS: SelectOption[] = [
   { value: "taluk", label: "Taluk" },
   { value: "district", label: "District" },
   { value: "division", label: "Division / Zonal" },
   { value: "state", label: "State" },
   { value: "national", label: "National" },
+  { value: "international", label: "International" },
+  { value: "other", label: "Other" },
 ];
 
 // The tier a single achievement/certificate was earned at -- a separate
@@ -93,6 +94,15 @@ export const ACHIEVEMENT_TYPES: SelectOption[] = [
   { value: "championship-winner", label: "Championship Winner" },
   { value: "record-holder", label: "Record Holder" },
   { value: "other", label: "Other" },
+];
+
+// Shown only when an achievement's type === "medal" (see AchievementForm's
+// Medal Type radio group). Matches athlete_achievements.medal_type's CHECK
+// constraint.
+export const MEDAL_TYPES: SelectOption[] = [
+  { value: "gold", label: "Gold" },
+  { value: "silver", label: "Silver" },
+  { value: "bronze", label: "Bronze" },
 ];
 
 export const EMPLOYMENT_TYPES: SelectOption[] = [

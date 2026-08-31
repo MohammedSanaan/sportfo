@@ -86,6 +86,7 @@ export type Database = {
           id: string
           issuing_organization: string | null
           issuing_organization_other: string | null
+          medal_type: string | null
           title: string | null
           updated_at: string
           verification_status: string
@@ -102,6 +103,7 @@ export type Database = {
           id?: string
           issuing_organization?: string | null
           issuing_organization_other?: string | null
+          medal_type?: string | null
           title?: string | null
           updated_at?: string
           verification_status?: string
@@ -118,6 +120,7 @@ export type Database = {
           id?: string
           issuing_organization?: string | null
           issuing_organization_other?: string | null
+          medal_type?: string | null
           title?: string | null
           updated_at?: string
           verification_status?: string
@@ -165,6 +168,7 @@ export type Database = {
           shoe_size: string | null
           short_bio: string | null
           shorts_size: string | null
+          state: string | null
           track_suit_size: string | null
           tshirt_size: string | null
           updated_at: string
@@ -203,6 +207,7 @@ export type Database = {
           shoe_size?: string | null
           short_bio?: string | null
           shorts_size?: string | null
+          state?: string | null
           track_suit_size?: string | null
           tshirt_size?: string | null
           updated_at?: string
@@ -241,6 +246,7 @@ export type Database = {
           shoe_size?: string | null
           short_bio?: string | null
           shorts_size?: string | null
+          state?: string | null
           track_suit_size?: string | null
           tshirt_size?: string | null
           updated_at?: string
@@ -253,6 +259,7 @@ export type Database = {
         Row: {
           athlete_profile_id: string
           competition_level: string | null
+          competition_level_other: string | null
           created_at: string
           id: string
           position_role: string | null
@@ -267,6 +274,7 @@ export type Database = {
         Insert: {
           athlete_profile_id: string
           competition_level?: string | null
+          competition_level_other?: string | null
           created_at?: string
           id?: string
           position_role?: string | null
@@ -281,6 +289,7 @@ export type Database = {
         Update: {
           athlete_profile_id?: string
           competition_level?: string | null
+          competition_level_other?: string | null
           created_at?: string
           id?: string
           position_role?: string | null
@@ -763,6 +772,7 @@ export type Database = {
           id: string
           issuing_organization: string | null
           issuing_organization_other: string | null
+          medal_type: string | null
           title: string | null
           updated_at: string
           verification_status: string
@@ -840,6 +850,7 @@ export type Database = {
           p_club_academy: string
           p_coach_mentor: string
           p_competition_level?: string
+          p_competition_level_other?: string
           p_country: string
           p_date_of_birth: string
           p_email: string
@@ -867,6 +878,7 @@ export type Database = {
           p_skill_level: string
           p_sport_category: string
           p_sport_discipline: string
+          p_state?: string
           p_support_needed?: string[]
           p_support_needed_other?: string
           p_track_suit_size?: string
@@ -1026,9 +1038,3 @@ export type CompositeTypes<
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never
-
-export const Constants = {
-  public: {
-    Enums: {},
-  },
-} as const
