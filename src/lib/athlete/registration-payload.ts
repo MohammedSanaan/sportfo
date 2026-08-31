@@ -79,6 +79,10 @@ export function buildSaveRegistrationArgs(
   const supportNeeded = sportsInformation.supportNeeded.length > 0
     ? sportsInformation.supportNeeded
     : null;
+  // Same "empty selection is null, never []" convention as supportNeeded.
+  const secondarySports = sportsInformation.secondarySports.length > 0
+    ? sportsInformation.secondarySports
+    : null;
 
   return {
     p_profile_status: status,
@@ -95,8 +99,11 @@ export function buildSaveRegistrationArgs(
     p_mobile_number: emptyToNull(authenticatedPhone),
     p_email: emptyToNull(personalDetails.email),
     p_school_college: emptyToNull(personalDetails.school),
-    p_club_academy: emptyToNull(personalDetails.club),
-    p_coach_mentor: emptyToNull(personalDetails.coachName),
+    // Club/Academy and Coach/Mentor Name are collected in the Sports
+    // Information section now (see task spec), but still write to the
+    // exact same athlete_profiles.club_academy/coach_mentor columns.
+    p_club_academy: emptyToNull(sportsInformation.club),
+    p_coach_mentor: emptyToNull(sportsInformation.coachName),
     p_preferred_language: emptyToNull(personalDetails.preferredLanguage),
     p_emergency_contact: emptyToNull(personalDetails.emergencyContact),
     p_aadhaar_or_govt_id: emptyToNull(personalDetails.aadhaarOrGovtId),
@@ -106,8 +113,19 @@ export function buildSaveRegistrationArgs(
     ),
     p_primary_sport: emptyToNull(sportsInformation.primarySport),
     p_sport_category: emptyToNull(sportsInformation.sportCategory),
-    p_sport_discipline: emptyToNull(sportsInformation.discipline),
-    p_position_role: emptyToNull(sportsInformation.position),
+    // The merged "Sport Discipline / Position / Role" field is written
+    // into the existing sport_discipline column; position_role is no
+    // longer collected as a separate value and is always sent null from
+    // here on (see deriveDisciplinePosition in registration-draft.ts for
+    // how a pre-merge record's two separate values are safely combined
+    // for display without ever being lost).
+    p_sport_discipline: emptyToNull(sportsInformation.disciplinePosition),
+    // The generated Args type marks this non-nullable `string` for the same
+    // generator-gap reason explained above (the RPC's own SQL signature has
+    // no DEFAULT for this specific param, but the column and the function
+    // body both accept null) -- a narrow cast on just this literal, not the
+    // whole payload.
+    p_position_role: null as unknown as string,
     p_skill_level: emptyToNull(sportsInformation.skillLevel),
     p_competition_level: emptyToNull(sportsInformation.competitionLevel),
     p_competition_level_other:
@@ -116,6 +134,7 @@ export function buildSaveRegistrationArgs(
         : null,
     p_support_needed: supportNeeded,
     p_support_needed_other: emptyToNull(sportsInformation.supportNeededOther),
+    p_secondary_sports: secondarySports,
     p_employment_type: emptyToNull(employment.employmentType),
     p_organization: emptyToNull(employment.organization),
     p_job_title: emptyToNull(employment.jobTitle),

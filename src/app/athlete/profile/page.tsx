@@ -112,7 +112,7 @@ export default async function AthleteProfilePage() {
 
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <AthletePersonalInfo profile={profile} locale={locale} />
-            <AthleteSportsSection sport={sport} locale={locale} />
+            <AthleteSportsSection sport={sport} profile={profile} locale={locale} />
           </div>
 
           <AthleteAchievementsSection achievements={achievements} locale={locale} />

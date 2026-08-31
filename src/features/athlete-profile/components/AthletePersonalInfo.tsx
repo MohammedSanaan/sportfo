@@ -42,8 +42,9 @@ export function AthletePersonalInfo({ profile, locale }: AthletePersonalInfoProp
       value: isLocale(profile.preferred_language) ? LOCALE_LABELS[profile.preferred_language] : "",
     },
     { label: t("detailFields.schoolCollege"), value: profile.school_college ?? "" },
-    { label: t("detailFields.clubAcademy"), value: profile.club_academy ?? "" },
-    { label: t("detailFields.coachMentor"), value: profile.coach_mentor ?? "" },
+    // Club/Academy and Coach/Mentor now render under Sports Information
+    // (see AthleteSportsSection) -- moved out of Personal Information to
+    // match the registration form's restructured field layout.
   ];
 
   return (

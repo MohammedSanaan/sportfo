@@ -20,19 +20,19 @@ function baseValues(
       preferredLanguage: "en",
       emergencyContact: "",
       school: "",
-      club: "",
-      coachName: "",
       aadhaarOrGovtId: "",
       ...overrides,
     },
     sportsInformation: {
       primarySport: "",
+      secondarySports: [],
       sportCategory: "",
-      discipline: "",
-      position: "",
+      disciplinePosition: "",
       skillLevel: "",
       competitionLevel: "",
       competitionLevelOther: "",
+      club: "",
+      coachName: "",
       supportNeeded: [],
       supportNeededOther: "",
     },
@@ -132,6 +132,37 @@ test("empty support needed selection maps to null, not an empty array", () => {
   const args = buildSaveRegistrationArgs(baseValues(), "draft", "+919876543210");
 
   assert.equal(args.p_support_needed, null);
+});
+
+test("Club/Academy and Coach/Mentor Name are read from sportsInformation (moved from personalDetails)", () => {
+  const values = baseValues();
+  values.sportsInformation.club = "Alvas Sports Club";
+  values.sportsInformation.coachName = "Rahul Sharma";
+
+  const args = buildSaveRegistrationArgs(values, "submitted", "+919876543210");
+
+  assert.equal(args.p_club_academy, "Alvas Sports Club");
+  assert.equal(args.p_coach_mentor, "Rahul Sharma");
+});
+
+test("merged Sport Discipline / Position / Role writes into p_sport_discipline; p_position_role is always null", () => {
+  const values = baseValues();
+  values.sportsInformation.disciplinePosition = "Sprint";
+
+  const args = buildSaveRegistrationArgs(values, "submitted", "+919876543210");
+
+  assert.equal(args.p_sport_discipline, "Sprint");
+  assert.equal(args.p_position_role, null);
+});
+
+test("Secondary Sports map to p_secondary_sports; empty selection maps to null", () => {
+  const withSports = baseValues();
+  withSports.sportsInformation.secondarySports = ["Badminton", "Swimming"];
+  const argsWithSports = buildSaveRegistrationArgs(withSports, "submitted", "+919876543210");
+  assert.deepEqual(argsWithSports.p_secondary_sports, ["Badminton", "Swimming"]);
+
+  const argsEmpty = buildSaveRegistrationArgs(baseValues(), "draft", "+919876543210");
+  assert.equal(argsEmpty.p_secondary_sports, null);
 });
 
 test("achievement certificate level and issuing organization are mapped, verification status is never sent", () => {

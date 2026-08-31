@@ -15,6 +15,7 @@ import { useTranslation } from "@/i18n/LocaleProvider";
 import { translateOptions } from "@/lib/i18n-options";
 import { SportCombobox } from "./SportCombobox";
 import { CategorySelect } from "./CategorySelect";
+import { SecondarySportsField } from "./SecondarySportsField";
 
 export function SportsInformationSection() {
   const { t } = useTranslation();
@@ -34,6 +35,7 @@ export function SportsInformationSection() {
   const primarySport = useWatch({ control, name: "sportsInformation.primarySport" });
   const sportCategory = useWatch({ control, name: "sportsInformation.sportCategory" });
   const competitionLevel = useWatch({ control, name: "sportsInformation.competitionLevel" });
+  const secondarySports = useWatch({ control, name: "sportsInformation.secondarySports" }) ?? [];
   const categoriesForSport = getCategoriesForSport(primarySport);
 
   // Keeps Category in lockstep with Sport: auto-fills a single-category
@@ -61,6 +63,23 @@ export function SportsInformationSection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [primarySport, categoriesForSport.join("|")]);
 
+  // Primary Sport can never also sit in Secondary Sports (see task spec)
+  // -- SecondarySportsField already excludes the current primary sport
+  // from its own pickable options, but if the athlete picks a NEW primary
+  // sport that happens to already be selected as a secondary one, that
+  // stale entry must be dropped automatically rather than silently
+  // leaving a sport duplicated across both fields.
+  useEffect(() => {
+    if (primarySport && secondarySports.includes(primarySport)) {
+      setValue(
+        "sportsInformation.secondarySports",
+        secondarySports.filter((sport) => sport !== primarySport),
+        { shouldDirty: true },
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [primarySport]);
+
   const isSingleCategory = categoriesForSport.length === 1;
   const isMultiCategory = categoriesForSport.length > 1;
   const isUnmapped = Boolean(primarySport) && categoriesForSport.length === 0;
@@ -85,6 +104,7 @@ export function SportsInformationSection() {
       description={t("register.sports.description")}
       icon={<SportsIcon />}
     >
+      {/* Row 1: Primary Sport / Secondary Sports */}
       <div className="grid grid-cols-1 gap-x-6 gap-y-6 sm:grid-cols-2">
         <Controller
           name="sportsInformation.primarySport"
@@ -105,6 +125,25 @@ export function SportsInformationSection() {
             />
           )}
         />
+        <Controller
+          name="sportsInformation.secondarySports"
+          control={control}
+          render={({ field }) => (
+            <SecondarySportsField
+              id="secondarySports"
+              label={t("register.sports.secondarySports")}
+              value={Array.isArray(field.value) ? field.value : []}
+              onChange={field.onChange}
+              primarySport={primarySport}
+              placeholder={t("register.sports.secondarySportsPlaceholder")}
+              noResultsLabel={t("register.sports.primarySportNoResults")}
+              removeLabel={t("register.sports.secondarySportsRemove")}
+              helperText={t("register.sports.secondarySportsHelper")}
+            />
+          )}
+        />
+
+        {/* Row 2: Category / Sport Discipline / Position / Role */}
         <Controller
           name="sportsInformation.sportCategory"
           control={control}
@@ -130,19 +169,14 @@ export function SportsInformationSection() {
           )}
         />
         <Input
-          id="discipline"
-          label={t("register.sports.discipline")}
+          id="disciplinePosition"
+          label={t("register.sports.disciplinePosition")}
           optional
-          placeholder={t("register.sports.disciplinePlaceholder")}
-          {...register("sportsInformation.discipline")}
+          placeholder={t("register.sports.disciplinePositionPlaceholder")}
+          {...register("sportsInformation.disciplinePosition")}
         />
-        <Input
-          id="position"
-          label={t("register.sports.position")}
-          optional
-          placeholder={t("register.sports.positionPlaceholder")}
-          {...register("sportsInformation.position")}
-        />
+
+        {/* Row 3: Skill Level / Highest Competition Level */}
         <Controller
           name="sportsInformation.skillLevel"
           control={control}
@@ -190,6 +224,21 @@ export function SportsInformationSection() {
             />
           </div>
         )}
+
+        {/* Row 4: Club / Academy / Coach / Mentor Name -- moved here from
+            Personal Details (see task spec). */}
+        <Input
+          id="sportsClub"
+          label={t("register.personal.club")}
+          optional
+          {...register("sportsInformation.club")}
+        />
+        <Input
+          id="sportsCoachName"
+          label={t("register.personal.coachName")}
+          optional
+          {...register("sportsInformation.coachName")}
+        />
       </div>
 
       <div className="mt-6 flex flex-col gap-6">

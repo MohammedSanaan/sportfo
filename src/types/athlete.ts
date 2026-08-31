@@ -39,8 +39,9 @@ export interface PersonalDetails {
   // E.164 phone, or "" if left blank -- optional, never a login credential.
   emergencyContact: string;
   school: string;
-  club: string;
-  coachName: string;
+  // club/coachName moved to SportsInformation (see task spec) -- still the
+  // same athlete_profiles.club_academy/coach_mentor columns, just read/
+  // written from a different spot in the form values shape.
   // Optional government ID (Aadhaar or equivalent). Sensitive -- never
   // rendered on any public profile/discovery surface; see
   // PersonalDetailsSection and the athlete_profiles RLS/RPC comments in
@@ -79,17 +80,34 @@ export const SUPPORT_NEEDED_VALUES = [
 
 export interface SportsInformation {
   primarySport: string;
+  // Other sports the athlete also participates in -- always a subset of
+  // the same sports catalog as primarySport, and never contains the
+  // current primarySport value (enforced in SecondarySportsField/
+  // SportsInformationSection, not just at the type level). Purely
+  // additional athlete capability/interest signal -- never affects
+  // sportCategory, which is derived from primarySport alone.
+  secondarySports: string[];
   // Kept as a separate canonical value, never combined into primarySport
   // (e.g. never "Team Sports - Cricket") -- see src/lib/sports/catalog.ts
   // for how it's resolved from primarySport.
   sportCategory: string;
-  discipline: string;
-  position: string;
+  // Merged "Sport Discipline / Position / Role" free-text field (replaces
+  // the old separate discipline + position fields). Persisted into the
+  // existing athlete_sports.sport_discipline column -- see
+  // registration-draft.ts's deriveDisciplinePosition for how an older
+  // record with sport_discipline/position_role stored separately is
+  // safely combined for display without losing either value.
+  disciplinePosition: string;
   skillLevel: SkillLevel | "";
   // Highest competition tier the athlete has achieved/participated at.
   competitionLevel: CompetitionLevel | "";
   // Free-text detail, shown only when competitionLevel === "other".
   competitionLevelOther: string;
+  // Moved from PersonalDetails (see task spec) -- same
+  // athlete_profiles.club_academy/coach_mentor columns as before, just
+  // read/written from here now.
+  club: string;
+  coachName: string;
   // Multi-select -- the kinds of support the athlete is looking for.
   supportNeeded: string[];
   // Free-text detail, shown only when supportNeeded includes "Other".

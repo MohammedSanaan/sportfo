@@ -14,6 +14,7 @@ import type {
   ShoeSize,
 } from "@/types/athlete";
 import { isLocale, type Locale } from "@/i18n/config";
+import { deriveDisciplinePosition } from "./discipline-position";
 
 type ProfileRow = Database["public"]["Tables"]["athlete_profiles"]["Row"];
 type SportRow = Database["public"]["Tables"]["athlete_sports"]["Row"];
@@ -108,18 +109,18 @@ export function mapDraftToFormValues(
         : currentLocale,
       emergencyContact: profile.emergency_contact ?? "",
       school: profile.school_college ?? "",
-      club: profile.club_academy ?? "",
-      coachName: profile.coach_mentor ?? "",
       aadhaarOrGovtId: profile.aadhaar_or_govt_id ?? "",
     },
     sportsInformation: {
       primarySport: sport?.primary_sport ?? "",
+      secondarySports: sport?.secondary_sports ?? [],
       sportCategory: sport?.sport_category ?? "",
-      discipline: sport?.sport_discipline ?? "",
-      position: sport?.position_role ?? "",
+      disciplinePosition: deriveDisciplinePosition(sport),
       skillLevel: (sport?.skill_level as DbSkillLevel | null) ?? "",
       competitionLevel: (sport?.competition_level as CompetitionLevel | null) ?? "",
       competitionLevelOther: sport?.competition_level_other ?? "",
+      club: profile.club_academy ?? "",
+      coachName: profile.coach_mentor ?? "",
       supportNeeded: sport?.support_needed ?? [],
       supportNeededOther: sport?.support_needed_other ?? "",
     },
@@ -194,18 +195,18 @@ export function buildEmptyFormValues(
       preferredLanguage: currentLocale,
       emergencyContact: "",
       school: "",
-      club: "",
-      coachName: "",
       aadhaarOrGovtId: "",
     },
     sportsInformation: {
       primarySport: "",
+      secondarySports: [],
       sportCategory: "",
-      discipline: "",
-      position: "",
+      disciplinePosition: "",
       skillLevel: "",
       competitionLevel: "",
       competitionLevelOther: "",
+      club: "",
+      coachName: "",
       supportNeeded: [],
       supportNeededOther: "",
     },

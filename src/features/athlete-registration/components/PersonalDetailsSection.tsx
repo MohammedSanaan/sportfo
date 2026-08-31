@@ -170,24 +170,14 @@ export function PersonalDetailsSection() {
           optional
           {...register("personalDetails.school")}
         />
-        <Input
-          id="club"
-          label={t("register.personal.club")}
-          optional
-          {...register("personalDetails.club")}
-        />
-        {/* sm:col-span-2 on the wrapper (not Input's own className, which
-            only reaches the inner <input>) -- Coach/Mentor Name and
-            Aadhaar/Govt ID both read better as their own full-width rows
-            than squeezed into a two-column pairing. */}
-        <div className="sm:col-span-2">
-          <Input
-            id="coachName"
-            label={t("register.personal.coachName")}
-            optional
-            {...register("personalDetails.coachName")}
-          />
-        </div>
+        {/* Club / Academy and Coach / Mentor Name moved to Sports
+            Information (see SportsInformationSection) -- both are now
+            read/written from sportsInformation.club/coachName instead,
+            same underlying athlete_profiles.club_academy/coach_mentor
+            columns. sm:col-span-2 on the wrapper (not Input's own
+            className, which only reaches the inner <input>) -- Aadhaar/
+            Govt ID reads better as its own full-width row than squeezed
+            into a two-column pairing. */}
         <div className="sm:col-span-2">
           <Input
             id="aadhaarOrGovtId"

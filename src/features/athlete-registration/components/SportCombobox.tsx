@@ -38,13 +38,16 @@ function CheckIcon({ className }: { className?: string }) {
 // any order -- "athletics javelin" finds "Athletics – Javelin Throw",
 // "cric" finds every *Cricket entry, "mma" finds "Mixed Martial Arts (MMA)".
 // Never searches the internal alias/mapping labels, only the visible name.
-function matchesQuery(label: string, query: string): boolean {
+// Exported for SecondarySportsField, which needs the exact same ranked
+// search behaviour over the exact same catalog -- never a second sports
+// list (see task spec).
+export function matchesQuery(label: string, query: string): boolean {
   const haystack = label.toLowerCase();
   const words = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
   return words.every((word) => haystack.includes(word));
 }
 
-function rankedSearch(query: string): SportCatalogEntry[] {
+export function rankedSearch(query: string): SportCatalogEntry[] {
   const q = query.toLowerCase().trim();
   return SPORTS_CATALOG.filter((entry) => matchesQuery(entry.sport, query)).sort((a, b) => {
     const aStarts = a.sport.toLowerCase().startsWith(q) ? 0 : 1;

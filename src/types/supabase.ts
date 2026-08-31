@@ -264,6 +264,7 @@ export type Database = {
           id: string
           position_role: string | null
           primary_sport: string | null
+          secondary_sports: string[] | null
           skill_level: string | null
           sport_category: string | null
           sport_discipline: string | null
@@ -279,6 +280,7 @@ export type Database = {
           id?: string
           position_role?: string | null
           primary_sport?: string | null
+          secondary_sports?: string[] | null
           skill_level?: string | null
           sport_category?: string | null
           sport_discipline?: string | null
@@ -294,6 +296,7 @@ export type Database = {
           id?: string
           position_role?: string | null
           primary_sport?: string | null
+          secondary_sports?: string[] | null
           skill_level?: string | null
           sport_category?: string | null
           sport_discipline?: string | null
@@ -831,6 +834,7 @@ export type Database = {
           primary_sport: string
           profile_photo_path: string
           school_college: string
+          secondary_sports: string[]
           short_bio: string
           skill_level: string
           sport_category: string
@@ -872,6 +876,7 @@ export type Database = {
           p_profile_status: string
           p_scholarship_recipient: boolean
           p_school_college: string
+          p_secondary_sports?: string[]
           p_shoe_size?: string
           p_short_bio?: string
           p_shorts_size?: string
