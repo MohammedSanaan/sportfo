@@ -48,6 +48,13 @@ interface AthleteRegistrationFormProps {
    * /athlete/register or /register/athlete, matching whichever URL they're
    * actually on (see AthleteRegistrationScreen). */
   reloadHref?: string;
+  /** Real submitted-profile state from AthleteRegistrationScreen's own
+   * loadAthleteDraft call -- never inferred here from the URL or which
+   * button was clicked. Drives the main CTA's label and the success
+   * screen's copy only; the underlying save flow (createAthleteProfile,
+   * which the RPC upserts on user_id regardless) is identical either way,
+   * so there is nothing else to branch on. */
+  isEditMode?: boolean;
 }
 
 type Banner = { kind: "success" | "warning" | "error"; message: string };
@@ -92,6 +99,7 @@ export function AthleteRegistrationForm({
   authPhone,
   initialValues,
   reloadHref = "/athlete/register",
+  isEditMode = false,
 }: AthleteRegistrationFormProps) {
   const { t, locale } = useTranslation();
   const router = useRouter();
@@ -501,7 +509,7 @@ export function AthleteRegistrationForm({
   };
 
   if (isRegistered) {
-    return <RegistrationSuccess sportfoId={sportfoId} />;
+    return <RegistrationSuccess sportfoId={sportfoId} isEditMode={isEditMode} />;
   }
 
   // The auth checkpoint runs *before* react-hook-form's own field
@@ -569,7 +577,11 @@ export function AthleteRegistrationForm({
             isSavingDraft={isSavingDraft}
             isSubmitting={isSubmitting}
             draftLabel={draftPhaseLabel ?? t("register.actions.savingDraft")}
-            submitLabel={submitPhaseLabel ?? t("register.actions.creatingProfile")}
+            submitLabel={
+              submitPhaseLabel ??
+              (isEditMode ? t("register.actions.updatingProfile") : t("register.actions.creatingProfile"))
+            }
+            isEditMode={isEditMode}
           />
         </div>
       </form>

@@ -12,9 +12,14 @@ interface RegistrationSuccessProps {
   // never generates or changes it, so showing this same screen again on a
   // later resubmission is safe and shows the identical id.
   sportfoId: string | null;
+  // Real submitted-profile state carried through from
+  // AthleteRegistrationScreen/Form -- an existing athlete re-submitting
+  // their already-submitted profile never sees the first-time "Welcome to
+  // SportFo" card again (see task spec), just a plain confirmation.
+  isEditMode?: boolean;
 }
 
-export function RegistrationSuccess({ sportfoId }: RegistrationSuccessProps) {
+export function RegistrationSuccess({ sportfoId, isEditMode = false }: RegistrationSuccessProps) {
   const { t } = useTranslation();
 
   return (
@@ -24,7 +29,7 @@ export function RegistrationSuccess({ sportfoId }: RegistrationSuccessProps) {
           <CheckCircleIcon className="h-9 w-9" />
         </span>
 
-        {sportfoId && (
+        {!isEditMode && sportfoId && (
           <div className="w-full rounded-xl border border-brand-200 bg-brand-50 p-5">
             <p className="text-base font-semibold text-brand-800">{t("register.success.welcome")}</p>
             <p className="mt-3 text-xs font-medium tracking-wide text-brand-700 uppercase">
@@ -35,18 +40,28 @@ export function RegistrationSuccess({ sportfoId }: RegistrationSuccessProps) {
           </div>
         )}
 
-        <p className="text-base text-ink-700">{t("register.success.message")}</p>
+        <p className="text-base text-ink-700">
+          {isEditMode ? t("register.success.updatedMessage") : t("register.success.message")}
+        </p>
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
           <Link href="/dashboard" className="sm:w-auto">
             <Button type="button" variant="primary">
               {t("register.success.viewDashboard")}
             </Button>
           </Link>
-          <Link href="/athlete/register" className="sm:w-auto">
-            <Button type="button" variant="secondary">
-              {t("register.success.completeProfile")}
-            </Button>
-          </Link>
+          {isEditMode ? (
+            <Link href="/athlete/profile" className="sm:w-auto">
+              <Button type="button" variant="secondary">
+                {t("register.success.viewProfile")}
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/athlete/register" className="sm:w-auto">
+              <Button type="button" variant="secondary">
+                {t("register.success.completeProfile")}
+              </Button>
+            </Link>
+          )}
           <Link href="/#community" className="sm:w-auto">
             <Button type="button" variant="secondary">
               {t("register.success.exploreCommunity")}

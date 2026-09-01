@@ -313,6 +313,11 @@ const en = {
     pageTitle: "Create Your Athlete Profile",
     pageDescription:
       "Build your professional sports profile and showcase your talent, experience and achievements.",
+    // Shown instead of the two keys above when the athlete already has a
+    // submitted profile (see getAthleteProfileStatus) -- never shown to a
+    // first-time athlete.
+    pageTitleEdit: "Edit Your Athlete Profile",
+    pageDescriptionEdit: "Update your professional sports profile and keep your details current.",
     loadFailed: "We couldn't load your saved information.",
     reload: "try reloading this page",
     contactSupport: "If this keeps happening, contact support.",
@@ -505,16 +510,26 @@ const en = {
       savingDraft: "Saving draft...",
       createProfile: "Create Athlete Profile",
       creatingProfile: "Creating profile...",
+      // Shown instead of the two keys above once the athlete already has a
+      // submitted profile -- the underlying save flow is the same upsert
+      // either way, only this resting/busy CTA label changes.
+      updateProfile: "Update Profile",
+      updatingProfile: "Updating profile...",
       uploadingDocuments: "Uploading documents...",
     },
     success: {
       title: "You're all set",
       message: "Your profile has been created successfully.",
+      // Shown instead of `message` (and the welcome/SportFo ID card below
+      // is skipped entirely) when an already-registered athlete just
+      // re-submitted an edit -- never "Welcome to SportFo" again.
+      updatedMessage: "Your profile has been updated successfully.",
       welcome: "Welcome to SportFo, Athlete!",
       yourSportfoId: "Your SportFo ID",
       sportfoIdHelper: "Keep this ID handy. You can use it to identify your SportFo account.",
       viewDashboard: "View Dashboard",
       completeProfile: "Complete Profile",
+      viewProfile: "View Profile",
       exploreCommunity: "Explore Community",
     },
     banners: {

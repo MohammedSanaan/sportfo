@@ -5,6 +5,7 @@ import { AlreadyRegisteredNotice } from "@/components/ui/AlreadyRegisteredNotice
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
 import { loadAthleteDraft, mapDraftToFormValues } from "@/lib/athlete/registration-draft";
+import { isEditModeFromStatus } from "@/lib/athlete/registration-mode";
 import { resolveAthleteMobileNumber } from "@/lib/phone/resolve-athlete-phone";
 import { getServerTranslations } from "@/i18n/server";
 
@@ -82,6 +83,12 @@ export async function AthleteRegistrationScreen({
             authPhone={authPhone}
             initialValues={draft ? mapDraftToFormValues(draft, authPhone, locale) : undefined}
             reloadHref={reloadHref}
+            // Edit mode is real submitted-profile state, never inferred from
+            // the URL or which button was clicked (see task spec) -- this is
+            // the exact same condition that already gates AlreadyRegistered
+            // Notice above and /athlete/profile's own access check, derived
+            // from the one loadAthleteDraft call this screen already made.
+            isEditMode={isEditModeFromStatus(draft?.profile.profile_status)}
           />
         </>
       )}

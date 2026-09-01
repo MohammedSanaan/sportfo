@@ -11,6 +11,8 @@ import {
 } from "@/lib/registration/categories";
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
+import { getAthleteProfileStatus } from "@/lib/athlete/registration-draft";
+import { isEditModeFromStatus } from "@/lib/athlete/registration-mode";
 import { getServerTranslations } from "@/i18n/server";
 import { translate } from "@/i18n/dictionary";
 import { DEFAULT_LOCALE } from "@/i18n/config";
@@ -56,6 +58,19 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
   // point of their own.
   let initialFields: Record<string, unknown> | undefined;
   let initialStatus: string | undefined;
+  // Athlete-only: a minimal, single-column status lookup purely to pick
+  // Create vs Edit hero copy (see getAthleteProfileStatus's own doc
+  // comment) -- AthleteRegistrationScreen still does its own full
+  // loadAthleteDraft for the form itself, unchanged. The other 7
+  // categories are out of this task's scope and keep their existing
+  // initialStatus-driven "already registered" behavior untouched below.
+  let athleteIsEditMode = false;
+  if (category.id === "athlete") {
+    const user = await getAuthUser();
+    if (user) {
+      athleteIsEditMode = isEditModeFromStatus(await getAthleteProfileStatus(await createClient(), user.id));
+    }
+  }
   if (category.id !== "athlete") {
     const user = await getAuthUser();
     if (user) {
@@ -85,7 +100,7 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
       <RegistrationShell
         hero={
           <RegistrationHero
-            title={formTitle}
+            title={category.id === "athlete" && athleteIsEditMode ? t("register.pageTitleEdit") : formTitle}
             subtitle={t("registerHub.pageSubtitle")}
             imageSrc={category.heroImage}
           />

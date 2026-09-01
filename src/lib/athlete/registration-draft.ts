@@ -26,6 +26,33 @@ export interface AthleteDraft {
   achievements: AchievementRow[];
 }
 
+// A minimal, single-column lookup for the one thing a Create-vs-Edit mode
+// decision needs -- used where the full loadAthleteDraft (profile + sport
+// + achievements, 3 queries) would be genuinely unnecessary just to pick a
+// page title (see /athlete/register and /register/[category]'s athlete
+// branch, both of which render their RegistrationHero *above*/*before*
+// AthleteRegistrationScreen, which does its own full loadAthleteDraft call
+// for the form itself -- this deliberately doesn't try to share that
+// heavier result across the two, since they run in different parts of the
+// tree and Supabase clients aren't cross-request-cacheable by
+// reference). Returns null if there's no athlete_profiles row at all yet.
+export async function getAthleteProfileStatus(
+  supabase: SupabaseClient<Database>,
+  userId: string,
+): Promise<ProfileRow["profile_status"] | null> {
+  const { data, error } = await supabase
+    .from("athlete_profiles")
+    .select("profile_status")
+    .eq("user_id", userId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("getAthleteProfileStatus failed:", error);
+    return null;
+  }
+  return data?.profile_status ?? null;
+}
+
 // Reads the athlete's own registration data back out. All three queries run
 // under the caller's authenticated session, so RLS ("Athletes can view own
 // profile" / "own sports" / "own achievements") is what actually scopes
