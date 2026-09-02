@@ -42,3 +42,22 @@ test("AthleteInfoGrid's value element explicitly allows wrapping and growing", (
     assert.equal(hasClassToken(required, ddClassName), true, `<dd> should apply "${required}"`);
   }
 });
+
+// Regression guard for the actual bug this file's history didn't catch:
+// every caller (AthletePersonalInfo, AthleteSportsSection, Employment,
+// Apparel) already renders inside the profile page's own `lg:grid-cols-2`
+// card layout -- a `sm:grid-cols-2` (or any grid-cols-2 at all) *inside*
+// AthleteInfoGrid re-splits an already-halved column into quarters from
+// 1024px viewport width up, cramming every field back down to where it
+// looked truncated again even with truncate/overflow-hidden removed.
+// AthleteInfoGrid must stay single-column at every breakpoint.
+test("AthleteInfoGrid's outer list is never re-split into columns (no nested grid-cols-2 squeeze)", () => {
+  const dlMatch = source.match(/<dl\b[^>]*className=(["'`])([^"'`]*)\1/);
+  assert.ok(dlMatch, "expected to find the <dl> element's className in AthleteInfoGrid.tsx");
+  const dlClassName = dlMatch[2];
+  assert.equal(
+    /grid-cols-2/.test(dlClassName),
+    false,
+    "<dl> must not split into 2 columns at any breakpoint -- every caller already sits inside the page's own lg:grid-cols-2 card layout",
+  );
+});
