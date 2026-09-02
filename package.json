@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "node --test src/lib/sports/catalog.test.ts src/lib/registration/categories.test.ts src/lib/auth/safe-redirect.test.ts src/lib/admin/dashboard-range.test.ts src/lib/account/initials.test.ts src/lib/phone/e164.test.ts src/lib/athlete/registration-payload.test.ts src/lib/athlete-validation.test.ts src/lib/athlete/discipline-position.test.ts src/lib/athlete/registration-mode.test.ts src/features/athlete-profile/components/athlete-info-grid-styles.test.ts src/lib/locations/india-states.test.ts"
+    "test": "node --test src/lib/sports/catalog.test.ts src/lib/registration/categories.test.ts src/lib/auth/safe-redirect.test.ts src/lib/admin/dashboard-range.test.ts src/lib/account/initials.test.ts src/lib/phone/e164.test.ts src/lib/athlete/registration-payload.test.ts src/lib/athlete-validation.test.ts src/lib/athlete/discipline-position.test.ts src/lib/athlete/registration-mode.test.ts src/features/athlete-profile/components/athlete-info-grid-styles.test.ts src/lib/locations/india-states.test.ts src/features/ai-assistant/server/tools/mappers/my-identity.test.ts src/features/ai-assistant/server/tools/mappers/my-profile-summary.test.ts src/features/ai-assistant/server/tools/mappers/my-profile-strength.test.ts src/features/ai-assistant/server/tools/mappers/my-achievements.test.ts src/features/ai-assistant/server/tools/mappers/my-verification-summary.test.ts src/features/ai-assistant/server/tools/achievement-counts.test.ts src/features/ai-assistant/server/security/sanitize.test.ts src/features/ai-assistant/server/validate-request.test.ts src/features/ai-assistant/server/providers/model-config.test.ts src/features/ai-assistant/server/providers/openai-provider.test.ts src/features/ai-assistant/server/system-prompt.test.ts src/features/ai-assistant/server/orchestrator.test.ts src/features/ai-assistant/server/handle-assistant-request.test.ts"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.20",
@@ -17,6 +17,7 @@
     "gsap": "^3.15.0",
     "lucide-react": "^1.33.0",
     "next": "16.3.1",
+    "openai": "^7.9.0",
     "react": "19.2.8",
     "react-dom": "19.2.8",
     "react-hook-form": "^7.85.0"
