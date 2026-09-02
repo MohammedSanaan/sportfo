@@ -346,6 +346,10 @@ const en = {
       cityPlaceholder: "Enter Taluk, City or District",
       state: "State",
       statePlaceholder: "Enter State",
+      // Used only for the India States/UTs dropdown (see
+      // PersonalDetailsSection's isIndia branch) -- statePlaceholder above
+      // stays the free-text placeholder for every other country.
+      stateSelectPlaceholder: "Select State",
       country: "Country",
       mobileNumber: "Mobile Number",
       mobileHelperDemo:
@@ -389,7 +393,8 @@ const en = {
       competitionLevelOtherRequired: "Please specify the competition level.",
       secondarySports: "Secondary Sports",
       secondarySportsPlaceholder: "Search and select sports...",
-      secondarySportsHelper: "Other sports you also play, in addition to your primary sport.",
+      secondarySportsHelper:
+        "Select all additional sports you play or participate in. You can choose multiple sports.",
       secondarySportsRemove: "Remove",
       supportNeeded: "Support You Are Looking For",
       supportNeededHelper: "Select all that apply.",

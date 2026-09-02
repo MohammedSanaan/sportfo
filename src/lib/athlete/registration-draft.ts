@@ -15,6 +15,7 @@ import type {
 } from "@/types/athlete";
 import { isLocale, type Locale } from "@/i18n/config";
 import { deriveDisciplinePosition } from "./discipline-position";
+import { normalizeIndiaState } from "@/lib/locations/india-states";
 
 type ProfileRow = Database["public"]["Tables"]["athlete_profiles"]["Row"];
 type SportRow = Database["public"]["Tables"]["athlete_sports"]["Row"];
@@ -127,7 +128,12 @@ export function mapDraftToFormValues(
       gender: (profile.gender as DbGender | null) ?? "",
       nationality: profile.nationality ?? "",
       city: profile.city ?? "",
-      state: profile.state ?? "",
+      // Loosely matched against the India States/UTs catalog (case/
+      // whitespace differences only) so an existing free-text value like
+      // "karnataka" still auto-selects "Karnataka" in the dropdown --
+      // never rewritten, let alone dropped, when it doesn't match
+      // anything (see normalizeIndiaState).
+      state: normalizeIndiaState(profile.state ?? ""),
       country: profile.country ?? "",
       mobileNumber: authPhone,
       email: profile.email ?? "",

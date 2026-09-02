@@ -336,6 +336,7 @@ const ml: Dictionary = {
       cityPlaceholder: "താലൂക്ക്, നഗരം അല്ലെങ്കിൽ ജില്ല നൽകുക",
       state: "സംസ്ഥാനം",
       statePlaceholder: "സംസ്ഥാനം നൽകുക",
+      stateSelectPlaceholder: "സംസ്ഥാനം തിരഞ്ഞെടുക്കുക",
       country: "രാജ്യം",
       mobileNumber: "മൊബൈൽ നമ്പർ",
       mobileHelperDemo:
@@ -379,7 +380,8 @@ const ml: Dictionary = {
       competitionLevelOtherRequired: "ദയവായി മത്സര നിലവാരം വ്യക്തമാക്കുക.",
       secondarySports: "ദ്വിതീയ കായിക ഇനങ്ങൾ",
       secondarySportsPlaceholder: "കായിക ഇനങ്ങൾ തിരയുകയും തിരഞ്ഞെടുക്കുകയും ചെയ്യുക...",
-      secondarySportsHelper: "നിങ്ങളുടെ പ്രധാന കായിക ഇനത്തിന് പുറമെ നിങ്ങൾ കളിക്കുന്ന മറ്റ് കായിക ഇനങ്ങൾ.",
+      secondarySportsHelper:
+        "നിങ്ങൾ കളിക്കുന്നതോ പങ്കെടുക്കുന്നതോ ആയ എല്ലാ അധിക കായിക ഇനങ്ങളും തിരഞ്ഞെടുക്കുക. നിങ്ങൾക്ക് ഒന്നിലധികം കായിക ഇനങ്ങൾ തിരഞ്ഞെടുക്കാം.",
       secondarySportsRemove: "നീക്കം ചെയ്യുക",
       supportNeeded: "നിങ്ങൾ ആഗ്രഹിക്കുന്ന പിന്തുണ",
       supportNeededHelper: "ബാധകമായവയെല്ലാം തിരഞ്ഞെടുക്കുക.",

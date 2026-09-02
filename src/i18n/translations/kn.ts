@@ -339,6 +339,7 @@ const kn: Dictionary = {
       cityPlaceholder: "ತಾಲೂಕು, ನಗರ ಅಥವಾ ಜಿಲ್ಲೆಯನ್ನು ನಮೂದಿಸಿ",
       state: "ರಾಜ್ಯ",
       statePlaceholder: "ರಾಜ್ಯವನ್ನು ನಮೂದಿಸಿ",
+      stateSelectPlaceholder: "ರಾಜ್ಯವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
       country: "ದೇಶ",
       mobileNumber: "ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",
       mobileHelperDemo:
@@ -382,7 +383,8 @@ const kn: Dictionary = {
       competitionLevelOtherRequired: "ದಯವಿಟ್ಟು ಸ್ಪರ್ಧಾ ಮಟ್ಟವನ್ನು ವಿವರಿಸಿ.",
       secondarySports: "ದ್ವಿತೀಯ ಕ್ರೀಡೆಗಳು",
       secondarySportsPlaceholder: "ಕ್ರೀಡೆಗಳನ್ನು ಹುಡುಕಿ ಮತ್ತು ಆಯ್ಕೆಮಾಡಿ...",
-      secondarySportsHelper: "ನಿಮ್ಮ ಮುಖ್ಯ ಕ್ರೀಡೆಯ ಜೊತೆಗೆ ನೀವು ಆಡುವ ಇತರ ಕ್ರೀಡೆಗಳು.",
+      secondarySportsHelper:
+        "ನೀವು ಆಡುವ ಅಥವಾ ಭಾಗವಹಿಸುವ ಎಲ್ಲಾ ಹೆಚ್ಚುವರಿ ಕ್ರೀಡೆಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ. ನೀವು ಬಹು ಕ್ರೀಡೆಗಳನ್ನು ಆಯ್ಕೆ ಮಾಡಬಹುದು.",
       secondarySportsRemove: "ತೆಗೆದುಹಾಕಿ",
       supportNeeded: "ನೀವು ಬಯಸುವ ಬೆಂಬಲ",
       supportNeededHelper: "ಅನ್ವಯಿಸುವ ಎಲ್ಲವನ್ನೂ ಆಯ್ಕೆಮಾಡಿ.",

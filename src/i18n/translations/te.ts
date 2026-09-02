@@ -336,6 +336,7 @@ const te: Dictionary = {
       cityPlaceholder: "తాలూకా, నగరం లేదా జిల్లాను నమోదు చేయండి",
       state: "రాష్ట్రం",
       statePlaceholder: "రాష్ట్రాన్ని నమోదు చేయండి",
+      stateSelectPlaceholder: "రాష్ట్రాన్ని ఎంచుకోండి",
       country: "దేశం",
       mobileNumber: "మొబైల్ నంబర్",
       mobileHelperDemo:
@@ -379,7 +380,8 @@ const te: Dictionary = {
       competitionLevelOtherRequired: "దయచేసి పోటీ స్థాయిని పేర్కొనండి.",
       secondarySports: "ద్వితీయ క్రీడలు",
       secondarySportsPlaceholder: "క్రీడలను శోధించి ఎంచుకోండి...",
-      secondarySportsHelper: "మీ ప్రధాన క్రీడతో పాటు మీరు ఆడే ఇతర క్రీడలు.",
+      secondarySportsHelper:
+        "మీరు ఆడే లేదా పాల్గొనే అన్ని అదనపు క్రీడలను ఎంచుకోండి. మీరు బహుళ క్రీడలను ఎంచుకోవచ్చు.",
       secondarySportsRemove: "తీసివేయండి",
       supportNeeded: "మీకు అవసరమైన మద్దతు",
       supportNeededHelper: "వర్తించే అన్నింటినీ ఎంచుకోండి.",

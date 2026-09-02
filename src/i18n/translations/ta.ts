@@ -339,6 +339,7 @@ const ta: Dictionary = {
       cityPlaceholder: "தாலுகா, நகரம் அல்லது மாவட்டத்தை உள்ளிடவும்",
       state: "மாநிலம்",
       statePlaceholder: "மாநிலத்தை உள்ளிடவும்",
+      stateSelectPlaceholder: "மாநிலத்தைத் தேர்ந்தெடுக்கவும்",
       country: "நாடு",
       mobileNumber: "மொபைல் எண்",
       mobileHelperDemo:
@@ -382,7 +383,8 @@ const ta: Dictionary = {
       competitionLevelOtherRequired: "தயவுசெய்து போட்டி நிலையைக் குறிப்பிடவும்.",
       secondarySports: "இரண்டாம் நிலை விளையாட்டுகள்",
       secondarySportsPlaceholder: "விளையாட்டுகளைத் தேடி தேர்ந்தெடுக்கவும்...",
-      secondarySportsHelper: "உங்கள் முதன்மை விளையாட்டைத் தவிர நீங்கள் விளையாடும் மற்ற விளையாட்டுகள்.",
+      secondarySportsHelper:
+        "நீங்கள் விளையாடும் அல்லது பங்கேற்கும் அனைத்து கூடுதல் விளையாட்டுகளையும் தேர்ந்தெடுக்கவும். நீங்கள் பல விளையாட்டுகளைத் தேர்ந்தெடுக்கலாம்.",
       secondarySportsRemove: "அகற்று",
       supportNeeded: "நீங்கள் தேடும் ஆதரவு",
       supportNeededHelper: "பொருந்தும் அனைத்தையும் தேர்ந்தெடுக்கவும்.",

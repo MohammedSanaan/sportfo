@@ -334,6 +334,7 @@ const hi: Dictionary = {
       cityPlaceholder: "तालुक, शहर या ज़िला दर्ज करें",
       state: "राज्य",
       statePlaceholder: "राज्य दर्ज करें",
+      stateSelectPlaceholder: "राज्य चुनें",
       country: "देश",
       mobileNumber: "मोबाइल नंबर",
       mobileHelperDemo:
@@ -377,7 +378,8 @@ const hi: Dictionary = {
       competitionLevelOtherRequired: "कृपया प्रतियोगिता स्तर बताएं।",
       secondarySports: "द्वितीयक खेल",
       secondarySportsPlaceholder: "खेल खोजें और चुनें...",
-      secondarySportsHelper: "आपके मुख्य खेल के अलावा अन्य खेल जो आप खेलते हैं।",
+      secondarySportsHelper:
+        "आप जो भी अतिरिक्त खेल खेलते हैं या भाग लेते हैं, उन सभी को चुनें। आप कई खेल चुन सकते हैं।",
       secondarySportsRemove: "हटाएं",
       supportNeeded: "आपको किस प्रकार का सहयोग चाहिए",
       supportNeededHelper: "जो भी लागू हो, सभी चुनें।",

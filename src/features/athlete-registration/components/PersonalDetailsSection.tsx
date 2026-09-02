@@ -1,6 +1,6 @@
 "use client";
 
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext, useWatch } from "react-hook-form";
 import { Input } from "@/components/ui/Input";
 import { RadioGroup } from "@/components/ui/RadioGroup";
 import { Select } from "@/components/ui/Select";
@@ -16,8 +16,9 @@ import {
 } from "@/lib/athlete-validation";
 import { getAuthMode } from "@/lib/auth-mode";
 import { isValidE164 } from "@/lib/phone/e164";
+import { INDIA_STATES_AND_UTS, isIndiaCountryValue } from "@/lib/locations/india-states";
 import { LOCALES, LOCALE_LABELS } from "@/i18n/config";
-import type { AthleteRegistrationFormValues } from "@/types/athlete";
+import type { AthleteRegistrationFormValues, SelectOption } from "@/types/athlete";
 import { useTranslation } from "@/i18n/LocaleProvider";
 import { translateOptions } from "@/lib/i18n-options";
 import { EmergencyContactField } from "./EmergencyContactField";
@@ -42,6 +43,23 @@ export function PersonalDetailsSection() {
     getAuthMode() === "demo" ? t("register.personal.mobileHelperDemo") : t("register.personal.mobileHelperOtp");
 
   const genderOptions = translateOptions(t, "options.gender", GENDER_OPTIONS);
+
+  // The State field becomes the India States/UTs dropdown only when
+  // Country is (exactly) "India" -- SportFo may support athletes outside
+  // India, so a non-India country keeps the plain free-text field rather
+  // than forcing an Indian state on them (see task spec).
+  const country = useWatch({ control, name: "personalDetails.country" });
+  const stateValue = useWatch({ control, name: "personalDetails.state" });
+  const isIndia = isIndiaCountryValue(country ?? "");
+
+  // An existing record's State may hold a value that isn't (or isn't yet)
+  // a recognized State/UT name -- rather than silently reset it to blank
+  // the moment the dropdown renders, that raw value is kept selectable as
+  // its own option so nothing already saved is ever lost.
+  const stateOptions: SelectOption[] =
+    stateValue && !INDIA_STATES_AND_UTS.some((option) => option.value === stateValue)
+      ? [{ value: stateValue, label: stateValue }, ...INDIA_STATES_AND_UTS]
+      : INDIA_STATES_AND_UTS;
 
   return (
     <SectionCard
@@ -100,14 +118,28 @@ export function PersonalDetailsSection() {
           error={errors.personalDetails?.city?.message}
           {...register("personalDetails.city", requiredTextRule("City"))}
         />
-        <Input
-          id="state"
-          label={t("register.personal.state")}
-          optional
-          autoComplete="address-level1"
-          placeholder={t("register.personal.statePlaceholder")}
-          {...register("personalDetails.state")}
-        />
+        {/* State stays fully optional either way -- this only changes
+            which widget collects it, never adds a required rule (see
+            task spec: "do NOT silently make it mandatory"). */}
+        {isIndia ? (
+          <Select
+            id="state"
+            label={t("register.personal.state")}
+            optional
+            options={stateOptions}
+            placeholder={t("register.personal.stateSelectPlaceholder")}
+            {...register("personalDetails.state")}
+          />
+        ) : (
+          <Input
+            id="state"
+            label={t("register.personal.state")}
+            optional
+            autoComplete="address-level1"
+            placeholder={t("register.personal.statePlaceholder")}
+            {...register("personalDetails.state")}
+          />
+        )}
         <Input
           id="country"
           label={t("register.personal.country")}
