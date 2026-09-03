@@ -291,7 +291,7 @@ export function HeaderNavDesktop({
 }
 
 const mobileBaseClassName =
-  "flex min-h-11 items-center rounded-lg border-l-2 border-l-transparent px-3 text-base font-medium text-ink-700 hover:bg-surface-muted";
+  "flex min-h-10 items-center rounded-lg border-l-2 border-l-transparent px-3 text-base font-medium text-ink-700 hover:bg-surface-muted";
 
 const mobileActiveClassName =
   "border-l-brand-500 bg-brand-50 font-semibold text-ink-900 hover:!bg-brand-50";
@@ -309,7 +309,7 @@ export function HeaderNavMobile({
   const closeMenu = useCloseMobileMenu();
 
   return (
-    <>
+    <nav aria-label="Primary" className="flex flex-col gap-0.5">
       {items.map((item) => {
         const isActive = active === item.key;
         return (
@@ -327,20 +327,24 @@ export function HeaderNavMobile({
           </Link>
         );
       })}
-      {plainLinks.map((link) => {
-        const isActive = pathname === link.href;
-        return (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={closeMenu}
-            aria-current={isActive ? "page" : undefined}
-            className={isActive ? `${mobileBaseClassName} ${mobileActiveClassName}` : mobileBaseClassName}
-          >
-            {link.label}
-          </Link>
-        );
-      })}
-    </>
+      {plainLinks.length > 0 && (
+        <div className="mt-1 flex flex-col gap-0.5 border-t border-border-default pt-1">
+          {plainLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                aria-current={isActive ? "page" : undefined}
+                className={isActive ? `${mobileBaseClassName} ${mobileActiveClassName}` : mobileBaseClassName}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </nav>
   );
 }

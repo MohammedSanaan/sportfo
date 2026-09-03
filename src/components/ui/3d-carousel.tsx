@@ -56,7 +56,41 @@ const FADE_START = 90; // degrees off-center where opacity/scale start easing do
 // it. sin(VISIBLE_HALF_ARC) puts the fade-out edge close to the container's
 // half-width; overflow-hidden on the container is the backstop for the
 // (already near-invisible) cards just past it.
-const FAN_RADIUS_RATIO = 0.42;
+//
+// A phone-width container gets a bigger ratio than a wide one: fewer cards
+// are shown deep on narrow screens (see CARDS_VISIBLE_EACH_SIDE_* below),
+// so the same 0.42 that spreads 3-deep nicely on desktop would leave a
+// 1-or-2-deep mobile fan clustered too close to the front card -- neighbors
+// barely peeking out instead of reading as separate cards.
+//
+// Tablet is its own tier, not desktop's ratio stretched over a smaller
+// container: the gallery section is capped at max-w-6xl (1152px), so
+// desktop's radius never actually exceeds ~484px regardless of viewport --
+// forcing that same 0.42-of-container-width radius onto a 700-900px tablet
+// container instead produces a radius nearly as large as desktop's inside
+// a much smaller box, which is what was overlapping/cramming cards there.
+// A smaller ratio (see also the narrower CARD_WIDTH_CLASS_TABLET below)
+// keeps tablet reading as a proportionally scaled-down desktop fan.
+const FAN_RADIUS_RATIO_PHONE = 0.85;
+const FAN_RADIUS_RATIO_TABLET = 0.4;
+const FAN_RADIUS_RATIO_DESKTOP = 0.42;
+// CSS 3D perspective magnifies anything pushed toward the viewer by
+// perspective/(perspective-z), which blows up as z (here, the front card's
+// translateZ(radius)) approaches the perspective value itself -- this is
+// what the height computation below corrects for. MAX_RADIUS_PX is only a
+// defensive backstop against that blow-up if this component ever ends up
+// in a container wider than max-w-6xl's 1152px cap (desktop's own radius,
+// 0.42 * 1152 =~ 484px, sits comfortably under it and is never affected).
+const PERSPECTIVE_PX = 1400;
+const MAX_RADIUS_PX = 520;
+// Two card-size tiers (not three): phone and desktop happen to share the
+// same clamp() -- phone's container is narrow enough that 26vw never
+// exceeds its 112px floor, and desktop's is exactly the size this clamp
+// was originally tuned for. Tablet gets its own, smaller clamp so cards
+// (and the gap between them) actually shrink for the smaller container
+// instead of the same near-desktop-sized cards just getting more cramped.
+const CARD_WIDTH_CLASS_DEFAULT = "w-[clamp(112px,26vw,190px)]";
+const CARD_WIDTH_CLASS_TABLET = "w-[clamp(90px,16vw,150px)]";
 
 function normalizeAngle(deg: number): number {
   const wrapped = ((deg % 360) + 360) % 360;
@@ -70,6 +104,7 @@ function Carousel3DCard({
   rotateY,
   visibleHalfArc,
   fadeStart,
+  widthClassName,
   onPointerDown,
   onPointerMove,
   onPointerUp,
@@ -81,6 +116,7 @@ function Carousel3DCard({
   rotateY: MotionValue<number>;
   visibleHalfArc: number;
   fadeStart: number;
+  widthClassName: string;
   onPointerDown: (e: ReactPointerEvent<HTMLDivElement>) => void;
   onPointerMove: (e: ReactPointerEvent<HTMLDivElement>) => void;
   onPointerUp: (e: ReactPointerEvent<HTMLDivElement>) => void;
@@ -112,14 +148,33 @@ function Carousel3DCard({
     return `translate(-50%, -50%) rotateY(${baseAngle}deg) translateZ(${radius}px) scale(${scale})`;
   });
   const pointerEvents = useTransform(angleFromFront, (a) => (a >= visibleHalfArc ? "none" : "auto"));
+  // Native preserve-3d depth sorting (on the ring parent) only works for
+  // fully-opaque children -- any card with opacity < 1 gets flattened out
+  // of the 3D stacking context and painted in plain DOM order instead, so a
+  // side card can end up drawn *over* the front card regardless of which is
+  // actually nearer the viewer. That was the clipped-front-card/label-
+  // behind-another-card glitch: every card but the exact front one animates
+  // opacity, so DOM order (not depth) was deciding paint order. An explicit
+  // z-index keyed off the same angleFromFront the depth math already uses
+  // sidesteps the flattening bug entirely -- closer to dead-center always
+  // wins, full stop.
+  const zIndex = useTransform(angleFromFront, (a) => Math.round(1000 - Math.min(a, visibleHalfArc) * 10));
 
   return (
     <motion.div
-      className="absolute top-1/2 left-1/2 h-full w-[clamp(108px,15vw,150px)] cursor-grab touch-pan-y active:cursor-grabbing"
+      // Width-driven, height-from-aspect-ratio (not h-full off the
+      // container) so the card reads as a near-square panel -- slightly
+      // taller than wide -- instead of a tall portrait sliver, independent
+      // of how tall the carousel's own container happens to be.
+      className={cn(
+        "absolute top-1/2 left-1/2 aspect-[4/5] cursor-grab touch-pan-y active:cursor-grabbing",
+        widthClassName,
+      )}
       style={{
         transform,
         opacity,
         pointerEvents,
+        zIndex,
       }}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -137,7 +192,7 @@ function Carousel3DCard({
             fill
             draggable={false}
             // Deliberately requested larger than the card ever renders (max
-            // 150px): these cards live inside a 3D rotateY/scale transform,
+            // 190px): these cards live inside a 3D rotateY/scale transform,
             // and over-fetching resolution gives the browser's own
             // downsample pass more detail to work with than an exact-size
             // fetch would -- exact-size fetches were reading as soft/blurry
@@ -166,17 +221,66 @@ function Carousel3DCard({
 // How many cards deep (on each side of dead-center) stay visible at once,
 // regardless of the ring's total item count -- see the VISIBLE_HALF_ARC
 // comment above for why a fixed arc breaks down on rings with many items.
-const CARDS_VISIBLE_EACH_SIDE = 3;
+// Narrower containers (phones) get fewer cards-deep so each one stays large
+// and legible instead of foreshortening into slivers; wider containers
+// (tablet/desktop) can afford to fan more cards deep. Three tiers matching
+// the site's own phone/tablet/desktop breakpoints (<400px, 400-1024px,
+// >=1024px): a real phone width only has room for the active card plus a
+// sliver of each neighbor before labels start mashing together, tablet can
+// fit a full extra card each side, and only true desktop widths get the
+// original 3-deep fan -- a tablet container forced into that same 3-deep
+// fan (the old 640px cutoff put 768-1024px widths there) reads as crowded,
+// same complaint as the old phone bug just less severe.
+const CARDS_VISIBLE_EACH_SIDE_PHONE = 1;
+const CARDS_VISIBLE_EACH_SIDE_TABLET = 2;
+const CARDS_VISIBLE_EACH_SIDE_DESKTOP = 3;
+// This is the carousel's own rendered container width, not the viewport --
+// the section wraps it in px-4 side padding, so a real phone viewport
+// (390-430px, even up to ~460-480px on the largest phones) already renders
+// a container narrower than its viewport by ~32px. A 400px cutoff here
+// meant anything from ~432px viewport up (still very much a phone, e.g.
+// this 450px test width) fell through to the tablet tier -- whose radius
+// ratio and card-size clamp were tuned for 700-900px containers -- and
+// crammed into a ~420px one instead, reading as jumbled/overlapping cards
+// rather than tablet's intended fan. Raised so all real single-column phone
+// widths land on the phone tier that's already tuned and confirmed good.
+const PHONE_CONTAINER_PX = 480;
+const TABLET_CONTAINER_PX = 1024;
 
 export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
   const containerRef = useRef<HTMLDivElement | null>(null);
+  // An invisible, untransformed div wearing the exact same size classes as
+  // a real card (see the probe render below) -- reading ITS box instead of
+  // re-deriving the w-[clamp(...)] + aspect-[4/5] formula in JS keeps the
+  // card's true size to one source of truth (the Tailwind classes
+  // themselves), the same bug class as the container-height mismatch this
+  // whole file just got bitten by. offsetWidth/Height specifically (not
+  // getBoundingClientRect) because they reflect the *layout* box, which
+  // transforms (the real cards' rotateY/translateZ/scale) never touch.
+  const cardProbeRef = useRef<HTMLDivElement | null>(null);
   const rotateY = useMotionValue(0);
   const [radius, setRadius] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  // The height this carousel actually needs to show its (perspective-
+  // magnified, see MAX_RADIUS_PX above) front card without clipping it --
+  // computed from the live probe + radius rather than guessed once and
+  // left to drift out of sync with the sizing classes above.
+  const [computedHeight, setComputedHeight] = useState(0);
   const angleStep = items.length > 0 ? 360 / items.length : 0;
+  const isTablet = containerWidth >= PHONE_CONTAINER_PX && containerWidth < TABLET_CONTAINER_PX;
+  const cardsVisibleEachSide =
+    containerWidth <= 0
+      ? CARDS_VISIBLE_EACH_SIDE_DESKTOP
+      : containerWidth < PHONE_CONTAINER_PX
+        ? CARDS_VISIBLE_EACH_SIDE_PHONE
+        : isTablet
+          ? CARDS_VISIBLE_EACH_SIDE_TABLET
+          : CARDS_VISIBLE_EACH_SIDE_DESKTOP;
+  const widthClassName = isTablet ? CARD_WIDTH_CLASS_TABLET : CARD_WIDTH_CLASS_DEFAULT;
   // Caps, not floors/replacements: a ring with few items (wide angleStep)
   // still lands on the original 150/90 constants via the Math.min.
-  const visibleHalfArc = Math.min(VISIBLE_HALF_ARC, angleStep * (CARDS_VISIBLE_EACH_SIDE + 0.5));
-  const fadeStart = Math.min(FADE_START, angleStep * (CARDS_VISIBLE_EACH_SIDE - 0.5));
+  const visibleHalfArc = Math.min(VISIBLE_HALF_ARC, angleStep * (cardsVisibleEachSide + 0.5));
+  const fadeStart = Math.min(FADE_START, angleStep * (cardsVisibleEachSide - 0.5));
 
   const pausedRef = useRef(false);
   const dragRef = useRef<{
@@ -198,7 +302,14 @@ export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
     const measure = () => {
       const w = el.getBoundingClientRect().width;
       if (w > 0) {
-        setRadius(Math.round(w * FAN_RADIUS_RATIO));
+        const ratio =
+          w < PHONE_CONTAINER_PX
+            ? FAN_RADIUS_RATIO_PHONE
+            : w < TABLET_CONTAINER_PX
+              ? FAN_RADIUS_RATIO_TABLET
+              : FAN_RADIUS_RATIO_DESKTOP;
+        setRadius(Math.min(Math.round(w * ratio), MAX_RADIUS_PX));
+        setContainerWidth(w);
       }
     };
     measure();
@@ -206,6 +317,22 @@ export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+
+  // Separate from the measurement above on purpose: widthClassName (and so
+  // the probe's actual rendered size) only updates once React commits the
+  // re-render that `setContainerWidth` above triggers, one tick after
+  // `radius` is set -- reading the probe inside the same effect as
+  // `measure()` would read its *previous* tier's size instead (e.g. still
+  // desktop-sized on the very first tablet measurement). Depending on
+  // `widthClassName` here guarantees this always runs after that class has
+  // actually landed in the DOM.
+  useEffect(() => {
+    const probe = cardProbeRef.current;
+    if (!probe || radius <= 0) return;
+    const magnification = PERSPECTIVE_PX / (PERSPECTIVE_PX - radius);
+    // +8px of headroom for the card's own border/shadow rounding.
+    setComputedHeight(Math.ceil(probe.offsetHeight * magnification) + 8);
+  }, [radius, widthClassName]);
 
   // Idle auto-rotate: a slow, constant drift that pauses the instant a drag
   // or an inertia coast is in progress, and resumes once both end.
@@ -326,6 +453,7 @@ export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
         "relative w-full overflow-hidden select-none [perspective:1400px]",
         className,
       )}
+      style={computedHeight > 0 ? { height: computedHeight } : undefined}
       onPointerEnter={() => {
         pausedRef.current = true;
       }}
@@ -333,6 +461,12 @@ export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
         if (!dragRef.current) pausedRef.current = false;
       }}
     >
+      {/* Same size classes as a real card, kept off-transform and
+          invisible -- exists purely so `measure()` above can read its
+          offsetHeight as the card's true intrinsic (untransformed) size.
+          See computedHeight's declaration for why that beats re-deriving
+          the clamp()/aspect-ratio formula a second time in JS. */}
+      <div ref={cardProbeRef} aria-hidden className={cn("invisible absolute aspect-[4/5]", widthClassName)} />
       <motion.div
         className="relative mx-auto h-full [transform-style:preserve-3d]"
         style={{ rotateY }}
@@ -346,6 +480,7 @@ export function Carousel3D({ items, onSelect, className }: Carousel3DProps) {
             rotateY={rotateY}
             visibleHalfArc={visibleHalfArc}
             fadeStart={fadeStart}
+            widthClassName={widthClassName}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onPointerUp={(e) => handlePointerUp(e, item)}

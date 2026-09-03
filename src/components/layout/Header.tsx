@@ -89,14 +89,14 @@ export async function Header({ locale }: { locale: Locale }) {
 
           <MobileMenuToggle>
             <HeaderNavMobile items={navItems} plainLinks={plainLinks} />
-            <div className="mt-2 border-t border-border-default pt-3">
+            <div className="mt-3 border-t border-border-default pt-3">
               <Suspense fallback={null}>
                 <AuthNav locale={locale} variant="mobile" />
               </Suspense>
             </div>
             {/* Placed inside the panel itself (not next to the hamburger
                 trigger) so the always-visible mobile navbar stays uncrowded. */}
-            <div className="mt-2 border-t border-border-default pt-3">
+            <div className="mt-3 border-t border-border-default pt-3">
               <LanguageSelector />
             </div>
           </MobileMenuToggle>

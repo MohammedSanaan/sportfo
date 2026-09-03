@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Carousel3D } from "@/components/ui/3d-carousel";
@@ -40,41 +39,24 @@ export function SportsGalleryInteractive({
 
   return (
     <div>
-      {/* The 3D fan reads well once the container is wide enough to space
-          its rotated cards apart (tablet/desktop). Below `sm` the same
-          card count crammed into a ~350px container foreshortens into a
-          wall of overlapping slivers -- a flat, swipeable strip of flush
-          (non-rotated) cards is the legible mobile equivalent instead. */}
-      <div className="hidden sm:block sm:h-[340px] lg:h-[380px]">
-        <Carousel3D
-          items={carouselItems}
-          onSelect={(item) => setSelectedKey(item.key)}
-          className="h-full"
-        />
-      </div>
+      {/* Same 3D fan at every breakpoint -- the arc-depth cap inside
+          Carousel3D keeps it legible on a narrow phone (fewer, larger cards
+          fanned) without falling back to a flat non-rotated strip.
 
-      <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-1 sm:hidden">
-        {items.map((item) => (
-          <button
-            key={item.key}
-            type="button"
-            onClick={() => setSelectedKey(item.key)}
-            className="stitch-card-lift group flex h-40 w-28 shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-gray-200 border-t-4 border-t-stitch-orange bg-white shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1),0_2px_4px_-1px_rgba(0,0,0,0.06)]"
-          >
-            <div className="relative min-h-0 flex-1 overflow-hidden">
-              <Image
-                src={item.image}
-                alt={item.name}
-                fill
-                sizes="112px"
-                className="stitch-card-image object-cover"
-              />
-            </div>
-            <p className="shrink-0 px-1.5 py-1.5 text-center text-[9px] leading-tight font-bold tracking-wide text-stitch-navy uppercase">
-              {item.name}
-            </p>
-          </button>
-        ))}
+          No fixed/clamped height guessed here on purpose: a card's real
+          on-screen size isn't just its own CSS box (w-[clamp(...)] +
+          aspect-[4/5]) -- the front card also gets magnified by the
+          perspective it's rendered through (CSS 3D: closer-to-viewer scales
+          up), and that magnification factor itself changes with container
+          width. Two formulas approximating the same curve from two files
+          previously drifted out of sync and clipped cards/labels at tablet
+          widths. Carousel3D now measures its own actual front-card size
+          (a same-classes probe element) and the real magnification it's
+          about to apply, and sets its own height accordingly -- this
+          wrapper only needs a floor for the instant before that JS
+          measurement lands on mount. */}
+      <div className="min-h-[140px]">
+        <Carousel3D items={carouselItems} onSelect={(item) => setSelectedKey(item.key)} className="h-full" />
       </div>
 
       <p className="mt-4 text-center text-xs text-gray-500">{dragHintLabel}</p>

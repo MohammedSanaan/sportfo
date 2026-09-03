@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 // Lets nav items rendered as children (see HeaderNav.tsx) close the panel
 // after handling their own click, without this toggle needing to know
@@ -57,16 +58,22 @@ export function MobileMenuToggle({ children }: { children: ReactNode }) {
         {open ? <CloseIcon /> : <MenuIcon />}
       </button>
 
-      {open && (
-        <div
-          id="mobile-nav-panel"
-          className="absolute inset-x-0 top-16 z-30 flex flex-col gap-1 border-b border-border-default bg-surface px-4 pb-6 pt-3 shadow-lg"
-        >
-          <MobileMenuCloseContext.Provider value={() => setOpen(false)}>
-            {children}
-          </MobileMenuCloseContext.Provider>
-        </div>
-      )}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            id="mobile-nav-panel"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.16, ease: "easeOut" }}
+            className="absolute inset-x-0 top-16 z-30 flex max-h-[calc(100vh-4rem)] flex-col gap-1 overflow-y-auto rounded-b-2xl border-b border-border-default bg-surface px-4 pt-3 pb-4 shadow-xl"
+          >
+            <MobileMenuCloseContext.Provider value={() => setOpen(false)}>
+              {children}
+            </MobileMenuCloseContext.Provider>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

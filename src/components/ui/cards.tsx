@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@/lib/cn";
 
@@ -10,6 +11,8 @@ export interface CardItem {
   title: string;
   subtitle: string;
   imageUrl: string;
+  /** When set, the whole card navigates here (e.g. a story's /stories/[slug]). */
+  href?: string;
 }
 
 interface HoverRevealCardsProps {
@@ -26,24 +29,22 @@ export function HoverRevealCards({ items, className }: HoverRevealCardsProps) {
         const isActive = activeId === item.id;
         const isDimmed = activeId !== null && !isActive;
 
-        return (
-          <div
-            key={item.id}
-            role="listitem"
-            tabIndex={0}
-            onMouseEnter={() => setActiveId(item.id)}
-            onMouseLeave={() => setActiveId(null)}
-            onFocus={() => setActiveId(item.id)}
-            onBlur={() => setActiveId(null)}
-            className={cn(
-              "group relative h-72 overflow-hidden rounded-lg outline-none transition-all duration-500 ease-out",
-              "focus-visible:ring-2 focus-visible:ring-stitch-orange focus-visible:ring-offset-2",
-              "motion-reduce:transition-none motion-reduce:!scale-100 motion-reduce:!blur-none motion-reduce:!opacity-100",
-              isActive && "z-10 scale-[1.04] opacity-100 blur-0",
-              isDimmed && "scale-100 opacity-75 blur-[1px]",
-              !isActive && !isDimmed && "scale-100 opacity-100 blur-0"
-            )}
-          >
+        const className = cn(
+          "group relative block h-72 overflow-hidden rounded-lg outline-none transition-all duration-500 ease-out",
+          "focus-visible:ring-2 focus-visible:ring-stitch-orange focus-visible:ring-offset-2",
+          "motion-reduce:transition-none motion-reduce:!scale-100 motion-reduce:!blur-none motion-reduce:!opacity-100",
+          isActive && "z-10 scale-[1.04] opacity-100 blur-0",
+          isDimmed && "scale-100 opacity-75 blur-[1px]",
+          !isActive && !isDimmed && "scale-100 opacity-100 blur-0"
+        );
+        const eventHandlers = {
+          onMouseEnter: () => setActiveId(item.id),
+          onMouseLeave: () => setActiveId(null),
+          onFocus: () => setActiveId(item.id),
+          onBlur: () => setActiveId(null),
+        };
+        const content = (
+          <>
             <Image
               src={item.imageUrl}
               alt=""
@@ -58,6 +59,20 @@ export function HoverRevealCards({ items, className }: HoverRevealCardsProps) {
               </span>
               <h3 className="mt-1 text-lg font-bold leading-snug text-white">{item.title}</h3>
             </div>
+          </>
+        );
+
+        if (item.href) {
+          return (
+            <Link key={item.id} href={item.href} role="listitem" className={className} {...eventHandlers}>
+              {content}
+            </Link>
+          );
+        }
+
+        return (
+          <div key={item.id} role="listitem" tabIndex={0} className={className} {...eventHandlers}>
+            {content}
           </div>
         );
       })}

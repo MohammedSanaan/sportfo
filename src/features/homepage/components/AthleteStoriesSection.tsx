@@ -1,40 +1,20 @@
+import Link from "next/link";
 import { HoverRevealCards, type CardItem } from "@/components/ui/cards";
+import { getAllStories } from "@/lib/stories/data";
 import type { TFunc } from "@/i18n/dictionary";
 
-const STORY_IMAGES = [
-  "/images/carousel/cricket.jpg",
-  "/images/carousel/athletics.jpg",
-  "/images/carousel/tennis.jpg",
-  "/images/carousel/swimming.jpg",
-] as const;
-
 export function AthleteStoriesSection({ t }: { t: TFunc }) {
-  const stories: CardItem[] = [
-    {
-      id: "story-1",
-      title: t("home.stories.story1Title"),
-      subtitle: t("home.stories.story1Subtitle"),
-      imageUrl: STORY_IMAGES[0],
-    },
-    {
-      id: "story-2",
-      title: t("home.stories.story2Title"),
-      subtitle: t("home.stories.story2Subtitle"),
-      imageUrl: STORY_IMAGES[1],
-    },
-    {
-      id: "story-3",
-      title: t("home.stories.story3Title"),
-      subtitle: t("home.stories.story3Subtitle"),
-      imageUrl: STORY_IMAGES[2],
-    },
-    {
-      id: "story-4",
-      title: t("home.stories.story4Title"),
-      subtitle: t("home.stories.story4Subtitle"),
-      imageUrl: STORY_IMAGES[3],
-    },
-  ];
+  // Same story data the /stories listing and /stories/[slug] detail pages
+  // read from -- the teaser card, the full listing card, and the detail
+  // page it opens all agree on title/category/image because they all come
+  // from one place (src/lib/stories/data.ts).
+  const stories: CardItem[] = getAllStories().map((story) => ({
+    id: story.id,
+    title: story.title,
+    subtitle: story.category,
+    imageUrl: story.coverImage,
+    href: `/stories/${story.slug}`,
+  }));
 
   return (
     <section id="stories" className="scroll-mt-16 bg-stitch-gray py-12">
@@ -48,6 +28,15 @@ export function AthleteStoriesSection({ t }: { t: TFunc }) {
 
         <div className="mt-8">
           <HoverRevealCards items={stories} />
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            href="/stories"
+            className="inline-flex h-11 items-center justify-center rounded px-6 text-sm font-bold text-stitch-navy transition-colors hover:text-stitch-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-orange focus-visible:ring-offset-2"
+          >
+            {t("home.stories.viewAll")} <span aria-hidden>→</span>
+          </Link>
         </div>
       </div>
     </section>

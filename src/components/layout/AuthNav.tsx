@@ -78,6 +78,26 @@ export async function AuthNav({
   // Join SportFo CTA -- which scrolls to Community/"Who We Serve" (the
   // real category-selection gateway) rather than jumping straight to
   // /auth or assuming Athlete.
+  //
+  // Mobile renders these as one intentional CTA block (Join as the filled
+  // primary action, Login as a lighter secondary one underneath) instead of
+  // two plain items indistinguishable from the scroll-nav list above them.
+  if (variant === "mobile") {
+    return (
+      <div className="flex flex-col gap-2">
+        <JoinCommunityLink className="flex h-12 w-full items-center justify-center rounded-lg bg-brand-600 text-base font-semibold text-white shadow-sm transition-all hover:bg-brand-700 active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200 focus-visible:ring-offset-2">
+          {t("nav.joinSportfo")}
+        </JoinCommunityLink>
+        <Link
+          href="/auth"
+          className="flex h-11 w-full items-center justify-center rounded-lg border border-border-default text-sm font-semibold text-ink-700 transition-colors hover:bg-surface-muted"
+        >
+          {t("nav.signIn")}
+        </Link>
+      </div>
+    );
+  }
+
   return (
     <>
       <Link href="/auth" className={navLinkClassName}>

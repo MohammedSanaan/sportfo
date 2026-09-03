@@ -33,22 +33,22 @@ export function EcosystemHero({ t }: { t: TFunc }) {
         className="pointer-events-none absolute inset-0 [background:radial-gradient(ellipse_at_center,transparent_55%,rgba(0,0,0,0.28)_100%)]"
       />
 
-      <div className="relative z-10 flex w-full flex-col px-4 py-10 sm:px-6 sm:py-12 lg:flex-row lg:items-center lg:gap-8 lg:py-14 lg:pr-6 lg:pl-10 xl:py-16">
-        <div className="flex flex-col items-center text-center lg:w-[42%] lg:shrink-0 lg:items-start lg:text-left">
+      <div className="relative z-10 flex w-full flex-col px-4 py-10 sm:px-6 sm:py-12 md:flex-row md:items-center md:gap-6 md:py-12 md:pr-6 md:pl-8 lg:gap-8 lg:py-14 lg:pr-6 lg:pl-10 xl:py-16">
+        <div className="flex flex-col items-center text-center md:w-[42%] md:shrink-0 md:items-start md:text-left">
           <p className="text-xs font-semibold tracking-[0.2em] text-white/75 uppercase sm:text-sm">
             {t("home.hero.eyebrow")}
           </p>
-          <h1 className="mt-3 text-4xl leading-[1.05] font-bold whitespace-pre-line text-white sm:text-5xl md:text-6xl lg:text-[3.4rem] xl:text-[3.75rem]">
+          <h1 className="mt-3 text-4xl leading-[1.05] font-bold whitespace-pre-line text-white sm:text-5xl md:text-5xl lg:text-[3.4rem] xl:text-[3.75rem]">
             {t("home.hero.title")}
           </h1>
           <h2 className="mt-3 text-lg leading-snug font-semibold text-white/90 sm:text-xl md:text-2xl">
             {t("home.hero.secondaryTitle")}
           </h2>
-          <p className="mx-auto mt-3 max-w-md text-base font-medium text-white/85 sm:text-lg lg:mx-0">
+          <p className="mx-auto mt-3 max-w-md text-base font-medium text-white/85 sm:text-lg md:mx-0">
             {t("home.hero.description")}
           </p>
 
-          <div className="mt-6 flex w-full max-w-md flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4 lg:mx-0 lg:items-start">
+          <div className="mt-6 flex w-full max-w-md flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4 md:mx-0 md:items-start">
             <Link
               href="#community"
               className="inline-flex h-13 w-full items-center justify-center rounded border border-white/50 px-8 text-base font-bold text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
@@ -67,22 +67,39 @@ export function EcosystemHero({ t }: { t: TFunc }) {
           </div>
         </div>
 
-        {/* One straight, flush grid for every screen size: 2x2 on mobile,
-            a single row of 4 from tablet up -- no gap between tiles, so the
-            four photos read as one continuous strip. From lg up, the strip
-            stretches to the row's full cross-height, then negative vertical
-            margins cancel the row's own py so it reaches the section's true
-            top/bottom edges instead of floating with navy letterboxing
-            above and below it. */}
-        <div className="mt-10 grid w-full grid-cols-2 overflow-hidden sm:grid-cols-4 lg:mt-0 lg:flex lg:flex-1 lg:items-stretch lg:self-stretch lg:-my-14 xl:-my-16">
+        {/* One straight, flush row of all 4 at every screen size -- no
+            gap between tiles, no horizontal scroll/swipe: all four photos
+            sit inside a single contained rectangle, exactly like the
+            desktop composition just narrower, not a carousel that hides
+            photos behind a swipe. From md up (tablet included, not just
+            desktop) the strip stretches to the row's full cross-height,
+            then negative vertical margins cancel the row's own py so it
+            reaches the section's true top/bottom edges instead of floating
+            with navy letterboxing above and below it.
+
+            Panel aspect ratio is tiered, not fixed, because the source
+            photos are themselves pre-cropped tall strips (~0.336 w/h,
+            measured). object-cover forces the image to fill whatever box
+            it's given, so a box far wider (relative to its height) than
+            0.336 -- the old flat aspect-[5/6] (0.83) used at every
+            breakpoint below lg -- has to blow the image up ~2.5x just to
+            cover the box's width, cropping out most of its height in the
+            process (a real "way too zoomed" crop, not a stylistic one).
+            aspect-[2/5] (0.4) on phones keeps that overshoot mild (~1.2x);
+            sm/tablet has enough width per panel that aspect-[1/3] (0.333)
+            lands within a hair of the source ratio, i.e. essentially no
+            crop at all -- matching how md/lg's aspect-auto (flex-1 filling
+            the row's own height) already behaves, since that also happens
+            to land close to 0.336 in practice. */}
+        <div className="mt-8 grid w-full grid-cols-4 overflow-hidden md:mt-0 md:flex md:flex-1 md:items-stretch md:self-stretch md:-my-12 lg:-my-14 xl:-my-16">
           <HeroCollage
             panelCount={PANEL_COUNT}
             clipPaths={Array.from({ length: PANEL_COUNT }, () => "none")}
             wrapperClassNames={Array.from(
               { length: PANEL_COUNT },
-              () => "group relative aspect-square overflow-hidden sm:aspect-[3/4] lg:aspect-auto lg:flex-1"
+              () => "group relative aspect-[2/5] overflow-hidden sm:aspect-[1/3] md:aspect-auto md:flex-1"
             )}
-            sizes="(min-width: 1024px) 20vw, (min-width: 640px) 25vw, 50vw"
+            sizes="(min-width: 768px) 20vw, 25vw"
           />
         </div>
       </div>
