@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { buildCoachSystemInstruction } from "@/lib/coach/systemInstruction";
+import { getClientIp, isRateLimited } from "@/lib/coach/rateLimit";
 import type { CoachErrorBody, CoachMessage, CoachRequestBody, CoachResponseBody } from "@/lib/coach/types";
 
 // Server-only: GEMINI_API_KEY is read here and never sent to the client.
@@ -42,6 +43,16 @@ function toGeminiContents(messages: CoachMessage[]) {
 }
 
 export async function POST(request: Request) {
+  // Guard a paid, unauthenticated route from being hammered by a script
+  // rather than a person -- see src/lib/coach/rateLimit.ts for the
+  // trade-offs of this single-instance, in-memory approach.
+  if (isRateLimited(getClientIp(request))) {
+    return friendlyError(
+      "I'm getting a lot of questions right now. Please try again in a moment.",
+      429,
+    );
+  }
+
   if (!GEMINI_API_KEY) {
     // Logged server-side only -- the client only ever sees the friendly
     // message below, never this detail or the missing-key state itself.
