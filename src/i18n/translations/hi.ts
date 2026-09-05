@@ -1226,6 +1226,32 @@ const hi: Dictionary = {
       comingSoon: "जल्द आ रहा है",
     },
   },
+  coach: {
+    name: "कोच",
+    tagline: "आपका SportFo गाइड",
+    openLabel: "कोच खोलें, आपका SportFo गाइड",
+    closeLabel: "कोच बंद करें",
+    welcomeGreeting: "नमस्ते! मैं कोच हूं 👋",
+    welcomeMessage:
+      "मैं आपका SportFo गाइड हूं। मैं आपको यह समझने में मदद कर सकता हूं कि SportFo कैसे काम करता है, आपके लिए सही रास्ता ढूंढ सकता हूं, और पंजीकरण में आपका मार्गदर्शन कर सकता हूं।",
+    welcomePrompt: "मैं आपकी किस तरह मदद कर सकता हूं?",
+    inputPlaceholder: "SportFo के बारे में कोच से कुछ भी पूछें...",
+    send: "भेजें",
+    newChat: "नई बातचीत",
+    aiDisclosure: "AI-संचालित गाइड",
+    typingIndicator: "कोच लिख रहा है",
+    quickActions: {
+      howItWorks: "SportFo कैसे काम करता है?",
+      register: "मैं पंजीकरण कैसे करूं?",
+      findPathway: "मेरे लिए कौन सा विकल्प सही है?",
+      imParent: "मैं एक अभिभावक हूं",
+      imCoach: "मैं एक कोच हूं",
+    },
+    errors: {
+      generic: "अभी कनेक्ट करने में थोड़ी परेशानी हो रही है। कृपया थोड़ी देर बाद फिर से कोशिश करें।",
+      empty: "कोच से कुछ पूछने के लिए एक संदेश टाइप करें।",
+    },
+  },
 };
 
 export default hi;

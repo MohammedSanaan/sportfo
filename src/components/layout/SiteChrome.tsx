@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
+import { CoachLauncher } from "@/features/coach/CoachLauncher";
 
 interface SiteChromeProps {
   // Pre-rendered by the (Server Component) root layout and passed through
@@ -28,7 +29,12 @@ export function SiteChrome({ header, footer, welcomeToast, children }: SiteChrom
   const isDashboard = pathname === "/dashboard" || pathname?.startsWith("/dashboard/");
 
   if (isDashboard) {
-    return <main className="flex flex-1 flex-col">{children}</main>;
+    return (
+      <>
+        <main className="flex flex-1 flex-col">{children}</main>
+        <CoachLauncher />
+      </>
+    );
   }
 
   return (
@@ -37,6 +43,7 @@ export function SiteChrome({ header, footer, welcomeToast, children }: SiteChrom
       {header}
       <main className="flex flex-1 flex-col">{children}</main>
       {footer}
+      <CoachLauncher />
     </>
   );
 }

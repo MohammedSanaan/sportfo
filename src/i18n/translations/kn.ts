@@ -1239,6 +1239,32 @@ const kn: Dictionary = {
       comingSoon: "ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ",
     },
   },
+  coach: {
+    name: "ಕೋಚ್",
+    tagline: "ನಿಮ್ಮ SportFo ಗೈಡ್",
+    openLabel: "ಕೋಚ್ ತೆರೆಯಿರಿ, ನಿಮ್ಮ SportFo ಗೈಡ್",
+    closeLabel: "ಕೋಚ್ ಮುಚ್ಚಿ",
+    welcomeGreeting: "ನಮಸ್ಕಾರ! ನಾನು ಕೋಚ್ 👋",
+    welcomeMessage:
+      "ನಾನು ನಿಮ್ಮ SportFo ಗೈಡ್. SportFo ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು, ನಿಮಗೆ ಸರಿಯಾದ ಮಾರ್ಗವನ್ನು ಕಂಡುಕೊಳ್ಳಲು ಮತ್ತು ನೋಂದಣಿಯಲ್ಲಿ ನಿಮಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡಲು ನಾನು ಸಹಾಯ ಮಾಡಬಲ್ಲೆ.",
+    welcomePrompt: "ನಾನು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?",
+    inputPlaceholder: "SportFo ಬಗ್ಗೆ ಕೋಚ್‌ಗೆ ಏನಾದರೂ ಕೇಳಿ...",
+    send: "ಕಳುಹಿಸಿ",
+    newChat: "ಹೊಸ ಚಾಟ್",
+    aiDisclosure: "AI-ಚಾಲಿತ ಗೈಡ್",
+    typingIndicator: "ಕೋಚ್ ಟೈಪ್ ಮಾಡುತ್ತಿದ್ದಾರೆ",
+    quickActions: {
+      howItWorks: "SportFo ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ?",
+      register: "ನಾನು ಹೇಗೆ ನೋಂದಾಯಿಸಿಕೊಳ್ಳಲಿ?",
+      findPathway: "ನನಗೆ ಯಾವ ಆಯ್ಕೆ ಸರಿಯಾಗಿದೆ?",
+      imParent: "ನಾನು ಪೋಷಕ",
+      imCoach: "ನಾನು ಕೋಚ್",
+    },
+    errors: {
+      generic: "ಈಗ ಸಂಪರ್ಕಿಸಲು ಸ್ವಲ್ಪ ತೊಂದರೆಯಾಗುತ್ತಿದೆ. ದಯವಿಟ್ಟು ಸ್ವಲ್ಪ ಸಮಯದ ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
+      empty: "ಕೋಚ್‌ಗೆ ಏನನ್ನಾದರೂ ಕೇಳಲು ಸಂದೇಶವನ್ನು ಟೈಪ್ ಮಾಡಿ.",
+    },
+  },
 };
 
 export default kn;

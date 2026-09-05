@@ -1269,6 +1269,36 @@ const en = {
       comingSoon: "Coming soon",
     },
   },
+  // Coach -- the AI SportFo guide (see src/features/coach/**). A short,
+  // self-contained namespace: Coach's own UI chrome and quick-action
+  // labels only, not its AI-generated reply text (that comes back live
+  // from src/app/api/coach/route.ts and is never pre-translated here).
+  coach: {
+    name: "Coach",
+    tagline: "Your SportFo Guide",
+    openLabel: "Open Coach, your SportFo guide",
+    closeLabel: "Close Coach",
+    welcomeGreeting: "Hi! I'm Coach 👋",
+    welcomeMessage:
+      "I'm your SportFo guide. I can help you understand how SportFo works, find the right pathway for you, and guide you through registration.",
+    welcomePrompt: "What can I help you with?",
+    inputPlaceholder: "Ask Coach anything about SportFo...",
+    send: "Send",
+    newChat: "New chat",
+    aiDisclosure: "AI-powered guide",
+    typingIndicator: "Coach is typing",
+    quickActions: {
+      howItWorks: "How does SportFo work?",
+      register: "How do I register?",
+      findPathway: "Which option is right for me?",
+      imParent: "I'm a parent",
+      imCoach: "I'm a coach",
+    },
+    errors: {
+      generic: "I'm having a little trouble connecting right now. Please try again in a moment.",
+      empty: "Type a message to ask Coach something.",
+    },
+  },
 } as const;
 
 export default en;

@@ -1230,6 +1230,32 @@ const te: Dictionary = {
       comingSoon: "త్వరలో వస్తుంది",
     },
   },
+  coach: {
+    name: "కోచ్",
+    tagline: "మీ SportFo గైడ్",
+    openLabel: "కోచ్‌ను తెరవండి, మీ SportFo గైడ్",
+    closeLabel: "కోచ్‌ను మూసివేయండి",
+    welcomeGreeting: "నమస్కారం! నేను కోచ్‌ని 👋",
+    welcomeMessage:
+      "నేను మీ SportFo గైడ్‌ని. SportFo ఎలా పనిచేస్తుందో అర్థం చేసుకోవడానికి, మీకు సరైన మార్గాన్ని కనుగొనడానికి మరియు నమోదులో మీకు మార్గనిర్దేశం చేయడానికి నేను సహాయం చేయగలను.",
+    welcomePrompt: "నేను మీకు ఎలా సహాయం చేయగలను?",
+    inputPlaceholder: "SportFo గురించి కోచ్‌ని ఏదైనా అడగండి...",
+    send: "పంపండి",
+    newChat: "కొత్త చాట్",
+    aiDisclosure: "AI-ఆధారిత గైడ్",
+    typingIndicator: "కోచ్ టైప్ చేస్తున్నారు",
+    quickActions: {
+      howItWorks: "SportFo ఎలా పనిచేస్తుంది?",
+      register: "నేను ఎలా నమోదు చేసుకోవాలి?",
+      findPathway: "నాకు ఏ ఎంపిక సరైనది?",
+      imParent: "నేను ఒక తల్లిదండ్రి",
+      imCoach: "నేను ఒక కోచ్",
+    },
+    errors: {
+      generic: "ఇప్పుడు కనెక్ట్ చేయడంలో కొంచెం ఇబ్బంది ఉంది. దయచేసి కొద్దిసేపటి తర్వాత మళ్లీ ప్రయత్నించండి.",
+      empty: "కోచ్‌ని ఏదైనా అడగడానికి ఒక సందేశాన్ని టైప్ చేయండి.",
+    },
+  },
 };
 
 export default te;
