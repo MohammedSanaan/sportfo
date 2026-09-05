@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { splitBilingualResponse } from "@/lib/coach/bilingual";
+import { useTranslation } from "@/i18n/LocaleProvider";
 import type { CoachMessage as CoachMessageType } from "@/lib/coach/types";
 
 // Coach is instructed (see systemInstruction.ts) to end a process
@@ -36,13 +38,23 @@ function renderLine(line: string, key: number) {
   );
 }
 
+function renderBlock(content: string) {
+  const lines = content.split("\n").filter((line, index, all) => line.trim() !== "" || (index > 0 && index < all.length - 1));
+  return lines.length > 0 ? lines.map(renderLine) : <p className="whitespace-pre-wrap">{content}</p>;
+}
+
 interface CoachMessageProps {
   message: CoachMessageType;
 }
 
 export function CoachMessage({ message }: CoachMessageProps) {
+  const { t } = useTranslation();
   const isUser = message.role === "user";
-  const lines = message.content.split("\n").filter((line, index, all) => line.trim() !== "" || (index > 0 && index < all.length - 1));
+  // Voice-mode replies come back as native-language-first, English-second
+  // (see systemInstruction.ts/bilingual.ts) -- a typed message or a
+  // response that was already in English never contains the separator, so
+  // `english` is null and this renders exactly as before.
+  const { primary, english } = isUser ? { primary: message.content, english: null } : splitBilingualResponse(message.content);
 
   return (
     <div className={cn("flex", isUser ? "justify-end" : "justify-start")}>
@@ -54,7 +66,13 @@ export function CoachMessage({ message }: CoachMessageProps) {
             : "rounded-bl-sm border border-border-default bg-white text-ink-800",
         )}
       >
-        {lines.length > 0 ? lines.map(renderLine) : <p className="whitespace-pre-wrap">{message.content}</p>}
+        {renderBlock(primary)}
+        {english && (
+          <div className="mt-2 space-y-1.5 border-t border-border-default pt-2">
+            <p className="text-[11px] font-semibold tracking-wide text-ink-400 uppercase">{t("coach.voice.englishLabel")}</p>
+            {renderBlock(english)}
+          </div>
+        )}
       </div>
     </div>
   );

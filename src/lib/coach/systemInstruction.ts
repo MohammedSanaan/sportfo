@@ -1,14 +1,25 @@
 import { buildKnowledgeContext } from "@/data/sportfoKnowledge";
+import { BILINGUAL_SEPARATOR } from "./bilingual";
+import { isLocale, LOCALE_TRIGGER_LABELS } from "@/i18n/config";
 import type { CoachPageContext } from "./types";
 
 // The Gemini system instruction for Coach. Kept in its own module (not
 // inlined in the route handler) so the persona/rules can be reviewed and
 // tuned independently of the request-handling code.
 //
-// `pageContext` is optional, per-request info (current route/page title --
-// see CoachPageContext) folded into the instruction so Coach can resolve
-// "what is this?" on a specific page without it polluting the static,
-// cacheable knowledge base above.
+// `pageContext` is optional, per-request info (current route/page title,
+// site locale, whether this message came from voice -- see
+// CoachPageContext) folded into the instruction so Coach can resolve
+// "what is this?" on a specific page, and respond in the right language,
+// without any of it polluting the static, cacheable knowledge base below.
+//
+// IMPORTANT (per product requirement): SportFo's six UI languages are
+// already fully implemented as static translation dictionaries
+// (src/i18n/translations/*.ts) -- that system is NOT touched or
+// duplicated here. This function never translates anything itself; it
+// only tells Gemini which language to write its own reply in, and (for
+// voice input) how to format a two-language reply. The actual
+// language generation is entirely Gemini's, per request, same as English.
 export function buildCoachSystemInstruction(pageContext?: CoachPageContext): string {
   const contextLine = pageContext
     ? `\n\nCURRENT PAGE: The user is currently on "${pageContext.pathname}"${
@@ -16,7 +27,24 @@ export function buildCoachSystemInstruction(pageContext?: CoachPageContext): str
       }. If they ask something like "what is this?" or "what am I looking at?", interpret it relative to this page using the verified routes/knowledge below.`
     : "";
 
-  return `You are Coach, the official AI guide for the SportFo platform.${contextLine}
+  // Re-validated here rather than trusted from the request body -- the
+  // client's TypeScript type doesn't enforce anything at runtime, and
+  // this string gets interpolated straight into the prompt text.
+  const siteLanguage =
+    pageContext?.locale && isLocale(pageContext.locale) ? LOCALE_TRIGGER_LABELS[pageContext.locale] : "English";
+
+  const languageInstruction = pageContext?.isVoiceInput
+    ? `\n\nVOICE RESPONSE FORMAT: This message was transcribed from the user's speech by the browser's speech recognizer, so expect occasional transcription errors or mixed-language phrasing (common for multilingual Indian speakers mixing English/SportFo terms into a sentence) -- interpret intent from the overall meaning rather than rejecting anything that looks mixed or slightly garbled.
+Decide the response language in this order of priority:
+1. If the transcribed text itself is reliably identifiable as one of SportFo's supported languages (English, Hindi, Kannada, Tamil, Telugu, Malayalam), respond in that language -- this takes priority even if it differs from the site's current language below.
+2. If you cannot reliably tell, respond in the site's current language: ${siteLanguage}.
+3. If neither can be determined, respond in English.
+Once you've picked a non-English language by the rules above, format your ENTIRE reply as exactly two parts, in this order, separated by a line containing only "${BILINGUAL_SEPARATOR}" and nothing else on that line: first, your complete answer in that language; then, the same answer's meaning in English below the separator. If English is the language you land on, skip the separator entirely and answer once, in English only.`
+    : `\n\nRESPONSE LANGUAGE: Respond in whichever language the user is writing in. If that's ambiguous, default to the site's current language: ${siteLanguage}. If the user explicitly asks for a specific language (including English), use that instead. Do not add a second, English restatement for typed messages -- that dual-language format is reserved for voice input only.`;
+
+  const terminologyRule = `\n\nTERMINOLOGY: Regardless of which language you respond in, never translate "SportFo" itself, and never translate the exact route labels or feature names given in the knowledge base below -- keep those exactly as written, in English, inside any response.`;
+
+  return `You are Coach, the official AI guide for the SportFo platform.${contextLine}${languageInstruction}${terminologyRule}
 
 Your purpose is to help visitors and users understand SportFo, navigate the platform, understand its user pathways, and understand registration -- using only the verified SportFo information provided below.
 

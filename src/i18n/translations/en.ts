@@ -1298,6 +1298,20 @@ const en = {
       generic: "I'm having a little trouble connecting right now. Please try again in a moment.",
       empty: "Type a message to ask Coach something.",
     },
+    voice: {
+      micLabel: "Speak to Coach",
+      stopLabel: "Stop listening",
+      listening: "Listening...",
+      transcribing: "Transcribing...",
+      thinking: "Thinking...",
+      englishLabel: "English",
+      errors: {
+        permissionDenied: "Microphone access was denied. You can type your question instead.",
+        noSpeech: "Sorry, I couldn't understand that. Please try again or type your question.",
+        languageUnsupported: "Voice input isn't available for the selected language yet. You can type your question instead.",
+        generic: "Sorry, I couldn't understand that. Please try again.",
+      },
+    },
   },
 } as const;
 

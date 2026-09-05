@@ -1,6 +1,10 @@
 // Shared between the client (src/features/coach/**) and the server route
 // (src/app/api/coach/route.ts) -- kept dependency-free (no React, no
-// Next.js server types) so both sides can import it safely.
+// Next.js server types) so both sides can import it safely. `Locale` is
+// the one exception: it's a plain string-literal union with no React/DOM
+// dependency of its own (see src/i18n/config.ts), so importing its type
+// here doesn't compromise that.
+import type { Locale } from "@/i18n/config";
 
 export type CoachRole = "user" | "coach";
 
@@ -16,6 +20,10 @@ export interface CoachMessage {
 export interface CoachPageContext {
   pathname: string;
   pageTitle?: string;
+  /** The SportFo site's currently-selected UI language (see LocaleProvider). */
+  locale?: Locale;
+  /** True when this message originated from the mic (voice transcription) rather than typing -- see bilingual.ts for what that changes about the expected response format. */
+  isVoiceInput?: boolean;
 }
 
 export interface CoachRequestBody {

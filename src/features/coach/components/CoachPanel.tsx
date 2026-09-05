@@ -14,8 +14,9 @@ interface CoachPanelProps {
   onClose: () => void;
   messages: CoachMessageType[];
   isLoading: boolean;
+  isVoiceReplyPending: boolean;
   error: string | null;
-  onSend: (text: string) => void;
+  onSend: (text: string, options?: { isVoiceInput?: boolean }) => void;
   onReset: () => void;
 }
 
@@ -39,8 +40,8 @@ function TypingIndicator({ label }: { label: string }) {
   );
 }
 
-export function CoachPanel({ isOpen, onClose, messages, isLoading, error, onSend, onReset }: CoachPanelProps) {
-  const { t } = useTranslation();
+export function CoachPanel({ isOpen, onClose, messages, isLoading, isVoiceReplyPending, error, onSend, onReset }: CoachPanelProps) {
+  const { t, locale } = useTranslation();
   const [draft, setDraft] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -113,7 +114,9 @@ export function CoachPanel({ isOpen, onClose, messages, isLoading, error, onSend
               messages.map((message) => <CoachMessage key={message.id} message={message} />)
             )}
 
-            {isLoading && <TypingIndicator label={t("coach.typingIndicator")} />}
+            {isLoading && (
+              <TypingIndicator label={isVoiceReplyPending ? t("coach.voice.thinking") : t("coach.typingIndicator")} />
+            )}
 
             {error && (
               <div role="alert" className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
@@ -126,9 +129,23 @@ export function CoachPanel({ isOpen, onClose, messages, isLoading, error, onSend
             value={draft}
             onChange={setDraft}
             onSubmit={handleSubmit}
+            onVoiceTranscript={(text) => onSend(text, { isVoiceInput: true })}
             placeholder={t("coach.inputPlaceholder")}
             sendLabel={t("coach.send")}
             disabled={isLoading}
+            locale={locale}
+            voiceCopy={{
+              micLabel: t("coach.voice.micLabel"),
+              stopLabel: t("coach.voice.stopLabel"),
+              listening: t("coach.voice.listening"),
+              transcribing: t("coach.voice.transcribing"),
+              errors: {
+                permissionDenied: t("coach.voice.errors.permissionDenied"),
+                noSpeech: t("coach.voice.errors.noSpeech"),
+                languageUnsupported: t("coach.voice.errors.languageUnsupported"),
+                generic: t("coach.voice.errors.generic"),
+              },
+            }}
           />
         </motion.div>
       )}
