@@ -56,7 +56,16 @@ export function CoachMessage({ message }: CoachMessageProps) {
   // (see systemInstruction.ts/bilingual.ts) -- a typed message or a
   // response that was already in English never contains the separator, so
   // `english` is null and the toggle below never renders.
-  const { primary, english } = isUser ? { primary: message.content, english: null } : splitBilingualResponse(message.content);
+  //
+  // While a response is still streaming in, the growing text may contain
+  // only part of the "---ENGLISH---" marker (or arrive right before/after
+  // it lands) -- splitting on a half-formed marker would either flash the
+  // toggle into existence and then remove it, or briefly render the raw
+  // marker text as if it were an answer. Simplest correct fix: show the
+  // raw accumulating text untouched while streaming, and only run the
+  // split once the message is complete.
+  const { primary, english } =
+    isUser || message.isStreaming ? { primary: message.content, english: null } : splitBilingualResponse(message.content);
   // Both languages arrive in the same response already -- this only
   // switches which one is *displayed*, no re-fetch and no flash of stale
   // content when toggling back and forth.

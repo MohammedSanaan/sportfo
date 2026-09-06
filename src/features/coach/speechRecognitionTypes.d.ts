@@ -9,6 +9,7 @@ export interface SpeechRecognitionAlternativeLike {
 
 export interface SpeechRecognitionResultLike {
   readonly length: number;
+  readonly isFinal: boolean;
   [index: number]: SpeechRecognitionAlternativeLike;
 }
 
@@ -19,6 +20,10 @@ export interface SpeechRecognitionResultListLike {
 
 export interface SpeechRecognitionEventLike extends Event {
   results: SpeechRecognitionResultListLike;
+  /** Index of the first result that's new/changed since the previous
+   * `onresult` event -- lets a continuous session process only what's new
+   * instead of re-reading (and re-appending) results it already saw. */
+  resultIndex: number;
 }
 
 export interface SpeechRecognitionErrorEventLike extends Event {

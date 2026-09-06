@@ -82,23 +82,23 @@ export function CoachInput({
   }
 
   const isListening = voice.status === "listening" || voice.status === "transcribing";
-  const statusText =
-    voice.status === "listening"
-      ? voiceCopy.listening
-      : voice.status === "transcribing"
-        ? voiceCopy.transcribing
-        : voice.status === "error" && voice.errorKind
-          ? voiceCopy.errors[voice.errorKind]
-          : null;
+  const listeningLabel = voice.status === "transcribing" ? voiceCopy.transcribing : voiceCopy.listening;
+  const errorText = voice.status === "error" && voice.errorKind ? voiceCopy.errors[voice.errorKind] : null;
 
   return (
     <div className="border-t border-border-default bg-white p-3 sm:p-4">
-      {statusText && (
-        <p
-          role={voice.status === "error" ? "alert" : "status"}
-          className={`mb-2 text-xs ${voice.status === "error" ? "text-red-600" : "text-ink-500"}`}
-        >
-          {statusText}
+      {isListening && (
+        <p role="status" className="mb-2 text-xs text-ink-500">
+          <span className="font-medium text-brand-600">{listeningLabel}</span>
+          {/* Live "what Coach has heard so far" -- lets the user catch a
+              misheard word before the pause-triggered send, per the voice
+              UX spec's transcription-transparency requirement. */}
+          {voice.interimTranscript && <span> &ldquo;{voice.interimTranscript}&rdquo;</span>}
+        </p>
+      )}
+      {errorText && (
+        <p role="alert" className="mb-2 text-xs text-red-600">
+          {errorText}
         </p>
       )}
       <div className="flex items-end gap-2">

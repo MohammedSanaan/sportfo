@@ -12,6 +12,12 @@ export interface CoachMessage {
   id: string;
   role: CoachRole;
   content: string;
+  /** Client-side only: true while this coach message is still receiving
+   * streamed chunks. Never sent to/from the server -- see useCoach.ts and
+   * CoachMessage.tsx, which skip the bilingual native/English split while
+   * true (a partial "---ENGLISH---" marker mid-stream would otherwise
+   * misrender) and render the raw growing text instead. */
+  isStreaming?: boolean;
 }
 
 // Only non-sensitive, navigation-relevant context -- never user identity,

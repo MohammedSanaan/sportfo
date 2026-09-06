@@ -14,6 +14,7 @@ interface CoachPanelProps {
   onClose: () => void;
   messages: CoachMessageType[];
   isLoading: boolean;
+  isBusy: boolean;
   isVoiceReplyPending: boolean;
   error: string | null;
   onSend: (text: string, options?: { isVoiceInput?: boolean }) => void;
@@ -40,7 +41,7 @@ function TypingIndicator({ label }: { label: string }) {
   );
 }
 
-export function CoachPanel({ isOpen, onClose, messages, isLoading, isVoiceReplyPending, error, onSend, onReset }: CoachPanelProps) {
+export function CoachPanel({ isOpen, onClose, messages, isLoading, isBusy, isVoiceReplyPending, error, onSend, onReset }: CoachPanelProps) {
   const { t, locale } = useTranslation();
   const [draft, setDraft] = useState("");
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -62,7 +63,7 @@ export function CoachPanel({ isOpen, onClose, messages, isLoading, isVoiceReplyP
   }, [isOpen, onClose]);
 
   function handleSubmit() {
-    if (!draft.trim() || isLoading) return;
+    if (!draft.trim() || isBusy) return;
     onSend(draft);
     setDraft("");
   }
@@ -132,7 +133,7 @@ export function CoachPanel({ isOpen, onClose, messages, isLoading, isVoiceReplyP
             onVoiceTranscript={(text) => onSend(text, { isVoiceInput: true })}
             placeholder={t("coach.inputPlaceholder")}
             sendLabel={t("coach.send")}
-            disabled={isLoading}
+            disabled={isBusy}
             locale={locale}
             voiceCopy={{
               micLabel: t("coach.voice.micLabel"),

@@ -21,6 +21,7 @@ export function CoachLauncher() {
         onClose={coach.close}
         messages={coach.messages}
         isLoading={coach.isLoading}
+        isBusy={coach.isBusy}
         isVoiceReplyPending={coach.isVoiceReplyPending}
         error={coach.error}
         onSend={coach.sendMessage}
