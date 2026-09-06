@@ -70,7 +70,13 @@ export function OpportunitiesSection({ t }: { t: TFunc }) {
               <p className="mt-2 text-sm font-medium text-stitch-blue">
                 {t("home.opportunities.events.categories")}
               </p>
-              <div className="mt-auto flex flex-nowrap gap-3 pt-6">
+              {/* flex-wrap (was flex-nowrap): each button is deliberately
+                  whitespace-nowrap (see InertButton) so its own label never
+                  breaks mid-phrase -- but two such buttons side by side in
+                  a nowrap row will overflow the card in a language whose
+                  CTA text runs longer than English. Wrapping the row lets
+                  the second button drop below the first instead. */}
+              <div className="mt-auto flex flex-wrap gap-3 pt-6">
                 <InertButton label={t("home.opportunities.events.postCta")} variant="primary" size="sm" />
                 <InertButton label={t("home.opportunities.events.cta")} variant="secondary" size="sm" />
               </div>
@@ -114,7 +120,13 @@ export function OpportunitiesSection({ t }: { t: TFunc }) {
               <p className="mt-2 text-sm leading-relaxed text-gray-600">
                 {t("home.opportunities.courses.description")}
               </p>
-              <div className="mt-auto flex flex-nowrap gap-3 pt-6">
+              {/* flex-wrap (was flex-nowrap): each button is deliberately
+                  whitespace-nowrap (see InertButton) so its own label never
+                  breaks mid-phrase -- but two such buttons side by side in
+                  a nowrap row will overflow the card in a language whose
+                  CTA text runs longer than English. Wrapping the row lets
+                  the second button drop below the first instead. */}
+              <div className="mt-auto flex flex-wrap gap-3 pt-6">
                 <InertButton label={t("home.opportunities.courses.cta")} variant="primary" size="sm" />
                 <InertButton label={t("home.opportunities.courses.viewAll")} variant="secondary" size="sm" />
               </div>
