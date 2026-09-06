@@ -55,15 +55,20 @@ export default async function StoryDetailPage({ params }: StoryDetailPageProps) 
   return (
     <div className={`${lexend.variable} flex flex-1 flex-col bg-white font-stitch text-stitch-text`}>
       <article className="px-4 pt-8 sm:px-6 sm:pt-12 lg:px-8">
-        <div className="mx-auto max-w-2xl">
-          <Link
-            href="/stories"
-            className="flex w-fit items-center gap-1.5 text-sm font-semibold text-stitch-blue transition-colors hover:text-stitch-navy"
-          >
-            <span aria-hidden>←</span>
-            {t("storyDetail.back")}
-          </Link>
+        {/* Sits at the article's own left padding edge (not the centered
+            reading column below) so it lines up close to the browser's own
+            back arrow instead of being indented into the max-w-2xl column --
+            a reader scanning for "how do I get back" shouldn't have to look
+            past the badge/title first. */}
+        <Link
+          href="/stories"
+          className="flex w-fit items-center gap-1.5 text-sm font-semibold text-stitch-blue transition-colors hover:text-stitch-navy"
+        >
+          <span aria-hidden>←</span>
+          {t("storyDetail.back")}
+        </Link>
 
+        <div className="mx-auto max-w-2xl">
           <span className="mt-6 flex w-fit items-center rounded-full border border-stitch-orange/20 bg-stitch-orange/10 px-4 py-1 text-xs font-semibold tracking-wide text-stitch-blue uppercase">
             {story.category}
           </span>
