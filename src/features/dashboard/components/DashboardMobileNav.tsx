@@ -81,7 +81,7 @@ export function DashboardMobileNav() {
                   <span
                     key={item.key}
                     aria-disabled="true"
-                    className="flex h-12 cursor-not-allowed items-center gap-3 rounded-[11px] px-3.5 text-[15px] font-medium text-[#5c6a99]/70"
+                    className="flex min-h-12 py-2 cursor-not-allowed items-center gap-3 rounded-[11px] px-3.5 text-[15px] font-medium text-[#5c6a99]/70"
                   >
                     <Icon aria-hidden className="h-[18px] w-[18px] shrink-0" />
                     <span className="flex-1 text-left">{t(`dashboard.nav.${item.key}`)}</span>
@@ -100,8 +100,8 @@ export function DashboardMobileNav() {
                   onClick={() => setOpen(false)}
                   className={
                     isActive
-                      ? "flex h-12 items-center gap-3 rounded-[11px] border border-[#7a9dff]/40 bg-gradient-to-r from-[#4d7cff]/28 to-[#4d7cff]/8 px-3.5 text-[15px] font-bold text-white"
-                      : "flex h-12 items-center gap-3 rounded-[11px] px-3.5 text-[15px] font-medium text-[#a5b0d0] hover:bg-white/[0.06]"
+                      ? "flex min-h-12 py-2 items-center gap-3 rounded-[11px] border border-[#7a9dff]/40 bg-gradient-to-r from-[#4d7cff]/28 to-[#4d7cff]/8 px-3.5 text-[15px] font-bold text-white"
+                      : "flex min-h-12 py-2 items-center gap-3 rounded-[11px] px-3.5 text-[15px] font-medium text-[#a5b0d0] hover:bg-white/[0.06]"
                   }
                 >
                   <Icon aria-hidden className="h-[18px] w-[18px] shrink-0" />
