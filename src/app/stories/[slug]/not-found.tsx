@@ -20,7 +20,7 @@ export default async function StoryNotFound() {
       </p>
       <Link
         href="/stories"
-        className="mt-6 inline-flex h-12 items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
+        className="mt-6 inline-flex min-h-12 items-center justify-center rounded px-8 py-3 text-center text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
       >
         {t("storyDetail.notFoundAction")}
       </Link>

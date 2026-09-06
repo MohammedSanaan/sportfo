@@ -51,7 +51,7 @@ export function EcosystemHero({ t }: { t: TFunc }) {
           <div className="mt-6 flex w-full max-w-md flex-col items-center gap-3 sm:w-auto sm:flex-row sm:gap-4 md:mx-0 md:items-start">
             <Link
               href="#community"
-              className="inline-flex h-13 w-full items-center justify-center rounded border border-white/50 px-8 text-base font-bold text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
+              className="inline-flex min-h-13 w-full items-center justify-center rounded border border-white/50 px-8 py-3 text-center text-base font-bold text-white transition-colors duration-300 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
             >
               {t("home.hero.explore")}
             </Link>
@@ -60,7 +60,7 @@ export function EcosystemHero({ t }: { t: TFunc }) {
                 /register/{category}, which itself gates on auth. */}
             <Link
               href="#community"
-              className="inline-flex h-13 w-full items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
+              className="inline-flex min-h-13 w-full items-center justify-center rounded px-8 py-3 text-center text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-stitch-navy sm:w-auto"
             >
               {t("home.hero.join")}
             </Link>

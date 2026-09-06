@@ -53,7 +53,7 @@ export function OpportunitiesSection({ t, demo }: OpportunitiesSectionProps) {
         <p className="max-w-sm text-sm text-[#8b96b8]">{t("dashboard.opportunities.emptyDescription")}</p>
         <Link
           href="/athletes"
-          className="mt-2 inline-flex h-10 items-center rounded-lg bg-[#4d7cff] px-5 text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
+          className="mt-2 inline-flex min-h-10 items-center rounded-lg bg-[#4d7cff] px-5 py-2 text-center text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
         >
           {t("dashboard.opportunities.exploreCta")}
         </Link>

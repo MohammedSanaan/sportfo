@@ -91,13 +91,13 @@ export function AthleteProfileHero({
           <div className="flex shrink-0 flex-wrap items-center justify-center gap-3">
             <Link
               href="/athlete/register"
-              className="inline-flex h-10 items-center rounded-lg border border-white/[0.18] bg-white/[0.08] px-4 text-sm font-semibold text-[#e8ecf8] transition-colors hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
+              className="inline-flex min-h-10 items-center rounded-lg border border-white/[0.18] bg-white/[0.08] px-4 py-2 text-center text-sm font-semibold text-[#e8ecf8] transition-colors hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
             >
               {t("profile.actions.editProfile")}
             </Link>
             <LogoutButton
               locale={locale}
-              className="inline-flex h-10 items-center rounded-lg border border-white/[0.18] bg-transparent px-4 text-sm font-semibold text-[#e8ecf8] transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex min-h-10 items-center rounded-lg border border-white/[0.18] bg-transparent px-4 py-2 text-center text-sm font-semibold text-[#e8ecf8] transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
         </div>

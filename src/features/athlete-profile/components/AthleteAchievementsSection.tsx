@@ -20,7 +20,7 @@ export function AthleteAchievementsSection({
   const addAchievementCta = (
     <Link
       href="/athlete/register"
-      className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg bg-[#4d7cff] px-4 text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
+      className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-lg bg-[#4d7cff] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
     >
       {t("register.achievements.addAchievement")}
     </Link>

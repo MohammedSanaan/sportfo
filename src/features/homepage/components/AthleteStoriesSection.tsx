@@ -33,7 +33,7 @@ export function AthleteStoriesSection({ t }: { t: TFunc }) {
         <div className="mt-8 text-center">
           <Link
             href="/stories"
-            className="inline-flex h-11 items-center justify-center rounded px-6 text-sm font-bold text-stitch-navy transition-colors hover:text-stitch-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-orange focus-visible:ring-offset-2"
+            className="inline-flex min-h-11 items-center justify-center rounded px-6 py-2.5 text-center text-sm font-bold text-stitch-navy transition-colors hover:text-stitch-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-orange focus-visible:ring-offset-2"
           >
             {t("home.stories.viewAll")} <span aria-hidden>→</span>
           </Link>

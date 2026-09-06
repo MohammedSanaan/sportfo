@@ -79,7 +79,7 @@ export function SportsGalleryInteractive({
               {selected.discoveryValue && (
                 <Link
                   href={`/athletes?sport=${selected.discoveryValue}`}
-                  className="inline-flex h-10 items-center justify-center rounded px-5 text-sm font-semibold text-white shadow transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
+                  className="inline-flex min-h-10 items-center justify-center rounded px-5 py-2 text-center text-sm font-semibold text-white shadow transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
                 >
                   {viewAthletesLabel}
                 </Link>

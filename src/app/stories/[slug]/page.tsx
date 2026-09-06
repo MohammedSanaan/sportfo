@@ -58,13 +58,13 @@ export default async function StoryDetailPage({ params }: StoryDetailPageProps) 
         <div className="mx-auto max-w-2xl">
           <Link
             href="/stories"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-stitch-blue transition-colors hover:text-stitch-navy"
+            className="flex w-fit items-center gap-1.5 text-sm font-semibold text-stitch-blue transition-colors hover:text-stitch-navy"
           >
             <span aria-hidden>←</span>
             {t("storyDetail.back")}
           </Link>
 
-          <span className="mt-6 inline-flex items-center rounded-full border border-stitch-orange/20 bg-stitch-orange/10 px-4 py-1 text-xs font-semibold tracking-wide text-stitch-blue uppercase">
+          <span className="mt-6 flex w-fit items-center rounded-full border border-stitch-orange/20 bg-stitch-orange/10 px-4 py-1 text-xs font-semibold tracking-wide text-stitch-blue uppercase">
             {story.category}
           </span>
 
@@ -81,13 +81,13 @@ export default async function StoryDetailPage({ params }: StoryDetailPageProps) 
         {/* Hero image allowed to run wider than the reading column (spec
             section 10), but capped well short of full-bleed/full-viewport
             so it never dominates the screen on mobile (spec section 9). */}
-        <div className="relative mx-auto mt-8 aspect-[4/3] w-full max-w-4xl overflow-hidden rounded-lg sm:aspect-[16/9]">
+        <div className="relative mx-auto mt-8 aspect-[16/10] w-full max-w-3xl overflow-hidden rounded-lg sm:aspect-[16/9]">
           <Image
             src={story.heroImage}
             alt={story.imageAlt}
             fill
             priority
-            sizes="(min-width: 1024px) 56rem, 100vw"
+            sizes="(min-width: 1024px) 48rem, 100vw"
             className="object-cover"
           />
         </div>
@@ -99,7 +99,7 @@ export default async function StoryDetailPage({ params }: StoryDetailPageProps) 
         <div className="mx-auto max-w-2xl border-t border-border-default py-10 text-center">
           <Link
             href="/stories"
-            className="inline-flex h-12 items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
+            className="inline-flex min-h-12 items-center justify-center rounded px-8 py-3 text-center text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
           >
             {t("storyDetail.exploreAllCta")}
           </Link>

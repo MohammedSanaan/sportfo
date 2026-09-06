@@ -76,7 +76,7 @@ export function ProfileStrengthCard({ strength, locale }: ProfileStrengthCardPro
           <div className="flex justify-end">
             <Link
               href="/athlete/register"
-              className="inline-flex h-10 w-full items-center justify-center rounded-lg bg-[#4d7cff] px-5 text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] sm:w-auto"
+              className="inline-flex min-h-10 w-full items-center justify-center rounded-lg bg-[#4d7cff] px-5 py-2 text-center text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] sm:w-auto"
             >
               {t("profile.strength.completeProfileCta")}
             </Link>

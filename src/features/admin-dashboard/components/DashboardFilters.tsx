@@ -88,7 +88,7 @@ export function DashboardFilters({ locale, range, category, status, from, to }: 
 
       <button
         type="submit"
-        className="inline-flex h-11 items-center justify-center rounded-lg bg-brand-600 px-6 text-sm font-semibold text-white transition-colors hover:bg-brand-700 sm:w-auto"
+        className="inline-flex min-h-11 items-center justify-center rounded-lg bg-brand-600 px-6 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-brand-700 sm:w-auto"
       >
         {t("adminDashboard.filters.apply")}
       </button>
