@@ -1258,6 +1258,7 @@ const hi: Dictionary = {
       transcribing: "लिख रहा हूं...",
       thinking: "सोच रहा हूं...",
       englishLabel: "अंग्रेज़ी",
+      showOriginal: "मूल भाषा",
       errors: {
         permissionDenied: "माइक्रोफ़ोन की अनुमति नहीं मिली। आप इसके बजाय अपना सवाल टाइप कर सकते हैं।",
         noSpeech: "माफ़ करें, मैं समझ नहीं पाया। कृपया फिर से कोशिश करें या अपना सवाल टाइप करें।",

@@ -1305,6 +1305,7 @@ const en = {
       transcribing: "Transcribing...",
       thinking: "Thinking...",
       englishLabel: "English",
+      showOriginal: "Original",
       errors: {
         permissionDenied: "Microphone access was denied. You can type your question instead.",
         noSpeech: "Sorry, I couldn't understand that. Please try again or type your question.",

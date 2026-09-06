@@ -1,4 +1,6 @@
+import { useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
 import { splitBilingualResponse } from "@/lib/coach/bilingual";
 import { useTranslation } from "@/i18n/LocaleProvider";
@@ -53,8 +55,13 @@ export function CoachMessage({ message }: CoachMessageProps) {
   // Voice-mode replies come back as native-language-first, English-second
   // (see systemInstruction.ts/bilingual.ts) -- a typed message or a
   // response that was already in English never contains the separator, so
-  // `english` is null and this renders exactly as before.
+  // `english` is null and the toggle below never renders.
   const { primary, english } = isUser ? { primary: message.content, english: null } : splitBilingualResponse(message.content);
+  // Both languages arrive in the same response already -- this only
+  // switches which one is *displayed*, no re-fetch and no flash of stale
+  // content when toggling back and forth.
+  const [showEnglish, setShowEnglish] = useState(false);
+  const shown = showEnglish ? english! : primary;
 
   return (
     <div className={cn("flex", isUser ? "justify-end" : "justify-start")}>
@@ -66,12 +73,25 @@ export function CoachMessage({ message }: CoachMessageProps) {
             : "rounded-bl-sm border border-border-default bg-white text-ink-800",
         )}
       >
-        {renderBlock(primary)}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={showEnglish ? "en" : "native"}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            {renderBlock(shown)}
+          </motion.div>
+        </AnimatePresence>
         {english && (
-          <div className="mt-2 space-y-1.5 border-t border-border-default pt-2">
-            <p className="text-[11px] font-semibold tracking-wide text-ink-400 uppercase">{t("coach.voice.englishLabel")}</p>
-            {renderBlock(english)}
-          </div>
+          <button
+            type="button"
+            onClick={() => setShowEnglish((value) => !value)}
+            className="mt-1.5 rounded-full border border-border-default px-2.5 py-1 text-[11px] font-semibold tracking-wide text-ink-500 uppercase transition-colors hover:border-brand-300 hover:text-brand-700"
+          >
+            {showEnglish ? t("coach.voice.showOriginal") : t("coach.voice.englishLabel")}
+          </button>
         )}
       </div>
     </div>
