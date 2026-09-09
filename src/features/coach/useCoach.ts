@@ -23,9 +23,9 @@ interface UseCoachResult {
   close: () => void;
   toggle: () => void;
   messages: CoachMessage[];
-  /** True only until the first response chunk arrives -- drives the typing indicator. */
+  /** True for the whole request lifecycle, until the complete reply (or an error) comes back -- drives the typing indicator. */
   isLoading: boolean;
-  /** True for the entire request lifecycle, including while a reply is still streaming in -- use this (not isLoading) to disable sending a second message. */
+  /** Same lifecycle as isLoading; kept as a separate flag (matching isLoading) so callers can disable sending a second message. */
   isBusy: boolean;
   error: string | null;
   /** True while waiting on a response to a voice-originated message -- lets the UI show a "Thinking..." state distinct from the generic typed-message typing indicator. */
@@ -80,53 +80,22 @@ export function useCoach(): UseCoachResult {
       const controller = new AbortController();
       abortControllerRef.current = controller;
 
-      // The streaming coach message is only added to `messages` once the
-      // first chunk actually arrives -- until then the panel's typing
-      // indicator stays up, covering Gemini's "thinking" phase (see
-      // route.ts's measurement note) without an empty bubble flashing in.
-      const streamingMessageId = createId();
-      let hasStartedStreaming = false;
-
+      // /api/coach now returns one complete JSON reply (see
+      // coachService.ts) rather than a stream -- the typing indicator
+      // (isLoading) stays up for the whole request and the reply is
+      // appended in one piece once it resolves, instead of growing
+      // token-by-token.
       askCoach(
         nextMessages,
         { pathname: pathname || "/", pageTitle, locale, isVoiceInput: options?.isVoiceInput },
-        {
-          onChunk: (delta) => {
-            if (!hasStartedStreaming) {
-              hasStartedStreaming = true;
-              setIsLoading(false);
-              setMessages((current) => [
-                ...current,
-                { id: streamingMessageId, role: "coach", content: delta, isStreaming: true },
-              ]);
-              return;
-            }
-            setMessages((current) =>
-              current.map((message) =>
-                message.id === streamingMessageId ? { ...message, content: message.content + delta } : message,
-              ),
-            );
-          },
-        },
         controller.signal,
       )
         .then((reply) => {
-          setMessages((current) =>
-            hasStartedStreaming
-              ? current.map((message) =>
-                  message.id === streamingMessageId ? { ...reply, id: streamingMessageId, isStreaming: false } : message,
-                )
-              : [...current, reply],
-          );
+          setMessages((current) => [...current, reply]);
         })
         .catch((err: Error) => {
           if (err.name === "AbortError") return; // Cancelled deliberately -- not a user-facing error.
           setError(err.message || "I'm having a little trouble connecting right now. Please try again in a moment.");
-          // A request that streamed some text before failing shouldn't
-          // leave a half-written, permanently "streaming" bubble behind.
-          if (hasStartedStreaming) {
-            setMessages((current) => current.filter((message) => message.id !== streamingMessageId));
-          }
         })
         .finally(() => {
           setIsLoading(false);

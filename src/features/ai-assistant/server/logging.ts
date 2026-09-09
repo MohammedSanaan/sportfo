@@ -18,6 +18,11 @@ export interface AssistantLogEvent {
   durationMs?: number;
   success?: boolean;
   errorCategory?: AssistantErrorCategory;
+  // Which entry point produced this event -- "assistant" (the default,
+  // implicit) vs. "coach" (see app/api/coach/route.ts, which now runs the
+  // exact same orchestrator/provider/tools as /api/assistant). Optional so
+  // every existing call site is unaffected.
+  route?: string;
 }
 
 // Single-line structured JSON -- easy to grep locally and ready to ship to
