@@ -95,7 +95,7 @@ export function AthleteExpandedPanel({
         {isLoggedIn ? (
           <Link
             href={`/a/${athlete.public_slug}`}
-            className="inline-flex h-11 items-center justify-center rounded-full bg-ink-900 px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-800 focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+            className="inline-flex min-h-11 items-center justify-center rounded-full bg-ink-900 px-6 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-ink-800 focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:outline-none"
           >
             {t("athletes.viewFullProfile")}
           </Link>
@@ -103,7 +103,7 @@ export function AthleteExpandedPanel({
           <>
             <Link
               href="/auth"
-              className="inline-flex h-11 items-center justify-center rounded-full bg-ink-900 px-6 text-sm font-semibold text-white transition-colors hover:bg-ink-800 focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:outline-none"
+              className="inline-flex min-h-11 items-center justify-center rounded-full bg-ink-900 px-6 py-2.5 text-center text-sm font-semibold text-white transition-colors hover:bg-ink-800 focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 focus-visible:outline-none"
             >
               {t("athletes.signInToViewProfile")}
             </Link>

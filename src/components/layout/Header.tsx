@@ -66,7 +66,13 @@ export async function Header({ locale }: { locale: Locale }) {
           true left edge and Sign In/Join/Language hug the true right edge
           of the viewport, instead of sitting inside the site's centered
           content column. */}
-      <div className="relative flex h-16 w-full items-center gap-8 px-4 sm:px-6 lg:px-8">
+      {/* min-h-16 (not a fixed h-16): the desktop nav can wrap onto a
+          second row for languages with longer labels (see HeaderNav.tsx's
+          flex-wrap) -- a fixed height would clip that second row instead
+          of letting the bar grow to fit it. items-center still centers the
+          shorter logo/actions against whatever height the nav ends up
+          needing. */}
+      <div className="relative flex min-h-16 w-full items-center gap-8 px-4 py-2 sm:px-6 lg:px-8">
         <Link
           href="/"
           className="flex shrink-0 items-center gap-2 text-lg font-bold tracking-tight text-ink-900"
@@ -89,14 +95,14 @@ export async function Header({ locale }: { locale: Locale }) {
 
           <MobileMenuToggle>
             <HeaderNavMobile items={navItems} plainLinks={plainLinks} />
-            <div className="mt-2 border-t border-border-default pt-3">
+            <div className="mt-3 border-t border-border-default pt-3">
               <Suspense fallback={null}>
                 <AuthNav locale={locale} variant="mobile" />
               </Suspense>
             </div>
             {/* Placed inside the panel itself (not next to the hamburger
                 trigger) so the always-visible mobile navbar stays uncrowded. */}
-            <div className="mt-2 border-t border-border-default pt-3">
+            <div className="mt-3 border-t border-border-default pt-3">
               <LanguageSelector />
             </div>
           </MobileMenuToggle>

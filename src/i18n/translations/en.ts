@@ -20,6 +20,15 @@ const en = {
   },
   footer: {
     tagline: "Where sporting talent gets discovered.",
+    discover: "Discover",
+    community: "Community",
+    connect: "Connect",
+    sports: "Sports",
+    stories: "Stories",
+    academies: "Academies",
+    sponsorsCsr: "Sponsors & CSR",
+    eventsTrials: "Events & Trials",
+    sportsServices: "Sports Services",
     platform: "Platform",
     forAthletes: "For Athletes",
     forOrganizations: "For Organizations",
@@ -269,7 +278,25 @@ const en = {
       story3Subtitle: "Athlete Story",
       story4Title: "Discipline Behind Every Practice",
       story4Subtitle: "Achievement",
+      viewAll: "View All Stories",
     },
+  },
+  storiesPage: {
+    eyebrow: "SportFo Stories",
+    title: "Stories From the Field",
+    subtitle:
+      "Real journeys, honest struggles, and the everyday discipline behind India's grassroots sport.",
+    readStory: "Read Story",
+  },
+  storyDetail: {
+    back: "Back to Stories",
+    minRead: "{count} min read",
+    relatedHeading: "More Stories",
+    relatedSubheading: "Keep exploring journeys from across India's sporting grassroots.",
+    exploreAllCta: "Explore All Stories",
+    notFoundTitle: "Story Not Found",
+    notFoundDescription: "This story may have moved, or doesn't exist.",
+    notFoundAction: "Back to Stories",
   },
   auth: {
     pageTitle: "Welcome back",
@@ -1260,6 +1287,51 @@ const en = {
       helpCenter: "Help Center",
       privacyPolicy: "Privacy Policy",
       comingSoon: "Coming soon",
+    },
+  },
+  // Coach -- the AI SportFo guide (see src/features/coach/**). A short,
+  // self-contained namespace: Coach's own UI chrome and quick-action
+  // labels only, not its AI-generated reply text (that comes back live
+  // from src/app/api/coach/route.ts and is never pre-translated here).
+  coach: {
+    name: "Coach",
+    tagline: "Your SportFo Guide",
+    openLabel: "Open Coach, your SportFo guide",
+    closeLabel: "Close Coach",
+    welcomeGreeting: "Hi! I'm Coach 👋",
+    welcomeMessage:
+      "I'm your SportFo guide. I can help you understand how SportFo works, find the right pathway for you, and guide you through registration.",
+    welcomePrompt: "What can I help you with?",
+    inputPlaceholder: "Ask Coach anything about SportFo...",
+    send: "Send",
+    newChat: "New chat",
+    aiDisclosure: "AI-powered guide",
+    typingIndicator: "Coach is typing",
+    quickActions: {
+      howItWorks: "How does SportFo work?",
+      register: "How do I register?",
+      findPathway: "Which option is right for me?",
+      imParent: "I'm a parent",
+      imCoach: "I'm a coach",
+    },
+    errors: {
+      generic: "I'm having a little trouble connecting right now. Please try again in a moment.",
+      empty: "Type a message to ask Coach something.",
+    },
+    voice: {
+      micLabel: "Speak to Coach",
+      stopLabel: "Stop listening",
+      listening: "Listening...",
+      transcribing: "Transcribing...",
+      thinking: "Thinking...",
+      englishLabel: "English",
+      showOriginal: "Original",
+      errors: {
+        permissionDenied: "Microphone access was denied. You can type your question instead.",
+        noSpeech: "Sorry, I couldn't understand that. Please try again or type your question.",
+        languageUnsupported: "Voice input isn't available for the selected language yet. You can type your question instead.",
+        generic: "Sorry, I couldn't understand that. Please try again.",
+      },
     },
   },
 } as const;

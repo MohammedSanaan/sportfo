@@ -25,7 +25,17 @@ export function CategoryBreakdown({ items, title, emptyLabel }: CategoryBreakdow
         <div className="mt-4 flex flex-col gap-3">
           {items.map((item) => (
             <div key={item.registrationType} className="flex items-center gap-3">
-              <span className="w-32 shrink-0 truncate text-sm text-ink-700 sm:w-40">{item.label}</span>
+              {/* A bar chart's label column needs *some* bounded width to
+                  keep bars aligned -- truly unbounded would defeat the
+                  chart layout. Widened tiers give longer translations (Tamil/
+                  Malayalam) more room before truncating, and `title` surfaces
+                  the full label on hover/focus for whatever still doesn't fit. */}
+              <span
+                title={item.label}
+                className="w-28 shrink-0 truncate text-sm text-ink-700 sm:w-36 lg:w-44"
+              >
+                {item.label}
+              </span>
               <div className="h-2 min-w-0 flex-1 rounded-full bg-surface-muted">
                 <div
                   className="h-2 rounded-full bg-brand-500"

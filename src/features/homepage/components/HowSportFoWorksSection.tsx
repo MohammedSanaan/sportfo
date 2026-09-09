@@ -99,7 +99,7 @@ export function HowSportFoWorksSection({ t }: { t: TFunc }) {
         <div className="mt-12">
           <Link
             href="/auth"
-            className="inline-flex h-13 items-center justify-center rounded px-8 text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
+            className="inline-flex min-h-13 items-center justify-center rounded px-8 py-3 text-center text-base font-bold text-white shadow-lg transition-colors duration-300 bg-stitch-orange hover:bg-stitch-orange-hover focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-stitch-navy focus-visible:ring-offset-2"
           >
             {t("home.howItWorks.cta")}
           </Link>

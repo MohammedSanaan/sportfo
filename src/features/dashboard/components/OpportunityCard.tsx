@@ -44,7 +44,7 @@ export function OpportunityCard({ tag, title, meta, ctaLabel, ctaHref, accent }:
         <p className="text-sm text-[#8f9bbd]">{meta}</p>
         <a
           href={ctaHref}
-          className={`mt-auto inline-flex h-10 items-center justify-center rounded-lg text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] ${styles.cta}`}
+          className={`mt-auto inline-flex min-h-10 items-center justify-center rounded-lg py-2 text-center text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] ${styles.cta}`}
         >
           {ctaLabel}
         </a>

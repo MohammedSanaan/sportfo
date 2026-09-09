@@ -28,7 +28,7 @@ export function SportsGallerySection({ t }: { t: TFunc }) {
         </p>
       </div>
 
-      <div className="mx-auto mt-12 max-w-6xl">
+      <div className="mx-auto mt-8 max-w-6xl sm:mt-10">
         <SportsGalleryInteractive
           items={items}
           viewAthletesLabel={t("home.sportsGallery.viewAthletes")}

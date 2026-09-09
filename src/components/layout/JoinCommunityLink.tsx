@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { useCloseMobileMenu } from "./MobileMenuToggle";
 
 function prefersReducedMotion() {
   return (
@@ -26,12 +27,17 @@ export function JoinCommunityLink({
 }) {
   const pathname = usePathname();
   const href = pathname === "/" ? "#community" : "/#community";
+  // No-op outside the mobile hamburger panel (default context value) --
+  // safe to call unconditionally here even for this link's other, non-menu
+  // usages (desktop header, AlreadyRegisteredNotice).
+  const closeMenu = useCloseMobileMenu();
 
   return (
     <Link
       href={href}
       className={className}
       onClick={(event) => {
+        closeMenu();
         if (pathname !== "/") return;
         const el = document.getElementById("community");
         if (!el) return;

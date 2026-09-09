@@ -226,8 +226,16 @@ function PillLink({
         className="pointer-events-none absolute left-1/2 bottom-0 rounded-full bg-brand-500"
       />
       <span className="relative inline-block leading-none">
+        {/* whitespace-nowrap: a translated label (Tamil/Malayalam run
+            notably longer than English for the same nav item) must never
+            wrap onto a second line inside this pill -- the pill's own
+            overflow-hidden (needed to clip the circular hover reveal, see
+            usePillHoverEffect above) would silently clip that second line
+            clean off instead of just showing a taller pill. Letting the
+            pill grow wider on one line, and the whole row wrap as a unit
+            (see the nav's flex-wrap below), is what actually fixes it. */}
         <span
-          className={`pill-label relative z-10 inline-block leading-none ${
+          className={`pill-label relative z-10 inline-block leading-none whitespace-nowrap ${
             isActive ? "text-ink-900" : "text-ink-600"
           }`}
         >
@@ -235,7 +243,7 @@ function PillLink({
         </span>
         <span
           aria-hidden="true"
-          className="pill-label-hover absolute top-0 left-0 z-10 inline-block leading-none text-white"
+          className="pill-label-hover absolute top-0 left-0 z-10 inline-block leading-none whitespace-nowrap text-white"
         >
           {label}
         </span>
@@ -257,7 +265,16 @@ export function HeaderNavDesktop({
   const { setCircleRef, handleEnter, handleLeave } = usePillHoverEffect(items.length + plainLinks.length);
 
   return (
-    <nav aria-label="Primary" className="hidden items-center gap-0.5 lg:flex">
+    // flex-wrap: at the lg breakpoint (1024px) with a translated language
+    // whose labels run long (Tamil/Malayalam especially), up to 9 pills
+    // plus the logo and right-side actions can outgrow one row's width.
+    // Wrapping the whole row (each pill kept on one line via
+    // whitespace-nowrap above) onto a second line reads as "compact nav,
+    // two rows" -- overlapping the page below it, or silently clipping,
+    // would both be worse. See Header.tsx's min-h-16 (was a fixed h-16)
+    // for the other half of this fix -- the bar itself must be able to
+    // grow when this row wraps.
+    <nav aria-label="Primary" className="hidden flex-wrap items-center gap-x-0.5 gap-y-1 py-1 lg:flex">
       {items.map((item, i) => (
         <PillLink
           key={item.key}
@@ -291,7 +308,7 @@ export function HeaderNavDesktop({
 }
 
 const mobileBaseClassName =
-  "flex min-h-11 items-center rounded-lg border-l-2 border-l-transparent px-3 text-base font-medium text-ink-700 hover:bg-surface-muted";
+  "flex min-h-10 items-center rounded-lg border-l-2 border-l-transparent px-3 text-base font-medium text-ink-700 hover:bg-surface-muted";
 
 const mobileActiveClassName =
   "border-l-brand-500 bg-brand-50 font-semibold text-ink-900 hover:!bg-brand-50";
@@ -309,7 +326,7 @@ export function HeaderNavMobile({
   const closeMenu = useCloseMobileMenu();
 
   return (
-    <>
+    <nav aria-label="Primary" className="flex flex-col gap-0.5">
       {items.map((item) => {
         const isActive = active === item.key;
         return (
@@ -327,20 +344,24 @@ export function HeaderNavMobile({
           </Link>
         );
       })}
-      {plainLinks.map((link) => {
-        const isActive = pathname === link.href;
-        return (
-          <Link
-            key={link.href}
-            href={link.href}
-            onClick={closeMenu}
-            aria-current={isActive ? "page" : undefined}
-            className={isActive ? `${mobileBaseClassName} ${mobileActiveClassName}` : mobileBaseClassName}
-          >
-            {link.label}
-          </Link>
-        );
-      })}
-    </>
+      {plainLinks.length > 0 && (
+        <div className="mt-1 flex flex-col gap-0.5 border-t border-border-default pt-1">
+          {plainLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                aria-current={isActive ? "page" : undefined}
+                className={isActive ? `${mobileBaseClassName} ${mobileActiveClassName}` : mobileBaseClassName}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </nav>
   );
 }

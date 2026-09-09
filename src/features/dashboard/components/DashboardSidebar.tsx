@@ -19,6 +19,10 @@ export function DashboardSidebar({ profileStrength, t }: DashboardSidebarProps) 
       aria-label={t("dashboard.nav.ariaLabel")}
       className="hidden lg:sticky lg:top-24 lg:flex lg:w-full lg:flex-col lg:gap-1"
     >
+      {/* min-h-[46px] (was a fixed h-[46px]): a translated nav label that
+          wraps onto a second line needs the row to grow instead of
+          overlapping the item below it -- the fixed height gave a
+          two-line label nowhere to go. */}
       {DASHBOARD_NAV_ITEMS.map((item) => {
         const Icon = item.icon;
         const isActive = item.key === "dashboard";
@@ -28,7 +32,7 @@ export function DashboardSidebar({ profileStrength, t }: DashboardSidebarProps) 
             <span
               key={item.key}
               aria-disabled="true"
-              className="flex h-[46px] cursor-not-allowed items-center gap-3 rounded-[11px] px-3.5 text-[15px] font-medium text-[#5c6a99]/70"
+              className="flex min-h-[46px] py-2 cursor-not-allowed items-center gap-3 rounded-[11px] px-3.5 text-[15px] font-medium text-[#5c6a99]/70"
             >
               <Icon aria-hidden className="h-[18px] w-[18px] shrink-0" />
               <span className="flex-1 text-left">{t(`dashboard.nav.${item.key}`)}</span>
@@ -46,8 +50,8 @@ export function DashboardSidebar({ profileStrength, t }: DashboardSidebarProps) 
             aria-current={isActive ? "page" : undefined}
             className={
               isActive
-                ? "flex h-[46px] items-center gap-3 rounded-[11px] border border-[#7a9dff]/40 bg-gradient-to-r from-[#4d7cff]/28 to-[#4d7cff]/8 px-3.5 text-[15px] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]"
-                : "flex h-[46px] items-center gap-3 rounded-[11px] border border-transparent px-3.5 text-[15px] font-medium text-[#a5b0d0] transition-colors hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]"
+                ? "flex min-h-[46px] py-2 items-center gap-3 rounded-[11px] border border-[#7a9dff]/40 bg-gradient-to-r from-[#4d7cff]/28 to-[#4d7cff]/8 px-3.5 text-[15px] font-bold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]"
+                : "flex min-h-[46px] py-2 items-center gap-3 rounded-[11px] border border-transparent px-3.5 text-[15px] font-medium text-[#a5b0d0] transition-colors hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]"
             }
           >
             <Icon aria-hidden className="h-[18px] w-[18px] shrink-0" />
