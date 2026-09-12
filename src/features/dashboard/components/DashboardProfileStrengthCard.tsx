@@ -16,11 +16,11 @@ export function DashboardProfileStrengthCard({ strength, t }: DashboardProfileSt
   const nextItem = strength.items.find((item) => !item.complete);
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-gradient-to-br from-[#4d7cff]/16 to-[#ff2f6d]/12 p-[18px]">
-      <div className="font-mono text-[10px] tracking-[0.12em] text-[#9fb0e0] uppercase">
+    <div className="rounded-2xl border border-border-default bg-gradient-to-br from-brand-50 to-rose-50 p-[18px]">
+      <div className="font-mono text-[10px] tracking-[0.12em] text-ink-500 uppercase">
         {t("dashboard.profileStrength.label")}
       </div>
-      <div className="my-1.5 text-[30px] leading-none font-extrabold text-[#e8ecf8]">
+      <div className="my-1.5 text-[30px] leading-none font-extrabold text-ink-900">
         {strength.percentage}%
       </div>
       <div
@@ -29,23 +29,23 @@ export function DashboardProfileStrengthCard({ strength, t }: DashboardProfileSt
         aria-valuemin={0}
         aria-valuemax={100}
         aria-label={t("dashboard.profileStrength.label")}
-        className="h-1.5 overflow-hidden rounded-full bg-white/10"
+        className="h-1.5 overflow-hidden rounded-full bg-white"
       >
         <div
-          className="h-full rounded-full bg-gradient-to-r from-[#4d7cff] to-[#ff2f6d] transition-all duration-300"
+          className="h-full rounded-full bg-gradient-to-r from-brand-600 to-rose-500 transition-all duration-300"
           style={{ width: `${strength.percentage}%` }}
         />
       </div>
       {nextItem ? (
         <Link
           href={nextItem.href}
-          className="mt-2.5 flex items-center gap-1 text-[13px] font-medium text-[#9fb0e0] underline-offset-2 transition-colors hover:text-[#e8ecf8] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+          className="mt-2.5 flex items-center gap-1 text-[13px] font-medium text-ink-600 underline-offset-2 transition-colors hover:text-ink-900 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
         >
           {nextItem.label}
           <span aria-hidden>&rarr;</span>
         </Link>
       ) : (
-        <p className="mt-2.5 text-[13px] text-[#9aa5c6]">{t("dashboard.profileStrength.complete")}</p>
+        <p className="mt-2.5 text-[13px] text-ink-500">{t("dashboard.profileStrength.complete")}</p>
       )}
     </div>
   );

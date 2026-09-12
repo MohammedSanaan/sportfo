@@ -24,21 +24,21 @@ const FILTER_TAG: Record<Exclude<FilterKey, "all">, DemoOpportunityTag> = {
 
 const TAG_STYLES: Record<DemoOpportunityTag, { chip: string; image: string; button: string; label: string }> = {
   trial: {
-    chip: "bg-[#4d7cff] text-white",
-    image: "bg-gradient-to-br from-[#1c2f6e] to-[#0d1430]",
-    button: "bg-[#4d7cff] hover:bg-[#6a92ff] text-white",
+    chip: "bg-brand-600 text-white",
+    image: "bg-gradient-to-br from-brand-100 to-brand-50",
+    button: "bg-brand-600 hover:bg-brand-700 text-white",
     label: "TRIAL",
   },
   sponsor: {
-    chip: "bg-[#ffb020] text-[#241703]",
-    image: "bg-gradient-to-br from-[#5a4110] to-[#0d1430]",
-    button: "bg-[#ffb020] hover:bg-[#ffc457] text-[#241703]",
+    chip: "bg-amber-500 text-ink-900",
+    image: "bg-gradient-to-br from-amber-100 to-amber-50",
+    button: "bg-amber-500 hover:bg-amber-600 text-ink-900",
     label: "SPONSOR",
   },
   camp: {
-    chip: "bg-[#2fbf71] text-[#03210f]",
-    image: "bg-gradient-to-br from-[#134028] to-[#0d1430]",
-    button: "bg-[#2fbf71] hover:bg-[#4fd98d] text-[#03210f]",
+    chip: "bg-green-500 text-white",
+    image: "bg-gradient-to-br from-green-100 to-green-50",
+    button: "bg-green-500 hover:bg-green-600 text-white",
     label: "CAMP",
   },
 };
@@ -65,8 +65,8 @@ export function DemoOpportunityBoard({ items, labels, demoOnlyLabel }: DemoOppor
               onClick={() => setActive(key)}
               className={
                 isActive
-                  ? "h-8 rounded-full border border-[#7a9dff]/45 bg-[#4d7cff]/22 px-3.5 text-[13px] font-semibold text-[#cddaff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]"
-                  : "h-8 rounded-full border border-white/[0.12] px-3.5 text-[13px] font-semibold text-[#8b96b8] transition-colors hover:border-white/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]"
+                  ? "h-8 rounded-full border border-brand-300 bg-brand-50 px-3.5 text-[13px] font-semibold text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
+                  : "h-8 rounded-full border border-border-default px-3.5 text-[13px] font-semibold text-ink-500 transition-colors hover:border-border-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
               }
             >
               {labels[key]}
@@ -79,9 +79,9 @@ export function DemoOpportunityBoard({ items, labels, demoOnlyLabel }: DemoOppor
         {visibleItems.map((item) => {
           const styles = TAG_STYLES[item.tag];
           return (
-            <article key={item.id} className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1430]">
+            <article key={item.id} className="overflow-hidden rounded-2xl border border-border-default bg-white">
               <div className={`relative flex h-28 items-end p-3 ${styles.image}`}>
-                <span className="font-mono text-[10px] tracking-[0.14em] text-white/50 uppercase">
+                <span className="font-mono text-[10px] tracking-[0.14em] text-ink-500 uppercase">
                   {item.imageCaption}
                 </span>
                 <span
@@ -91,12 +91,12 @@ export function DemoOpportunityBoard({ items, labels, demoOnlyLabel }: DemoOppor
                 </span>
               </div>
               <div className="p-4">
-                <h3 className="text-[15px] font-bold text-[#e8ecf8]">{item.title}</h3>
-                <p className="mt-1 text-sm text-[#8b96b8]">{item.meta}</p>
+                <h3 className="text-[15px] font-bold text-ink-900">{item.title}</h3>
+                <p className="mt-1 text-sm text-ink-500">{item.meta}</p>
                 <DemoOnlyButton
                   label={item.ctaLabel}
                   demoOnlyLabel={demoOnlyLabel}
-                  className={`mt-4 flex h-10 w-full items-center justify-center rounded-lg text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] ${styles.button}`}
+                  className={`mt-4 flex h-10 w-full items-center justify-center rounded-lg text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 ${styles.button}`}
                 />
               </div>
             </article>

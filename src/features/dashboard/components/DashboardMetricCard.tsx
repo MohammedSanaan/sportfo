@@ -16,19 +16,19 @@ interface DashboardMetricCardProps {
 
 const ACCENT_STYLES: Record<DashboardMetricCardProps["accent"], { card: string; dot: string; link: string }> = {
   blue: {
-    card: "bg-gradient-to-br from-[#4d7cff]/18 to-[#0d1430] border-[#4d7cff]/30",
-    dot: "bg-[#4d7cff]",
-    link: "text-[#7ea3ff] hover:text-[#a9c1ff]",
+    card: "bg-brand-50/60 border-brand-200",
+    dot: "bg-brand-600",
+    link: "text-brand-700 hover:text-brand-800",
   },
   orange: {
-    card: "bg-gradient-to-br from-[#ffb020]/16 to-[#0d1430] border-[#ffb020]/30",
-    dot: "bg-[#ffb020]",
-    link: "text-[#ffc457] hover:text-[#ffd992]",
+    card: "bg-amber-50 border-amber-200",
+    dot: "bg-amber-500",
+    link: "text-amber-700 hover:text-amber-800",
   },
   pink: {
-    card: "bg-gradient-to-br from-[#ff2f6d]/16 to-[#0d1430] border-[#ff2f6d]/30",
-    dot: "bg-[#ff2f6d]",
-    link: "text-[#ff7fa4] hover:text-[#ffb0c7]",
+    card: "bg-rose-50 border-rose-200",
+    dot: "bg-rose-500",
+    link: "text-rose-700 hover:text-rose-800",
   },
 };
 
@@ -50,21 +50,21 @@ export function DashboardMetricCard({
   return (
     <div className={`rounded-2xl border p-5 ${styles.card}`}>
       <div className="flex items-start justify-between gap-2">
-        <div className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] text-[#9fb0e0] uppercase">
+        <div className="flex items-center gap-2 text-[11px] font-semibold tracking-[0.12em] text-ink-500 uppercase">
           {icon}
           {label}
         </div>
         <span aria-hidden className={`h-2.5 w-2.5 shrink-0 rounded-full ${styles.dot}`} />
       </div>
-      <div className="mt-3 text-4xl font-extrabold leading-none text-[#e8ecf8] sm:text-[46px]">
+      <div className="mt-3 text-4xl font-extrabold leading-none text-ink-900 sm:text-[46px]">
         {value}
       </div>
-      <p className="mt-1.5 text-sm text-[#96a2c4]">{helperText}</p>
+      <p className="mt-1.5 text-sm text-ink-500">{helperText}</p>
       {footer}
       {!footer && actionLabel && actionHref && (
         <Link
           href={actionHref}
-          className={`mt-4 inline-block text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] ${styles.link}`}
+          className={`mt-4 inline-block text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 ${styles.link}`}
         >
           {actionLabel} →
         </Link>

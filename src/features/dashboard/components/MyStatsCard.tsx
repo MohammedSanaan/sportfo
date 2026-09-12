@@ -19,26 +19,26 @@ interface MyStatsCardProps {
 export function MyStatsCard({ profileStrengthPercentage, achievementsCount, verifiedCount, t, demo }: MyStatsCardProps) {
   const stats = demo
     ? [
-        { value: demo.followers, label: t("dashboard.myStats.followers"), color: "text-[#e8ecf8]" },
-        { value: demo.rank, label: t("dashboard.myStats.rank"), color: "text-[#7ea3ff]" },
-        { value: demo.medals, label: t("dashboard.myStats.medals"), color: "text-[#ffb020]" },
+        { value: demo.followers, label: t("dashboard.myStats.followers"), color: "text-ink-900" },
+        { value: demo.rank, label: t("dashboard.myStats.rank"), color: "text-brand-600" },
+        { value: demo.medals, label: t("dashboard.myStats.medals"), color: "text-amber-600" },
       ]
     : [
-        { value: `${profileStrengthPercentage}%`, label: t("dashboard.stats.profile"), color: "text-[#e8ecf8]" },
-        { value: String(achievementsCount), label: t("dashboard.stats.achievements"), color: "text-[#7ea3ff]" },
-        { value: String(verifiedCount), label: t("dashboard.stats.verified"), color: "text-[#ffb020]" },
+        { value: `${profileStrengthPercentage}%`, label: t("dashboard.stats.profile"), color: "text-ink-900" },
+        { value: String(achievementsCount), label: t("dashboard.stats.achievements"), color: "text-brand-600" },
+        { value: String(verifiedCount), label: t("dashboard.stats.verified"), color: "text-amber-600" },
       ];
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1430]">
-      <div className="border-b border-white/[0.08] px-[18px] py-3.5 text-base font-bold text-[#e8ecf8]">
+    <div className="overflow-hidden rounded-2xl border border-border-default bg-white">
+      <div className="border-b border-border-default px-[18px] py-3.5 text-base font-bold text-ink-900">
         {t("dashboard.myStats.title")}
       </div>
       <div className="grid grid-cols-3 px-2.5 py-4 text-center">
         {stats.map((stat, index) => (
-          <div key={stat.label} className={index > 0 ? "border-l border-white/[0.08]" : undefined}>
+          <div key={stat.label} className={index > 0 ? "border-l border-border-default" : undefined}>
             <div className={`text-2xl font-extrabold ${stat.color}`}>{stat.value}</div>
-            <div className="mt-1 text-xs text-[#8b96b8]">{stat.label}</div>
+            <div className="mt-1 text-xs text-ink-500">{stat.label}</div>
           </div>
         ))}
       </div>

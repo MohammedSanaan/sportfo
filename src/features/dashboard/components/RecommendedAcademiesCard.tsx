@@ -18,20 +18,17 @@ interface RecommendedAcademiesCardProps {
 export function RecommendedAcademiesCard({ t, demo, demoCtaLabel }: RecommendedAcademiesCardProps) {
   if (demo && demoCtaLabel) {
     return (
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1430]">
-        <div className="border-b border-white/[0.08] px-[18px] py-3.5 text-base font-bold text-[#e8ecf8]">
+      <div className="overflow-hidden rounded-2xl border border-border-default bg-white">
+        <div className="border-b border-border-default px-[18px] py-3.5 text-base font-bold text-ink-900">
           {t("dashboard.recommendedAcademies.title")}
         </div>
-        <ul className="flex flex-col divide-y divide-white/[0.08]">
+        <ul className="flex flex-col divide-y divide-border-default">
           {demo.map((academy) => (
             <li key={academy.id} className="flex items-center gap-3 px-[18px] py-3.5">
-              <span
-                aria-hidden
-                className="h-9 w-9 shrink-0 rounded-lg bg-gradient-to-br from-[#1c4d3a] to-[#0d1430]"
-              />
+              <span aria-hidden className="h-9 w-9 shrink-0 rounded-lg bg-green-50" />
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-[#e8ecf8]">{academy.name}</p>
-                <p className="truncate text-xs text-[#8b96b8]">{academy.meta}</p>
+                <p className="truncate text-sm font-semibold text-ink-900">{academy.name}</p>
+                <p className="truncate text-xs text-ink-500">{academy.meta}</p>
               </div>
             </li>
           ))}
@@ -40,7 +37,7 @@ export function RecommendedAcademiesCard({ t, demo, demoCtaLabel }: RecommendedA
           <DemoOnlyButton
             label={demoCtaLabel}
             demoOnlyLabel={t("dashboard.demo.onlyLabel")}
-            className="text-sm font-semibold text-[#7ea3ff] transition-colors hover:text-[#a9c1ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff] rounded"
+            className="text-sm font-semibold text-brand-700 transition-colors hover:text-brand-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 rounded"
           />
         </div>
       </div>
@@ -48,11 +45,11 @@ export function RecommendedAcademiesCard({ t, demo, demoCtaLabel }: RecommendedA
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1430]">
-      <div className="border-b border-white/[0.08] px-[18px] py-3.5 text-base font-bold text-[#e8ecf8]">
+    <div className="overflow-hidden rounded-2xl border border-border-default bg-white">
+      <div className="border-b border-border-default px-[18px] py-3.5 text-base font-bold text-ink-900">
         {t("dashboard.recommendedAcademies.title")}
       </div>
-      <p className="px-[18px] py-6 text-sm text-[#8b96b8]">{t("dashboard.recommendedAcademies.comingSoon")}</p>
+      <p className="px-[18px] py-6 text-sm text-ink-500">{t("dashboard.recommendedAcademies.comingSoon")}</p>
     </div>
   );
 }

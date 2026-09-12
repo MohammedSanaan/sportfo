@@ -30,10 +30,10 @@ export function OpportunitiesSection({ t, demo }: OpportunitiesSectionProps) {
     return (
       <section>
         <div className="mb-4 flex flex-wrap items-center gap-4">
-          <h2 className="text-xl font-bold tracking-tight text-[#e8ecf8] sm:text-[22px]">
+          <h2 className="text-xl font-bold tracking-tight text-ink-900 sm:text-[22px]">
             {t("dashboard.opportunities.title")}
           </h2>
-          <div className="h-px flex-1 bg-gradient-to-r from-white/[0.16] to-transparent" />
+          <div className="h-px flex-1 bg-gradient-to-r from-border-strong to-transparent" />
         </div>
         <DemoOpportunityBoard items={demo} labels={filterLabels} demoOnlyLabel={t("dashboard.demo.onlyLabel")} />
       </section>
@@ -43,18 +43,18 @@ export function OpportunitiesSection({ t, demo }: OpportunitiesSectionProps) {
   return (
     <section>
       <div className="mb-4 flex flex-wrap items-center gap-4">
-        <h2 className="text-xl font-bold tracking-tight text-[#e8ecf8] sm:text-[22px]">
+        <h2 className="text-xl font-bold tracking-tight text-ink-900 sm:text-[22px]">
           {t("dashboard.opportunities.title")}
         </h2>
-        <div className="h-px flex-1 bg-gradient-to-r from-white/[0.16] to-transparent" />
+        <div className="h-px flex-1 bg-gradient-to-r from-border-strong to-transparent" />
       </div>
 
-      <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-white/15 bg-[#0d1430]/60 px-6 py-12 text-center">
-        <p className="text-base font-semibold text-[#e8ecf8]">{t("dashboard.opportunities.emptyTitle")}</p>
-        <p className="max-w-sm text-sm text-[#8b96b8]">{t("dashboard.opportunities.emptyDescription")}</p>
+      <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-border-strong bg-surface-muted px-6 py-12 text-center">
+        <p className="text-base font-semibold text-ink-900">{t("dashboard.opportunities.emptyTitle")}</p>
+        <p className="max-w-sm text-sm text-ink-500">{t("dashboard.opportunities.emptyDescription")}</p>
         <Link
           href="/athletes"
-          className="mt-2 inline-flex min-h-10 items-center rounded-lg bg-[#4d7cff] px-5 py-2 text-center text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
+          className="mt-2 inline-flex min-h-10 items-center rounded-lg bg-brand-600 px-5 py-2 text-center text-sm font-bold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
         >
           {t("dashboard.opportunities.exploreCta")}
         </Link>
