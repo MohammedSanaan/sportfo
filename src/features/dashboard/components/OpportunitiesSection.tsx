@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { OpportunityFilters } from "./OpportunityFilters";
 import { DemoOpportunityBoard } from "./DemoOpportunityBoard";
 import type { DemoOpportunity } from "../data/demo-dashboard";
 
@@ -16,7 +15,10 @@ interface OpportunitiesSectionProps {
 // sponsorship" / "Elite sports academy camp" cards -- UNLESS `demo` is
 // provided (only in dev/demo mode), in which case DemoOpportunityBoard
 // renders those exact sample cards with a real, working All/Trials/
-// Sponsors filter.
+// Sponsors filter. The real (non-demo) empty state never shows that
+// filter row itself -- three pills that visibly toggle but never change
+// a permanently-empty result read as broken, not merely unfinished, so
+// they're withheld entirely until there's an actual list behind them.
 export function OpportunitiesSection({ t, demo }: OpportunitiesSectionProps) {
   const filterLabels = {
     all: t("dashboard.opportunities.filters.all"),
@@ -45,7 +47,6 @@ export function OpportunitiesSection({ t, demo }: OpportunitiesSectionProps) {
           {t("dashboard.opportunities.title")}
         </h2>
         <div className="h-px flex-1 bg-gradient-to-r from-white/[0.16] to-transparent" />
-        <OpportunityFilters labels={filterLabels} />
       </div>
 
       <div className="flex flex-col items-center gap-3 rounded-2xl border border-dashed border-white/15 bg-[#0d1430]/60 px-6 py-12 text-center">

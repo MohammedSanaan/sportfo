@@ -44,9 +44,9 @@ const TAG_STYLES: Record<DemoOpportunityTag, { chip: string; image: string; butt
 };
 
 // DEV/DEMO ONLY (see demo-dashboard.ts) -- the one place the "All / Trials /
-// Sponsors" filter actually changes what's rendered. The real (non-demo)
-// OpportunityFilters pill row stays purely cosmetic on OpportunitiesSection's
-// honest empty state, since there's no real list to filter yet.
+// Sponsors" filter actually changes what's rendered. OpportunitiesSection's
+// real (non-demo) empty state shows no filter row at all, since there's no
+// real list yet for one to meaningfully act on.
 export function DemoOpportunityBoard({ items, labels, demoOnlyLabel }: DemoOpportunityBoardProps) {
   const [active, setActive] = useState<FilterKey>("all");
 
