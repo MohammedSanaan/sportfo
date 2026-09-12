@@ -18,7 +18,10 @@ export function CoachLauncher() {
       <CoachButton isOpen={coach.isOpen} onClick={coach.toggle} label={t("coach.openLabel")} name={t("coach.name")} />
       <CoachPanel
         isOpen={coach.isOpen}
+        isMinimized={coach.isMinimized}
         onClose={coach.close}
+        onMinimize={coach.minimize}
+        onRestore={coach.restore}
         messages={coach.messages}
         isLoading={coach.isLoading}
         isBusy={coach.isBusy}

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { AthleteRegistrationForm } from "./AthleteRegistrationForm";
-import { RegistrationStepNav } from "./RegistrationStepNav";
 import { AlreadyRegisteredNotice } from "@/components/ui/AlreadyRegisteredNotice";
 import { getAuthUser } from "@/lib/supabase/auth-user";
 import { createClient } from "@/lib/supabase/server";
@@ -16,13 +15,6 @@ interface AthleteRegistrationScreenProps {
    * hub passes /register/athlete so either path round-trips back to itself
    * instead of silently switching URLs on the visitor. */
   reloadHref?: string;
-  /** Whether to show the step-pill nav (RegistrationStepNav). Both
-   * /athlete/register and the /register/athlete hub route now get their
-   * page title from the shared RegistrationHero (rendered by the caller,
-   * above this whole screen) -- this screen no longer renders its own
-   * duplicate h1. The hub route still opts out of the step nav since it
-   * already has its own category-switching nav alongside the hero. */
-  showHeading?: boolean;
 }
 
 // The one real, Supabase-backed Athlete registration flow -- reused as-is
@@ -33,7 +25,6 @@ interface AthleteRegistrationScreenProps {
 // Profile, enforced by AthleteRegistrationForm itself.
 export async function AthleteRegistrationScreen({
   reloadHref = "/athlete/register",
-  showHeading = true,
 }: AthleteRegistrationScreenProps) {
   // Public-to-view, auth-required-only-at-submit (see task spec) -- a
   // guest gets the real, blank Athlete form here, with no draft to load
@@ -51,8 +42,6 @@ export async function AthleteRegistrationScreen({
 
   return (
     <div className="flex flex-col gap-8 sm:gap-10">
-      {showHeading && !draftLoadFailed && <RegistrationStepNav locale={locale} />}
-
       {draftLoadFailed ? (
         // Rendering a blank form here would risk Save Draft silently
         // overwriting a real, already-saved draft with empty fields --

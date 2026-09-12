@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/Button";
 import { FormProvider, useFieldArray, useForm, type SubmitHandler } from "react-hook-form";
 import type { Achievement, AthleteRegistrationFormValues } from "@/types/athlete";
 import { buildEmptyFormValues } from "@/lib/athlete/registration-draft";
@@ -32,13 +33,15 @@ import { EmploymentSection } from "./EmploymentSection";
 import { ApparelLogisticsSection } from "./ApparelLogisticsSection";
 import { ProfileSetupSection } from "./ProfileSetupSection";
 import { VerifyActivateSection } from "./VerifyActivateSection";
-import { RegistrationProgressBar } from "./RegistrationProgressBar";
 import { FormActions } from "./FormActions";
 import { PersonalDetailsSection } from "./PersonalDetailsSection";
 import { RegistrationSuccess } from "./RegistrationSuccess";
 import { getOwnSportfoId } from "@/lib/sportfo-id/server";
 import { SportsInformationSection } from "./SportsInformationSection";
 import { useTranslation } from "@/i18n/LocaleProvider";
+import { RegistrationWizardStepper } from "./RegistrationWizardStepper";
+import { ReviewSection } from "./ReviewSection";
+import { WIZARD_STEPS, findStepIndexForSectionId } from "../wizard-steps";
 
 interface AthleteRegistrationFormProps {
   authPhone: string;
@@ -109,8 +112,79 @@ export function AthleteRegistrationForm({
     setValue,
     reset,
     control,
+    trigger,
     formState: { isSubmitting },
   } = methods;
+
+  // Step-gated wizard state (Section 5/8 of the production spec: the
+  // Athlete form's 8 sections used to all be mounted at once on one long
+  // scrolling page). maxReachedIndex, not just activeStep, is what the
+  // stepper uses to decide which steps are clickable -- so a visitor can
+  // freely go back to an earlier step, but can't jump ahead of one they
+  // haven't validated yet.
+  //
+  // Both start at step 0 on every render, server and client alike --
+  // `window.location.hash` genuinely doesn't exist yet during SSR, so
+  // computing it during the initial render (even via a lazy useState
+  // initializer) makes the client's first paint disagree with the
+  // server-rendered HTML and throws a hydration-mismatch error. Resolving
+  // an incoming #section-x deep link (from a ProfileStrengthCard/
+  // DashboardProfileStrengthCard link, or any other bookmark) is therefore
+  // done in the effect below instead, after hydration has already
+  // completed -- a legitimate, sanctioned use of setState-in-effect for
+  // syncing with browser-only state the server could never have known.
+  const [activeStep, setActiveStep] = useState(0);
+  const [maxReachedIndex, setMaxReachedIndex] = useState(0);
+  const formTopRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    const stepIndex = findStepIndexForSectionId(hash);
+    if (stepIndex === null) return;
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setActiveStep(stepIndex);
+    setMaxReachedIndex((prev) => Math.max(prev, stepIndex));
+    // Runs after the target step's own render commits.
+    const scrollTimer = window.setTimeout(() => {
+      document.getElementById(hash)?.scrollIntoView({ block: "start" });
+    }, 0);
+    return () => window.clearTimeout(scrollTimer);
+  }, []);
+
+  function scrollToFormTop() {
+    formTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function goToStep(index: number) {
+    if (index < 0 || index >= WIZARD_STEPS.length || index > maxReachedIndex) return;
+    setActiveStep(index);
+    scrollToFormTop();
+  }
+
+  // Gates Continue on the current step's own fields actually being valid
+  // (Section 9: "Do not wait until the final page to reveal obvious
+  // validation errors") -- a step with invalid required fields shows those
+  // errors inline (same RHF error rendering each section already has) and
+  // never advances. Steps with no fields of their own (Review) have an
+  // empty fieldGroups list, so trigger() with no args here would validate
+  // the WHOLE form prematurely -- skipped entirely for those.
+  async function goNext() {
+    const { fieldGroups } = WIZARD_STEPS[activeStep];
+    const isValid = fieldGroups.length === 0 || (await trigger(fieldGroups));
+    if (!isValid) return;
+
+    const next = activeStep + 1;
+    setActiveStep(next);
+    setMaxReachedIndex((prev) => Math.max(prev, next));
+    scrollToFormTop();
+  }
+
+  function goBack() {
+    setActiveStep((prev) => Math.max(0, prev - 1));
+    scrollToFormTop();
+  }
 
   // Read-only subscription to the same field array AchievementsSection owns
   // (mutated only there via append/remove) -- this is just so document
@@ -517,10 +591,19 @@ export function AthleteRegistrationForm({
     await handleSubmit(handleCreateProfile)(event);
   }
 
+  const isReviewStep = activeStep === WIZARD_STEPS.length - 1;
+
   return (
     <FormProvider {...methods}>
       <form noValidate onSubmit={onFormSubmit} className="flex flex-col gap-6">
-        <RegistrationProgressBar />
+        <div ref={formTopRef} className="scroll-mt-24" />
+
+        <RegistrationWizardStepper
+          activeIndex={activeStep}
+          maxReachedIndex={maxReachedIndex}
+          onStepClick={goToStep}
+        />
+
         {banner && (
           <div
             role={banner.kind === "error" ? "alert" : "status"}
@@ -536,41 +619,84 @@ export function AthleteRegistrationForm({
           </div>
         )}
 
-        <div id="section-personal" className="scroll-mt-24">
-          <PersonalDetailsSection />
-        </div>
-        <div id="section-sport" className="scroll-mt-24">
-          <SportsInformationSection />
-        </div>
-        <div id="section-achievements" className="scroll-mt-24">
-          <AchievementsSection
-            docOpsByField={docOpsByField}
-            onFileSelected={handleFileSelected}
-            onViewDocument={handleViewDocument}
-            onRemoveDocument={handleRemoveDocument}
-          />
-        </div>
-        <AdditionalRecognitionSection />
-        <div id="section-employment" className="scroll-mt-24">
-          <EmploymentSection />
-        </div>
-        <div id="section-apparel" className="scroll-mt-24">
-          <ApparelLogisticsSection />
-        </div>
-        <div id="section-profile" className="scroll-mt-24">
-          <ProfileSetupSection />
-        </div>
-        <div id="section-verify" className="scroll-mt-24">
-          <VerifyActivateSection />
-        </div>
-        <div id="section-review" className="scroll-mt-24">
-          <FormActions
-            onSaveDraft={handleSaveDraft}
-            isSavingDraft={isSavingDraft}
-            isSubmitting={isSubmitting}
-            draftLabel={draftPhaseLabel ?? t("register.actions.savingDraft")}
-            submitLabel={submitPhaseLabel ?? t("register.actions.creatingProfile")}
-          />
+        {/* Only the active step's sections are mounted -- values for every
+            other step persist regardless (useForm's default
+            shouldUnregister: false keeps unmounted fields' state), so
+            switching steps never drops anything the visitor already
+            entered. */}
+        {activeStep === 0 && (
+          <div id="section-personal" className="scroll-mt-24">
+            <PersonalDetailsSection />
+          </div>
+        )}
+
+        {activeStep === 1 && (
+          <>
+            <div id="section-sport" className="scroll-mt-24">
+              <SportsInformationSection />
+            </div>
+            <div id="section-achievements" className="scroll-mt-24">
+              <AchievementsSection
+                docOpsByField={docOpsByField}
+                onFileSelected={handleFileSelected}
+                onViewDocument={handleViewDocument}
+                onRemoveDocument={handleRemoveDocument}
+              />
+            </div>
+            <AdditionalRecognitionSection />
+          </>
+        )}
+
+        {activeStep === 2 && (
+          <>
+            <div id="section-employment" className="scroll-mt-24">
+              <EmploymentSection />
+            </div>
+            <div id="section-apparel" className="scroll-mt-24">
+              <ApparelLogisticsSection />
+            </div>
+          </>
+        )}
+
+        {activeStep === 3 && (
+          <>
+            <div id="section-profile" className="scroll-mt-24">
+              <ProfileSetupSection />
+            </div>
+            <div id="section-verify" className="scroll-mt-24">
+              <VerifyActivateSection />
+            </div>
+          </>
+        )}
+
+        {isReviewStep && (
+          <div id="section-review" className="scroll-mt-24">
+            <ReviewSection onEditStep={goToStep} />
+          </div>
+        )}
+
+        <div className="flex items-center justify-between gap-3 border-t border-border-default pt-6">
+          {activeStep > 0 ? (
+            <Button type="button" variant="secondary" onClick={goBack}>
+              {t("register.wizard.back")}
+            </Button>
+          ) : (
+            <span />
+          )}
+
+          {isReviewStep ? (
+            <FormActions
+              onSaveDraft={handleSaveDraft}
+              isSavingDraft={isSavingDraft}
+              isSubmitting={isSubmitting}
+              draftLabel={draftPhaseLabel ?? t("register.actions.savingDraft")}
+              submitLabel={submitPhaseLabel ?? t("register.actions.creatingProfile")}
+            />
+          ) : (
+            <Button type="button" variant="primary" onClick={goNext}>
+              {t("register.wizard.continue")}
+            </Button>
+          )}
         </div>
       </form>
     </FormProvider>

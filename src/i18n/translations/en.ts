@@ -354,6 +354,22 @@ const en = {
     stepApparel: "Apparel & Logistics",
     stepProfile: "Profile Setup",
     stepVerify: "Verify & Activate",
+    wizard: {
+      stepPersonal: "Personal",
+      stepSportAchievements: "Sport & Achievements",
+      stepBackground: "Background",
+      stepProfileVerify: "Profile & Verify",
+      stepReview: "Review",
+      stepIndicator: "Step {current} of {total}",
+      back: "Back",
+      continue: "Continue",
+      reviewTitle: "Review Your Details",
+      reviewDescription:
+        "Check everything below before creating your profile. You can go back and edit any section.",
+      edit: "Edit",
+      notProvided: "Not provided",
+      achievementsAdded: "{n} achievement{plural} added",
+    },
     uploadFailed: "Failed to upload document.",
     documentRemovedButSyncFailed:
       "Document removed, but we couldn't update our records. Please refresh and try again.",
@@ -1278,6 +1294,8 @@ const en = {
     tagline: "Your SportFo Guide",
     openLabel: "Open Coach, your SportFo guide",
     closeLabel: "Close Coach",
+    minimizeLabel: "Minimize Coach",
+    restoreLabel: "Expand Coach",
     welcomeGreeting: "Hi! I'm Coach 👋",
     welcomeMessage:
       "I'm your SportFo guide. I can help you understand how SportFo works, find the right pathway for you, and guide you through registration.",

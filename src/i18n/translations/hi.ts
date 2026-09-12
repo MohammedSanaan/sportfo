@@ -344,6 +344,22 @@ const hi: Dictionary = {
     stepApparel: "पोशाक और लॉजिस्टिक्स",
     stepProfile: "प्रोफ़ाइल सेटअप",
     stepVerify: "सत्यापित करें और सक्रिय करें",
+    wizard: {
+      stepPersonal: "व्यक्तिगत",
+      stepSportAchievements: "खेल और उपलब्धियाँ",
+      stepBackground: "पृष्ठभूमि",
+      stepProfileVerify: "प्रोफ़ाइल और सत्यापन",
+      stepReview: "समीक्षा",
+      stepIndicator: "चरण {current} / {total}",
+      back: "वापस",
+      continue: "जारी रखें",
+      reviewTitle: "अपना विवरण जांचें",
+      reviewDescription:
+        "अपनी प्रोफ़ाइल बनाने से पहले नीचे सब कुछ जांच लें। आप किसी भी सेक्शन में वापस जाकर बदलाव कर सकते हैं।",
+      edit: "संपादित करें",
+      notProvided: "प्रदान नहीं किया गया",
+      achievementsAdded: "{n} उपलब्धि{plural} जोड़ी गई",
+    },
     uploadFailed: "दस्तावेज़ अपलोड करने में विफल।",
     documentRemovedButSyncFailed:
       "दस्तावेज़ हटा दिया गया, लेकिन हम अपने रिकॉर्ड अपडेट नहीं कर पाए। कृपया रीफ़्रेश करें और फिर से प्रयास करें।",
@@ -1231,6 +1247,8 @@ const hi: Dictionary = {
     tagline: "आपका SportFo गाइड",
     openLabel: "कोच खोलें, आपका SportFo गाइड",
     closeLabel: "कोच बंद करें",
+    minimizeLabel: "कोच को छोटा करें",
+    restoreLabel: "कोच को बड़ा करें",
     welcomeGreeting: "नमस्ते! मैं कोच हूं 👋",
     welcomeMessage:
       "मैं आपका SportFo गाइड हूं। मैं आपको यह समझने में मदद कर सकता हूं कि SportFo कैसे काम करता है, आपके लिए सही रास्ता ढूंढ सकता हूं, और पंजीकरण में आपका मार्गदर्शन कर सकता हूं।",

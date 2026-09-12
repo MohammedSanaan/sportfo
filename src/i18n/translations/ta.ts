@@ -349,6 +349,22 @@ const ta: Dictionary = {
     stepApparel: "உடை & லாஜிஸ்டிக்ஸ்",
     stepProfile: "சுயவிவர அமைப்பு",
     stepVerify: "சரிபார்த்து செயல்படுத்தவும்",
+    wizard: {
+      stepPersonal: "தனிப்பட்ட",
+      stepSportAchievements: "விளையாட்டு மற்றும் சாதனைகள்",
+      stepBackground: "பின்னணி",
+      stepProfileVerify: "சுயவிவரம் மற்றும் சரிபார்ப்பு",
+      stepReview: "மதிப்பாய்வு",
+      stepIndicator: "படி {current} / {total}",
+      back: "பின்செல்",
+      continue: "தொடரவும்",
+      reviewTitle: "உங்கள் விவரங்களை மதிப்பாய்வு செய்யவும்",
+      reviewDescription:
+        "உங்கள் சுயவிவரத்தை உருவாக்கும் முன் கீழே உள்ள அனைத்தையும் சரிபார்க்கவும். எந்தப் பிரிவையும் திரும்பிச் சென்று திருத்தலாம்.",
+      edit: "திருத்து",
+      notProvided: "வழங்கப்படவில்லை",
+      achievementsAdded: "{n} சாதனை{plural} சேர்க்கப்பட்டது",
+    },
     uploadFailed: "ஆவணத்தை பதிவேற்ற முடியவில்லை.",
     documentRemovedButSyncFailed:
       "ஆவணம் அகற்றப்பட்டது, ஆனால் எங்கள் பதிவுகளை புதுப்பிக்க முடியவில்லை. புதுப்பித்து மீண்டும் முயற்சிக்கவும்.",
@@ -1238,6 +1254,8 @@ const ta: Dictionary = {
     tagline: "உங்கள் SportFo வழிகாட்டி",
     openLabel: "கோச்சைத் திறக்கவும், உங்கள் SportFo வழிகாட்டி",
     closeLabel: "கோச்சை மூடு",
+    minimizeLabel: "கோச்சை சிறிதாக்கு",
+    restoreLabel: "கோச்சை பெரிதாக்கு",
     welcomeGreeting: "வணக்கம்! நான் கோச் 👋",
     welcomeMessage:
       "நான் உங்கள் SportFo வழிகாட்டி. SportFo எப்படி செயல்படுகிறது என்பதைப் புரிந்துகொள்ளவும், உங்களுக்கு சரியான வழியைக் கண்டறியவும், பதிவு செய்வதில் உங்களுக்கு வழிகாட்டவும் நான் உதவ முடியும்.",

@@ -347,6 +347,22 @@ const ml: Dictionary = {
     stepApparel: "വസ്ത്രം & ലോജിസ്റ്റിക്സ്",
     stepProfile: "പ്രൊഫൈൽ സെറ്റപ്പ്",
     stepVerify: "പരിശോധിച്ച് സജീവമാക്കുക",
+    wizard: {
+      stepPersonal: "വ്യക്തിഗതം",
+      stepSportAchievements: "കായികവും നേട്ടങ്ങളും",
+      stepBackground: "പശ്ചാത്തലം",
+      stepProfileVerify: "പ്രൊഫൈലും പരിശോധനയും",
+      stepReview: "അവലോകനം",
+      stepIndicator: "ഘട്ടം {current} / {total}",
+      back: "തിരികെ",
+      continue: "തുടരുക",
+      reviewTitle: "നിങ്ങളുടെ വിവരങ്ങൾ പരിശോധിക്കുക",
+      reviewDescription:
+        "നിങ്ങളുടെ പ്രൊഫൈൽ സൃഷ്ടിക്കുന്നതിന് മുമ്പ് താഴെയുള്ളതെല്ലാം പരിശോധിക്കുക. ഏത് വിഭാഗവും തിരികെ പോയി എഡിറ്റ് ചെയ്യാം.",
+      edit: "എഡിറ്റ് ചെയ്യുക",
+      notProvided: "നൽകിയിട്ടില്ല",
+      achievementsAdded: "{n} നേട്ടം{plural} ചേർത്തു",
+    },
     uploadFailed: "രേഖ അപ്‌ലോഡ് ചെയ്യുന്നതിൽ പരാജയപ്പെട്ടു.",
     documentRemovedButSyncFailed:
       "രേഖ നീക്കം ചെയ്തു, പക്ഷേ ഞങ്ങളുടെ റെക്കോർഡുകൾ അപ്‌ഡേറ്റ് ചെയ്യാൻ കഴിഞ്ഞില്ല. ദയവായി പുതുക്കി വീണ്ടും ശ്രമിക്കുക.",
@@ -1236,6 +1252,8 @@ const ml: Dictionary = {
     tagline: "നിങ്ങളുടെ SportFo ഗൈഡ്",
     openLabel: "കോച്ച് തുറക്കുക, നിങ്ങളുടെ SportFo ഗൈഡ്",
     closeLabel: "കോച്ച് അടയ്ക്കുക",
+    minimizeLabel: "കോച്ചിനെ ചെറുതാക്കുക",
+    restoreLabel: "കോച്ചിനെ വലുതാക്കുക",
     welcomeGreeting: "ഹായ്! ഞാൻ കോച്ച് ആണ് 👋",
     welcomeMessage:
       "ഞാൻ നിങ്ങളുടെ SportFo ഗൈഡ് ആണ്. SportFo എങ്ങനെ പ്രവർത്തിക്കുന്നു എന്ന് മനസ്സിലാക്കാനും, നിങ്ങൾക്ക് ശരിയായ വഴി കണ്ടെത്താനും, രജിസ്ട്രേഷനിൽ നിങ്ങളെ നയിക്കാനും എനിക്ക് സഹായിക്കാനാകും.",

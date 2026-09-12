@@ -22,6 +22,10 @@ interface UseCoachResult {
   open: () => void;
   close: () => void;
   toggle: () => void;
+  /** True while the panel is collapsed to a small pill instead of hidden entirely -- conversation and draft stay intact so the user can pick a reply back up after checking the page underneath. */
+  isMinimized: boolean;
+  minimize: () => void;
+  restore: () => void;
   messages: CoachMessage[];
   /** True only until the first response chunk arrives -- drives the typing indicator. */
   isLoading: boolean;
@@ -44,6 +48,7 @@ export function useCoach(): UseCoachResult {
   const pathname = usePathname();
   const { locale } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<CoachMessage[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isBusy, setIsBusy] = useState(false);
@@ -146,9 +151,21 @@ export function useCoach(): UseCoachResult {
 
   return {
     isOpen,
-    open: () => setIsOpen(true),
-    close: () => setIsOpen(false),
-    toggle: () => setIsOpen((value) => !value),
+    open: () => {
+      setIsOpen(true);
+      setIsMinimized(false);
+    },
+    close: () => {
+      setIsOpen(false);
+      setIsMinimized(false);
+    },
+    toggle: () => {
+      setIsOpen((value) => !value);
+      setIsMinimized(false);
+    },
+    isMinimized,
+    minimize: () => setIsMinimized(true),
+    restore: () => setIsMinimized(false),
     messages,
     isLoading,
     isBusy,

@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { getAuthUser } from "@/lib/supabase/auth-user";
-import { createClient } from "@/lib/supabase/server";
 import { LogoutButton } from "@/features/auth/components/LogoutButton";
-import { getOwnAccountIdentity } from "@/lib/account/identity";
+import { getCurrentAccountIdentity } from "@/lib/account/identity";
 import { AccountMenu } from "./AccountMenu";
 import { JoinCommunityLink } from "./JoinCommunityLink";
 import { translate } from "@/i18n/dictionary";
@@ -33,10 +32,11 @@ export async function AuthNav({
   const t = (key: string) => translate(locale, key);
 
   if (user) {
-    const supabase = await createClient();
     // RLS-scoped to this user's own rows throughout -- can never resolve
     // another account's name, SportFo ID, admin status, or registrations.
-    const identity = await getOwnAccountIdentity(supabase, user.id);
+    // cache()-wrapped: shares its Supabase queries with Header's own
+    // dashboard-link visibility check for this same request.
+    const identity = await getCurrentAccountIdentity();
 
     if (identity.sportfoId) {
       const roleLabel = identity.category ? t(`account.roles.${identity.category.id}`) : null;

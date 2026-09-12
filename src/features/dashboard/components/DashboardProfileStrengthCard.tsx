@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ProfileStrength } from "@/lib/athlete/profile-strength";
 
 interface DashboardProfileStrengthCardProps {
@@ -35,9 +36,17 @@ export function DashboardProfileStrengthCard({ strength, t }: DashboardProfileSt
           style={{ width: `${strength.percentage}%` }}
         />
       </div>
-      <p className="mt-2.5 text-[13px] text-[#9aa5c6]">
-        {nextItem ? nextItem.label : t("dashboard.profileStrength.complete")}
-      </p>
+      {nextItem ? (
+        <Link
+          href={nextItem.href}
+          className="mt-2.5 flex items-center gap-1 text-[13px] font-medium text-[#9fb0e0] underline-offset-2 transition-colors hover:text-[#e8ecf8] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+        >
+          {nextItem.label}
+          <span aria-hidden>&rarr;</span>
+        </Link>
+      ) : (
+        <p className="mt-2.5 text-[13px] text-[#9aa5c6]">{t("dashboard.profileStrength.complete")}</p>
+      )}
     </div>
   );
 }

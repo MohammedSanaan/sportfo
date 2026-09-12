@@ -17,8 +17,9 @@ import type { CoachPageContext } from "./types";
 // already fully implemented as static translation dictionaries
 // (src/i18n/translations/*.ts) -- that system is NOT touched or
 // duplicated here. This function never translates anything itself; it
-// only tells Gemini which language to write its own reply in, and (for
-// voice input) how to format a two-language reply. The actual
+// only tells Gemini which language to write its own reply in, and --
+// whenever that reply isn't English -- how to format a two-language
+// reply so the UI can offer a "translate to English" toggle. The actual
 // language generation is entirely Gemini's, per request, same as English.
 export function buildCoachSystemInstruction(pageContext?: CoachPageContext): string {
   const contextLine = pageContext
@@ -40,7 +41,8 @@ Decide the response language in this order of priority:
 2. If you cannot reliably tell, respond in the site's current language: ${siteLanguage}.
 3. If neither can be determined, respond in English.
 Once you've picked a non-English language by the rules above, format your ENTIRE reply as exactly two parts, in this order, separated by a line containing only "${BILINGUAL_SEPARATOR}" and nothing else on that line: first, your complete answer in that language; then, the same answer's meaning in English below the separator. If English is the language you land on, skip the separator entirely and answer once, in English only.`
-    : `\n\nRESPONSE LANGUAGE: Respond in whichever language the user is writing in. If that's ambiguous, default to the site's current language: ${siteLanguage}. If the user explicitly asks for a specific language (including English), use that instead. Do not add a second, English restatement for typed messages -- that dual-language format is reserved for voice input only.`;
+    : `\n\nRESPONSE LANGUAGE: Respond in whichever language the user is writing in. If that's ambiguous, default to the site's current language: ${siteLanguage}. If the user explicitly asks for a specific language (including English), use that instead.
+Once you've picked a non-English language by the rules above, format your ENTIRE reply as exactly two parts, in this order, separated by a line containing only "${BILINGUAL_SEPARATOR}" and nothing else on that line: first, your complete answer in that language; then, the same answer's meaning in English below the separator. If English is the language you land on, skip the separator entirely and answer once, in English only.`;
 
   const terminologyRule = `\n\nTERMINOLOGY: Regardless of which language you respond in, never translate "SportFo" itself, and never translate the exact route labels or feature names given in the knowledge base below -- keep those exactly as written, in English, inside any response.`;
 

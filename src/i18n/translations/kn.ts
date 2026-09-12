@@ -350,6 +350,22 @@ const kn: Dictionary = {
     stepApparel: "ಉಡುಪು ಮತ್ತು ಲಾಜಿಸ್ಟಿಕ್ಸ್",
     stepProfile: "ಪ್ರೊಫೈಲ್ ಸೆಟಪ್",
     stepVerify: "ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಸಕ್ರಿಯಗೊಳಿಸಿ",
+    wizard: {
+      stepPersonal: "ವೈಯಕ್ತಿಕ",
+      stepSportAchievements: "ಕ್ರೀಡೆ ಮತ್ತು ಸಾಧನೆಗಳು",
+      stepBackground: "ಹಿನ್ನೆಲೆ",
+      stepProfileVerify: "ಪ್ರೊಫೈಲ್ ಮತ್ತು ಪರಿಶೀಲನೆ",
+      stepReview: "ಪರಿಶೀಲನೆ",
+      stepIndicator: "ಹಂತ {current} / {total}",
+      back: "ಹಿಂದೆ",
+      continue: "ಮುಂದುವರಿಸಿ",
+      reviewTitle: "ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ",
+      reviewDescription:
+        "ನಿಮ್ಮ ಪ್ರೊಫೈಲ್ ರಚಿಸುವ ಮೊದಲು ಕೆಳಗಿನ ಎಲ್ಲವನ್ನೂ ಪರಿಶೀಲಿಸಿ. ನೀವು ಯಾವುದೇ ವಿಭಾಗಕ್ಕೆ ಹಿಂತಿರುಗಿ ಸಂಪಾದಿಸಬಹುದು.",
+      edit: "ಸಂಪಾದಿಸಿ",
+      notProvided: "ಒದಗಿಸಿಲ್ಲ",
+      achievementsAdded: "{n} ಸಾಧನೆ{plural} ಸೇರಿಸಲಾಗಿದೆ",
+    },
     uploadFailed: "ದಾಖಲೆ ಅಪ್‌ಲೋಡ್ ಮಾಡಲು ವಿಫಲವಾಗಿದೆ.",
     documentRemovedButSyncFailed:
       "ದಾಖಲೆ ತೆಗೆದುಹಾಕಲಾಗಿದೆ, ಆದರೆ ನಮ್ಮ ದಾಖಲೆಗಳನ್ನು ನವೀಕರಿಸಲು ಸಾಧ್ಯವಾಗಲಿಲ್ಲ. ದಯವಿಟ್ಟು ರಿಫ್ರೆಶ್ ಮಾಡಿ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.",
@@ -1244,6 +1260,8 @@ const kn: Dictionary = {
     tagline: "ನಿಮ್ಮ SportFo ಗೈಡ್",
     openLabel: "ಕೋಚ್ ತೆರೆಯಿರಿ, ನಿಮ್ಮ SportFo ಗೈಡ್",
     closeLabel: "ಕೋಚ್ ಮುಚ್ಚಿ",
+    minimizeLabel: "ಕೋಚ್ ಅನ್ನು ಚಿಕ್ಕದಾಗಿಸಿ",
+    restoreLabel: "ಕೋಚ್ ಅನ್ನು ದೊಡ್ಡದಾಗಿಸಿ",
     welcomeGreeting: "ನಮಸ್ಕಾರ! ನಾನು ಕೋಚ್ 👋",
     welcomeMessage:
       "ನಾನು ನಿಮ್ಮ SportFo ಗೈಡ್. SportFo ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ ಎಂಬುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು, ನಿಮಗೆ ಸರಿಯಾದ ಮಾರ್ಗವನ್ನು ಕಂಡುಕೊಳ್ಳಲು ಮತ್ತು ನೋಂದಣಿಯಲ್ಲಿ ನಿಮಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡಲು ನಾನು ಸಹಾಯ ಮಾಡಬಲ್ಲೆ.",

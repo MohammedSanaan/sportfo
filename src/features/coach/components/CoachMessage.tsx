@@ -15,7 +15,7 @@ import type { CoachMessage as CoachMessageType } from "@/lib/coach/types";
 // navigable <Link>.
 const LINK_LINE_PATTERN = /^(.*?)\[([^\]]+)\]\((\/[^)\s]*)\)\s*$/;
 
-function renderLine(line: string, key: number) {
+function renderLine(line: string, key: number, onNavigate?: () => void) {
   const match = line.match(LINK_LINE_PATTERN);
   if (!match) {
     return (
@@ -31,6 +31,10 @@ function renderLine(line: string, key: number) {
       {prefix.trim().length > 0 && <p className="whitespace-pre-wrap">{prefix.trim()}</p>}
       <Link
         href={href}
+        // Following an answer's link means the user wants to go do
+        // something on that page -- collapse Coach out of the way
+        // instead of leaving it covering the page they just navigated to.
+        onClick={onNavigate}
         className="inline-flex items-center gap-1 text-sm font-semibold text-brand-700 underline decoration-brand-300 underline-offset-2 hover:text-brand-800"
       >
         {label}
@@ -40,22 +44,27 @@ function renderLine(line: string, key: number) {
   );
 }
 
-function renderBlock(content: string) {
+function renderBlock(content: string, onNavigate?: () => void) {
   const lines = content.split("\n").filter((line, index, all) => line.trim() !== "" || (index > 0 && index < all.length - 1));
-  return lines.length > 0 ? lines.map(renderLine) : <p className="whitespace-pre-wrap">{content}</p>;
+  return lines.length > 0
+    ? lines.map((line, index) => renderLine(line, index, onNavigate))
+    : <p className="whitespace-pre-wrap">{content}</p>;
 }
 
 interface CoachMessageProps {
   message: CoachMessageType;
+  /** Called when the user follows a link inside a reply (e.g. "Continue to registration") -- lets the panel minimize itself so it doesn't sit on top of the page it just sent them to. */
+  onNavigate?: () => void;
 }
 
-export function CoachMessage({ message }: CoachMessageProps) {
+export function CoachMessage({ message, onNavigate }: CoachMessageProps) {
   const { t } = useTranslation();
   const isUser = message.role === "user";
-  // Voice-mode replies come back as native-language-first, English-second
-  // (see systemInstruction.ts/bilingual.ts) -- a typed message or a
-  // response that was already in English never contains the separator, so
-  // `english` is null and the toggle below never renders.
+  // Any reply not already in English -- typed or voice -- comes back as
+  // native-language-first, English-second (see
+  // systemInstruction.ts/bilingual.ts). A response already in English
+  // never contains the separator, so `english` is null and the toggle
+  // below never renders.
   //
   // While a response is still streaming in, the growing text may contain
   // only part of the "---ENGLISH---" marker (or arrive right before/after
@@ -90,7 +99,7 @@ export function CoachMessage({ message }: CoachMessageProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
           >
-            {renderBlock(shown)}
+            {renderBlock(shown, onNavigate)}
           </motion.div>
         </AnimatePresence>
         {english && (

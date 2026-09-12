@@ -55,8 +55,8 @@ export function ProfileStrengthCard({ strength, locale }: ProfileStrengthCardPro
         </div>
 
         <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {strength.items.map((item) => (
-            <li key={item.label} className="flex items-center gap-2.5 text-sm">
+          {strength.items.map((item) => {
+            const marker = (
               <span
                 aria-hidden
                 className={
@@ -67,9 +67,29 @@ export function ProfileStrengthCard({ strength, locale }: ProfileStrengthCardPro
               >
                 {item.complete ? "✓" : ""}
               </span>
-              <span className={item.complete ? "text-[#cddaff]" : "text-[#8b96b8]"}>{item.label}</span>
-            </li>
-          ))}
+            );
+
+            if (item.complete) {
+              return (
+                <li key={item.label} className="flex items-center gap-2.5 text-sm">
+                  {marker}
+                  <span className="text-[#cddaff]">{item.label}</span>
+                </li>
+              );
+            }
+
+            return (
+              <li key={item.label} className="text-sm">
+                <Link
+                  href={item.href}
+                  className="flex items-center gap-2.5 rounded-md text-[#8b96b8] transition-colors hover:text-[#cddaff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+                >
+                  {marker}
+                  <span>{item.label}</span>
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {!isComplete && (

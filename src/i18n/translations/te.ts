@@ -347,6 +347,22 @@ const te: Dictionary = {
     stepApparel: "దుస్తులు & లాజిస్టిక్స్",
     stepProfile: "ప్రొఫైల్ సెటప్",
     stepVerify: "ధృవీకరించి సక్రియం చేయండి",
+    wizard: {
+      stepPersonal: "వ్యక్తిగత",
+      stepSportAchievements: "క్రీడ మరియు విజయాలు",
+      stepBackground: "నేపథ్యం",
+      stepProfileVerify: "ప్రొఫైల్ మరియు ధృవీకరణ",
+      stepReview: "సమీక్ష",
+      stepIndicator: "దశ {current} / {total}",
+      back: "వెనుకకు",
+      continue: "కొనసాగించండి",
+      reviewTitle: "మీ వివరాలను సమీక్షించండి",
+      reviewDescription:
+        "మీ ప్రొఫైల్‌ను సృష్టించే ముందు దిగువ ఉన్న అన్నింటినీ సమీక్షించండి. మీరు ఏ విభాగానికైనా వెనక్కి వెళ్లి సవరించవచ్చు.",
+      edit: "సవరించండి",
+      notProvided: "అందించలేదు",
+      achievementsAdded: "{n} విజయం{plural} జోడించబడింది",
+    },
     uploadFailed: "పత్రాన్ని అప్‌లోడ్ చేయడంలో విఫలమైంది.",
     documentRemovedButSyncFailed:
       "పత్రం తీసివేయబడింది, కానీ మా రికార్డులను నవీకరించలేకపోయాము. దయచేసి రిఫ్రెష్ చేసి మళ్లీ ప్రయత్నించండి.",
@@ -1235,6 +1251,8 @@ const te: Dictionary = {
     tagline: "మీ SportFo గైడ్",
     openLabel: "కోచ్‌ను తెరవండి, మీ SportFo గైడ్",
     closeLabel: "కోచ్‌ను మూసివేయండి",
+    minimizeLabel: "కోచ్‌ను చిన్నదిగా చేయండి",
+    restoreLabel: "కోచ్‌ను పెద్దదిగా చేయండి",
     welcomeGreeting: "నమస్కారం! నేను కోచ్‌ని 👋",
     welcomeMessage:
       "నేను మీ SportFo గైడ్‌ని. SportFo ఎలా పనిచేస్తుందో అర్థం చేసుకోవడానికి, మీకు సరైన మార్గాన్ని కనుగొనడానికి మరియు నమోదులో మీకు మార్గనిర్దేశం చేయడానికి నేను సహాయం చేయగలను.",

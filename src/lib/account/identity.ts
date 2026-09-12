@@ -1,3 +1,4 @@
+import { cache } from "react";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { Database } from "@/types/supabase";
 import {
@@ -5,6 +6,8 @@ import {
   getRegistrationCategoryByType,
   type RegistrationCategoryConfig,
 } from "@/lib/registration/categories";
+import { getAuthUser } from "@/lib/supabase/auth-user";
+import { createClient } from "@/lib/supabase/server";
 
 export interface AccountIdentity {
   // Never the internal auth.users UUID -- always the account's permanent
@@ -77,3 +80,17 @@ export async function getOwnAccountIdentity(
     profileHref: category ? getProfileHrefForCategory(category) : null,
   };
 }
+
+// `cache()`-wrapped, no-arg lookup of the signed-in visitor's own identity
+// for the current request -- Header (nav link visibility) and AuthNav
+// (account menu) both need this same data on every page render; without
+// this, each would run its own pair of Supabase queries instead of sharing
+// one. Returns EMPTY_IDENTITY for a signed-out visitor, same shape either
+// way so callers never need a separate guest branch just for this call.
+export const getCurrentAccountIdentity = cache(async (): Promise<AccountIdentity> => {
+  const user = await getAuthUser();
+  if (!user) return EMPTY_IDENTITY;
+
+  const supabase = await createClient();
+  return getOwnAccountIdentity(supabase, user.id);
+});

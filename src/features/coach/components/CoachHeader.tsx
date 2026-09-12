@@ -16,14 +16,24 @@ function NewChatIcon() {
   );
 }
 
+function MinimizeIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+      <path d="M4.5 12.5h11" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 interface CoachHeaderProps {
   name: string;
   tagline: string;
   aiDisclosure: string;
   newChatLabel: string;
   closeLabel: string;
+  minimizeLabel: string;
   onNewChat: () => void;
   onClose: () => void;
+  onMinimize: () => void;
   showNewChat: boolean;
 }
 
@@ -35,8 +45,10 @@ export function CoachHeader({
   aiDisclosure,
   newChatLabel,
   closeLabel,
+  minimizeLabel,
   onNewChat,
   onClose,
+  onMinimize,
   showNewChat,
 }: CoachHeaderProps) {
   return (
@@ -62,6 +74,15 @@ export function CoachHeader({
           <NewChatIcon />
         </button>
       )}
+      <button
+        type="button"
+        onClick={onMinimize}
+        aria-label={minimizeLabel}
+        title={minimizeLabel}
+        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-ink-500 transition-colors hover:bg-surface-muted hover:text-ink-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-200"
+      >
+        <MinimizeIcon />
+      </button>
       <button
         type="button"
         onClick={onClose}
