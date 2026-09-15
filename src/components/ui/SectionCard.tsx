@@ -11,9 +11,13 @@ interface SectionCardProps {
   // before; this is an additive, backward-compatible prop.
   icon?: ReactNode;
   className?: string;
+  // Optional trailing element in the header row (e.g. a "private" badge, a
+  // count, an inline CTA) -- omitted by every existing caller, so this is
+  // additive and never changes their layout.
+  action?: ReactNode;
 }
 
-export function SectionCard({ title, description, children, icon, className }: SectionCardProps) {
+export function SectionCard({ title, description, children, icon, className, action }: SectionCardProps) {
   return (
     <section
       className={cn(
@@ -21,21 +25,24 @@ export function SectionCard({ title, description, children, icon, className }: S
         className,
       )}
     >
-      <div className="mb-6 flex items-start gap-3 border-b border-border-default pb-5">
-        {icon && (
-          <span
-            aria-hidden
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
-          >
-            {icon}
-          </span>
-        )}
-        <div>
-          <h2 className="text-lg font-semibold text-ink-900">{title}</h2>
-          {description && (
-            <p className="mt-1 text-sm text-ink-500">{description}</p>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4 border-b border-border-default pb-5">
+        <div className="flex items-start gap-3">
+          {icon && (
+            <span
+              aria-hidden
+              className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600"
+            >
+              {icon}
+            </span>
           )}
+          <div>
+            <h2 className="text-lg font-semibold text-ink-900">{title}</h2>
+            {description && (
+              <p className="mt-1 text-sm text-ink-500">{description}</p>
+            )}
+          </div>
         </div>
+        {action}
       </div>
       <div className="flex flex-col gap-6">{children}</div>
     </section>

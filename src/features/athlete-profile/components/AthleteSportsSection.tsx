@@ -7,7 +7,7 @@ import {
   SUPPORT_NEEDED,
 } from "@/lib/athlete-options";
 import type { AthleteProfileRow, AthleteSportRow } from "@/types/database";
-import { DarkSectionCard } from "./DarkSectionCard";
+import { SectionCard } from "@/components/ui/SectionCard";
 import { AthleteInfoGrid } from "./AthleteInfoGrid";
 import { translate } from "@/i18n/dictionary";
 import { translateOptions } from "@/lib/i18n-options";
@@ -35,12 +35,12 @@ export function AthleteSportsSection({ sport, profile, locale }: AthleteSportsSe
 
   if (!sport) {
     return (
-      <DarkSectionCard title={t("profile.sportsInfo.title")} icon={<SportsIcon />}>
-        <p className="rounded-xl border border-dashed border-white/15 px-4 py-6 text-center text-sm text-[#8b96b8]">
+      <SectionCard title={t("profile.sportsInfo.title")} icon={<SportsIcon />}>
+        <p className="rounded-xl border border-dashed border-border-strong px-4 py-6 text-center text-sm text-ink-500">
           {t("profile.sportsInfo.empty")}
         </p>
         {hasClubOrCoach && <AthleteInfoGrid items={clubCoachItems} />}
-      </DarkSectionCard>
+      </SectionCard>
     );
   }
 
@@ -72,19 +72,19 @@ export function AthleteSportsSection({ sport, profile, locale }: AthleteSportsSe
   ];
 
   return (
-    <DarkSectionCard title={t("profile.sportsInfo.title")} icon={<SportsIcon />}>
+    <SectionCard title={t("profile.sportsInfo.title")} icon={<SportsIcon />}>
       <AthleteInfoGrid items={items} />
 
       {sport.secondary_sports && sport.secondary_sports.length > 0 && (
         <div>
-          <span className="mb-2 block text-xs font-medium tracking-wide text-[#8b96b8] uppercase">
+          <span className="mb-2 block text-xs font-medium tracking-wide text-ink-500 uppercase">
             {t("detailFields.secondarySports")}
           </span>
           <div className="flex flex-wrap gap-2">
             {sport.secondary_sports.map((secondarySport) => (
               <span
                 key={secondarySport}
-                className="rounded-full border border-white/15 bg-white/[0.04] px-3 py-1 text-xs font-medium text-[#cddaff]"
+                className="rounded-full border border-border-default bg-surface-muted px-3 py-1 text-xs font-medium text-ink-700"
               >
                 {secondarySport}
               </span>
@@ -95,7 +95,7 @@ export function AthleteSportsSection({ sport, profile, locale }: AthleteSportsSe
 
       {sport.support_needed && sport.support_needed.length > 0 && (
         <div>
-          <span className="mb-2 block text-xs font-medium tracking-wide text-[#8b96b8] uppercase">
+          <span className="mb-2 block text-xs font-medium tracking-wide text-ink-500 uppercase">
             {t("detailFields.supportNeeded")}
           </span>
           <div className="flex flex-wrap gap-2">
@@ -108,7 +108,7 @@ export function AthleteSportsSection({ sport, profile, locale }: AthleteSportsSe
               return (
                 <span
                   key={need}
-                  className="rounded-full border border-[#4d7cff]/30 bg-[#4d7cff]/10 px-3 py-1 text-xs font-medium text-[#a9c1ff]"
+                  className="rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-xs font-medium text-brand-700"
                 >
                   {label}
                 </span>
@@ -117,6 +117,6 @@ export function AthleteSportsSection({ sport, profile, locale }: AthleteSportsSe
           </div>
         </div>
       )}
-    </DarkSectionCard>
+    </SectionCard>
   );
 }

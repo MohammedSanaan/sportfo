@@ -1,6 +1,6 @@
 import { ApparelIcon } from "@/components/ui/RegistrationIcons";
 import type { AthleteProfileRow } from "@/types/database";
-import { DarkSectionCard } from "./DarkSectionCard";
+import { SectionCard } from "@/components/ui/SectionCard";
 import { AthleteInfoGrid } from "./AthleteInfoGrid";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
@@ -27,16 +27,16 @@ export function AthleteApparelSection({ profile, locale }: AthleteApparelSection
   ];
 
   return (
-    <DarkSectionCard
+    <SectionCard
       title={t("register.apparel.title")}
       icon={<ApparelIcon />}
       action={
-        <span className="rounded-full border border-white/15 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-[#8b96b8] uppercase">
+        <span className="rounded-full border border-border-default px-2.5 py-1 text-[10px] font-semibold tracking-wide text-ink-500 uppercase">
           {t("profile.privateNote")}
         </span>
       }
     >
       <AthleteInfoGrid items={items} />
-    </DarkSectionCard>
+    </SectionCard>
   );
 }

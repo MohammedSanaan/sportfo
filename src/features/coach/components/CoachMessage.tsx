@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { cn } from "@/lib/cn";
@@ -15,12 +15,31 @@ import type { CoachMessage as CoachMessageType } from "@/lib/coach/types";
 // navigable <Link>.
 const LINK_LINE_PATTERN = /^(.*?)\[([^\]]+)\]\((\/[^)\s]*)\)\s*$/;
 
+// Gemini is told not to use markdown (see systemInstruction.ts), but LLMs
+// reach for **bold** out of habit anyway, especially in lists -- rather
+// than trust that instruction alone (and rather than pull in a full
+// markdown renderer for one token), this renders just that one pattern as
+// real emphasis so a stray "**" never leaks into the UI as literal
+// asterisks.
+function renderTextWithBold(text: string, keyPrefix: string): ReactNode[] {
+  return text.split(/(\*\*[^*]+\*\*)/g).map((part, index) => {
+    const match = part.match(/^\*\*([^*]+)\*\*$/);
+    return match ? (
+      <strong key={`${keyPrefix}-b${index}`} className="font-semibold">
+        {match[1]}
+      </strong>
+    ) : (
+      part
+    );
+  });
+}
+
 function renderLine(line: string, key: number, onNavigate?: () => void) {
   const match = line.match(LINK_LINE_PATTERN);
   if (!match) {
     return (
       <p key={key} className="whitespace-pre-wrap">
-        {line}
+        {renderTextWithBold(line, `line-${key}`)}
       </p>
     );
   }
@@ -28,7 +47,9 @@ function renderLine(line: string, key: number, onNavigate?: () => void) {
   const [, prefix, label, href] = match;
   return (
     <div key={key} className={cn(prefix.trim().length > 0 && "space-y-2")}>
-      {prefix.trim().length > 0 && <p className="whitespace-pre-wrap">{prefix.trim()}</p>}
+      {prefix.trim().length > 0 && (
+        <p className="whitespace-pre-wrap">{renderTextWithBold(prefix.trim(), `prefix-${key}`)}</p>
+      )}
       <Link
         href={href}
         // Following an answer's link means the user wants to go do

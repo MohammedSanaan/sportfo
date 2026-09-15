@@ -20,30 +20,30 @@ export function AthleteAchievementsSection({
   const addAchievementCta = (
     <Link
       href="/athlete/register"
-      className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-lg bg-[#4d7cff] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#6a92ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
+      className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-lg bg-brand-600 px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
     >
       {t("register.achievements.addAchievement")}
     </Link>
   );
 
   return (
-    <section className="rounded-2xl border border-white/10 bg-[#0d1430] p-5 sm:p-7">
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-white/[0.08] pb-4">
+    <section className="rounded-2xl border border-border-default bg-surface p-5 shadow-sm sm:p-7">
+      <div className="mb-5 flex flex-wrap items-center justify-between gap-4 border-b border-border-default pb-4">
         <div className="flex items-center gap-2">
-          <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#4d7cff]/15 text-[#7ea3ff]">
+          <span aria-hidden className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-brand-50 text-brand-600">
             <AchievementIcon />
           </span>
           <div>
-            <h2 className="text-base font-bold text-[#e8ecf8] sm:text-lg">{t("profile.achievements.title")}</h2>
-            <p className="mt-0.5 text-sm text-[#8b96b8]">{t("profile.achievements.description")}</p>
+            <h2 className="text-base font-bold text-ink-900 sm:text-lg">{t("profile.achievements.title")}</h2>
+            <p className="mt-0.5 text-sm text-ink-500">{t("profile.achievements.description")}</p>
           </div>
         </div>
         {achievements.length > 0 && addAchievementCta}
       </div>
 
       {achievements.length === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-white/15 px-6 py-12 text-center">
-          <p className="text-sm text-[#8b96b8]">{t("profile.achievements.empty")}</p>
+        <div className="flex flex-col items-center gap-3 rounded-xl border border-dashed border-border-strong px-6 py-12 text-center">
+          <p className="text-sm text-ink-500">{t("profile.achievements.empty")}</p>
           {addAchievementCta}
         </div>
       ) : (
@@ -51,7 +51,6 @@ export function AthleteAchievementsSection({
           {achievements.map((achievement) => (
             <AchievementCard
               key={achievement.id}
-              variant="dark"
               title={achievement.title}
               achievementType={achievement.achievement_type}
               achievementTypeOther={achievement.achievement_type_other}
@@ -68,7 +67,7 @@ export function AthleteAchievementsSection({
                 achievement.document_path ? (
                   <ViewCertificateButton achievementId={achievement.id} />
                 ) : (
-                  <span className="text-xs text-[#5c6a99]">{t("profile.achievements.noDocument")}</span>
+                  <span className="text-xs text-ink-400">{t("profile.achievements.noDocument")}</span>
                 )
               }
             />
