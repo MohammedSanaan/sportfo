@@ -2,7 +2,7 @@ import { PersonalDetailsIcon } from "@/components/ui/RegistrationIcons";
 import { getOptionLabel, GENDER_OPTIONS } from "@/lib/athlete-options";
 import { formatDisplayDate } from "@/lib/format";
 import type { AthleteProfileRow } from "@/types/database";
-import { DarkSectionCard } from "./DarkSectionCard";
+import { SectionCard } from "@/components/ui/SectionCard";
 import { AthleteInfoGrid } from "./AthleteInfoGrid";
 import { translate } from "@/i18n/dictionary";
 import { translateOptions } from "@/lib/i18n-options";
@@ -48,8 +48,8 @@ export function AthletePersonalInfo({ profile, locale }: AthletePersonalInfoProp
   ];
 
   return (
-    <DarkSectionCard title={t("profile.personalInfo.title")} icon={<PersonalDetailsIcon />}>
+    <SectionCard title={t("profile.personalInfo.title")} icon={<PersonalDetailsIcon />}>
       <AthleteInfoGrid items={items} />
-    </DarkSectionCard>
+    </SectionCard>
   );
 }

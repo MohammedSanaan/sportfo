@@ -25,18 +25,18 @@ export function PlatformStatsStrip({ counts, t }: PlatformStatsStripProps) {
   ];
 
   return (
-    <section className="grid grid-cols-1 overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-r from-[#4d7cff]/12 to-[#ff2f6d]/10 sm:grid-cols-3">
+    <section className="grid grid-cols-1 overflow-hidden rounded-2xl border border-border-default bg-gradient-to-r from-brand-50 to-rose-50 sm:grid-cols-3">
       {items.map((item, index) => (
         <div
           key={item.label}
           className={
             index < items.length - 1
-              ? "border-b border-white/[0.08] px-6 py-5 sm:border-r sm:border-b-0"
+              ? "border-b border-border-default px-6 py-5 sm:border-r sm:border-b-0"
               : "px-6 py-5"
           }
         >
-          <div className="text-[34px] leading-none font-extrabold text-[#e8ecf8]">{item.value}</div>
-          <div className="mt-1.5 font-mono text-[11px] tracking-[0.14em] text-[#9aa5c6] uppercase">
+          <div className="text-[34px] leading-none font-extrabold text-ink-900">{item.value}</div>
+          <div className="mt-1.5 font-mono text-[11px] tracking-[0.14em] text-ink-500 uppercase">
             {item.label}
           </div>
         </div>

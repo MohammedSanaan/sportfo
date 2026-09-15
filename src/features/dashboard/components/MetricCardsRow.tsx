@@ -10,11 +10,11 @@ interface MetricCardsRowProps {
 }
 
 const demoButtonBaseClassName =
-  "mt-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] rounded";
+  "mt-4 text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 rounded";
 const demoButtonAccentClassName = {
-  blue: "text-[#7ea3ff] hover:text-[#a9c1ff]",
-  orange: "text-[#ffc457] hover:text-[#ffd992]",
-  pink: "text-[#ff7fa4] hover:text-[#ffb0c7]",
+  blue: "text-brand-700 hover:text-brand-800",
+  orange: "text-amber-700 hover:text-amber-800",
+  pink: "text-rose-700 hover:text-rose-800",
 } as const;
 
 // SportFo has no sponsorships/trials/academy-invites backend yet, so all

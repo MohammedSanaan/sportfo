@@ -1,7 +1,7 @@
 import { ProfileSetupIcon } from "@/components/ui/RegistrationIcons";
 import { isSafeExternalUrl } from "@/lib/url";
 import type { AthleteProfileRow } from "@/types/database";
-import { DarkSectionCard } from "./DarkSectionCard";
+import { SectionCard } from "@/components/ui/SectionCard";
 import { translate } from "@/i18n/dictionary";
 import type { Locale } from "@/i18n/config";
 
@@ -32,8 +32,8 @@ export function AthleteBioSection({ profile, locale }: AthleteBioSectionProps) {
   ].filter((link) => isSafeExternalUrl(link.url));
 
   return (
-    <DarkSectionCard title={t("profile.about.title")} icon={<ProfileSetupIcon />}>
-      {profile.short_bio && <p className="text-sm leading-relaxed text-[#cddaff]">{profile.short_bio}</p>}
+    <SectionCard title={t("profile.about.title")} icon={<ProfileSetupIcon />}>
+      {profile.short_bio && <p className="text-sm leading-relaxed text-ink-700">{profile.short_bio}</p>}
 
       {links.length > 0 && (
         <div className="flex flex-wrap gap-3">
@@ -43,7 +43,7 @@ export function AthleteBioSection({ profile, locale }: AthleteBioSectionProps) {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-white/[0.15] bg-white/[0.05] px-3.5 text-sm font-semibold text-[#7ea3ff] transition-colors hover:bg-white/[0.1] hover:text-[#a9c1ff] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
+              className="inline-flex h-9 items-center gap-1.5 rounded-lg border border-border-default bg-surface-muted px-3.5 text-sm font-semibold text-brand-700 transition-colors hover:bg-brand-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
             >
               {link.label}
               <ExternalLinkIcon />
@@ -51,6 +51,6 @@ export function AthleteBioSection({ profile, locale }: AthleteBioSectionProps) {
           ))}
         </div>
       )}
-    </DarkSectionCard>
+    </SectionCard>
   );
 }

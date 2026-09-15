@@ -18,20 +18,20 @@ interface AthleteProfileHeroProps {
 
 function LocationPinIcon() {
   return (
-    <svg aria-hidden width="13" height="13" viewBox="0 0 20 20" fill="none" className="shrink-0 text-[#8b96b8]">
+    <svg aria-hidden width="13" height="13" viewBox="0 0 20 20" fill="none" className="shrink-0 text-ink-400">
       <path d="M10 18s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" stroke="currentColor" strokeWidth="1.4" />
       <circle cx="10" cy="8" r="2.2" stroke="currentColor" strokeWidth="1.4" />
     </svg>
   );
 }
 
-// The owner-only, dark-themed equivalent of the shared (public-profile)
-// ProfileHero -- a separate component rather than a themed variant of that
-// one, since ProfileHero must stay pixel-identical for /a/[slug] (see
-// task's "audit shared components carefully" instruction). Every value
-// here is real: fullName/photoUrl/sportfoId come straight from the
-// authenticated athlete's own row (see src/app/athlete/profile/page.tsx),
-// never a fabricated name/photo/location.
+// The owner-only equivalent of the shared (public-profile) ProfileHero --
+// a separate component rather than a themed variant of that one, since
+// ProfileHero must stay pixel-identical for /a/[slug] (see task's "audit
+// shared components carefully" instruction). Every value here is real:
+// fullName/photoUrl/sportfoId come straight from the authenticated
+// athlete's own row (see src/app/athlete/profile/page.tsx), never a
+// fabricated name/photo/location.
 export function AthleteProfileHero({
   fullName,
   primarySport,
@@ -47,14 +47,8 @@ export function AthleteProfileHero({
   const sportLine = [primarySport, skillLevel].filter(Boolean).join(" · ");
 
   return (
-    <section className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1430]">
-      <div
-        className="relative h-24 sm:h-32"
-        style={{
-          backgroundImage:
-            "linear-gradient(120deg, #0f1a48 0%, #1b1c56 55%, #0a1128 100%), radial-gradient(circle at 85% 15%, rgba(77,124,255,0.35), transparent 60%)",
-        }}
-      />
+    <section className="overflow-hidden rounded-2xl border border-border-default bg-surface shadow-sm">
+      <div className="relative h-24 bg-gradient-to-r from-navy-900 via-navy-800 to-brand-800 sm:h-32" />
 
       <div className="flex flex-col gap-6 px-5 pb-6 sm:px-8 sm:pb-8">
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:items-end sm:justify-between">
@@ -63,26 +57,26 @@ export function AthleteProfileHero({
               fullName={fullName}
               size="2xl"
               photoUrl={photoUrl}
-              className="-mt-12 shrink-0 ring-4 ring-[#0d1430] sm:-mt-14"
+              className="-mt-12 shrink-0 ring-4 ring-surface sm:-mt-14"
             />
             <div className="flex flex-col items-center gap-1.5 pb-1 sm:items-start">
-              <Badge variant="onDark">{t("athletes.sportfoAthleteBadge")}</Badge>
-              <h1 className="text-2xl font-extrabold tracking-tight text-[#e8ecf8] sm:text-3xl">
+              <Badge variant="brand">{t("athletes.sportfoAthleteBadge")}</Badge>
+              <h1 className="text-2xl font-extrabold tracking-tight text-ink-900 sm:text-3xl">
                 {fullName || t("athletes.athleteFallback")}
               </h1>
-              {sportLine && <p className="text-base font-medium text-[#b6c1e2]">{sportLine}</p>}
+              {sportLine && <p className="text-base font-medium text-ink-700">{sportLine}</p>}
               {location && (
-                <p className="flex items-center gap-1 text-sm text-[#8b96b8]">
+                <p className="flex items-center gap-1 text-sm text-ink-500">
                   <LocationPinIcon />
                   {location}
                 </p>
               )}
               {sportfoId && (
                 <p className="mt-1 flex flex-col items-center sm:items-start">
-                  <span className="font-mono text-[10px] tracking-[0.14em] text-[#6c789c] uppercase">
+                  <span className="font-mono text-[10px] tracking-[0.14em] text-ink-400 uppercase">
                     {t("account.sportfoId")}
                   </span>
-                  <span className="text-sm font-bold tracking-wide text-[#7ea3ff]">{sportfoId}</span>
+                  <span className="text-sm font-bold tracking-wide text-brand-700">{sportfoId}</span>
                 </p>
               )}
             </div>
@@ -91,13 +85,13 @@ export function AthleteProfileHero({
           <div className="flex shrink-0 flex-wrap items-center justify-center gap-3">
             <Link
               href="/athlete/register"
-              className="inline-flex min-h-10 items-center rounded-lg border border-white/[0.18] bg-white/[0.08] px-4 py-2 text-center text-sm font-semibold text-[#e8ecf8] transition-colors hover:bg-white/[0.14] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430]"
+              className="inline-flex min-h-10 items-center rounded-lg border border-border-default bg-surface-muted px-4 py-2 text-center text-sm font-semibold text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2"
             >
               {t("profile.actions.editProfile")}
             </Link>
             <LogoutButton
               locale={locale}
-              className="inline-flex min-h-10 items-center rounded-lg border border-white/[0.18] bg-transparent px-4 py-2 text-center text-sm font-semibold text-[#e8ecf8] transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#0d1430] disabled:cursor-not-allowed disabled:opacity-50"
+              className="inline-flex min-h-10 items-center rounded-lg border border-border-default bg-transparent px-4 py-2 text-center text-sm font-semibold text-ink-700 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             />
           </div>
         </div>

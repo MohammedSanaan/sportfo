@@ -1,8 +1,10 @@
-// Shared contract for Coach's voice-mode bilingual response format (native
-// language first, English second -- see systemInstruction.ts, which
-// instructs Gemini to emit this exact marker on its own line, and
-// CoachMessage.tsx, which parses it back out). Kept in one module so the
-// prompt-side instruction and the render-side parser can never drift.
+// Shared contract for Coach's bilingual response format (native language
+// first, English second), used for any reply -- typed or voice -- that
+// isn't already in English (see systemInstruction.ts, which instructs
+// Gemini to emit this exact marker on its own line, and CoachMessage.tsx,
+// which parses it back out and renders the "translate to English"
+// toggle). Kept in one module so the prompt-side instruction and the
+// render-side parser can never drift.
 export const BILINGUAL_SEPARATOR = "---ENGLISH---";
 
 export interface SplitCoachResponse {

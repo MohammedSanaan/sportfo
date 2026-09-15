@@ -40,10 +40,7 @@ export function AthleteDashboard({ data, t, locale, demo }: AthleteDashboardProp
     : t("dashboard.header.roleAthlete");
 
   return (
-    <div className="min-h-screen bg-[#05080f] text-[#e8ecf8]" style={{
-      backgroundImage:
-        "radial-gradient(1200px 600px at 12% -5%, #16215a 0%, rgba(6,10,24,0) 60%), radial-gradient(900px 500px at 95% 8%, #2a1146 0%, rgba(6,10,24,0) 55%)",
-    }}>
+    <div className="min-h-screen bg-surface-muted text-ink-900">
       <DashboardHeader identity={data.identity} roleLine={roleLine} locale={locale} />
 
       <div className="grid grid-cols-1 gap-6 px-4 py-6 sm:px-6 lg:grid-cols-[248px_minmax(0,1fr)] lg:gap-6 lg:px-8 xl:grid-cols-[248px_minmax(0,1fr)_336px]">
@@ -52,7 +49,7 @@ export function AthleteDashboard({ data, t, locale, demo }: AthleteDashboardProp
         <main className="flex min-w-0 flex-col gap-[22px]">
           {demo && (
             <div className="flex justify-end">
-              <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-white/20 px-2.5 py-1 text-[10px] font-semibold tracking-wide text-[#8b96b8] uppercase">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-dashed border-border-strong px-2.5 py-1 text-[10px] font-semibold tracking-wide text-ink-500 uppercase">
                 {t("dashboard.demo.badge")}
               </span>
             </div>
@@ -85,7 +82,7 @@ export function AthleteDashboard({ data, t, locale, demo }: AthleteDashboardProp
         </aside>
       </div>
 
-      <footer className="mt-4 flex flex-wrap items-center gap-5 border-t border-white/[0.07] px-4 py-5 text-sm text-[#8b96b8] sm:px-8">
+      <footer className="mt-4 flex flex-wrap items-center gap-5 border-t border-border-default px-4 py-5 text-sm text-ink-500 sm:px-8">
         <span className="font-mono text-[11px] tracking-[0.12em]">
           {t("dashboard.footer.copyright")}
         </span>
@@ -93,10 +90,10 @@ export function AthleteDashboard({ data, t, locale, demo }: AthleteDashboardProp
             two -- disabled "coming soon" text, never a link to a page
             that doesn't exist yet. */}
         <div className="ml-auto flex flex-wrap gap-5">
-          <span aria-disabled title={t("dashboard.footer.comingSoon")} className="text-[#8b96b8]/60">
+          <span aria-disabled title={t("dashboard.footer.comingSoon")} className="text-ink-400">
             {t("dashboard.footer.helpCenter")}
           </span>
-          <span aria-disabled title={t("dashboard.footer.comingSoon")} className="text-[#8b96b8]/60">
+          <span aria-disabled title={t("dashboard.footer.comingSoon")} className="text-ink-400">
             {t("dashboard.footer.privacyPolicy")}
           </span>
         </div>

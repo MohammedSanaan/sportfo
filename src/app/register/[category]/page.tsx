@@ -116,7 +116,7 @@ export default async function RegisterCategoryPage({ params }: RegisterCategoryP
 
           <div className="min-w-0">
             {category.id === "athlete" ? (
-              <AthleteRegistrationScreen reloadHref="/register/athlete" showHeading={false} />
+              <AthleteRegistrationScreen reloadHref="/register/athlete" />
             ) : (
               <GenericCategoryForm
                 category={category}

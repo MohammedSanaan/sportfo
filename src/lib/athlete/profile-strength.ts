@@ -3,6 +3,13 @@ import type { AthleteDraft } from "./registration-draft";
 export interface ProfileStrengthItem {
   label: string;
   complete: boolean;
+  // Anchor on /athlete/register (the same edit form used by the "Complete
+  // Profile" CTA) pointing straight at the section that resolves this
+  // item -- a real id AthleteRegistrationForm renders (see
+  // findStepIndexForSectionId in wizard-steps.ts, which jumps the wizard to
+  // whichever step owns this id before scrolling to it), never a
+  // fabricated route.
+  href: string;
 }
 
 export interface ProfileStrength {
@@ -32,10 +39,10 @@ export function calculateProfileStrength(draft: AthleteDraft): ProfileStrength {
   const isPublic = profile.is_public;
 
   const items: ProfileStrengthItem[] = [
-    { label: "Personal details complete", complete: personalComplete },
-    { label: "Sports information complete", complete: sportsComplete },
-    { label: "At least one achievement added", complete: hasAchievement },
-    { label: "Public profile enabled", complete: isPublic },
+    { label: "Personal details complete", complete: personalComplete, href: "/athlete/register#section-personal" },
+    { label: "Sports information complete", complete: sportsComplete, href: "/athlete/register#section-sport" },
+    { label: "At least one achievement added", complete: hasAchievement, href: "/athlete/register#section-achievements" },
+    { label: "Public profile enabled", complete: isPublic, href: "/athlete/register#section-profile" },
   ];
 
   const percentage = Math.round(

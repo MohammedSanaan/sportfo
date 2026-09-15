@@ -1,7 +1,7 @@
 import { EmploymentIcon } from "@/components/ui/RegistrationIcons";
 import { getOptionLabel, EMPLOYMENT_TYPES, YEARS_EXPERIENCE } from "@/lib/athlete-options";
 import type { AthleteProfileRow } from "@/types/database";
-import { DarkSectionCard } from "./DarkSectionCard";
+import { SectionCard } from "@/components/ui/SectionCard";
 import { AthleteInfoGrid } from "./AthleteInfoGrid";
 import { translate } from "@/i18n/dictionary";
 import { translateOptions } from "@/lib/i18n-options";
@@ -35,8 +35,8 @@ export function AthleteEmploymentSection({ profile, locale }: AthleteEmploymentS
   ];
 
   return (
-    <DarkSectionCard title={t("register.employment.title")} icon={<EmploymentIcon />}>
+    <SectionCard title={t("register.employment.title")} icon={<EmploymentIcon />}>
       <AthleteInfoGrid items={items} />
-    </DarkSectionCard>
+    </SectionCard>
   );
 }

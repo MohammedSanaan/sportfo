@@ -32,11 +32,11 @@ interface AthleteInfoGridProps {
 // every value wrap and grow the row instead of being clipped.
 export function AthleteInfoGrid({ items }: AthleteInfoGridProps) {
   return (
-    <dl className="flex flex-col gap-px overflow-hidden rounded-xl border border-white/10 bg-white/10">
+    <dl className="flex flex-col gap-px overflow-hidden rounded-xl border border-border-default bg-border-default">
       {items.map((item) => (
-        <div key={item.label} className="flex min-w-0 flex-col gap-1 bg-[#0d1430] px-4 py-3">
-          <dt className="min-w-0 text-xs font-medium tracking-wide text-[#8b96b8] uppercase">{item.label}</dt>
-          <dd className="min-w-0 text-sm leading-relaxed font-medium whitespace-normal break-words text-[#e8ecf8]">
+        <div key={item.label} className="flex min-w-0 flex-col gap-1 bg-surface px-4 py-3">
+          <dt className="min-w-0 text-xs font-medium tracking-wide text-ink-500 uppercase">{item.label}</dt>
+          <dd className="min-w-0 text-sm leading-relaxed font-medium whitespace-normal break-words text-ink-900">
             {item.value || "—"}
           </dd>
         </div>

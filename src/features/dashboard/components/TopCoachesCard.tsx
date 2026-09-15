@@ -18,27 +18,27 @@ interface TopCoachesCardProps {
 export function TopCoachesCard({ t, demo }: TopCoachesCardProps) {
   if (demo) {
     return (
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1430]">
-        <div className="border-b border-white/[0.08] px-[18px] py-3.5 text-base font-bold text-[#e8ecf8]">
+      <div className="overflow-hidden rounded-2xl border border-border-default bg-white">
+        <div className="border-b border-border-default px-[18px] py-3.5 text-base font-bold text-ink-900">
           {t("dashboard.topCoaches.title")}
         </div>
-        <ul className="flex flex-col divide-y divide-white/[0.08]">
+        <ul className="flex flex-col divide-y divide-border-default">
           {demo.map((coach) => (
             <li key={coach.id} className="flex items-center gap-3 px-[18px] py-3.5">
               <span
                 aria-hidden
-                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#2a3a7e] to-[#141b3f] text-xs font-bold text-[#a9c1ff]"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-50 text-xs font-bold text-brand-700"
               >
                 {coach.name.charAt(0)}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold text-[#e8ecf8]">{coach.name}</p>
-                <p className="truncate text-xs text-[#8b96b8]">{coach.subtitle}</p>
+                <p className="truncate text-sm font-semibold text-ink-900">{coach.name}</p>
+                <p className="truncate text-xs text-ink-500">{coach.subtitle}</p>
               </div>
               <DemoOnlyButton
                 label={t("dashboard.topCoaches.follow")}
                 demoOnlyLabel={t("dashboard.demo.onlyLabel")}
-                className="h-8 shrink-0 rounded-lg border border-white/15 px-3 text-xs font-semibold text-[#cddaff] transition-colors hover:bg-white/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4d7cff]"
+                className="h-8 shrink-0 rounded-lg border border-border-default px-3 text-xs font-semibold text-brand-700 transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-500"
               />
             </li>
           ))}
@@ -48,11 +48,11 @@ export function TopCoachesCard({ t, demo }: TopCoachesCardProps) {
   }
 
   return (
-    <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0d1430]">
-      <div className="border-b border-white/[0.08] px-[18px] py-3.5 text-base font-bold text-[#e8ecf8]">
+    <div className="overflow-hidden rounded-2xl border border-border-default bg-white">
+      <div className="border-b border-border-default px-[18px] py-3.5 text-base font-bold text-ink-900">
         {t("dashboard.topCoaches.title")}
       </div>
-      <p className="px-[18px] py-6 text-sm text-[#8b96b8]">{t("dashboard.topCoaches.comingSoon")}</p>
+      <p className="px-[18px] py-6 text-sm text-ink-500">{t("dashboard.topCoaches.comingSoon")}</p>
     </div>
   );
 }

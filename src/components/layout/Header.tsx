@@ -6,6 +6,7 @@ import { HeaderNavDesktop, HeaderNavMobile, type PlainLink } from "./HeaderNav";
 import { LanguageSelector } from "./LanguageSelector";
 import { translate } from "@/i18n/dictionary";
 import { getAuthUser } from "@/lib/supabase/auth-user";
+import { getCurrentAccountIdentity } from "@/lib/account/identity";
 import type { Locale } from "@/i18n/config";
 
 function AuthNavFallback() {
@@ -49,13 +50,25 @@ export async function Header({ locale }: { locale: Locale }) {
   // "Discover Athletes" lives on the left with the main nav (not in the
   // right-side auth actions) -- it's a real page, not a homepage scroll
   // section, so it's passed separately as a plain link. "Dashboard" joins
-  // it here (also a real route, not a scroll section) but only once
-  // authenticated -- a guest opening /dashboard directly is still redirected
-  // to /auth by src/proxy.ts regardless of whether this link is shown, so
-  // this check is a navigation nicety, never the actual security boundary.
+  // it here (also a real route, not a scroll section) but only for an
+  // account with a *submitted Athlete* registration -- the one case
+  // /dashboard actually renders a dashboard instead of bouncing to
+  // getPostLoginDestination's fallback (see src/app/dashboard/page.tsx).
+  // Showing it unconditionally to every signed-in visitor would put a nav
+  // item in front of guests, non-Athlete categories, and unfinished drafts
+  // that silently redirects them elsewhere -- exactly the "dead navigation"
+  // this app avoids everywhere else. A guest opening /dashboard directly is
+  // still redirected to /auth by src/proxy.ts regardless of this link, so
+  // this check is purely a navigation nicety, never the actual security
+  // boundary.
+  const identity = user ? await getCurrentAccountIdentity() : null;
+  const hasDashboard = identity?.category?.id === "athlete";
+
   const plainLinks: PlainLink[] = user
     ? [
-        { href: "/dashboard", label: translate(locale, "nav.dashboard") },
+        ...(hasDashboard
+          ? [{ href: "/dashboard", label: translate(locale, "nav.dashboard") }]
+          : []),
         { href: "/athletes", label: translate(locale, "nav.discoverAthletes") },
       ]
     : [{ href: "/athletes", label: translate(locale, "nav.discoverAthletes") }];

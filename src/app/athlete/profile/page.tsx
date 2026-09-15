@@ -83,13 +83,7 @@ export default async function AthleteProfilePage() {
     [profile.instagram_url, profile.facebook_url, profile.other_url].some(isSafeExternalUrl);
 
   return (
-    <div
-      className="min-h-screen bg-[#05080f] text-[#e8ecf8]"
-      style={{
-        backgroundImage:
-          "radial-gradient(1200px 600px at 12% -5%, #16215a 0%, rgba(6,10,24,0) 60%), radial-gradient(900px 500px at 95% 8%, #2a1146 0%, rgba(6,10,24,0) 55%)",
-      }}
-    >
+    <div className="min-h-screen bg-surface-muted text-ink-900">
       <div className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
         <div className="flex flex-col gap-6">
           <AthleteProfileHero

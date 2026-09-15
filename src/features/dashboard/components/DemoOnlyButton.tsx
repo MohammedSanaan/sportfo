@@ -33,7 +33,7 @@ export function DemoOnlyButton({ label, demoOnlyLabel, className }: DemoOnlyButt
       {showNote && (
         <span
           role="status"
-          className="absolute top-full left-1/2 z-10 mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md border border-white/15 bg-[#0a0f22] px-2.5 py-1 text-[11px] font-medium text-[#b6c1e2] shadow-lg"
+          className="absolute top-full left-1/2 z-10 mt-1.5 -translate-x-1/2 whitespace-nowrap rounded-md border border-border-default bg-ink-900 px-2.5 py-1 text-[11px] font-medium text-white shadow-lg"
         >
           {demoOnlyLabel}
         </span>
